@@ -11,6 +11,7 @@
 				optimize="off">
 			<classpath>
 				<pathelement location="../tomcat/common/lib/servlet-api.jar" />
+				<pathelement location="../tomcat/server/lib/commons-fileupload-1.0.jar" />
 			</classpath>
 		</javac>
 	</target>
