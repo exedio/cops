@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<project name="cops" default="all" basedir=".">
+
+	<target name="compile">
+		<mkdir dir="build/classes" />
+		<javac srcdir="src"
+				destdir="build/classes"
+				deprecation="on"
+				debug="on"
+				optimize="off">
+			<classpath>
+				<pathelement location="../tomcat/common/lib/servlet-api.jar" />
+			</classpath>
+		</javac>
+	</target>
+	
+	<target name="jar" depends="compile">
+		<jar jarfile="build/exedio-cops.jar" basedir="build/classes" />
+	</target>
+	
+	<target name="clean">
+		<delete dir="build" />
+	</target>
+
+	<target name="all" depends="compile, jar" />
+
+</project>
