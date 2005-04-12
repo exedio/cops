@@ -92,22 +92,15 @@ public abstract class Form
 	{
 		public final Object key;
 		public final String name;
+		final boolean readOnly;
 		public final String value;
 		public String error;
 		
-		public Field(final Object key, final String name, final String value, final boolean hidden)
+		public Field(final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
 		{
 			this.key = key;
 			this.name = name;
-			this.value = value;
-			fieldMap.put(key, this);
-			(hidden?hiddenFieldList:fieldList).add(this);
-		}
-		
-		public Field(final Object key, final String value, final boolean hidden)
-		{
-			this.key = key;
-			this.name = null;
+			this.readOnly = readOnly;
 			this.value = value;
 			fieldMap.put(key, this);
 			(hidden?hiddenFieldList:fieldList).add(this);
@@ -115,7 +108,7 @@ public abstract class Form
 		
 		public final boolean isReadOnly()
 		{
-			return name==null;
+			return readOnly;
 		}
 		
 		public final String getName()
@@ -147,14 +140,9 @@ public abstract class Form
 		public final ArrayList names = new ArrayList();
 		final HashMap values = new HashMap();
 		
-		public EnumField(final Object key, final String name, final String value, final boolean hidden)
+		public EnumField(final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
 		{
-			super(key, name, value, hidden);
-		}
-		
-		public EnumField(final Object key, final String value, final boolean hidden)
-		{
-			super(key, value, hidden);
+			super(key, name, readOnly, value, hidden);
 		}
 		
 		public String getValue(final String name)
@@ -184,14 +172,9 @@ public abstract class Form
 	{
 		public static final String VALUE_ON = "on";
 		
-		public BooleanField(final Object key, final String name, final String value, final boolean hidden)
+		public BooleanField(final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
 		{
-			super(key, name, value, hidden);
-		}
-		
-		public BooleanField(final Object key, final String value, final boolean hidden)
-		{
-			super(key, value, hidden);
+			super(key, name, readOnly, value, hidden);
 		}
 		
 		public boolean isChecked()
@@ -209,14 +192,9 @@ public abstract class Form
 	public class TextField extends Field
 	{
 		
-		public TextField(final Object key, final String name, final String value, final boolean hidden)
+		public TextField(final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
 		{
-			super(key, name, value, hidden);
-		}
-		
-		public TextField(final Object key, final String value, final boolean hidden)
-		{
-			super(key, value, hidden);
+			super(key, name, readOnly, value, hidden);
 		}
 		
 		public void write(final PrintStream out) throws IOException
