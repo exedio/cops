@@ -206,6 +206,26 @@ public abstract class Form
 		
 	}
 	
+	public class TextField extends Field
+	{
+		
+		public TextField(final Object key, final String name, final String value, final boolean hidden)
+		{
+			super(key, name, value, hidden);
+		}
+		
+		public TextField(final Object key, final String value, final boolean hidden)
+		{
+			super(key, value, hidden);
+		}
+		
+		public void write(final PrintStream out) throws IOException
+		{
+			Main_Jspm.write(out, this);
+		}
+		
+	}
+	
 	public final List getFields()
 	{
 		return Collections.unmodifiableList(fieldList);

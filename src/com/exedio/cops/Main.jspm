@@ -35,6 +35,26 @@ public class Main_Jspm
 		%>><br><%
 	}
 	
+	public static final void write(final PrintStream out, final Form.TextField field)
+		throws IOException
+	{
+		final String value = field.getValue();
+
+		if(field.isReadOnly())
+		{
+			%><b><%=value%></b><%
+		}
+		else
+		{
+			%><input type="text" name="<%=field.name%>" size="30" value="<%=value%>" /><%
+			final String error = field.getError();
+			if(error!=null)
+			{
+				%> <b><%=error%></b><%
+			}
+		}
+	}
+	
 	public static final void writeHiddenFields(final PrintStream out, final Form form)
 		throws IOException
 	{
