@@ -2,7 +2,16 @@
 
 <project name="cops" default="all" basedir=".">
 
-	<target name="compile">
+	<target name="jspm">
+		<java classname="com.exedio.jspm.Main" taskname="jspm" fork="yes" failonerror="yes">
+			<classpath>
+				<pathelement location="../jspm/build/exedio-jspm.jar" />
+			</classpath>
+			<arg value="src/com/exedio/cops/Main.jspm" />
+		</java>
+	</target>
+	
+	<target name="compile" depends="jspm">
 		<mkdir dir="build/classes" />
 		<javac srcdir="src"
 				destdir="build/classes"
@@ -31,6 +40,11 @@
 	
 	<target name="clean">
 		<delete dir="build" />
+		<delete>
+			<fileset dir="src">
+				<include name="**/*_Jspm.java" />
+			</fileset>
+		</delete>
 	</target>
 
 	<target name="all" depends="compile, jar" />

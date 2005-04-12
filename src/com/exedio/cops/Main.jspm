@@ -1,0 +1,26 @@
+<%
+package com.exedio.cops;
+
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.Iterator;
+
+public class Main_Jspm
+{
+	public static final void write(final PrintStream out, final Form.EnumField field)
+		throws IOException
+	{
+		for(Iterator i = field.names.iterator(); i.hasNext(); )
+		{
+			final String optionValue = (String)i.next();
+			%>
+			<input type="radio" name="<%=field.name%>" value="<%=optionValue%>"<%
+			if(field.isChecked(optionValue))
+			{
+				%> checked="checked"<%
+			}
+			%>><%=field.getValue(optionValue)%><br><%
+		}
+	}
+}
+%>

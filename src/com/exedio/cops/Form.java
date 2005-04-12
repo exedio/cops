@@ -1,5 +1,7 @@
 package com.exedio.cops;
 
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -133,6 +135,11 @@ public abstract class Form
 			return error;
 		}
 		
+		// TODO make this method abstract
+		public void write(final PrintStream out) throws IOException
+		{
+			throw new RuntimeException(name);
+		}
 	}
 	
 	public class EnumField extends Field
@@ -164,6 +171,11 @@ public abstract class Form
 		{
 			names.add(name);
 			values.put(name, value);
+		}
+		
+		public void write(final PrintStream out) throws IOException
+		{
+			Main_Jspm.write(out, this);
 		}
 		
 	}
