@@ -34,5 +34,16 @@ public class Main_Jspm
 		}
 		%>><br><%
 	}
+	
+	public static final void writeHiddenFields(final PrintStream out, final Form form)
+		throws IOException
+	{
+		for(Iterator i = form.getHiddenFields().iterator(); i.hasNext(); )
+		{
+			final Form.Field field = (Form.Field)i.next();
+			%>
+			<input type="hidden" name="<%=field.name%>" value="<%=field.value%>" /><%
+		}
+	}
 }
 %>

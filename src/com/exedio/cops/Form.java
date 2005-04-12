@@ -216,6 +216,11 @@ public abstract class Form
 		return Collections.unmodifiableList(hiddenFieldList);
 	}
 	
+	public final void writeHiddenFields(final PrintStream out) throws IOException
+	{
+		Main_Jspm.writeHiddenFields(out, this);
+	}
+	
 	public final class Section
 	{
 		public final String id;
