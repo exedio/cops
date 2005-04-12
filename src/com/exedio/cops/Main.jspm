@@ -22,5 +22,17 @@ public class Main_Jspm
 			%>><%=field.getValue(optionValue)%><br><%
 		}
 	}
+	
+	public static final void write(final PrintStream out, final Form.BooleanField field)
+		throws IOException
+	{
+		%>
+		<input type="checkbox" name="<%=field.name%>" value="<%=field.VALUE_ON%>"<%
+		if(field.isChecked())
+		{
+			%> checked="checked"<%
+		}
+		%>><br><%
+	}
 }
 %>
