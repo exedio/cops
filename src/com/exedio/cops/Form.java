@@ -86,7 +86,7 @@ public abstract class Form
 			return null;
 	}
 	
-	public final class Field
+	public class Field
 	{
 		public final Object key;
 		public final String name;
@@ -132,6 +132,40 @@ public abstract class Form
 		{
 			return error;
 		}
+		
+	}
+	
+	public class EnumField extends Field
+	{
+		public final ArrayList names = new ArrayList();
+		final HashMap values = new HashMap();
+		
+		public EnumField(final Object key, final String name, final String value, final boolean hidden)
+		{
+			super(key, name, value, hidden);
+		}
+		
+		public EnumField(final Object key, final String value, final boolean hidden)
+		{
+			super(key, value, hidden);
+		}
+		
+		public String getValue(final String name)
+		{
+			return (String)values.get(name);
+		}
+		
+		public boolean isChecked(final String checkValue)
+		{
+			return value.equals(checkValue);
+		}
+		
+		public void addOption(final String name, final String value)
+		{
+			names.add(name);
+			values.put(name, value);
+		}
+		
 	}
 	
 	public final List getFields()
