@@ -168,11 +168,11 @@ public abstract class Form
 		
 	}
 	
-	public class BooleanField extends Field
+	public class CheckboxField extends Field
 	{
 		public static final String VALUE_ON = "on";
 		
-		public BooleanField(final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
+		public CheckboxField(final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
 		{
 			super(key, name, readOnly, value, hidden);
 		}

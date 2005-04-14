@@ -23,7 +23,7 @@ public class Main_Jspm
 		}
 	}
 	
-	public static final void write(final PrintStream out, final Form.BooleanField field)
+	public static final void write(final PrintStream out, final Form.CheckboxField field)
 		throws IOException
 	{
 		%>
