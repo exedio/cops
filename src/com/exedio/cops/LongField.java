@@ -6,10 +6,23 @@ public class LongField extends TextField
 {
 	final Long content;
 	
-	public LongField(final Form form, final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
+	/**
+	 * Constructs a form field with an inital value.
+	 */
+	public LongField(final Form form, final Object key, final String name, final boolean readOnly, final Long value, final boolean hidden)
 	{
-		super(form, key, name, readOnly, value, hidden);
+		super(form, key, name, readOnly, (value==null) ? "" : String.valueOf(value), hidden);
+		content = value;
+	}
+	
+	/**
+	 * Constructs a form field with a value obtained from the submitted form.
+	 */
+	public LongField(final Form form, final Object key, final String name, final boolean readOnly, final boolean hidden)
+	{
+		super(form, key, name, readOnly, hidden);
 
+		final String value = this.value;
 		if(value.length()>0)
 		{
 			long parsed = 0;

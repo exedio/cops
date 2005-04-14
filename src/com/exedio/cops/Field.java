@@ -12,13 +12,28 @@ public class Field
 	final boolean readOnly;
 	public final String value;
 	public String error;
-	
+
+	/**
+	 * Constructs a form field with an inital value.
+	 */
 	public Field(final Form form, final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
 	{
 		this.key = key;
 		this.name = name;
 		this.readOnly = readOnly;
 		this.value = value;
+		form.register(this, hidden);
+	}
+	
+	/**
+	 * Constructs a form field with a value obtained from the submitted form.
+	 */
+	public Field(final Form form, final Object key, final String name, final boolean readOnly, final boolean hidden)
+	{
+		this.key = key;
+		this.name = name;
+		this.readOnly = readOnly;
+		this.value = form.getParameter(name);
 		form.register(this, hidden);
 	}
 	
