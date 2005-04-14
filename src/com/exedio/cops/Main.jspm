@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 public class Main_Jspm
 {
-	public static final void write(final PrintStream out, final Form.RadioField field)
+	public static final void write(final PrintStream out, final RadioField field)
 		throws IOException
 	{
 		for(Iterator i = field.names.iterator(); i.hasNext(); )
@@ -23,7 +23,7 @@ public class Main_Jspm
 		}
 	}
 	
-	public static final void write(final PrintStream out, final Form.CheckboxField field)
+	public static final void write(final PrintStream out, final CheckboxField field)
 		throws IOException
 	{
 		%>
@@ -35,7 +35,7 @@ public class Main_Jspm
 		%>><br><%
 	}
 	
-	public static final void write(final PrintStream out, final Form.TextField field)
+	public static final void write(final PrintStream out, final TextField field)
 		throws IOException
 	{
 		final String value = field.getValue();
@@ -60,7 +60,7 @@ public class Main_Jspm
 	{
 		for(Iterator i = form.getHiddenFields().iterator(); i.hasNext(); )
 		{
-			final Form.Field field = (Form.Field)i.next();
+			final Field field = (Field)i.next();
 			%>
 			<input type="hidden" name="<%=field.name%>" value="<%=field.value%>" /><%
 		}

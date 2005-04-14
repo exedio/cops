@@ -2,11 +2,8 @@ package com.exedio.cops;
 
 import java.io.IOException;
 import java.io.PrintStream;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -71,6 +68,13 @@ public abstract class Form
 		}
 	}
 	
+	final void register(final Field field, final boolean hidden)
+	{
+		if(fieldMap.put(field.key, field)!=null)
+			throw new RuntimeException(field.name);
+		(hidden?hiddenFieldList:fieldList).add(field);
+	}
+	
 	protected final String getParameter(final String name)
 	{
 		if(multipartContentParameters!=null)
@@ -89,264 +93,6 @@ public abstract class Form
 		}
 		else
 			return null;
-	}
-	
-	public class Field
-	{
-		public final Object key;
-		public final String name;
-		final boolean readOnly;
-		public final String value;
-		public String error;
-		
-		public Field(final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
-		{
-			this.key = key;
-			this.name = name;
-			this.readOnly = readOnly;
-			this.value = value;
-			fieldMap.put(key, this);
-			(hidden?hiddenFieldList:fieldList).add(this);
-		}
-		
-		public final boolean isReadOnly()
-		{
-			return readOnly;
-		}
-		
-		public final String getName()
-		{
-			if(name==null)
-				throw new RuntimeException();
-			return name;
-		}
-		
-		public final String getValue()
-		{
-			return value;
-		}
-		
-		public final String getError()
-		{
-			return error;
-		}
-		
-		// TODO make this method abstract
-		public void write(final PrintStream out) throws IOException
-		{
-			throw new RuntimeException(name);
-		}
-		
-		public Object getContent()
-		{
-			return value;
-		}
-		
-	}
-	
-	public class RadioField extends Field
-	{
-		public final ArrayList names = new ArrayList();
-		final HashMap values = new HashMap();
-		
-		public RadioField(final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
-		{
-			super(key, name, readOnly, value, hidden);
-		}
-		
-		public String getValue(final String name)
-		{
-			return (String)values.get(name);
-		}
-		
-		public boolean isChecked(final String checkValue)
-		{
-			return value.equals(checkValue);
-		}
-		
-		public void addOption(final String name, final String value)
-		{
-			names.add(name);
-			values.put(name, value);
-		}
-		
-		public void write(final PrintStream out) throws IOException
-		{
-			Main_Jspm.write(out, this);
-		}
-		
-	}
-	
-	public class CheckboxField extends Field
-	{
-		public static final String VALUE_ON = "on";
-		
-		public CheckboxField(final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
-		{
-			super(key, name, readOnly, value, hidden);
-		}
-		
-		public boolean isChecked()
-		{
-			return VALUE_ON.equals(value);
-		}
-		
-		public void write(final PrintStream out) throws IOException
-		{
-			Main_Jspm.write(out, this);
-		}
-		
-		public Object getContent()
-		{
-			return Boolean.valueOf(isChecked());
-		}
-		
-	}
-	
-	public class TextField extends Field
-	{
-		
-		public TextField(final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
-		{
-			super(key, name, readOnly, value, hidden);
-		}
-		
-		public void write(final PrintStream out) throws IOException
-		{
-			Main_Jspm.write(out, this);
-		}
-		
-	}
-	
-	public class IntegerField extends TextField
-	{
-		final Integer content;
-		
-		public IntegerField(final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
-		{
-			super(key, name, readOnly, value, hidden);
-
-			if(value.length()>0)
-			{
-				int parsed = 0;
-				try
-				{
-					parsed = Integer.parseInt(value);
-				}
-				catch(NumberFormatException e)
-				{
-					error = "bad number: "+e.getMessage();
-				}
-				content = error==null ? new Integer(parsed) : null;
-			}
-			else
-				content = null;
-		}
-
-		public Object getContent()
-		{
-			return content;
-		}
-		
-	}
-	
-	public class LongField extends TextField
-	{
-		final Long content;
-		
-		public LongField(final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
-		{
-			super(key, name, readOnly, value, hidden);
-
-			if(value.length()>0)
-			{
-				long parsed = 0;
-				try
-				{
-					parsed = Long.parseLong(value);
-				}
-				catch(NumberFormatException e)
-				{
-					error = "bad number: "+e.getMessage();
-				}
-				content = error==null ? new Long(parsed) : null;
-			}
-			else
-				content = null;
-		}
-		
-		public Object getContent()
-		{
-			return content;
-		}
-		
-	}
-	
-	public class DoubleField extends TextField
-	{
-		final Double content;
-		
-		public DoubleField(final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
-		{
-			super(key, name, readOnly, value, hidden);
-
-			if(value.length()>0)
-			{
-				double parsed = 0;
-				try
-				{
-					parsed = Double.parseDouble(value);
-				}
-				catch(NumberFormatException e)
-				{
-					error = "bad number: "+e.getMessage();
-				}
-				content = error==null ? new Double(parsed) : null;
-			}
-			else
-				content = null;
-		}
-		
-		public Object getContent()
-		{
-			return content;
-		}
-		
-	}
-	
-	public class DateField extends TextField
-	{
-		private static final String DATE_FORMAT_FULL = "dd.MM.yyyy HH:mm:ss.SSS";
-
-		final Date content;
-		
-		public DateField(final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
-		{
-			super(key, name, readOnly, value, hidden);
-
-			if(value.length()>0)
-			{
-				Date parsed = null;
-				try
-				{
-					final SimpleDateFormat df = new SimpleDateFormat(DATE_FORMAT_FULL);
-					parsed = df.parse(value);
-				}
-				catch(ParseException e)
-				{
-					error = "bad date: "+e.getMessage();
-				}
-				content = error==null ? parsed : null;
-			}
-			else
-				content = null;
-		}
-		
-		public Object getContent()
-		{
-			return content;
-		}
-		
 	}
 	
 	public final List getFields()
