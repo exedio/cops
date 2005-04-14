@@ -2,8 +2,11 @@ package com.exedio.cops;
 
 import java.io.IOException;
 import java.io.PrintStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -133,6 +136,12 @@ public abstract class Form
 		{
 			throw new RuntimeException(name);
 		}
+		
+		public Object getContent()
+		{
+			return value;
+		}
+		
 	}
 	
 	public class RadioField extends Field
@@ -187,6 +196,11 @@ public abstract class Form
 			Main_Jspm.write(out, this);
 		}
 		
+		public Object getContent()
+		{
+			return Boolean.valueOf(isChecked());
+		}
+		
 	}
 	
 	public class TextField extends Field
@@ -200,6 +214,38 @@ public abstract class Form
 		public void write(final PrintStream out) throws IOException
 		{
 			Main_Jspm.write(out, this);
+		}
+		
+	}
+	
+	public class IntegerField extends TextField
+	{
+		final Integer content;
+		
+		public IntegerField(final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
+		{
+			super(key, name, readOnly, value, hidden);
+
+			if(value.length()>0)
+			{
+				int parsed = 0;
+				try
+				{
+					parsed = Integer.parseInt(value);
+				}
+				catch(NumberFormatException e)
+				{
+					error = "bad number: "+e.getMessage();
+				}
+				content = error==null ? new Integer(parsed) : null;
+			}
+			else
+				content = null;
+		}
+
+		public Object getContent()
+		{
+			return content;
 		}
 		
 	}
@@ -227,6 +273,78 @@ public abstract class Form
 			}
 			else
 				content = null;
+		}
+		
+		public Object getContent()
+		{
+			return content;
+		}
+		
+	}
+	
+	public class DoubleField extends TextField
+	{
+		final Double content;
+		
+		public DoubleField(final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
+		{
+			super(key, name, readOnly, value, hidden);
+
+			if(value.length()>0)
+			{
+				double parsed = 0;
+				try
+				{
+					parsed = Double.parseDouble(value);
+				}
+				catch(NumberFormatException e)
+				{
+					error = "bad number: "+e.getMessage();
+				}
+				content = error==null ? new Double(parsed) : null;
+			}
+			else
+				content = null;
+		}
+		
+		public Object getContent()
+		{
+			return content;
+		}
+		
+	}
+	
+	public class DateField extends TextField
+	{
+		private static final String DATE_FORMAT_FULL = "dd.MM.yyyy HH:mm:ss.SSS";
+
+		final Date content;
+		
+		public DateField(final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
+		{
+			super(key, name, readOnly, value, hidden);
+
+			if(value.length()>0)
+			{
+				Date parsed = null;
+				try
+				{
+					final SimpleDateFormat df = new SimpleDateFormat(DATE_FORMAT_FULL);
+					parsed = df.parse(value);
+				}
+				catch(ParseException e)
+				{
+					error = "bad date: "+e.getMessage();
+				}
+				content = error==null ? parsed : null;
+			}
+			else
+				content = null;
+		}
+		
+		public Object getContent()
+		{
+			return content;
 		}
 		
 	}
