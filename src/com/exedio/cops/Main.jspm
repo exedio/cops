@@ -28,7 +28,7 @@ final class Main_Jspm
 	{
 		%>
 		<input type="checkbox" name="<%=field.name%>" value="<%=field.VALUE_ON%>"<%
-		if(field.isChecked())
+		if(field.content)
 		{
 			%> checked="checked"<%
 		}
@@ -61,8 +61,12 @@ final class Main_Jspm
 		for(Iterator i = form.getHiddenFields().iterator(); i.hasNext(); )
 		{
 			final Field field = (Field)i.next();
+			final String value = field.value;
+			if(value!=null)
+			{
 			%>
-			<input type="hidden" name="<%=field.name%>" value="<%=field.value%>" /><%
+			<input type="hidden" name="<%=field.name%>" value="<%=value%>" /><%
+			}
 		}
 	}
 }
