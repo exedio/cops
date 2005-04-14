@@ -24,6 +24,7 @@ public abstract class Form
 	private final HashMap fieldMap = new HashMap();
 	private final ArrayList visibleFieldList = new ArrayList();
 	private final ArrayList hiddenFieldList = new ArrayList();
+	private final ArrayList allFieldList = new ArrayList();
 	
 	private final ArrayList sectionList = new ArrayList();
 	
@@ -73,6 +74,7 @@ public abstract class Form
 		if(fieldMap.put(field.key, field)!=null)
 			throw new RuntimeException(field.name);
 		(hidden?hiddenFieldList:visibleFieldList).add(field);
+		allFieldList.add(field);
 	}
 	
 	protected final String getParameter(final String name)
@@ -103,6 +105,11 @@ public abstract class Form
 	public final List getHiddenFields()
 	{
 		return Collections.unmodifiableList(hiddenFieldList);
+	}
+	
+	public final List getAllFields()
+	{
+		return Collections.unmodifiableList(allFieldList);
 	}
 	
 	public final void writeHiddenFields(final PrintStream out) throws IOException
