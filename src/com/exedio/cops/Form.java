@@ -22,7 +22,7 @@ public abstract class Form
 	private final HashMap multipartContentParameters;
 
 	private final HashMap fieldMap = new HashMap();
-	private final ArrayList fieldList = new ArrayList();
+	private final ArrayList visibleFieldList = new ArrayList();
 	private final ArrayList hiddenFieldList = new ArrayList();
 	
 	private final ArrayList sectionList = new ArrayList();
@@ -72,7 +72,7 @@ public abstract class Form
 	{
 		if(fieldMap.put(field.key, field)!=null)
 			throw new RuntimeException(field.name);
-		(hidden?hiddenFieldList:fieldList).add(field);
+		(hidden?hiddenFieldList:visibleFieldList).add(field);
 	}
 	
 	protected final String getParameter(final String name)
@@ -95,9 +95,9 @@ public abstract class Form
 			return null;
 	}
 	
-	public final List getFields()
+	public final List getVisibleFields()
 	{
-		return Collections.unmodifiableList(fieldList);
+		return Collections.unmodifiableList(visibleFieldList);
 	}
 	
 	public final List getHiddenFields()
