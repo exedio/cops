@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Iterator;
 
-public class Main_Jspm
+final class Main_Jspm
 {
 	public static final void write(final PrintStream out, final RadioField field)
 		throws IOException
