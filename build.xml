@@ -47,6 +47,33 @@
 		</delete>
 	</target>
 
-	<target name="all" depends="compile, jar" />
+	<target name="api">
+
+		<delete dir="api" />
+		<mkdir  dir="api" />
+
+		<javadoc
+				sourcepath="src"
+				destdir="api"
+				maxmemory="60m"
+				author="on"
+				use="on"
+				version="on"
+				windowtitle="Cops"
+				doctitle=   "Cops &lt;br&gt;API Specification"
+				header=     "Cops"
+				footer=     "Cops"
+				splitindex="on"
+				bottom='&lt;small&gt;&amp;copy; Copyright 2004 &lt;a href="http://www.exedio.com/" target="_top"&gt;exedio&lt;/a&gt; Gesellschaft f&amp;uuml;r Softwareentwicklung mbH. All rights reserved.&lt;small&gt;'
+			>
+			<package name="com.*" />
+			<classpath>
+				<pathelement location="../tomcat/common/lib/servlet-api.jar" />
+				<pathelement location="../tomcat/server/lib/commons-fileupload-1.0.jar" />
+			</classpath>
+		</javadoc>
+	</target>
+	
+	<target name="all" depends="compile, jar, api" />
 
 </project>
