@@ -135,12 +135,12 @@ public abstract class Form
 		}
 	}
 	
-	public class EnumField extends Field
+	public class RadioField extends Field
 	{
 		public final ArrayList names = new ArrayList();
 		final HashMap values = new HashMap();
 		
-		public EnumField(final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
+		public RadioField(final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
 		{
 			super(key, name, readOnly, value, hidden);
 		}

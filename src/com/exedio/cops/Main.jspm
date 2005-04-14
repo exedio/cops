@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 public class Main_Jspm
 {
-	public static final void write(final PrintStream out, final Form.EnumField field)
+	public static final void write(final PrintStream out, final Form.RadioField field)
 		throws IOException
 	{
 		for(Iterator i = field.names.iterator(); i.hasNext(); )
