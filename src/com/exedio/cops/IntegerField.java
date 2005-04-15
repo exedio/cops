@@ -6,10 +6,24 @@ public class IntegerField extends TextField
 {
 	final Integer content;
 	
-	public IntegerField(final Form form, final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
+	/**
+	 * Constructs a form field with an inital value.
+	 */
+	public IntegerField(final Form form, final Object key, final String name, final boolean readOnly, final Integer value, final boolean hidden)
 	{
-		super(form, key, name, readOnly, value, hidden);
+		super(form, key, name, readOnly, (value==null) ? "" : String.valueOf(value), hidden);
+		
+		this.content = value;
+	}
 
+	/**
+	 * Constructs a form field with a value obtained from the submitted form.
+	 */
+	public IntegerField(final Form form, final Object key, final String name, final boolean readOnly, final boolean hidden)
+	{
+		super(form, key, name, readOnly, hidden);
+
+		final String value = this.value;
 		if(value.length()>0)
 		{
 			int parsed = 0;

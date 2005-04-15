@@ -23,7 +23,9 @@ public abstract class Form
 
 	private final HashMap fieldMap = new HashMap();
 	private final ArrayList visibleFieldList = new ArrayList();
+	// TODO: lazily initialize hiddenFieldList
 	private final ArrayList hiddenFieldList = new ArrayList();
+	// TODO: compute allFieldList
 	private final ArrayList allFieldList = new ArrayList();
 	
 	private final ArrayList sectionList = new ArrayList();
@@ -71,7 +73,7 @@ public abstract class Form
 	
 	final void register(final Field field, final boolean hidden)
 	{
-		if(fieldMap.put(field.key, field)!=null)
+		if(fieldMap.put(field.name, field)!=null)
 			throw new RuntimeException(field.name);
 		(hidden?hiddenFieldList:visibleFieldList).add(field);
 		allFieldList.add(field);

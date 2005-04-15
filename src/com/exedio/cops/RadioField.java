@@ -12,9 +12,21 @@ public class RadioField extends Field
 	public final ArrayList names = new ArrayList();
 	final HashMap values = new HashMap();
 	
+	/**
+	 * Constructs a form field with an inital value.
+	 * TODO: fix typo
+	 */
 	public RadioField(final Form form, final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
 	{
 		super(form, key, name, readOnly, value, hidden);
+	}
+	
+	/**
+	 * Constructs a form field with a value obtained from the submitted form.
+	 */
+	public RadioField(final Form form, final Object key, final String name, final boolean readOnly, final boolean hidden)
+	{
+		super(form, key, name, readOnly, hidden);
 	}
 	
 	public String getValue(final String name)

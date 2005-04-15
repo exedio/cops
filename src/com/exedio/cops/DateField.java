@@ -8,14 +8,28 @@ import java.util.Date;
 
 public class DateField extends TextField
 {
-	private static final String DATE_FORMAT_FULL = "dd.MM.yyyy HH:mm:ss.SSS";
+	public static final String DATE_FORMAT_FULL = "dd.MM.yyyy HH:mm:ss.SSS";
 
 	final Date content;
 	
-	public DateField(final Form form, final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
+	/**
+	 * Constructs a form field with an inital value.
+	 */
+	public DateField(final Form form, final Object key, final String name, final boolean readOnly, final Date value, final boolean hidden)
 	{
-		super(form, key, name, readOnly, value, hidden);
+		super(form, key, name, readOnly, (value==null) ? "" : (new SimpleDateFormat(DATE_FORMAT_FULL)).format(value), hidden);
 
+		this.content = value;
+	}
+	
+	/**
+	 * Constructs a form field with a value obtained from the submitted form.
+	 */
+	public DateField(final Form form, final Object key, final String name, final boolean readOnly, final boolean hidden)
+	{
+		super(form, key, name, readOnly, hidden);
+
+		final String value = this.value;
 		if(value.length()>0)
 		{
 			Date parsed = null;

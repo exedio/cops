@@ -7,7 +7,7 @@ import java.io.PrintStream;
 
 public class CheckboxField extends Field
 {
-	public static final String VALUE_ON = "on";
+	static final String VALUE_ON = "on";
 	
 	final boolean content;
 
