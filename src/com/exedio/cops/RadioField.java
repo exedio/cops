@@ -13,8 +13,7 @@ public class RadioField extends Field
 	final HashMap values = new HashMap();
 	
 	/**
-	 * Constructs a form field with an inital value.
-	 * TODO: fix typo
+	 * Constructs a form field with an initial value.
 	 */
 	public RadioField(final Form form, final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
 	{

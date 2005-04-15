@@ -12,7 +12,7 @@ public class CheckboxField extends Field
 	final boolean content;
 
 	/**
-	 * Constructs a form field with an inital value.
+	 * Constructs a form field with an initial value.
 	 */
 	public CheckboxField(final Form form, final Object key, final String name, final boolean readOnly, final boolean value, final boolean hidden)
 	{

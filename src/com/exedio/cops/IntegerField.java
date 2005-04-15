@@ -7,7 +7,7 @@ public class IntegerField extends TextField
 	final Integer content;
 	
 	/**
-	 * Constructs a form field with an inital value.
+	 * Constructs a form field with an initial value.
 	 */
 	public IntegerField(final Form form, final Object key, final String name, final boolean readOnly, final Integer value, final boolean hidden)
 	{

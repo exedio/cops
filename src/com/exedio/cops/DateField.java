@@ -13,7 +13,7 @@ public class DateField extends TextField
 	final Date content;
 	
 	/**
-	 * Constructs a form field with an inital value.
+	 * Constructs a form field with an initial value.
 	 */
 	public DateField(final Form form, final Object key, final String name, final boolean readOnly, final Date value, final boolean hidden)
 	{

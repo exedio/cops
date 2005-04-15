@@ -7,7 +7,7 @@ public class DoubleField extends TextField
 	final Double content;
 	
 	/**
-	 * Constructs a form field with an inital value.
+	 * Constructs a form field with an initial value.
 	 */
 	public DoubleField(final Form form, final Object key, final String name, final boolean readOnly, final Double value, final boolean hidden)
 	{

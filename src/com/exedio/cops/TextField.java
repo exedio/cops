@@ -9,7 +9,7 @@ public class TextField extends Field
 {
 	
 	/**
-	 * Constructs a form field with an inital value.
+	 * Constructs a form field with an initial value.
 	 */
 	public TextField(final Form form, final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
 	{
