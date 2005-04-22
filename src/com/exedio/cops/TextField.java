@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 
 
-public class TextField extends Field
+public abstract class TextField extends Field
 {
 	
 	/**

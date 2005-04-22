@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 
 
-public class Field
+public abstract class Field
 {
 	public final Object key;
 	public final String name;
@@ -59,11 +59,7 @@ public class Field
 		return error;
 	}
 	
-	// TODO make this method abstract
-	public void write(final PrintStream out) throws IOException
-	{
-		throw new RuntimeException(name);
-	}
+	public abstract void write(final PrintStream out) throws IOException;
 	
 	public Object getContent()
 	{
