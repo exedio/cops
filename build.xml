@@ -5,7 +5,7 @@
 	<target name="jspm">
 		<java classname="com.exedio.jspm.Main" taskname="jspm" fork="yes" failonerror="yes">
 			<classpath>
-				<pathelement location="../jspm/build/exedio-jspm.jar" />
+				<pathelement location="lib/exedio-jspm.jar" />
 			</classpath>
 			<arg value="src/com/exedio/cops/Main.jspm" />
 		</java>
@@ -19,8 +19,8 @@
 				debug="on"
 				optimize="off">
 			<classpath>
-				<pathelement location="../tomcat/common/lib/servlet-api.jar" />
-				<pathelement location="../tomcat/server/lib/commons-fileupload-1.0.jar" />
+				<pathelement location="lib/servlet-api.jar" />
+				<pathelement location="lib/commons-fileupload-1.0.jar" />
 			</classpath>
 		</javac>
 	</target>
@@ -37,6 +37,29 @@
 			</manifest>
 		</jar>
 	</target>
+	
+	<target name="dist.tar">
+		<mkdir dir="build" />
+		<tar destfile="build/exedio-cops-src.tar.gz"
+				compression="gzip">
+			<tarfileset dir="${basedir}">
+				<exclude name="build/**" />
+				<exclude name="api/**" />
+				<exclude name="**/*_Jspm.java" />
+			</tarfileset>
+		</tar>
+	</target>
+	
+	<target name="dist.test" depends="dist.tar">
+		<delete dir="build/dist-test" />
+		<mkdir dir="build/dist-test" />
+		<untar src="build/exedio-cops-src.tar.gz"
+				dest="build/dist-test"
+				compression="gzip" />
+		<ant dir="build/dist-test" target="all.but.dist.test" />
+	</target>
+	
+	<target name="dist" depends="dist.tar, dist.test" />
 	
 	<target name="clean">
 		<delete dir="build" />
@@ -73,12 +96,13 @@
 			<link href="${api.link.jdk}" />
 			<link href="${api.link.servlet}" />
 			<classpath>
-				<pathelement location="../tomcat/common/lib/servlet-api.jar" />
-				<pathelement location="../tomcat/server/lib/commons-fileupload-1.0.jar" />
+				<pathelement location="lib/servlet-api.jar" />
+				<pathelement location="lib/commons-fileupload-1.0.jar" />
 			</classpath>
 		</javadoc>
 	</target>
 	
-	<target name="all" depends="compile, jar, api" />
+	<target name="all"               depends="compile, jar, api, dist" />
+	<target name="all.but.dist.test" depends="compile, jar, api, dist.tar" />
 
 </project>
