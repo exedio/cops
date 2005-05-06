@@ -2,13 +2,18 @@
 
 <project name="cops" default="all" basedir=".">
 
-	<target name="jspm">
-		<java classname="com.exedio.jspm.Main" taskname="jspm" fork="yes" failonerror="yes">
+	<target name="jspm.taskdef">
+		<taskdef name="jspm" classname="com.exedio.jspm.AntTask">
 			<classpath>
 				<pathelement location="lib/exedio-jspm.jar" />
 			</classpath>
-			<arg value="src/com/exedio/cops/Main.jspm" />
-		</java>
+		</taskdef>
+	</target>
+	
+	<target name="jspm" depends="jspm.taskdef">
+		<jspm>
+			<fileset dir="src" includes="**/*.jspm" />
+		</jspm>
 	</target>
 	
 	<target name="compile" depends="jspm">
