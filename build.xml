@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<project name="cops" default="all" basedir=".">
+<project name="cops" default="build" basedir=".">
 
 	<target name="jspm.taskdef">
 		<taskdef name="jspm" classname="com.exedio.jspm.AntTask">
@@ -61,7 +61,7 @@
 		<untar src="build/exedio-cops-src.tar.gz"
 				dest="build/dist-test"
 				compression="gzip" />
-		<ant dir="build/dist-test" target="all.but.dist.test" />
+		<ant dir="build/dist-test" target="build" />
 	</target>
 	
 	<target name="dist" depends="dist.tar, dist.test" />
@@ -107,7 +107,7 @@
 		</javadoc>
 	</target>
 	
-	<target name="all"               depends="compile, jar, api, dist" />
-	<target name="all.but.dist.test" depends="compile, jar, api, dist.tar" />
+	<target name="build" depends="compile, jar, api" />
+	<target name="all" depends="build, dist" />
 
 </project>
