@@ -78,7 +78,7 @@
 	<target name="api">
 
 		<property name="api.link.jdk" value="http://java.sun.com/j2se/1.4.2/docs/api" />
-		<property name="api.link.servlet" value="http://jakarta.apache.org/tomcat/tomcat-5.0-doc/servletapi" />
+		<property name="api.link.j2ee" value="http://java.sun.com/j2ee/1.4/docs/api" />
 
 		<delete dir="api" />
 		<mkdir  dir="api" />
@@ -99,7 +99,7 @@
 			>
 			<package name="com.*" />
 			<link href="${api.link.jdk}" />
-			<link href="${api.link.servlet}" />
+			<link href="${api.link.j2ee}" />
 			<classpath>
 				<pathelement location="lib/servlet-api.jar" />
 				<pathelement location="lib/commons-fileupload-1.0.jar" />
