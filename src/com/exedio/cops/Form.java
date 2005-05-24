@@ -116,6 +116,11 @@ public abstract class Form
 			return null;
 	}
 	
+	public final Field getField(final String name)
+	{
+		return (Field)fieldMap.get(name);
+	}
+	
 	public final List getVisibleFields()
 	{
 		return Collections.unmodifiableList(visibleFieldList);
