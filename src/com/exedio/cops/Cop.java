@@ -18,6 +18,7 @@
 package com.exedio.cops;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public abstract class Cop
 {
@@ -74,6 +75,12 @@ public abstract class Cop
 		//System.out.println("userid:"+userid);
 		//System.out.println("password:"+password);
 		return new String[]{userid, password};
+	}
+	
+	public static final void rejectAuthorizeBasic(final HttpServletResponse response, final String realm)
+	{
+		response.addHeader("WWW-Authenticate", "Basic realm=\"" + realm + '"');
+		response.setStatus(response.SC_UNAUTHORIZED);
 	}
 	
 }
