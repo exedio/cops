@@ -105,7 +105,15 @@
 		</javadoc>
 	</target>
 	
+	<target name="api.zip" depends="api">
+		<mkdir dir="build" />
+		<tar destfile="build/exedio-cops-api.tar.gz"
+			  compression="gzip">
+			<tarfileset dir="${basedir}/api" />
+		</tar>
+	</target>
+	
 	<target name="build" depends="compile, jar, api" />
-	<target name="all" depends="build, dist" />
+	<target name="all" depends="build, api.zip, dist" />
 
 </project>
