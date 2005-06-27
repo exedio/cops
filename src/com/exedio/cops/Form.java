@@ -33,7 +33,7 @@ import org.apache.commons.fileupload.FileUpload;
 import org.apache.commons.fileupload.FileUploadException;
 
 
-public abstract class Form
+public class Form
 {
 	private final HttpServletRequest request;
 	private final HashMap multipartContentParameters;
