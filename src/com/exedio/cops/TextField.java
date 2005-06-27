@@ -41,6 +41,19 @@ public abstract class TextField extends Field
 		super(form, key, name, readOnly, hidden);
 	}
 	
+	/**
+	 * Let the content of the <code>type</code> attribute of the <code>input</code> tag
+	 * contain <code>password</code> instead of <code>text</code>,
+	 * if you use {@link #write(PrintStream)}.
+	 */
+	public boolean password = false;
+
+	/**
+	 * The content of the <code>size</code> attribute of the <code>input</code> tag,
+	 * if you use {@link #write(PrintStream)}.
+	 */
+	public int size = 30;
+	
 	public void write(final PrintStream out) throws IOException
 	{
 		Main_Jspm.write(out, this);

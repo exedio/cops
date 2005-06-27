@@ -54,6 +54,12 @@ public abstract class Field
 		form.register(this, hidden);
 	}
 	
+	/**
+	 * The content of the <code>style</code> attribute of the <code>input</code> tag,
+	 * if you use {@link #write(PrintStream)}.
+	 */
+	public String style = null;
+	
 	public final boolean isReadOnly()
 	{
 		return readOnly;

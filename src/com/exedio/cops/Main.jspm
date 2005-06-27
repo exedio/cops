@@ -33,6 +33,11 @@ final class Main_Jspm
 			final String optionValue = (String)i.next();
 			%>
 			<input type="radio" name="<%=field.name%>" value="<%=optionValue%>"<%
+			final String style = field.style;
+			if(style!=null)
+			{
+				%> style="<%=style%>"<%
+			}
 			if(field.isChecked(optionValue))
 			{
 				%> checked="checked"<%
@@ -46,6 +51,11 @@ final class Main_Jspm
 	{
 		%>
 		<input type="checkbox" name="<%=field.name%>" value="<%=field.VALUE_ON%>"<%
+		final String style = field.style;
+		if(style!=null)
+		{
+			%> style="<%=style%>"<%
+		}
 		if(field.content)
 		{
 			%> checked="checked"<%
@@ -64,7 +74,22 @@ final class Main_Jspm
 		}
 		else
 		{
-			%><input type="text" name="<%=field.name%>" size="30" value="<%=value%>" /><%
+			%><input type="<%
+			if(field.password)
+			{
+				%>password<%
+			}
+			else
+			{
+				%>text<%
+			}
+			%>" name="<%=field.name%>" size="<%=field.size%>" value="<%=value%>"<%
+			final String style = field.style;
+			if(style!=null)
+			{
+				%> style="<%=style%>"<%
+			}
+			%> /><%
 			final String error = field.getError();
 			if(error!=null)
 			{
