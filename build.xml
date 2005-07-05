@@ -93,6 +93,7 @@
 				version="on"
 				windowtitle="Cops"
 				splitindex="on"
+				failonerror="true"
 			>
 			<doctitle><![CDATA[Cops<br>API Specification]]></doctitle>
 			<header>Cops</header>
