@@ -28,17 +28,17 @@ public abstract class TextField extends Field
 	/**
 	 * Constructs a form field with an initial value.
 	 */
-	public TextField(final Form form, final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
+	public TextField(final Form form, final Object key, final String name, final boolean readOnly, final String value)
 	{
-		super(form, key, name, readOnly, value, hidden);
+		super(form, key, name, readOnly, value);
 	}
 	
 	/**
 	 * Constructs a form field with a value obtained from the submitted form.
 	 */
-	public TextField(final Form form, final Object key, final String name, final boolean readOnly, final boolean hidden)
+	public TextField(final Form form, final Object key, final String name, final boolean readOnly)
 	{
-		super(form, key, name, readOnly, hidden);
+		super(form, key, name, readOnly);
 	}
 	
 	/**
@@ -54,7 +54,7 @@ public abstract class TextField extends Field
 	 */
 	public int size = 30;
 	
-	public void write(final PrintStream out) throws IOException
+	public void writeIt(final PrintStream out) throws IOException
 	{
 		Main_Jspm.write(out, this);
 	}

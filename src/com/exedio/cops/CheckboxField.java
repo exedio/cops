@@ -31,18 +31,18 @@ public class CheckboxField extends Field
 	/**
 	 * Constructs a form field with an initial value.
 	 */
-	public CheckboxField(final Form form, final Object key, final String name, final boolean readOnly, final boolean value, final boolean hidden)
+	public CheckboxField(final Form form, final Object key, final String name, final boolean readOnly, final boolean value)
 	{
-		super(form, key, name, readOnly, value ? VALUE_ON : null, hidden);
+		super(form, key, name, readOnly, value ? VALUE_ON : null);
 		this.content = value;
 	}
 	
 	/**
 	 * Constructs a form field with a value obtained from the submitted form.
 	 */
-	public CheckboxField(final Form form, final Object key, final String name, final boolean readOnly, final boolean hidden)
+	public CheckboxField(final Form form, final Object key, final String name, final boolean readOnly)
 	{
-		super(form, key, name, readOnly, hidden);
+		super(form, key, name, readOnly);
 
 		final String value = this.value;
 		if(value==null)
@@ -53,7 +53,7 @@ public class CheckboxField extends Field
 			throw new RuntimeException(name+'-'+value);
 	}
 	
-	public void write(final PrintStream out) throws IOException
+	public void writeIt(final PrintStream out) throws IOException
 	{
 		Main_Jspm.write(out, this);
 	}

@@ -27,9 +27,9 @@ public final class StringField extends TextField
 	/**
 	 * Constructs a form field with an initial value.
 	 */
-	public StringField(final Form form, final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
+	public StringField(final Form form, final Object key, final String name, final boolean readOnly, final String value)
 	{
-		super(form, key, name, readOnly, (value==null) ? "" : value, hidden);
+		super(form, key, name, readOnly, (value==null) ? "" : value);
 		
 		this.content = value;
 	}
@@ -37,9 +37,9 @@ public final class StringField extends TextField
 	/**
 	 * Constructs a form field with a value obtained from the submitted form.
 	 */
-	public StringField(final Form form, final Object key, final String name, final boolean readOnly, final boolean hidden)
+	public StringField(final Form form, final Object key, final String name, final boolean readOnly)
 	{
-		super(form, key, name, readOnly, hidden);
+		super(form, key, name, readOnly);
 		
 		final String value = this.value;
 		content = value; // TODO: convert empty string to null

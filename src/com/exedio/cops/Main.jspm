@@ -127,14 +127,17 @@ final class Main_Jspm
 	public static final void writeHiddenFields(final PrintStream out, final Form form)
 		throws IOException
 	{
-		for(Iterator i = form.getHiddenFields().iterator(); i.hasNext(); )
+		for(Iterator i = form.getFields().iterator(); i.hasNext(); )
 		{
 			final Field field = (Field)i.next();
-			final String value = field.value;
-			if(value!=null)
+			if(!field.isWritten())
 			{
-			%>
-			<input type="hidden" name="<%=field.name%>" value="<%=value%>" /><%
+				final String value = field.value;
+				if(value!=null)
+				{
+				%>
+				<input type="hidden" name="<%=field.name%>" value="<%=value%>" /><%
+				}
 			}
 		}
 	}

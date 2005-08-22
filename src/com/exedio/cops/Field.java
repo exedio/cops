@@ -29,29 +29,30 @@ public abstract class Field
 	final boolean readOnly;
 	public final String value;
 	public String error;
+	private boolean written = false;
 
 	/**
 	 * Constructs a form field with an initial value.
 	 */
-	public Field(final Form form, final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
+	public Field(final Form form, final Object key, final String name, final boolean readOnly, final String value)
 	{
 		this.key = key;
 		this.name = name;
 		this.readOnly = readOnly;
 		this.value = value;
-		form.register(this, hidden);
+		form.register(this);
 	}
 	
 	/**
 	 * Constructs a form field with a value obtained from the submitted form.
 	 */
-	public Field(final Form form, final Object key, final String name, final boolean readOnly, final boolean hidden)
+	public Field(final Form form, final Object key, final String name, final boolean readOnly)
 	{
 		this.key = key;
 		this.name = name;
 		this.readOnly = readOnly;
 		this.value = form.getParameter(name);
-		form.register(this, hidden);
+		form.register(this);
 	}
 	
 	/**
@@ -82,7 +83,21 @@ public abstract class Field
 		return error;
 	}
 	
-	public abstract void write(final PrintStream out) throws IOException;
+	public final boolean isWritten()
+	{
+		return written;
+	}
+	
+	public final void write(final PrintStream out) throws IOException
+	{
+		if(written)
+			throw new RuntimeException("field "+name+" has already been written");
+		
+		writeIt(out);
+		written = true;
+	}
+
+	public abstract void writeIt(final PrintStream out) throws IOException;
 	
 	public Object getContent()
 	{

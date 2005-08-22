@@ -39,11 +39,7 @@ public class Form
 	private final HashMap multipartContentParameters;
 
 	private final HashMap fieldMap = new HashMap();
-	private final ArrayList visibleFieldList = new ArrayList();
-	// TODO: lazily initialize hiddenFieldList
-	private final ArrayList hiddenFieldList = new ArrayList();
-	// TODO: compute allFieldList
-	private final ArrayList allFieldList = new ArrayList();
+	private final ArrayList fieldList = new ArrayList();
 	
 	private final ArrayList sectionList = new ArrayList();
 	
@@ -88,12 +84,11 @@ public class Form
 		}
 	}
 	
-	final void register(final Field field, final boolean hidden)
+	final void register(final Field field)
 	{
 		if(fieldMap.put(field.name, field)!=null)
 			throw new RuntimeException(field.name);
-		(hidden?hiddenFieldList:visibleFieldList).add(field);
-		allFieldList.add(field);
+		fieldList.add(field);
 	}
 	
 	protected final String getParameter(final String name)
@@ -121,19 +116,9 @@ public class Form
 		return (Field)fieldMap.get(name);
 	}
 	
-	public final List getVisibleFields()
+	public final List getFields()
 	{
-		return Collections.unmodifiableList(visibleFieldList);
-	}
-	
-	public final List getHiddenFields()
-	{
-		return Collections.unmodifiableList(hiddenFieldList);
-	}
-	
-	public final List getAllFields()
-	{
-		return Collections.unmodifiableList(allFieldList);
+		return Collections.unmodifiableList(fieldList);
 	}
 	
 	public final void writeHiddenFields(final PrintStream out) throws IOException

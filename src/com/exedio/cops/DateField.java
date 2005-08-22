@@ -32,9 +32,9 @@ public class DateField extends TextField
 	/**
 	 * Constructs a form field with an initial value.
 	 */
-	public DateField(final Form form, final Object key, final String name, final boolean readOnly, final Date value, final boolean hidden)
+	public DateField(final Form form, final Object key, final String name, final boolean readOnly, final Date value)
 	{
-		super(form, key, name, readOnly, (value==null) ? "" : (new SimpleDateFormat(DATE_FORMAT_FULL)).format(value), hidden);
+		super(form, key, name, readOnly, (value==null) ? "" : (new SimpleDateFormat(DATE_FORMAT_FULL)).format(value));
 
 		this.content = value;
 	}
@@ -42,9 +42,9 @@ public class DateField extends TextField
 	/**
 	 * Constructs a form field with a value obtained from the submitted form.
 	 */
-	public DateField(final Form form, final Object key, final String name, final boolean readOnly, final boolean hidden)
+	public DateField(final Form form, final Object key, final String name, final boolean readOnly)
 	{
-		super(form, key, name, readOnly, hidden);
+		super(form, key, name, readOnly);
 
 		final String value = this.value;
 		if(value.length()>0)

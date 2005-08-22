@@ -32,17 +32,17 @@ public class DropdownField extends Field
 	/**
 	 * Constructs a form field with an initial value.
 	 */
-	public DropdownField(final Form form, final Object key, final String name, final boolean readOnly, final String value, final boolean hidden)
+	public DropdownField(final Form form, final Object key, final String name, final boolean readOnly, final String value)
 	{
-		super(form, key, name, readOnly, value, hidden);
+		super(form, key, name, readOnly, value);
 	}
 	
 	/**
 	 * Constructs a form field with a value obtained from the submitted form.
 	 */
-	public DropdownField(final Form form, final Object key, final String name, final boolean readOnly, final boolean hidden)
+	public DropdownField(final Form form, final Object key, final String name, final boolean readOnly)
 	{
-		super(form, key, name, readOnly, hidden);
+		super(form, key, name, readOnly);
 	}
 	
 	public String getValue(final String name)
@@ -69,7 +69,7 @@ public class DropdownField extends Field
 		values.put(name, value);
 	}
 	
-	public void write(final PrintStream out) throws IOException
+	public void writeIt(final PrintStream out) throws IOException
 	{
 		Main_Jspm.write(out, this);
 	}
