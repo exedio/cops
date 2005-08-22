@@ -31,18 +31,26 @@ public class RadioField extends Field
 	
 	/**
 	 * Constructs a form field with an initial value.
+	 * @throws NullPointerException if value is null.
 	 */
 	public RadioField(final Form form, final Object key, final String name, final boolean readOnly, final String value)
 	{
 		super(form, key, name, readOnly, value);
+
+		if(value==null)
+			throw new NullPointerException("value for field "+name+" must not be null");
 	}
 	
 	/**
 	 * Constructs a form field with a value obtained from the submitted form.
+	 * @throws NullPointerException if request does not contain a parameter for name.
 	 */
 	public RadioField(final Form form, final Object key, final String name, final boolean readOnly)
 	{
 		super(form, key, name, readOnly);
+
+		if(value==null)
+			throw new NullPointerException("value for field "+name+" must be in request");
 	}
 	
 	public String getValue(final String name)
