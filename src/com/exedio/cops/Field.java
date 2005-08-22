@@ -33,9 +33,13 @@ public abstract class Field
 
 	/**
 	 * Constructs a form field with an initial value.
+	 * @throws NullPointerException if name is null and readOnly is false.
 	 */
 	public Field(final Form form, final Object key, final String name, final boolean readOnly, final String value)
 	{
+		if(name==null && !readOnly)
+			throw new NullPointerException("name for field can be null for read-only fields only");
+
 		this.key = key;
 		this.name = name;
 		this.readOnly = readOnly;
