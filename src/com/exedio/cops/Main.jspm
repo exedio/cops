@@ -46,6 +46,32 @@ final class Main_Jspm
 		}
 	}
 	
+	public static final void write(final PrintStream out, final DropdownField field)
+		throws IOException
+	{
+		%>
+		<select name="<%=field.name%>"<%
+		final String style = field.style;
+		if(style!=null)
+		{
+			%> style="<%=style%>"<%
+		}
+		%>><%
+		for(Iterator i = field.names.iterator(); i.hasNext(); )
+		{
+			final String optionValue = (String)i.next();
+			%>
+			<option value="<%=optionValue%>"><%=field.getValue(optionValue)%></option><%
+			if(field.isChecked(optionValue))
+			{
+				%> checked="checked"<%
+			}
+			%>><%
+		}
+		%>
+		</select><%
+	}
+	
 	public static final void write(final PrintStream out, final CheckboxField field)
 		throws IOException
 	{
