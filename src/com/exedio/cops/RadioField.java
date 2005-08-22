@@ -55,8 +55,16 @@ public class RadioField extends Field
 		return value.equals(checkValue);
 	}
 	
+	/**
+	 * @throws NullPointerException if name or value is null
+	 */
 	public void addOption(final String name, final String value)
 	{
+		if(name==null)
+			throw new NullPointerException("name must not be null");
+		if(value==null)
+			throw new NullPointerException("value must not be null");
+
 		names.add(name);
 		values.put(name, value);
 	}
