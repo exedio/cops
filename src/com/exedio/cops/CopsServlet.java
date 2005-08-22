@@ -82,9 +82,9 @@ public abstract class CopsServlet extends HttpServlet
 			idLong = random.nextLong();
 		}
 		final String id = String.valueOf(Math.abs(idLong));
-		System.out.println("--------I"+id+"-----");
+		System.out.println("--------"+id+"-----");
 		printException(System.out, exception);
-		System.out.println("--------O"+id+"-----");
+		System.out.println("-------/"+id+"-----");
 		return id;
 	}
 
