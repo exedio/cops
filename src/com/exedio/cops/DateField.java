@@ -28,15 +28,28 @@ public class DateField extends TextField
 	public static final String DATE_FORMAT_FULL = "dd.MM.yyyy HH:mm:ss.SSS";
 
 	final Date content;
+	final String pattern;
 	
 	/**
 	 * Constructs a form field with an initial value.
 	 */
 	public DateField(final Form form, final Object key, final String name, final boolean readOnly, final Date value)
 	{
-		super(form, key, name, readOnly, (value==null) ? "" : (new SimpleDateFormat(DATE_FORMAT_FULL)).format(value));
+		this(DATE_FORMAT_FULL, form, key, name, readOnly, value);
+	}
+	
+	/**
+	 * Constructs a form field with an initial value.
+	 */
+	public DateField(final String pattern, final Form form, final Object key, final String name, final boolean readOnly, final Date value)
+	{
+		super(form, key, name, readOnly, (value==null) ? "" : (new SimpleDateFormat(pattern)).format(value));
 
+		this.pattern = pattern;
 		this.content = value;
+
+		if(pattern==null)
+			throw new NullPointerException("pattern must not be null");
 	}
 	
 	/**
@@ -44,7 +57,17 @@ public class DateField extends TextField
 	 */
 	public DateField(final Form form, final Object key, final String name, final boolean readOnly)
 	{
+		this(DATE_FORMAT_FULL, form, key, name, readOnly);
+	}
+	
+	/**
+	 * Constructs a form field with a value obtained from the submitted form.
+	 */
+	public DateField(final String pattern, final Form form, final Object key, final String name, final boolean readOnly)
+	{
 		super(form, key, name, readOnly);
+
+		this.pattern = pattern;
 
 		final String value = this.value;
 		if(value.length()>0)
@@ -52,7 +75,7 @@ public class DateField extends TextField
 			Date parsed = null;
 			try
 			{
-				final SimpleDateFormat df = new SimpleDateFormat(DATE_FORMAT_FULL);
+				final SimpleDateFormat df = new SimpleDateFormat(pattern);
 				parsed = df.parse(value);
 			}
 			catch(ParseException e)
