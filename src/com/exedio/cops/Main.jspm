@@ -61,12 +61,12 @@ final class Main_Jspm
 		{
 			final String optionValue = (String)i.next();
 			%>
-			<option value="<%=optionValue%>"><%=field.getValue(optionValue)%></option><%
+			<option value="<%=optionValue%>"<%
 			if(field.isChecked(optionValue))
 			{
-				%> checked="checked"<%
+				%> selected="selected"<%
 			}
-			%>><%
+			%>><%=field.getValue(optionValue)%></option><%
 		}
 		%>
 		</select><%
