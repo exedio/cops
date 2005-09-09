@@ -25,9 +25,9 @@ public abstract class Cop
 	private final StringBuffer url;
 	private boolean first = true;
 	
-	public Cop(final String jsp)
+	public Cop()
 	{
-		this.url = new StringBuffer(jsp);
+		this.url = new StringBuffer();
 	}
 	
 	protected void addParameter(final String key, final String value)
