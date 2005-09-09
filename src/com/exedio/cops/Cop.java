@@ -47,7 +47,7 @@ public abstract class Cop
 	
 	public final String toString()
 	{
-		return url.toString();
+		return url.length()>0 ? url.toString() : "?";
 	}
 	
 	private static final String BASIC = "Basic ";
