@@ -41,6 +41,11 @@ public final class Resource
 	final Object contentLock = new Object();
 	byte[] content;
 
+	public Resource(final ResourceSet set, final String name)
+	{
+		this(set, name, getContentTypeFromName(name));
+	}
+
 	public Resource(final ResourceSet set, final String name, final String contentType)
 	{
 		if(set==null)
@@ -158,5 +163,15 @@ public final class Resource
 	public String url(final HttpServletRequest request)
 	{
 		return request.getContextPath() + request.getServletPath() + '/' + name;
+	}
+	
+	private static final String getContentTypeFromName(final String name)
+	{
+		if(name.endsWith(".css"))
+			return "text/css";
+		else if(name.endsWith(".js"))
+			return "application/x-javascript";
+		else
+			throw new RuntimeException("no content type known for "+name+", specify content type explicitly");
 	}
 }
