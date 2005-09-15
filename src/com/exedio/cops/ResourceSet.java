@@ -48,7 +48,7 @@ public final class ResourceSet
 	}
 	
 	/**
-	 * to be called in {@link HttpServlet#init}.
+	 * to be called in {@link javax.servlet.GenericServlet#init()}.
 	 */
 	public final void init()
 	{
