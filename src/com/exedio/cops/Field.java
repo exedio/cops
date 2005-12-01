@@ -26,7 +26,6 @@ public abstract class Field
 {
 	public final Object key;
 	public final String name;
-	final boolean readOnly;
 	public final String value;
 	public String error;
 	private boolean written = false;
@@ -35,14 +34,13 @@ public abstract class Field
 	 * Constructs a form field with an initial value.
 	 * @throws NullPointerException if name is null and readOnly is false.
 	 */
-	public Field(final Form form, final Object key, final String name, final boolean readOnly, final String value)
+	public Field(final Form form, final Object key, final String name, final String value)
 	{
-		if(name==null && !readOnly)
+		if(name==null)
 			throw new NullPointerException("name for field can be null for read-only fields only");
 
 		this.key = key;
 		this.name = name;
-		this.readOnly = readOnly;
 		this.value = value;
 		form.register(this);
 	}
@@ -50,11 +48,10 @@ public abstract class Field
 	/**
 	 * Constructs a form field with a value obtained from the submitted form.
 	 */
-	public Field(final Form form, final Object key, final String name, final boolean readOnly)
+	public Field(final Form form, final Object key, final String name)
 	{
 		this.key = key;
 		this.name = name;
-		this.readOnly = readOnly;
 		this.value = form.getParameter(name);
 		form.register(this);
 	}
@@ -64,11 +61,6 @@ public abstract class Field
 	 * if you use {@link #write(PrintStream)}.
 	 */
 	public String style = null;
-	
-	public final boolean isReadOnly()
-	{
-		return readOnly;
-	}
 	
 	public final String getName()
 	{

@@ -26,18 +26,18 @@ public class LongField extends TextField
 	/**
 	 * Constructs a form field with an initial value.
 	 */
-	public LongField(final Form form, final Object key, final String name, final boolean readOnly, final Long value)
+	public LongField(final Form form, final Object key, final String name, final Long value)
 	{
-		super(form, key, name, readOnly, (value==null) ? "" : String.valueOf(value));
+		super(form, key, name, (value==null) ? "" : String.valueOf(value));
 		content = value;
 	}
 	
 	/**
 	 * Constructs a form field with a value obtained from the submitted form.
 	 */
-	public LongField(final Form form, final Object key, final String name, final boolean readOnly)
+	public LongField(final Form form, final Object key, final String name)
 	{
-		super(form, key, name, readOnly);
+		super(form, key, name);
 
 		final String value = this.value;
 		if(value.length()>0)

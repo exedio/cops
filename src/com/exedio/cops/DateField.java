@@ -33,17 +33,17 @@ public class DateField extends TextField
 	/**
 	 * Constructs a form field with an initial value.
 	 */
-	public DateField(final Form form, final Object key, final String name, final boolean readOnly, final Date value)
+	public DateField(final Form form, final Object key, final String name, final Date value)
 	{
-		this(DATE_FORMAT_FULL, form, key, name, readOnly, value);
+		this(DATE_FORMAT_FULL, form, key, name, value);
 	}
 	
 	/**
 	 * Constructs a form field with an initial value.
 	 */
-	public DateField(final String pattern, final Form form, final Object key, final String name, final boolean readOnly, final Date value)
+	public DateField(final String pattern, final Form form, final Object key, final String name, final Date value)
 	{
-		super(form, key, name, readOnly, (value==null) ? "" : (new SimpleDateFormat(pattern)).format(value));
+		super(form, key, name, (value==null) ? "" : (new SimpleDateFormat(pattern)).format(value));
 
 		this.pattern = pattern;
 		this.content = value;
@@ -55,17 +55,17 @@ public class DateField extends TextField
 	/**
 	 * Constructs a form field with a value obtained from the submitted form.
 	 */
-	public DateField(final Form form, final Object key, final String name, final boolean readOnly)
+	public DateField(final Form form, final Object key, final String name)
 	{
-		this(DATE_FORMAT_FULL, form, key, name, readOnly);
+		this(DATE_FORMAT_FULL, form, key, name);
 	}
 	
 	/**
 	 * Constructs a form field with a value obtained from the submitted form.
 	 */
-	public DateField(final String pattern, final Form form, final Object key, final String name, final boolean readOnly)
+	public DateField(final String pattern, final Form form, final Object key, final String name)
 	{
-		super(form, key, name, readOnly);
+		super(form, key, name);
 
 		this.pattern = pattern;
 

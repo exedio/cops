@@ -26,9 +26,9 @@ public class IntegerField extends TextField
 	/**
 	 * Constructs a form field with an initial value.
 	 */
-	public IntegerField(final Form form, final Object key, final String name, final boolean readOnly, final Integer value)
+	public IntegerField(final Form form, final Object key, final String name, final Integer value)
 	{
-		super(form, key, name, readOnly, (value==null) ? "" : String.valueOf(value));
+		super(form, key, name, (value==null) ? "" : String.valueOf(value));
 		
 		this.content = value;
 	}
@@ -36,9 +36,9 @@ public class IntegerField extends TextField
 	/**
 	 * Constructs a form field with a value obtained from the submitted form.
 	 */
-	public IntegerField(final Form form, final Object key, final String name, final boolean readOnly)
+	public IntegerField(final Form form, final Object key, final String name)
 	{
-		super(form, key, name, readOnly);
+		super(form, key, name);
 
 		final String value = this.value;
 		if(value.length()>0)

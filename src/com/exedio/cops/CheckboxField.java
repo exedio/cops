@@ -31,18 +31,18 @@ public class CheckboxField extends Field
 	/**
 	 * Constructs a form field with an initial value.
 	 */
-	public CheckboxField(final Form form, final Object key, final String name, final boolean readOnly, final boolean value)
+	public CheckboxField(final Form form, final Object key, final String name, final boolean value)
 	{
-		super(form, key, name, readOnly, value ? VALUE_ON : null);
+		super(form, key, name, value ? VALUE_ON : null);
 		this.content = value;
 	}
 	
 	/**
 	 * Constructs a form field with a value obtained from the submitted form.
 	 */
-	public CheckboxField(final Form form, final Object key, final String name, final boolean readOnly)
+	public CheckboxField(final Form form, final Object key, final String name)
 	{
-		super(form, key, name, readOnly);
+		super(form, key, name);
 
 		final String value = this.value;
 		if(value==null)

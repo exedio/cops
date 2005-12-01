@@ -93,34 +93,26 @@ final class Main_Jspm
 		throws IOException
 	{
 		final String value = field.getValue();
-
-		if(field.isReadOnly())
+		%><input type="<%
+		if(field.password)
 		{
-			%><b><%=value%></b><%
+			%>password<%
 		}
 		else
 		{
-			%><input type="<%
-			if(field.password)
-			{
-				%>password<%
-			}
-			else
-			{
-				%>text<%
-			}
-			%>" name="<%=field.name%>" size="<%=field.size%>" value="<%=value%>"<%
-			final String style = field.style;
-			if(style!=null)
-			{
-				%> style="<%=style%>"<%
-			}
-			%> /><%
-			final String error = field.getError();
-			if(error!=null)
-			{
-				%> <b><%=error%></b><%
-			}
+			%>text<%
+		}
+		%>" name="<%=field.name%>" size="<%=field.size%>" value="<%=value%>"<%
+		final String style = field.style;
+		if(style!=null)
+		{
+			%> style="<%=style%>"<%
+		}
+		%> /><%
+		final String error = field.getError();
+		if(error!=null)
+		{
+			%> <b><%=error%></b><%
 		}
 	}
 	

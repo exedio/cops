@@ -26,9 +26,9 @@ public class DoubleField extends TextField
 	/**
 	 * Constructs a form field with an initial value.
 	 */
-	public DoubleField(final Form form, final Object key, final String name, final boolean readOnly, final Double value)
+	public DoubleField(final Form form, final Object key, final String name, final Double value)
 	{
-		super(form, key, name, readOnly, (value==null) ? "" : String.valueOf(value));
+		super(form, key, name, (value==null) ? "" : String.valueOf(value));
 
 		this.content = value;
 	}
@@ -36,9 +36,9 @@ public class DoubleField extends TextField
 	/**
 	 * Constructs a form field with a value obtained from the submitted form.
 	 */
-	public DoubleField(final Form form, final Object key, final String name, final boolean readOnly)
+	public DoubleField(final Form form, final Object key, final String name)
 	{
-		super(form, key, name, readOnly);
+		super(form, key, name);
 
 		final String value = this.value;
 		if(value.length()>0)

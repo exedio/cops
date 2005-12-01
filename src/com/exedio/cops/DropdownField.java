@@ -33,9 +33,9 @@ public class DropdownField extends Field
 	 * Constructs a form field with an initial value.
 	 * @throws NullPointerException if value is null.
 	 */
-	public DropdownField(final Form form, final Object key, final String name, final boolean readOnly, final String value)
+	public DropdownField(final Form form, final Object key, final String name, final String value)
 	{
-		super(form, key, name, readOnly, value);
+		super(form, key, name, value);
 
 		if(value==null)
 			throw new NullPointerException("value for field "+name+" must not be null");
@@ -45,9 +45,9 @@ public class DropdownField extends Field
 	 * Constructs a form field with a value obtained from the submitted form.
 	 * @throws NullPointerException if request does not contain a parameter for name.
 	 */
-	public DropdownField(final Form form, final Object key, final String name, final boolean readOnly)
+	public DropdownField(final Form form, final Object key, final String name)
 	{
-		super(form, key, name, readOnly);
+		super(form, key, name);
 
 		if(value==null)
 			throw new NullPointerException("value for field "+name+" must be in request");

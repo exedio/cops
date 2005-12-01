@@ -38,7 +38,8 @@ public class Form
 	private final HttpServletRequest request;
 	private final HashMap multipartContentParameters;
 
-	private final HashMap fieldMap = new HashMap();
+	private final HashMap fieldByName = new HashMap();
+	private final HashMap fieldByKey = new HashMap();
 	private final ArrayList fieldList = new ArrayList();
 	
 	private final ArrayList sectionList = new ArrayList();
@@ -86,7 +87,9 @@ public class Form
 	
 	final void register(final Field field)
 	{
-		if(fieldMap.put(field.name, field)!=null)
+		if(fieldByName.put(field.name, field)!=null)
+			throw new RuntimeException(field.name);
+		if(fieldByKey.put(field.key, field)!=null)
 			throw new RuntimeException(field.name);
 		fieldList.add(field);
 	}
@@ -111,9 +114,14 @@ public class Form
 			return null;
 	}
 	
-	public final Field getField(final String name)
+	public final Field getFieldByName(final String name)
 	{
-		return (Field)fieldMap.get(name);
+		return (Field)fieldByName.get(name);
+	}
+	
+	public final Field getFieldByKey(final Object key)
+	{
+		return (Field)fieldByKey.get(key);
 	}
 	
 	public final List getFields()
