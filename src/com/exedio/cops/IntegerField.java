@@ -52,7 +52,7 @@ public class IntegerField extends TextField
 			{
 				error = "bad number: "+e.getMessage();
 			}
-			content = error==null ? new Integer(parsed) : null;
+			content = error==null ? Integer.valueOf(parsed) : null;
 		}
 		else
 			content = null;
