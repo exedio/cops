@@ -51,7 +51,7 @@ public class LongField extends TextField
 			{
 				error = "bad number: "+e.getMessage();
 			}
-			content = error==null ? new Long(parsed) : null;
+			content = error==null ? Long.valueOf(parsed) : null;
 		}
 		else
 			content = null;
