@@ -31,8 +31,8 @@ import javax.servlet.http.HttpServletResponse;
 public final class ResourceSet
 {
 	private final Class resourceLoader;
-	private final ArrayList resourceList = new ArrayList();
-	private final HashMap resources = new HashMap();
+	private final ArrayList<Resource> resourceList = new ArrayList<Resource>();
+	private final HashMap<String, Resource> resources = new HashMap<String, Resource>();
 	
 	public ResourceSet(final Class resourceLoader)
 	{
@@ -69,7 +69,7 @@ public final class ResourceSet
 		if(pathInfo==null)
 			return false;
 		
-		final Resource resource = (Resource)resources.get(pathInfo);
+		final Resource resource = resources.get(pathInfo);
 		if(resource==null)
 			return false;
 		

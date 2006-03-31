@@ -26,8 +26,8 @@ import java.util.HashMap;
 
 public class DropdownField extends Field
 {
-	public final ArrayList names = new ArrayList();
-	final HashMap values = new HashMap();
+	public final ArrayList<String> names = new ArrayList<String>();
+	final HashMap<String, String> values = new HashMap<String, String>();
 	
 	/**
 	 * Constructs a form field with an initial value.
@@ -55,7 +55,7 @@ public class DropdownField extends Field
 	
 	public String getValue(final String name)
 	{
-		return (String)values.get(name);
+		return values.get(name);
 	}
 	
 	public boolean isChecked(final String checkValue)

@@ -37,13 +37,13 @@ import org.apache.commons.fileupload.FileUploadException;
 public class Form
 {
 	private final HttpServletRequest request;
-	private final HashMap multipartContentParameters;
+	private final HashMap<String, Object> multipartContentParameters;
 
-	private final HashMap fieldByName = new HashMap();
-	private final HashMap fieldByKey = new HashMap();
-	private final ArrayList fieldList = new ArrayList();
+	private final HashMap<String, Field> fieldByName = new HashMap<String, Field>();
+	private final HashMap<Object, Field> fieldByKey = new HashMap<Object, Field>();
+	private final ArrayList<Field> fieldList = new ArrayList<Field>();
 	
-	private final ArrayList sectionList = new ArrayList();
+	private final ArrayList<Section> sectionList = new ArrayList<Section>();
 	
 	public Form(final HttpServletRequest request)
 	{
@@ -56,7 +56,7 @@ public class Form
 			upload.setSizeThreshold(maxSize); // TODO: always save to disk
 			upload.setSizeMax(maxSize);
 			//upload.setRepositoryPath("");
-			multipartContentParameters = new HashMap();
+			multipartContentParameters = new HashMap<String, Object>();
 			try
 			{
 				for(Iterator i = upload.parseRequest(request).iterator(); i.hasNext(); )
@@ -117,15 +117,15 @@ public class Form
 	
 	public final Field getFieldByName(final String name)
 	{
-		return (Field)fieldByName.get(name);
+		return fieldByName.get(name);
 	}
 	
 	public final Field getFieldByKey(final Object key)
 	{
-		return (Field)fieldByKey.get(key);
+		return fieldByKey.get(key);
 	}
 	
-	public final List getFields()
+	public final List<Field> getFields()
 	{
 		return Collections.unmodifiableList(fieldList);
 	}
@@ -148,7 +148,7 @@ public class Form
 		}
 	}
 	
-	public final List getSections()
+	public final List<Section> getSections()
 	{
 		return Collections.unmodifiableList(sectionList);
 	}
