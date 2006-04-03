@@ -146,7 +146,7 @@ final class Base64
 
     
     /** Defeats instantiation. */
-    private Base64(){}
+    private Base64(){/*EMPTY*/}
     
     
     
@@ -334,7 +334,7 @@ final class Base64
         if( bytes != null && bytes.length >= 4 )
         {
             
-            int head = ((int)bytes[0] & 0xff) | ((bytes[1] << 8) & 0xff00);       
+            int head = (bytes[0] & 0xff) | ((bytes[1] << 8) & 0xff00);       
             if( java.util.zip.GZIPInputStream.GZIP_MAGIC == head ) 
             {
                 java.io.ByteArrayInputStream  bais = null;
@@ -364,9 +364,9 @@ final class Base64
                 }   // end catch
                 finally
                 {
-                    try{ baos.close(); } catch( Exception e ){}
-                    try{ gzis.close(); } catch( Exception e ){}
-                    try{ bais.close(); } catch( Exception e ){}
+                    try{ baos.close(); } catch( Exception e ){/*IGNORE*/}
+                    try{ gzis.close(); } catch( Exception e ){/*IGNORE*/}
+                    try{ bais.close(); } catch( Exception e ){/*IGNORE*/}
                 }   // end finally
 
             }   // end if: gzipped
