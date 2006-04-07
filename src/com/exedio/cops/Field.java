@@ -57,7 +57,7 @@ public abstract class Field
 	}
 	
 	/**
-	 * The content of the <code>style</code> attribute of the <code>input</code> tag,
+	 * The content of the <tt>style</tt> attribute of the <tt>input</tt> tag,
 	 * if you use {@link #write(PrintStream)}.
 	 */
 	public String style = null;

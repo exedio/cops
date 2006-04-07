@@ -50,14 +50,14 @@ public abstract class TextField extends Field
 	}
 	
 	/**
-	 * Let the content of the <code>type</code> attribute of the <code>input</code> tag
-	 * contain <code>password</code> instead of <code>text</code>,
+	 * Let the content of the <tt>type</tt> attribute of the <tt>input</tt> tag
+	 * contain <tt>password</tt> instead of <tt>text</tt>,
 	 * if you use {@link #write(PrintStream)}.
 	 */
 	public boolean password = false;
 
 	/**
-	 * The content of the <code>size</code> attribute of the <code>input</code> tag,
+	 * The content of the <tt>size</tt> attribute of the <tt>input</tt> tag,
 	 * if you use {@link #write(PrintStream)}.
 	 */
 	public int size = 30;
