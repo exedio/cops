@@ -21,12 +21,10 @@ package com.exedio.cops;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 
 public final class ResourceSet
 {
@@ -52,9 +50,8 @@ public final class ResourceSet
 	 */
 	public final void init()
 	{
-		for(Iterator i = resourceList.iterator(); i.hasNext(); )
+		for(final Resource resource : resourceList)
 		{
-			final Resource resource = (Resource)i.next();
 			resource.init(resourceLoader);
 			resources.put('/'+resource.name, resource);
 		}
