@@ -3,7 +3,7 @@ package com.exedio.cops;
 /*
  * This class has been stripped from all components not used for http authentication,
  * and moved into the cops package.
- * 
+ *
  * If you want to use the Base64 class, better get the original version.
  */
 
@@ -20,17 +20,17 @@ package com.exedio.cops;
  *   with other encodings (like EBCDIC).</li>
  *  <li>v2.0.1 - Fixed an error when decoding a single byte, that is, when the
  *   encoded data was a single byte.</li>
- *  <li>v2.0 - I got rid of methods that used booleans to set options. 
+ *  <li>v2.0 - I got rid of methods that used booleans to set options.
  *   Now everything is more consolidated and cleaner. The code now detects
  *   when data that's being decoded is gzip-compressed and will decompress it
  *   automatically. Generally things are cleaner. You'll probably have to
  *   change some method calls that you were making to support the new
  *   options format (<tt>int</tt>s that you "OR" together).</li>
- *  <li>v1.5.1 - Fixed bug when decompressing and decoding to a             
- *   byte[] using <tt>decode( String s, boolean gzipCompressed )</tt>.      
- *   Added the ability to "suspend" encoding in the Output Stream so        
- *   you can turn on and off the encoding if you need to embed base64       
- *   data in an otherwise "normal" stream (like an XML file).</li>  
+ *  <li>v1.5.1 - Fixed bug when decompressing and decoding to a
+ *   byte[] using <tt>decode( String s, boolean gzipCompressed )</tt>.
+ *   Added the ability to "suspend" encoding in the Output Stream so
+ *   you can turn on and off the encoding if you need to embed base64
+ *   data in an otherwise "normal" stream (like an XML file).</li>
  *  <li>v1.5 - Output stream pases on flush() command but doesn't do anything itself.
  *      This helps when using GZIP streams.
  *      Added the ability to GZip-compress objects before encoding them.</li>
@@ -56,34 +56,34 @@ package com.exedio.cops;
  */
 final class Base64
 {
-    
-/* ********  P R I V A T E   F I E L D S  ******** */  
-    
-    
+
+/* ********  P R I V A T E   F I E L D S  ******** */
+
+
     /** The equals sign (=) as a byte. */
     private final static byte EQUALS_SIGN = (byte)'=';
-    
-    
+
+
     /** Preferred encoding. */
     private final static String PREFERRED_ENCODING = "UTF-8";
-    
-    
+
+
     /** The 64 valid Base64 values. */
     private final static byte[] ALPHABET;
     private final static byte[] _NATIVE_ALPHABET = /* May be something funny like EBCDIC */
     {
         (byte)'A', (byte)'B', (byte)'C', (byte)'D', (byte)'E', (byte)'F', (byte)'G',
         (byte)'H', (byte)'I', (byte)'J', (byte)'K', (byte)'L', (byte)'M', (byte)'N',
-        (byte)'O', (byte)'P', (byte)'Q', (byte)'R', (byte)'S', (byte)'T', (byte)'U', 
+        (byte)'O', (byte)'P', (byte)'Q', (byte)'R', (byte)'S', (byte)'T', (byte)'U',
         (byte)'V', (byte)'W', (byte)'X', (byte)'Y', (byte)'Z',
         (byte)'a', (byte)'b', (byte)'c', (byte)'d', (byte)'e', (byte)'f', (byte)'g',
         (byte)'h', (byte)'i', (byte)'j', (byte)'k', (byte)'l', (byte)'m', (byte)'n',
-        (byte)'o', (byte)'p', (byte)'q', (byte)'r', (byte)'s', (byte)'t', (byte)'u', 
+        (byte)'o', (byte)'p', (byte)'q', (byte)'r', (byte)'s', (byte)'t', (byte)'u',
         (byte)'v', (byte)'w', (byte)'x', (byte)'y', (byte)'z',
-        (byte)'0', (byte)'1', (byte)'2', (byte)'3', (byte)'4', (byte)'5', 
+        (byte)'0', (byte)'1', (byte)'2', (byte)'3', (byte)'4', (byte)'5',
         (byte)'6', (byte)'7', (byte)'8', (byte)'9', (byte)'+', (byte)'/'
     };
-    
+
     /** Determine which ALPHABET to use. */
     static
     {
@@ -98,14 +98,14 @@ final class Base64
         }   // end catch
         ALPHABET = __bytes;
     }   // end static
-    
-    
-    /** 
+
+
+    /**
      * Translates a Base64 value to either its 6-bit reconstruction value
      * or a negative number indicating some other meaning.
      **/
     private final static byte[] DECODABET =
-    {   
+    {
         -9,-9,-9,-9,-9,-9,-9,-9,-9,                 // Decimal  0 -  8
         -5,-5,                                      // Whitespace: Tab and Linefeed
         -9,-9,                                      // Decimal 11 - 12
@@ -138,40 +138,40 @@ final class Base64
         -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,     // Decimal 231 - 243
         -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9         // Decimal 244 - 255 */
     };
-    
+
     // I think I end up not using the BAD_ENCODING indicator.
     //private final static byte BAD_ENCODING    = -9; // Indicates error in encoding
     private final static byte WHITE_SPACE_ENC = -5; // Indicates white space in encoding
     private final static byte EQUALS_SIGN_ENC = -1; // Indicates equals sign in encoding
 
-    
+
     /** Defeats instantiation. */
     private Base64(){/*EMPTY*/}
-    
-    
-    
-    
 
-    
-    
-    
+
+
+
+
+
+
+
 /* ********  D E C O D I N G   M E T H O D S  ******** */
-    
-    
+
+
     /**
      * Decodes four bytes from array <var>source</var>
      * and writes the resulting bytes (up to three of them)
      * to <var>destination</var>.
      * The source and destination arrays can be manipulated
-     * anywhere along their length by specifying 
+     * anywhere along their length by specifying
      * <var>srcOffset</var> and <var>destOffset</var>.
      * This method does not check to make sure your arrays
      * are large enough to accomodate <var>srcOffset</var> + 4 for
      * the <var>source</var> array or <var>destOffset</var> + 3 for
      * the <var>destination</var> array.
-     * This method returns the actual number of bytes that 
+     * This method returns the actual number of bytes that
      * were converted from the Base64 encoding.
-     * 
+     *
      *
      * @param source the array to convert
      * @param srcOffset the index where conversion begins
@@ -190,11 +190,11 @@ final class Base64
             //              | ( ( DECODABET[ source[ srcOffset + 1] ] << 24 ) >>> 12 );
             int outBuff =   ( ( DECODABET[ source[ srcOffset    ] ] & 0xFF ) << 18 )
                           | ( ( DECODABET[ source[ srcOffset + 1] ] & 0xFF ) << 12 );
-            
+
             destination[ destOffset ] = (byte)( outBuff >>> 16 );
             return 1;
         }
-        
+
         // Example: DkL=
         else if( source[ srcOffset + 3 ] == EQUALS_SIGN )
         {
@@ -205,12 +205,12 @@ final class Base64
             int outBuff =   ( ( DECODABET[ source[ srcOffset     ] ] & 0xFF ) << 18 )
                           | ( ( DECODABET[ source[ srcOffset + 1 ] ] & 0xFF ) << 12 )
                           | ( ( DECODABET[ source[ srcOffset + 2 ] ] & 0xFF ) <<  6 );
-            
+
             destination[ destOffset     ] = (byte)( outBuff >>> 16 );
             destination[ destOffset + 1 ] = (byte)( outBuff >>>  8 );
             return 2;
         }
-        
+
         // Example: DkLE
         else
         {
@@ -225,7 +225,7 @@ final class Base64
                           | ( ( DECODABET[ source[ srcOffset + 2 ] ] & 0xFF ) <<  6)
                           | ( ( DECODABET[ source[ srcOffset + 3 ] ] & 0xFF )      );
 
-            
+
             destination[ destOffset     ] = (byte)( outBuff >> 16 );
             destination[ destOffset + 1 ] = (byte)( outBuff >>  8 );
             destination[ destOffset + 2 ] = (byte)( outBuff       );
@@ -240,10 +240,10 @@ final class Base64
             }   //e nd catch
         }
     }   // end decodeToBytes
-    
-    
-    
-    
+
+
+
+
     /**
      * Very low-level access to decoding ASCII characters in
      * the form of a byte array. Does not support automatically
@@ -260,7 +260,7 @@ final class Base64
         int    len34   = len * 3 / 4;
         byte[] outBuff = new byte[ len34 ]; // Upper limit on size of output
         int    outBuffPosn = 0;
-        
+
         byte[] b4        = new byte[4];
         int    b4Posn    = 0;
         int    i         = 0;
@@ -270,7 +270,7 @@ final class Base64
         {
             sbiCrop = (byte)(source[i] & 0x7f); // Only the low seven bits
             sbiDecode = DECODABET[ sbiCrop ];
-            
+
             if( sbiDecode >= WHITE_SPACE_ENC ) // White space, Equals sign or better
             {
                 if( sbiDecode >= EQUALS_SIGN_ENC )
@@ -280,30 +280,30 @@ final class Base64
                     {
                         outBuffPosn += decode4to3( b4, 0, outBuff, outBuffPosn );
                         b4Posn = 0;
-                        
+
                         // If that was the equals sign, break out of 'for' loop
                         if( sbiCrop == EQUALS_SIGN )
                             break;
                     }   // end if: quartet built
-                    
+
                 }   // end if: equals sign or better
-                
+
             }   // end if: white space, equals sign or better
             else
             {
                 System.err.println( "Bad Base64 input character at " + i + ": " + source[i] + "(decimal)" );
                 return null;
-            }   // end else: 
+            }   // end else:
         }   // each input character
-                                   
+
         byte[] out = new byte[ outBuffPosn ];
-        System.arraycopy( outBuff, 0, out, 0, outBuffPosn ); 
+        System.arraycopy( outBuff, 0, out, 0, outBuffPosn );
         return out;
     }   // end decode
-    
-    
-    
-    
+
+
+
+
     /**
      * Decodes data from Base64 notation, automatically
      * detecting gzip-compressed data and decompressing it.
@@ -313,7 +313,7 @@ final class Base64
      * @since 1.4
      */
     public static byte[] decode( String s )
-    {   
+    {
         byte[] bytes;
         try
         {
@@ -324,18 +324,18 @@ final class Base64
             bytes = s.getBytes();
         }   // end catch
 		//</change>
-        
+
         // Decode
         bytes = decode( bytes, 0, bytes.length );
-        
-        
+
+
         // Check to see if it's gzip-compressed
         // GZIP Magic Two-Byte Number: 0x8b1f (35615)
         if( bytes != null && bytes.length >= 4 )
         {
-            
-            int head = (bytes[0] & 0xff) | ((bytes[1] << 8) & 0xff00);       
-            if( java.util.zip.GZIPInputStream.GZIP_MAGIC == head ) 
+
+            int head = (bytes[0] & 0xff) | ((bytes[1] << 8) & 0xff00);
+            if( java.util.zip.GZIPInputStream.GZIP_MAGIC == head )
             {
                 java.io.ByteArrayInputStream  bais = null;
                 java.util.zip.GZIPInputStream gzis = null;
@@ -371,9 +371,9 @@ final class Base64
 
             }   // end if: gzipped
         }   // end if: bytes.length >= 2
-        
+
         return bytes;
     }   // end decode
 
-    
+
 }   // end class Base64

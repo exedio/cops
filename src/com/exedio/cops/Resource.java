@@ -114,7 +114,7 @@ public final class Resource
 	 * Together with a http reverse proxy this ensures,
 	 * that for that time no request for that data will reach the servlet.
 	 * This may reduce the load on the server.
-	 * 
+	 *
 	 * TODO: make this configurable, at best per resource.
 	 */
 	private static final long EXPIRES_OFFSET = 1000 * 60 * 5; // 5 minutes

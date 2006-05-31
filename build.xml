@@ -3,7 +3,7 @@
 <project name="cops" default="build" basedir=".">
 
 	<target name="jspm.taskdef">
-		<taskdef name="jspm" 
+		<taskdef name="jspm"
 					classname="com.exedio.jspm.AntTask"
 					classpath="lib/exedio-jspm.jar" />
 	</target>
