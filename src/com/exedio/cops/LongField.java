@@ -57,6 +57,7 @@ public class LongField extends TextField
 			content = null;
 	}
 	
+	@Override
 	public Object getContent()
 	{
 		return content;

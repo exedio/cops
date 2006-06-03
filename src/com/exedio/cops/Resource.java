@@ -62,6 +62,7 @@ public final class Resource
 		set.add(this);
 	}
 	
+	@Override
 	public String toString()
 	{
 		return name;

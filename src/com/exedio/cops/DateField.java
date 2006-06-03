@@ -88,6 +88,7 @@ public class DateField extends TextField
 			content = null;
 	}
 	
+	@Override
 	public Object getContent()
 	{
 		return content;

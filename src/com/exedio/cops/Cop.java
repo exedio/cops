@@ -46,6 +46,7 @@ public abstract class Cop
 		url.append(value);
 	}
 	
+	@Override
 	public final String toString()
 	{
 		return url.length()>0 ? url.toString() : "?";

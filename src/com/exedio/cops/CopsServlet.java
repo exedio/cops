@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public abstract class CopsServlet extends HttpServlet
 {
+	@Override
 	protected final void doGet(
 			final HttpServletRequest request,
 			final HttpServletResponse response)
@@ -37,6 +38,7 @@ public abstract class CopsServlet extends HttpServlet
 		doRequest(request, response);
 	}
 
+	@Override
 	protected final void doPost(
 			final HttpServletRequest request,
 			final HttpServletResponse response)

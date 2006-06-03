@@ -53,11 +53,13 @@ public class CheckboxField extends Field
 			throw new RuntimeException(name+'-'+value);
 	}
 	
+	@Override
 	public void writeIt(final PrintStream out) throws IOException
 	{
 		Main_Jspm.write(out, this);
 	}
 	
+	@Override
 	public Object getContent()
 	{
 		return Boolean.valueOf(content);

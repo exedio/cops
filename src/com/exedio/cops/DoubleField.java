@@ -58,6 +58,7 @@ public class DoubleField extends TextField
 			content = null;
 	}
 	
+	@Override
 	public Object getContent()
 	{
 		return content;

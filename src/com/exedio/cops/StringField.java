@@ -45,6 +45,7 @@ public final class StringField extends TextField
 		content = value; // TODO: convert empty string to null
 	}
 	
+	@Override
 	public Object getContent()
 	{
 		return content;
