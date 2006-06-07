@@ -24,7 +24,8 @@
 				optimize="off">
 			<classpath>
 				<pathelement location="lib/servlet-api.jar" />
-				<pathelement location="lib/commons-fileupload-1.0.jar" />
+				<pathelement location="lib/commons-fileupload-1.1.jar" />
+				<pathelement location="lib/commons-io-1.2.jar" />
 			</classpath>
 		</javac>
 	</target>
@@ -105,7 +106,7 @@
 			<link href="${api.link.j2ee}" packagelistLoc="package-list/j2ee" offline="true" />
 			<classpath>
 				<pathelement location="lib/servlet-api.jar" />
-				<pathelement location="lib/commons-fileupload-1.0.jar" />
+				<pathelement location="lib/commons-fileupload-1.1.jar" />
 			</classpath>
 		</javadoc>
 	</target>
