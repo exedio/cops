@@ -28,7 +28,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.fileupload.DiskFileUpload;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUpload;
 import org.apache.commons.fileupload.FileUploadException;
@@ -45,13 +44,14 @@ public class Form
 	
 	private final ArrayList<Section> sectionList = new ArrayList<Section>();
 	
+	@SuppressWarnings("deprecation") // TODO use new way of fileupload
 	public Form(final HttpServletRequest request)
 	{
 		this.request = request;
 
 		if(FileUpload.isMultipartContent(request))
 		{
-			final DiskFileUpload upload = new DiskFileUpload();
+			final org.apache.commons.fileupload.DiskFileUpload upload = new org.apache.commons.fileupload.DiskFileUpload();
 			final int maxSize = 100*1024; // TODO: make this configurable
 			upload.setSizeThreshold(maxSize); // TODO: always save to disk
 			upload.setSizeMax(maxSize);
