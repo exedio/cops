@@ -39,6 +39,7 @@
 				<attribute name="Implementation-Title" value="exedio cops"/>
 				<attribute name="Implementation-Version" value="${build.tag}"/>
 				<attribute name="Implementation-Vendor" value="exedio GmbH"/>
+				<attribute name="Class-Path" value="servlet-api.jar commons-fileupload-1.1.jar" />
 			</manifest>
 		</jar>
 	</target>
