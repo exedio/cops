@@ -22,7 +22,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -127,7 +126,7 @@ public final class Resource
 	final void doGet(
 			final HttpServletRequest request,
 			final HttpServletResponse response)
-		throws ServletException, IOException
+		throws IOException
 	{
 		if(content==null)
 			throw new RuntimeException("not initialized: "+name);

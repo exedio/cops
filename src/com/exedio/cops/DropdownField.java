@@ -18,11 +18,9 @@
 
 package com.exedio.cops;
 
-import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 
 public class DropdownField extends Field
 {
@@ -78,9 +76,8 @@ public class DropdownField extends Field
 	}
 	
 	@Override
-	public void writeIt(final PrintStream out) throws IOException
+	public void writeIt(final PrintStream out)
 	{
 		Main_Jspm.write(out, this);
 	}
-	
 }

@@ -19,14 +19,12 @@
 
 package com.exedio.cops;
 
-import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Iterator;
 
 final class Main_Jspm
 {
 	public static final void write(final PrintStream out, final RadioField field)
-		throws IOException
 	{
 		for(Iterator i = field.names.iterator(); i.hasNext(); )
 		{
@@ -47,7 +45,6 @@ final class Main_Jspm
 	}
 	
 	public static final void write(final PrintStream out, final DropdownField field)
-		throws IOException
 	{
 		%>
 		<select name="<%=field.name%>"<%
@@ -73,7 +70,6 @@ final class Main_Jspm
 	}
 	
 	public static final void write(final PrintStream out, final CheckboxField field)
-		throws IOException
 	{
 		%>
 		<input type="checkbox" name="<%=field.name%>" value="<%=field.VALUE_ON%>"<%
@@ -90,7 +86,6 @@ final class Main_Jspm
 	}
 	
 	public static final void write(final PrintStream out, final TextField field)
-		throws IOException
 	{
 		final String value = field.getValue();
 		%><input type="<%
@@ -117,7 +112,6 @@ final class Main_Jspm
 	}
 	
 	public static final void writeHiddenFields(final PrintStream out, final Form form)
-		throws IOException
 	{
 		for(Iterator i = form.getFields().iterator(); i.hasNext(); )
 		{

@@ -18,7 +18,6 @@
 
 package com.exedio.cops;
 
-import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -130,7 +129,7 @@ public class Form
 		return Collections.unmodifiableList(fieldList);
 	}
 	
-	public final void writeHiddenFields(final PrintStream out) throws IOException
+	public final void writeHiddenFields(final PrintStream out)
 	{
 		Main_Jspm.writeHiddenFields(out, this);
 	}

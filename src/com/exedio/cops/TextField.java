@@ -18,9 +18,7 @@
 
 package com.exedio.cops;
 
-import java.io.IOException;
 import java.io.PrintStream;
-
 
 public abstract class TextField extends Field
 {
@@ -63,9 +61,8 @@ public abstract class TextField extends Field
 	public int size = 30;
 	
 	@Override
-	public void writeIt(final PrintStream out) throws IOException
+	public void writeIt(final PrintStream out)
 	{
 		Main_Jspm.write(out, this);
 	}
-	
 }

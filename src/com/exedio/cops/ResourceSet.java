@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -60,7 +59,7 @@ public final class ResourceSet
 	public final boolean doGet(
 			final HttpServletRequest request,
 			final HttpServletResponse response)
-		throws ServletException, IOException
+		throws IOException
 	{
 		final String pathInfo = request.getPathInfo();
 		if(pathInfo==null)

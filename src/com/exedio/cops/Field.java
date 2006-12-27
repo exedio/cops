@@ -18,9 +18,7 @@
 
 package com.exedio.cops;
 
-import java.io.IOException;
 import java.io.PrintStream;
-
 
 public abstract class Field
 {
@@ -84,7 +82,7 @@ public abstract class Field
 		return written;
 	}
 	
-	public final void write(final PrintStream out) throws IOException
+	public final void write(final PrintStream out)
 	{
 		if(written)
 			throw new RuntimeException("field "+name+" has already been written");
@@ -93,11 +91,10 @@ public abstract class Field
 		written = true;
 	}
 
-	public abstract void writeIt(final PrintStream out) throws IOException;
+	public abstract void writeIt(final PrintStream out);
 	
 	public Object getContent()
 	{
 		return value;
 	}
-	
 }

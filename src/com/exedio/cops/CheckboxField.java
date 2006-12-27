@@ -18,9 +18,7 @@
 
 package com.exedio.cops;
 
-import java.io.IOException;
 import java.io.PrintStream;
-
 
 public class CheckboxField extends Field
 {
@@ -54,7 +52,7 @@ public class CheckboxField extends Field
 	}
 	
 	@Override
-	public void writeIt(final PrintStream out) throws IOException
+	public void writeIt(final PrintStream out)
 	{
 		Main_Jspm.write(out, this);
 	}
@@ -64,5 +62,4 @@ public class CheckboxField extends Field
 	{
 		return Boolean.valueOf(content);
 	}
-	
 }
