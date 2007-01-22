@@ -169,6 +169,8 @@ public final class Resource
 	{
 		if(name.endsWith(".css"))
 			return "text/css";
+		else if(name.endsWith(".txt"))
+			return "text/plain";
 		else if(name.endsWith(".js"))
 			return "application/x-javascript";
 		else if(name.endsWith(".png"))
