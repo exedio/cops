@@ -30,6 +30,39 @@
 		</javac>
 	</target>
 	
+	<target name="test.compile" depends="compile">
+		<mkdir dir="build/testclasses" />
+		<javac srcdir="testsrc"
+				destdir="build/testclasses"
+				deprecation="on"
+				debug="on"
+				optimize="off">
+			<classpath>
+				<pathelement location="build/classes" />
+				<pathelement location="lib/junit.jar" />
+			</classpath>
+			<compilerarg value="-Xlint" />
+		</javac>
+	</target>
+	
+	<target name="test.run" depends="test.compile">
+		<mkdir dir="build/testresults" />
+		<junit fork="yes"
+				 haltonerror="true" haltonfailure="true"
+				 showoutput="true" printsummary="true">
+			<formatter type="brief" usefile="false" />
+			<formatter type="xml" />
+			<classpath>
+				<pathelement location="build/classes" />
+				<pathelement location="build/testclasses" />
+			</classpath>
+			<test name="com.exedio.cops.PackageTest" todir="build/testresults" outfile="cops" />
+			<assertions><enable/></assertions>
+		</junit>
+	</target>
+	
+	<target name="test" depends="test.run" />
+	
 	<target name="jar" depends="compile">
 		<jar jarfile="build/exedio-cops.jar" basedir="build/classes" duplicate="fail">
 			<manifest>
@@ -120,7 +153,7 @@
 		</tar>
 	</target>
 	
-	<target name="build" depends="compile, jar, api" />
+	<target name="build" depends="compile, test, jar, api" />
 	<target name="all" depends="build, api.zip, dist" />
 
 	<target name="cruise" depends="all">

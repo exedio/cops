@@ -85,4 +85,16 @@ public abstract class Cop
 		response.setStatus(response.SC_UNAUTHORIZED);
 	}
 	
+	public static final String encodeXml(final String st)
+	{
+		if(st==null)
+			return null;
+		
+		return 
+			st.replaceAll("&",  "&amp;").
+				replaceAll("<",  "&lt;").
+				replaceAll(">",  "&gt;").
+				replaceAll("\"", "&quot;").
+				replaceAll("'",  "&apos;");
+	}
 }
