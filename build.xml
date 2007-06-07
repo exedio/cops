@@ -2,6 +2,8 @@
 
 <project name="cops" default="build" basedir=".">
 
+	<property name="build.file.tag" value="unlabeled" />
+	
 	<target name="jspm.taskdef">
 		<taskdef name="jspm"
 					classname="com.exedio.jspm.AntTask"
@@ -80,7 +82,7 @@
 	<target name="dist.tar">
 		<mkdir dir="build" />
 		<echo file="build/build.number" message="${build.tag}" />
-		<tar destfile="build/exedio-cops-src.tar.gz"
+		<tar destfile="build/exedio-cops-src-${build.file.tag}.tar.gz"
 				compression="gzip">
 			<tarfileset file="${basedir}/build/build.number" />
 			<tarfileset dir="${basedir}">
@@ -95,7 +97,7 @@
 	<target name="dist.test" depends="dist.tar">
 		<delete dir="build/dist-test" />
 		<mkdir dir="build/dist-test" />
-		<untar src="build/exedio-cops-src.tar.gz"
+		<untar src="build/exedio-cops-src-${build.file.tag}.tar.gz"
 				dest="build/dist-test"
 				compression="gzip" />
 		<ant dir="build/dist-test" target="build" />
@@ -161,7 +163,7 @@
 		<mkdir dir="cruise" />
 		<copy todir="${basedir}/cruise">
 			<fileset file="${basedir}/build/exedio-cops.jar" />
-			<fileset file="${basedir}/build/exedio-cops-src.tar.gz" />
+			<fileset file="${basedir}/build/exedio-cops-src-${build.file.tag}.tar.gz" />
 			<fileset file="${basedir}/build/exedio-cops-api.tar.bz2" />
 		</copy>
 	</target>
