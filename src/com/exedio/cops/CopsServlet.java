@@ -35,6 +35,12 @@ public abstract class CopsServlet extends HttpServlet
 			final HttpServletResponse response)
 		throws ServletException, IOException
 	{
+		if(request.getPathInfo()==null)
+		{
+			response.sendRedirect(request.getContextPath() + request.getServletPath() + '/');
+			return;
+		}
+		
 		doRequest(request, response);
 	}
 
@@ -89,5 +95,4 @@ public abstract class CopsServlet extends HttpServlet
 		System.out.println("-------/"+id+"-----");
 		return id;
 	}
-
 }

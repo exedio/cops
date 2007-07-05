@@ -23,20 +23,26 @@ import javax.servlet.http.HttpServletResponse;
 
 public abstract class Cop
 {
-	private final StringBuffer url;
-	private boolean first = true;
+	private final String name;
+	private StringBuffer url = null;
 	
-	public Cop()
+	public Cop(final String name)
 	{
-		this.url = new StringBuffer();
+		for(final char c : FORBIDDEN_IN_NAME)
+			if(name.indexOf(c)>=0)
+				throw new IllegalArgumentException("cop name \"" + name + "\" must not contain character " + c);
+
+		this.name = name;
 	}
+	
+	private static final char[] FORBIDDEN_IN_NAME = new char[] {'/', '?', '&', ';'};
 	
 	protected void addParameter(final String key, final String value)
 	{
-		if(first)
+		if(url==null)
 		{
+			url = new StringBuffer(name);
 			url.append('?');
-			first = false;
 		}
 		else
 			url.append('&');
@@ -49,7 +55,7 @@ public abstract class Cop
 	@Override
 	public final String toString()
 	{
-		return url.length()>0 ? url.toString() : "?";
+		return url!=null ? url.toString() : name;
 	}
 	
 	private static final String BASIC = "Basic ";

@@ -26,7 +26,6 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 public final class Resource
 {
 	final String name;
@@ -158,11 +157,6 @@ public final class Resource
 					out.close();
 			}
 		}
-	}
-	
-	public String url(final HttpServletRequest request)
-	{
-		return request.getContextPath() + request.getServletPath() + '/' + name;
 	}
 	
 	private static final String getContentTypeFromName(final String name)
