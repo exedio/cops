@@ -61,6 +61,11 @@ public abstract class Cop
 		return response!=null ? response.encodeURL(url) : url;
 	}
 	
+	public static final boolean isPost(final HttpServletRequest request)
+	{
+		return "POST".equals(request.getMethod());
+	}
+	
 	private static final String BASIC = "Basic ";
 	private static final int BASIC_LENGTH = BASIC.length();
 	
