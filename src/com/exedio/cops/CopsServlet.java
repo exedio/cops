@@ -31,6 +31,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public abstract class CopsServlet extends HttpServlet
 {
+	public static final String ENCODING = "utf-8";
+	
 	private final HashMap<String, Resource> resources = new HashMap<String, Resource>();
 	
 	protected CopsServlet()
@@ -81,7 +83,7 @@ public abstract class CopsServlet extends HttpServlet
 			return;
 		}
 		
-		doRequest(request, response);
+		doRequestPrivate(request, response);
 	}
 
 	@Override
@@ -90,6 +92,22 @@ public abstract class CopsServlet extends HttpServlet
 			final HttpServletResponse response)
 		throws ServletException, IOException
 	{
+		doRequestPrivate(request, response);
+	}
+	
+	private final void doRequestPrivate(final HttpServletRequest request, final HttpServletResponse response)
+		throws ServletException, IOException
+	{
+		request.setCharacterEncoding(ENCODING);
+		response.setContentType("text/html; charset="+ENCODING);
+
+		response.addHeader("Cache-Control", "no-cache");
+		response.addHeader("Cache-Control", "no-store");
+		response.addHeader("Cache-Control", "max-age=0");
+		response.addHeader("Cache-Control", "must-revalidate");
+		response.setHeader("Pragma", "no-cache");
+		response.setDateHeader("Expires", System.currentTimeMillis());
+		
 		doRequest(request, response);
 	}
 
