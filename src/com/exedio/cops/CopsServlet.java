@@ -20,6 +20,8 @@ package com.exedio.cops;
 
 import java.io.IOException;
 import java.io.PrintStream;
+import java.lang.reflect.Modifier;
+import java.util.HashMap;
 import java.util.Random;
 
 import javax.servlet.ServletException;
@@ -29,15 +31,53 @@ import javax.servlet.http.HttpServletResponse;
 
 public abstract class CopsServlet extends HttpServlet
 {
+	private final HashMap<String, Resource> resources = new HashMap<String, Resource>();
+	
+	protected CopsServlet()
+	{
+		try
+		{
+			final Class clazz = getClass(); // TODO go to super class as well until CopsServlet
+			for(final java.lang.reflect.Field field : clazz.getDeclaredFields())
+			{
+				if((field.getModifiers() & (Modifier.STATIC | Modifier.FINAL)) != (Modifier.STATIC | Modifier.FINAL))
+					continue;
+				if(!Resource.class.isAssignableFrom(field.getType()))
+					continue;
+
+				field.setAccessible(true);
+				final Resource resource = (Resource)field.get(null); // always static
+				if(resource==null)
+					continue;
+				
+				resource.init(clazz);
+				this.resources.put('/'+resource.name, resource);
+			}
+		}
+		catch(IllegalAccessException e)
+		{
+			throw new RuntimeException(e);
+		}
+	}
+
 	@Override
 	protected final void doGet(
 			final HttpServletRequest request,
 			final HttpServletResponse response)
 		throws ServletException, IOException
 	{
-		if(request.getPathInfo()==null)
+		final String pathInfo = request.getPathInfo();
+
+		if(pathInfo==null)
 		{
 			response.sendRedirect(request.getContextPath() + request.getServletPath() + '/');
+			return;
+		}
+		
+		final Resource resource = resources.get(pathInfo);
+		if(resource!=null)
+		{
+			resource.doGet(request, response);
 			return;
 		}
 		

@@ -39,15 +39,13 @@ public final class Resource
 	final Object contentLock = new Object();
 	byte[] content;
 
-	public Resource(final ResourceSet set, final String name)
+	public Resource(final String name)
 	{
-		this(set, name, getContentTypeFromName(name));
+		this(name, getContentTypeFromName(name));
 	}
 
-	public Resource(final ResourceSet set, final String name, final String contentType)
+	public Resource(final String name, final String contentType)
 	{
-		if(set==null)
-			throw new NullPointerException();
 		if(name==null)
 			throw new NullPointerException();
 		if(contentType==null)
@@ -56,8 +54,6 @@ public final class Resource
 		this.name = name;
 		this.contentType = contentType;
 		this.lastModified = ((System.currentTimeMillis()/1000)+1)*1000;
-		
-		set.add(this);
 	}
 	
 	@Override
@@ -170,6 +166,6 @@ public final class Resource
 		else if(name.endsWith(".png"))
 			return "image/png";
 		else
-			throw new RuntimeException("no content type known for "+name+", specify content type explicitly");
+			throw new RuntimeException("no content type known for " + name + ", specify content type explicitly");
 	}
 }
