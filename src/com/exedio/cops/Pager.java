@@ -65,7 +65,16 @@ public final class Pager
 		return limit;
 	}
 	
+	private int pageIfInitialized = -1;
 	private int totalIfInitialized = -1;
+	
+	private int page()
+	{
+		if(pageIfInitialized<0)
+			throw new IllegalStateException(String.valueOf(pageIfInitialized));
+		
+		return pageIfInitialized;
+	}
 	
 	private int total()
 	{
@@ -75,13 +84,18 @@ public final class Pager
 		return totalIfInitialized;
 	}
 	
-	public void init(final int total)
+	public void init(final int page, final int total)
 	{
+		if(page<0)
+			throw new IllegalArgumentException(String.valueOf(page));
 		if(total<0)
 			throw new IllegalArgumentException(String.valueOf(total));
+		if(pageIfInitialized>=0)
+			throw new IllegalStateException(String.valueOf(pageIfInitialized));
 		if(totalIfInitialized>=0)
 			throw new IllegalStateException(String.valueOf(totalIfInitialized));
 		
+		this.pageIfInitialized  = page;
 		this.totalIfInitialized = total;
 	}
 	
@@ -122,6 +136,16 @@ public final class Pager
 	public Pager switchLimit(final int newLimit)
 	{
 		return new Pager(limitDefault, offset, newLimit);
+	}
+	
+	public int getFrom()
+	{
+		return offset + 1;
+	}
+	
+	public int getTo()
+	{
+		return offset + page();
 	}
 	
 	public int getTotal()
