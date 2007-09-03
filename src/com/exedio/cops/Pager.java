@@ -25,7 +25,7 @@ public final class Pager
 	private static final String OFFSET = "st"; // TODO change value to "off"
 	private static final String LIMIT  = "ct"; // TODO change value to "lim"
 
-	private static final int OFFSET_DEFAULT = 0;
+	private static final int OFFSET_MIN = 0;
 	private final int limitDefault;
 
 	private static final int limitCeiling  = 1000;
@@ -34,7 +34,7 @@ public final class Pager
 	
 	public Pager(final int limitDefault)
 	{
-		this(limitDefault, OFFSET_DEFAULT, limitDefault);
+		this(limitDefault, OFFSET_MIN, limitDefault);
 	}
 	
 	private Pager(final int limitDefault, final int offset, int limit)
@@ -49,7 +49,7 @@ public final class Pager
 	
 	public void addParameters(final Cop cop)
 	{
-		if(offset!=OFFSET_DEFAULT)
+		if(offset!=OFFSET_MIN)
 			cop.addParameter(OFFSET, String.valueOf(offset));
 		if(limit!=limitDefault)
 			cop.addParameter(LIMIT, String.valueOf(limit));
@@ -87,7 +87,7 @@ public final class Pager
 	
 	public boolean isFirst()
 	{
-		return offset == 0;
+		return offset == OFFSET_MIN;
 	}
 	
 	public boolean isLast()
@@ -97,7 +97,7 @@ public final class Pager
 	
 	public Pager first()
 	{
-		return new Pager(limitDefault, 0, limit);
+		return new Pager(limitDefault, OFFSET_MIN, limit);
 	}
 	
 	public Pager last()
@@ -108,8 +108,8 @@ public final class Pager
 	public Pager previous()
 	{
 		int newOffset = offset - limit;
-		if(newOffset<0)
-			newOffset = 0;
+		if(newOffset<OFFSET_MIN)
+			newOffset = OFFSET_MIN;
 		return new Pager(limitDefault, newOffset, limit);
 	}
 	
@@ -137,7 +137,7 @@ public final class Pager
 	public static final Pager newPager(final HttpServletRequest request, final int limitDefault)
 	{
 		return new Pager(limitDefault,
-				Cop.getIntParameter(request, OFFSET, OFFSET_DEFAULT),
+				Cop.getIntParameter(request, OFFSET, OFFSET_MIN),
 				Cop.getIntParameter(request, LIMIT,  limitDefault));
 	}
 }
