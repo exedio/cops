@@ -111,4 +111,13 @@ public abstract class Cop
 				replaceAll("\"", "&quot;").
 				replaceAll("'",  "&apos;");
 	}
+	
+	public static int getIntParameter(
+			final HttpServletRequest request,
+			final String name,
+			final int defaultValue)
+	{
+		final String value = request.getParameter(name);
+		return (value==null) ? defaultValue : Integer.parseInt(value);
+	}
 }
