@@ -54,6 +54,15 @@ public class PagerTest extends TestCase
 		assertIt(i(page2l20.last(),      5, 45), 40, 20, 41, 45, 45, false, true);
 	}
 	
+	public void testNotNeeded()
+	{
+		final Pager p = i(p(10), 10, 10);
+		assertIt(p, 0, 10, 1, 10, 10, true, true);
+
+		final Pager pn = i(p(10), 10, 11);
+		assertIt(pn, 0, 10, 1, 10, 11, true, false);
+	}
+	
 	private static final Pager p(final int limit)
 	{
 		return new Pager(limit);
