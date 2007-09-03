@@ -129,6 +129,11 @@ public final class Pager
 		return total();
 	}
 
+	public boolean isTotalEmpty()
+	{
+		return total()==0;
+	}
+
 	public static final Pager newPager(final HttpServletRequest request, final int LIMIT_DEFAULT)
 	{
 		return new Pager(LIMIT_DEFAULT,
