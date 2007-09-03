@@ -72,8 +72,8 @@ public class PagerTest extends TestCase
 			final int total,
 			final boolean first, final boolean last)
 	{
-		assertEquals(limit,  pager.getLimit());
 		assertEquals(offset, pager.getOffset());
+		assertEquals(limit,  pager.getLimit());
 		assertEquals(from,   pager.getFrom());
 		assertEquals(to,     pager.getTo());
 		assertEquals(total,  pager.getTotal());
