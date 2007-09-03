@@ -157,6 +157,11 @@ public final class Pager
 	{
 		return total()==0;
 	}
+	
+	public boolean isNeeded()
+	{
+		return total()>limitDefault;
+	}
 
 	public static final Pager newPager(final HttpServletRequest request, final int limitDefault)
 	{
