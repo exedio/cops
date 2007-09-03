@@ -26,23 +26,23 @@ public final class Pager
 	private static final String LIMIT  = "ct"; // TODO change value to "lim"
 
 	private static final int OFFSET_DEFAULT = 0;
-	private final int LIMIT_DEFAULT;
+	private final int limitDefault;
 
 	private static final int limitCeiling  = 1000;
 	final int offset;
 	final int limit;
 	
-	public Pager(final int LIMIT_DEFAULT)
+	public Pager(final int limitDefault)
 	{
-		this(LIMIT_DEFAULT, OFFSET_DEFAULT, LIMIT_DEFAULT);
+		this(limitDefault, OFFSET_DEFAULT, limitDefault);
 	}
 	
-	private Pager(final int LIMIT_DEFAULT, final int offset, int limit)
+	private Pager(final int limitDefault, final int offset, int limit)
 	{
 		if(limit>limitCeiling)
 			limit = limitCeiling;
 
-		this.LIMIT_DEFAULT = LIMIT_DEFAULT;
+		this.limitDefault = limitDefault;
 		this.offset = offset;
 		this.limit = limit;
 	}
@@ -51,7 +51,7 @@ public final class Pager
 	{
 		if(offset!=OFFSET_DEFAULT)
 			cop.addParameter(OFFSET, String.valueOf(offset));
-		if(limit!=LIMIT_DEFAULT)
+		if(limit!=limitDefault)
 			cop.addParameter(LIMIT, String.valueOf(limit));
 	}
 	
@@ -97,12 +97,12 @@ public final class Pager
 	
 	public Pager first()
 	{
-		return new Pager(LIMIT_DEFAULT, 0, limit);
+		return new Pager(limitDefault, 0, limit);
 	}
 	
 	public Pager last()
 	{
-		return new Pager(LIMIT_DEFAULT, ((total()-1)/limit)*limit, limit);
+		return new Pager(limitDefault, ((total()-1)/limit)*limit, limit);
 	}
 	
 	public Pager previous()
@@ -110,18 +110,18 @@ public final class Pager
 		int newOffset = offset - limit;
 		if(newOffset<0)
 			newOffset = 0;
-		return new Pager(LIMIT_DEFAULT, newOffset, limit);
+		return new Pager(limitDefault, newOffset, limit);
 	}
 	
 	public Pager next()
 	{
 		int newOffset = offset + limit;
-		return new Pager(LIMIT_DEFAULT, newOffset, limit);
+		return new Pager(limitDefault, newOffset, limit);
 	}
 	
 	public Pager switchLimit(final int newLimit)
 	{
-		return new Pager(LIMIT_DEFAULT, offset, newLimit);
+		return new Pager(limitDefault, offset, newLimit);
 	}
 	
 	public int getTotal()
@@ -134,10 +134,10 @@ public final class Pager
 		return total()==0;
 	}
 
-	public static final Pager newPager(final HttpServletRequest request, final int LIMIT_DEFAULT)
+	public static final Pager newPager(final HttpServletRequest request, final int limitDefault)
 	{
-		return new Pager(LIMIT_DEFAULT,
+		return new Pager(limitDefault,
 				Cop.getIntParameter(request, OFFSET, OFFSET_DEFAULT),
-				Cop.getIntParameter(request, LIMIT,  LIMIT_DEFAULT));
+				Cop.getIntParameter(request, LIMIT,  limitDefault));
 	}
 }
