@@ -45,9 +45,9 @@ public class PagerTest extends TestCase
 		final Pager first3 = i(last.first(), 10, 45);
 		assertIt(first3, 0, 10, 1, 10, 45, true, false, true, false);
 		
-		assertIt(i(page2.switchLimit(10), 10, 45), 10, 10, 11, 20, 45, true, true, false, false);
 		final Pager page2l20 = i(page2.switchLimit(20), 20, 45);
 		assertIt(page2l20, 10, 20, 11, 30, 45, true, false, false, false);
+		assertIt(i(page2.switchLimit(10), 10, 45), 10, 10, 11, 20, 45, true, true, false, false);
 
 		assertIt(i(page2l20.previous(), 20, 45),  0, 20,  1, 20, 45, true, false, true, false);
 		assertIt(i(page2l20.first(),    20, 45),  0, 20,  1, 20, 45, true, false, true, false);
@@ -83,14 +83,14 @@ public class PagerTest extends TestCase
 			final boolean needed, final boolean neutral,
 			final boolean first, final boolean last)
 	{
-		assertEquals(offset, pager.getOffset());
-		assertEquals(limit,  pager.getLimit());
-		assertEquals(from,   pager.getFrom());
-		assertEquals(to,     pager.getTo());
-		assertEquals(total,  pager.getTotal());
-		assertEquals(needed, pager.isNeeded());
-		assertEquals(neutral,pager.isNeutral());
-		assertEquals(first,  pager.isFirst());
-		assertEquals(last,   pager.isLast());
+		assertEquals(offset,  pager.getOffset());
+		assertEquals(limit,   pager.getLimit());
+		assertEquals(from,    pager.getFrom());
+		assertEquals(to,      pager.getTo());
+		assertEquals(total,   pager.getTotal());
+		assertEquals(needed,  pager.isNeeded());
+		assertEquals(neutral, pager.isNeutral());
+		assertEquals(first,   pager.isFirst());
+		assertEquals(last,    pager.isLast());
 	}
 }

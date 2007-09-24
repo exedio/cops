@@ -29,9 +29,9 @@ public final class Pager
 	private final int limitDefault;
 
 	private static final int limitCeiling = 1000;
-	final int offset;
-	final int limit;
-	private final boolean neutral; // TODO make others private
+	private final int offset;
+	private final int limit;
+	private final boolean neutral;
 	
 	public Pager(final int limitDefault)
 	{
@@ -175,6 +175,7 @@ public final class Pager
 	{
 		return new Pager(limitDefault,
 				Cop.getIntParameter(request, OFFSET, OFFSET_MIN),
-				Cop.getIntParameter(request, LIMIT,  limitDefault), false);
+				Cop.getIntParameter(request, LIMIT,  limitDefault),
+				false);
 	}
 }
