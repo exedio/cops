@@ -22,8 +22,8 @@ import javax.servlet.http.HttpServletRequest;
 
 public final class Pager
 {
-	private static final String OFFSET = "st"; // TODO change value to "off"
-	private static final String LIMIT  = "ct"; // TODO change value to "lim"
+	private static final String OFFSET = "off";
+	private static final String LIMIT  = "lim";
 
 	private static final int OFFSET_MIN = 0;
 	private final int limitDefault;
