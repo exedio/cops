@@ -28,16 +28,17 @@ public final class Pager
 	private static final int OFFSET_MIN = 0;
 	private final int limitDefault;
 
-	private static final int limitCeiling  = 1000;
+	private static final int limitCeiling = 1000;
 	final int offset;
 	final int limit;
+	private final boolean neutral; // TODO make others private
 	
 	public Pager(final int limitDefault)
 	{
-		this(limitDefault, OFFSET_MIN, limitDefault);
+		this(limitDefault, OFFSET_MIN, limitDefault, false);
 	}
 	
-	private Pager(final int limitDefault, final int offset, int limit)
+	private Pager(final int limitDefault, final int offset, int limit, final boolean neutral)
 	{
 		if(limit>limitCeiling)
 			limit = limitCeiling;
@@ -45,6 +46,7 @@ public final class Pager
 		this.limitDefault = limitDefault;
 		this.offset = offset;
 		this.limit = limit;
+		this.neutral = neutral;
 	}
 	
 	public void addParameters(final Cop cop)
@@ -111,12 +113,13 @@ public final class Pager
 	
 	public Pager first()
 	{
-		return new Pager(limitDefault, OFFSET_MIN, limit);
+		return new Pager(limitDefault, OFFSET_MIN, limit, offset==OFFSET_MIN);
 	}
 	
 	public Pager last()
 	{
-		return new Pager(limitDefault, ((total()-1)/limit)*limit, limit);
+		final int newOffset = ((total()-1)/limit)*limit;
+		return new Pager(limitDefault, newOffset, limit, offset==newOffset);
 	}
 	
 	public Pager previous()
@@ -124,18 +127,18 @@ public final class Pager
 		int newOffset = offset - limit;
 		if(newOffset<OFFSET_MIN)
 			newOffset = OFFSET_MIN;
-		return new Pager(limitDefault, newOffset, limit);
+		return new Pager(limitDefault, newOffset, limit, offset==newOffset);
 	}
 	
 	public Pager next()
 	{
-		int newOffset = offset + limit;
-		return new Pager(limitDefault, newOffset, limit);
+		final int newOffset = offset + limit;
+		return new Pager(limitDefault, newOffset, limit, offset==newOffset);
 	}
 	
 	public Pager switchLimit(final int newLimit)
 	{
-		return new Pager(limitDefault, offset, newLimit);
+		return new Pager(limitDefault, offset, newLimit, limit==newLimit);
 	}
 	
 	public int getFrom()
@@ -163,10 +166,15 @@ public final class Pager
 		return total()>limitDefault;
 	}
 
+	public boolean isNeutral()
+	{
+		return neutral;
+	}
+
 	public static final Pager newPager(final HttpServletRequest request, final int limitDefault)
 	{
 		return new Pager(limitDefault,
 				Cop.getIntParameter(request, OFFSET, OFFSET_MIN),
-				Cop.getIntParameter(request, LIMIT,  limitDefault));
+				Cop.getIntParameter(request, LIMIT,  limitDefault), false);
 	}
 }
