@@ -153,19 +153,19 @@ public final class Pager
 		for(int factor = 1; true; factor*=10)
 		{
 			final int one = limitDefault * factor;
-			if(one>max)
-				break;
 			result.add(switchLimit(one));
+			if(one>=max)
+				break;
 			
 			final int two = 2*one;
-			if(two>max)
-				break;
 			result.add(switchLimit(two));
+			if(two>=max)
+				break;
 			
 			final int five = 5*one;
-			if(two>five)
-				break;
 			result.add(switchLimit(five));
+			if(five>=max)
+				break;
 		}
 		return result;
 	}
