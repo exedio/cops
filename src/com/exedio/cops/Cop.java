@@ -104,7 +104,7 @@ public abstract class Cop
 		if(st==null)
 			return null;
 		
-		return 
+		return
 			st.replaceAll("&",  "&amp;").
 				replaceAll("<",  "&lt;").
 				replaceAll(">",  "&gt;").
