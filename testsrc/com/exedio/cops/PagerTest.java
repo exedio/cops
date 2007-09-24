@@ -41,7 +41,7 @@ public class PagerTest extends TestCase
 		final Pager last = i(first.last(), 5, 45);
 		assertIt(last, 40, 10, 41, 45, 45, true, false, false, true);
 		
-		assertIt(i(last.next(), 0, 45), 50, 10, 51, 50, 45, true, false, false, true); // TODO should be 40 instead of 50 and neutral should be true
+		assertIt(i(last.next(), 5, 45), 40, 10, 41, 45, 45, true, true, false, true);
 		assertIt(i(last.last(), 5, 45), 40, 10, 41, 45, 45, true, true, false, true);
 		
 		final Pager first3 = i(last.first(), 10, 45);

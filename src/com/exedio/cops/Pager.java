@@ -136,6 +136,8 @@ public final class Pager
 	public Pager next()
 	{
 		final int newOffset = offset + limit;
+		if(newOffset>total())
+			return last();
 		return new Pager(limitDefault, newOffset, limit, offset==newOffset);
 	}
 	
