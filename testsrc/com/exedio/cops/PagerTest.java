@@ -18,6 +18,8 @@
 
 package com.exedio.cops;
 
+import java.util.Iterator;
+
 import junit.framework.TestCase;
 
 public class PagerTest extends TestCase
@@ -62,6 +64,19 @@ public class PagerTest extends TestCase
 
 		final Pager pn = i(p(10), 10, 11);
 		assertIt(pn, 0, 10, 1, 10, 11, true, false, true, false);
+	}
+	
+	public void testNewLimit()
+	{
+		final Pager p = i(p(10), 10, 500);
+		final Iterator<Pager> i = p.newLimits().iterator();
+		assertIt(i(i.next(),  10, 500), 0,  10, 1,  10, 500, true, true,  true, false);
+		assertIt(i(i.next(),  20, 500), 0,  20, 1,  20, 500, true, false, true, false);
+		assertIt(i(i.next(),  50, 500), 0,  50, 1,  50, 500, true, false, true, false);
+		assertIt(i(i.next(), 100, 500), 0, 100, 1, 100, 500, true, false, true, false);
+		assertIt(i(i.next(), 200, 500), 0, 200, 1, 200, 500, true, false, true, false);
+		assertIt(i(i.next(), 500, 500), 0, 500, 1, 500, 500, true, false, true, true);
+		assertFalse(i.hasNext());
 	}
 	
 	private static final Pager p(final int limit)

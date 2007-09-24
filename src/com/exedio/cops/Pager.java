@@ -18,6 +18,9 @@
 
 package com.exedio.cops;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 public final class Pager
@@ -139,6 +142,30 @@ public final class Pager
 	public Pager switchLimit(final int newLimit)
 	{
 		return new Pager(limitDefault, offset, newLimit, limit==newLimit);
+	}
+	
+	public List<Pager> newLimits()
+	{
+		final ArrayList<Pager> result = new ArrayList<Pager>();
+		final int max = Math.min(total(), limitCeiling);
+		for(int factor = 1; true; factor*=10)
+		{
+			final int one = limitDefault * factor;
+			if(one>max)
+				break;
+			result.add(switchLimit(one));
+			
+			final int two = 2*one;
+			if(two>max)
+				break;
+			result.add(switchLimit(two));
+			
+			final int five = 5*one;
+			if(two>five)
+				break;
+			result.add(switchLimit(five));
+		}
+		return result;
 	}
 	
 	public int getFrom()
