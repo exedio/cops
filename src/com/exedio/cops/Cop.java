@@ -25,7 +25,7 @@ public abstract class Cop
 {
 	protected final HttpServletResponse response;
 	private final String name;
-	private StringBuffer url = null;
+	private StringBuilder url = null;
 	
 	public Cop(final HttpServletResponse responseForEncodeURL, final String name)
 	{
@@ -43,7 +43,7 @@ public abstract class Cop
 	{
 		if(url==null)
 		{
-			url = new StringBuffer(name);
+			url = new StringBuilder(name);
 			url.append('?');
 		}
 		else
