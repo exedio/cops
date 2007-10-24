@@ -41,7 +41,7 @@ public class Form
 	private final HashMap<Object, Field> fieldByKey = new HashMap<Object, Field>();
 	private final ArrayList<Field> fieldList = new ArrayList<Field>();
 	
-	private final ArrayList<Section> sectionList = new ArrayList<Section>();
+	final ArrayList<Section> sectionList = new ArrayList<Section>();
 	
 	@SuppressWarnings("deprecation") // TODO use new way of fileupload
 	public Form(final HttpServletRequest request)
@@ -151,5 +151,4 @@ public class Form
 	{
 		return Collections.unmodifiableList(sectionList);
 	}
-	
 }
