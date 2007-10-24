@@ -135,7 +135,7 @@ public final class Resource
 		
 		if(ifModifiedSince>=0 && ifModifiedSince>=lastModified)
 		{
-			response.setStatus(response.SC_NOT_MODIFIED);
+			response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
 		}
 		else
 		{

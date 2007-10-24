@@ -96,7 +96,7 @@ public abstract class Cop
 	public static final void rejectAuthorizeBasic(final HttpServletResponse response, final String realm)
 	{
 		response.addHeader("WWW-Authenticate", "Basic realm=\"" + realm + '"');
-		response.setStatus(response.SC_UNAUTHORIZED);
+		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 	}
 	
 	public static final String encodeXml(final String st)

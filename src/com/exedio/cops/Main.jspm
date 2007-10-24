@@ -72,7 +72,7 @@ final class Main_Jspm
 	public static final void write(final PrintStream out, final CheckboxField field)
 	{
 		%>
-		<input type="checkbox" name="<%=field.name%>" value="<%=field.VALUE_ON%>"<%
+		<input type="checkbox" name="<%=field.name%>" value="<%=CheckboxField.VALUE_ON%>"<%
 		final String style = field.style;
 		if(style!=null)
 		{
