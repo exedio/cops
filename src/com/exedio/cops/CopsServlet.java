@@ -39,7 +39,7 @@ public abstract class CopsServlet extends HttpServlet
 	{
 		try
 		{
-			final Class clazz = getClass(); // TODO go to super class as well until CopsServlet
+			final Class<?> clazz = getClass(); // TODO go to super class as well until CopsServlet
 			for(final java.lang.reflect.Field field : clazz.getDeclaredFields())
 			{
 				if((field.getModifiers() & (Modifier.STATIC | Modifier.FINAL)) != (Modifier.STATIC | Modifier.FINAL))

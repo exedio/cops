@@ -58,7 +58,7 @@ public class Form
 			multipartContentParameters = new HashMap<String, Object>();
 			try
 			{
-				for(Iterator i = upload.parseRequest(request).iterator(); i.hasNext(); )
+				for(Iterator<?> i = upload.parseRequest(request).iterator(); i.hasNext(); )
 				{
 					final FileItem item = (FileItem)i.next();
 					if (item.isFormField())

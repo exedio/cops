@@ -62,7 +62,7 @@ public final class Resource
 		return name;
 	}
 	
-	final void init(final Class resourceLoader)
+	final void init(final Class<?> resourceLoader)
 	{
 		synchronized(contentLock)
 		{

@@ -26,7 +26,7 @@ final class Main_Jspm
 {
 	public static final void write(final PrintStream out, final RadioField field)
 	{
-		for(Iterator i = field.names.iterator(); i.hasNext(); )
+		for(Iterator<?> i = field.names.iterator(); i.hasNext(); )
 		{
 			final String optionValue = (String)i.next();
 			%>
@@ -54,7 +54,7 @@ final class Main_Jspm
 			%> style="<%=style%>"<%
 		}
 		%>><%
-		for(Iterator i = field.names.iterator(); i.hasNext(); )
+		for(Iterator<?> i = field.names.iterator(); i.hasNext(); )
 		{
 			final String optionValue = (String)i.next();
 			%>
@@ -113,7 +113,7 @@ final class Main_Jspm
 	
 	public static final void writeHiddenFields(final PrintStream out, final Form form)
 	{
-		for(Iterator i = form.getFields().iterator(); i.hasNext(); )
+		for(Iterator<?> i = form.getFields().iterator(); i.hasNext(); )
 		{
 			final Field field = (Field)i.next();
 			if(!field.isWritten())
