@@ -21,5 +21,5 @@ package com.exedio.cops;
 public interface Pageable
 {
 	Pager getPager();
-	Pageable toPage(Pager pager);
+	Cop toPage(Pager pager);
 }
