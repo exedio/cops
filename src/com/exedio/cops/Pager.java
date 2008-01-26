@@ -76,7 +76,7 @@ public final class Pager
 	private int page()
 	{
 		if(pageIfInitialized<0)
-			throw new IllegalStateException(String.valueOf(pageIfInitialized));
+			throw new IllegalStateException("must call init before");
 		
 		return pageIfInitialized;
 	}
@@ -84,7 +84,7 @@ public final class Pager
 	private int total()
 	{
 		if(totalIfInitialized<0)
-			throw new IllegalStateException(String.valueOf(totalIfInitialized));
+			throw new IllegalStateException("must call init before");
 		
 		return totalIfInitialized;
 	}
@@ -92,13 +92,13 @@ public final class Pager
 	public void init(final int page, final int total)
 	{
 		if(page<0)
-			throw new IllegalArgumentException(String.valueOf(page));
+			throw new IllegalArgumentException("page must be positive, but was " + String.valueOf(page));
 		if(total<0)
-			throw new IllegalArgumentException(String.valueOf(total));
+			throw new IllegalArgumentException("total must be positive, but was " + String.valueOf(total));
 		if(pageIfInitialized>=0)
-			throw new IllegalStateException(String.valueOf(pageIfInitialized));
+			throw new IllegalStateException("must not call init more than once");
 		if(totalIfInitialized>=0)
-			throw new IllegalStateException(String.valueOf(totalIfInitialized));
+			throw new IllegalStateException("must not call init more than once");
 		
 		this.pageIfInitialized  = page;
 		this.totalIfInitialized = total;
