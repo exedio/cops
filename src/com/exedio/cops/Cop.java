@@ -23,16 +23,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public abstract class Cop
 {
-	@Deprecated protected final HttpServletResponse response = CopsServlet.responses.get();
 	private final String name;
 	private StringBuilder url = null;
-	
-	@Deprecated
-	@SuppressWarnings("unused")
-	public Cop(final HttpServletResponse responseForEncodeURL, final String name)
-	{
-		this(name);
-	}
 	
 	public Cop(final String name)
 	{
