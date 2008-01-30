@@ -31,6 +31,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public abstract class CopsServlet extends HttpServlet
 {
+	static final ThreadLocal<HttpServletResponse> responses = new ThreadLocal<HttpServletResponse>();
+	
 	public static final String ENCODING = "utf-8";
 	
 	private final HashMap<String, Resource> resources = new HashMap<String, Resource>();
@@ -108,7 +110,15 @@ public abstract class CopsServlet extends HttpServlet
 		response.setHeader("Pragma", "no-cache");
 		response.setDateHeader("Expires", System.currentTimeMillis());
 		
-		doRequest(request, response);
+		try
+		{
+			responses.set(response);
+			doRequest(request, response);
+		}
+		finally
+		{
+			responses.remove();
+		}
 	}
 
 	protected abstract void doRequest(HttpServletRequest request, HttpServletResponse response)

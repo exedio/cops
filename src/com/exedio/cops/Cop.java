@@ -23,17 +23,23 @@ import javax.servlet.http.HttpServletResponse;
 
 public abstract class Cop
 {
-	protected final HttpServletResponse response;
+	@Deprecated protected final HttpServletResponse response = CopsServlet.responses.get();
 	private final String name;
 	private StringBuilder url = null;
 	
+	@Deprecated
+	@SuppressWarnings("unused")
 	public Cop(final HttpServletResponse responseForEncodeURL, final String name)
+	{
+		this(name);
+	}
+	
+	public Cop(final String name)
 	{
 		for(final char c : FORBIDDEN_IN_NAME)
 			if(name.indexOf(c)>=0)
 				throw new IllegalArgumentException("cop name \"" + name + "\" must not contain character " + c);
 
-		this.response = responseForEncodeURL;
 		this.name = name;
 	}
 	
@@ -58,6 +64,7 @@ public abstract class Cop
 	public final String toString()
 	{
 		final String url = this.url!=null ? this.url.toString() : name;
+		final HttpServletResponse response = CopsServlet.responses.get();
 		return response!=null ? response.encodeURL(url) : url;
 	}
 	
