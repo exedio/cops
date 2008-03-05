@@ -29,15 +29,15 @@ import javax.servlet.http.HttpServletResponse;
 public final class Resource
 {
 	final String name;
-	final String contentType;
+	private final String contentType;
 	
 	/**
 	 * rounded to full seconds
 	 */
-	final long lastModified;
+	private final long lastModified;
 
-	final Object contentLock = new Object();
-	byte[] content;
+	private final Object contentLock = new Object();
+	private byte[] content;
 
 	public Resource(final String name)
 	{
