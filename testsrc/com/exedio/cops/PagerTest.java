@@ -79,6 +79,18 @@ public class PagerTest extends TestCase
 		assertFalse(i.hasNext());
 	}
 	
+	public void testFullLastPage()
+	{
+		final Pager first = i(p(10), 10, 20);
+		assertIt(first, 0, 10, 1, 10, 20, true, false, true, false);
+		
+		final Pager second = i(first.next(), 10, 20);
+		assertIt(second, 10, 10, 11, 20, 20, true, false, false, true);
+		
+		assertIt(i(second.next(), 10, 20), 20/*10*/, 10, 21/*11*/, 30/*20*/, 20, true, false/*true*/, false, true); // TODO values in comments are correct
+		assertIt(i(second.last(), 10, 20), 10      , 10, 11      , 20      , 20, true, true         , false, true);
+	}
+	
 	private static final Pager p(final int limit)
 	{
 		return new Pager(limit);
