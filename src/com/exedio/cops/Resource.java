@@ -62,7 +62,7 @@ public final class Resource
 		return name;
 	}
 	
-	final void init(final Class<?> resourceLoader)
+	void init(final Class<?> resourceLoader)
 	{
 		synchronized(contentLock)
 		{
@@ -118,7 +118,7 @@ public final class Resource
 	private static final String RESPONSE_EXPIRES = "Expires";
 	private static final String RESPONSE_LAST_MODIFIED = "Last-Modified";
 
-	final void doGet(
+	void doGet(
 			final HttpServletRequest request,
 			final HttpServletResponse response)
 		throws IOException
@@ -155,7 +155,7 @@ public final class Resource
 		}
 	}
 	
-	private static final String getContentTypeFromName(final String name)
+	private static String getContentTypeFromName(final String name)
 	{
 		if(name.endsWith(".css"))
 			return "text/css";
