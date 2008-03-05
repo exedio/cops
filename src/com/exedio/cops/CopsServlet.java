@@ -39,7 +39,7 @@ public abstract class CopsServlet extends HttpServlet
 	
 	private final HashMap<String, Resource> resources = new HashMap<String, Resource>();
 	
-	private boolean contextPathOnResourcesToBeSet = true;
+	private boolean contextPathOnResourcesToBeSet = false;
 	
 	protected CopsServlet()
 	{
@@ -60,6 +60,7 @@ public abstract class CopsServlet extends HttpServlet
 				
 				resource.init(clazz);
 				this.resources.put('/'+resource.name, resource);
+				contextPathOnResourcesToBeSet = true;
 			}
 		}
 		catch(IllegalAccessException e)
@@ -77,10 +78,9 @@ public abstract class CopsServlet extends HttpServlet
 		if(contextPathOnResourcesToBeSet)
 		{
 			contextPathOnResourcesToBeSet = false;
-			final String contextPath = request.getContextPath();
-			final String servletPath = request.getServletPath();
+			final String path = request.getContextPath() + request.getServletPath() + '/';
 			for(final Resource resource : resources.values())
-				resource.setPath(contextPath, servletPath);
+				resource.setPath(path);
 		}
 		
 		final String pathInfo = request.getPathInfo();

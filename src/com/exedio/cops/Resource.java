@@ -63,9 +63,9 @@ public final class Resource
 		return toString;
 	}
 	
-	void setPath(final String contextPath, final String servletPath)
+	void setPath(final String path)
 	{
-		toString = contextPath + servletPath + '/' + name;
+		toString = path + name;
 	}
 	
 	void init(final Class<?> resourceLoader)
