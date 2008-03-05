@@ -38,6 +38,7 @@ public final class Resource
 
 	private final Object contentLock = new Object();
 	private byte[] content;
+	private String toString;
 
 	public Resource(final String name)
 	{
@@ -59,7 +60,12 @@ public final class Resource
 	@Override
 	public String toString()
 	{
-		return name;
+		return toString;
+	}
+	
+	void setPath(final String contextPath, final String servletPath)
+	{
+		toString = contextPath + servletPath + '/' + name;
 	}
 	
 	void init(final Class<?> resourceLoader)

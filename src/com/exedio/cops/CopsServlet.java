@@ -39,6 +39,8 @@ public abstract class CopsServlet extends HttpServlet
 	
 	private final HashMap<String, Resource> resources = new HashMap<String, Resource>();
 	
+	private boolean contextPathOnResourcesToBeSet = true;
+	
 	protected CopsServlet()
 	{
 		try
@@ -72,6 +74,15 @@ public abstract class CopsServlet extends HttpServlet
 			final HttpServletResponse response)
 		throws ServletException, IOException
 	{
+		if(contextPathOnResourcesToBeSet)
+		{
+			contextPathOnResourcesToBeSet = false;
+			final String contextPath = request.getContextPath();
+			final String servletPath = request.getServletPath();
+			for(final Resource resource : resources.values())
+				resource.setPath(contextPath, servletPath);
+		}
+		
 		final String pathInfo = request.getPathInfo();
 
 		if(pathInfo==null)
