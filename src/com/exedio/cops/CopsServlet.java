@@ -18,9 +18,11 @@
 
 package com.exedio.cops;
 
+import static java.lang.reflect.Modifier.FINAL;
+import static java.lang.reflect.Modifier.STATIC;
+
 import java.io.IOException;
 import java.io.PrintStream;
-import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -44,7 +46,7 @@ public abstract class CopsServlet extends HttpServlet
 			final Class<?> clazz = getClass(); // TODO go to super class as well until CopsServlet
 			for(final java.lang.reflect.Field field : clazz.getDeclaredFields())
 			{
-				if((field.getModifiers() & (Modifier.STATIC | Modifier.FINAL)) != (Modifier.STATIC | Modifier.FINAL))
+				if((field.getModifiers() & (STATIC | FINAL)) != (STATIC | FINAL))
 					continue;
 				if(!Resource.class.isAssignableFrom(field.getType()))
 					continue;
