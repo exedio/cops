@@ -171,6 +171,8 @@ public final class Resource
 			return "application/x-javascript";
 		else if(name.endsWith(".png"))
 			return "image/png";
+		else if(name.endsWith(".gif"))
+			return "image/gif";
 		else
 			throw new RuntimeException("no content type known for " + name + ", specify content type explicitly");
 	}
