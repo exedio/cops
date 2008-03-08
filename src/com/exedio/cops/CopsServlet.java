@@ -23,6 +23,8 @@ import static java.lang.reflect.Modifier.STATIC;
 
 import java.io.IOException;
 import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -156,6 +158,34 @@ public abstract class CopsServlet extends HttpServlet
 			}
 		}
 		out.flush();
+	}
+	
+	private static final void printStackTrace(final Throwable exception, final StringBuilder out)
+	{
+		final StringWriter sw = new StringWriter();
+		final PrintWriter pw = new PrintWriter(sw);
+		exception.printStackTrace(pw);
+		pw.flush();
+		out.append(sw.getBuffer());
+	}
+	
+	public final void printException(final StringBuilder out, final Exception exception)
+	{
+		printStackTrace(exception, out);
+		if(exception instanceof ServletException)
+		{
+			final Throwable rootCause =
+				((ServletException)exception).getRootCause();
+			if(rootCause!=null)
+			{
+				out.append("root cause for ServletException:");
+				printStackTrace(rootCause, out);
+			}
+			else
+			{
+				out.append("no root cause for ServletException");
+			}
+		}
 	}
 	
 	private final Random random = new Random();
