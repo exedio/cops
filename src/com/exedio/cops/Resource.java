@@ -173,6 +173,8 @@ public final class Resource
 			return "image/png";
 		else if(name.endsWith(".gif"))
 			return "image/gif";
+		else if(name.endsWith(".jpg"))
+			return "image/jpeg";
 		else
 			throw new RuntimeException("no content type known for " + name + ", specify content type explicitly");
 	}
