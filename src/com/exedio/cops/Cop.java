@@ -52,6 +52,14 @@ public abstract class Cop
 		url.append(value);
 	}
 	
+	/**
+	 * Specifies, whether this cop should use http or https.
+	 * Return TRUE to use https.
+	 * Return FALSE to use http.
+	 * Return null to use any of these,
+	 * which uses the previously used protocol.
+	 * This default implementation returns null.
+	 */
 	protected Boolean needsSecure()
 	{
 		return null;
