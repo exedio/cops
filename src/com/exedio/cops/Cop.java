@@ -52,12 +52,42 @@ public abstract class Cop
 		url.append(value);
 	}
 	
+	protected Boolean needsSecure()
+	{
+		return null;
+	}
+	
 	@Override
 	public final String toString()
 	{
 		final String url = this.url!=null ? this.url.toString() : name;
+		
 		final HttpServletResponse response = CopsServlet.responses.get();
-		return response!=null ? response.encodeURL(url) : url;
+		final String encodedURL = response!=null ? response.encodeURL(url) : url;
+		
+		final Boolean needsSecure = needsSecure();
+		if(needsSecure==null)
+			return encodedURL;
+		
+		final HttpServletRequest request = CopsServlet.requests.get();
+		if(request==null)
+			return encodedURL;
+		
+		if(needsSecure.booleanValue()==request.isSecure())
+			return encodedURL;
+		
+		String host = request.getHeader("Host");
+		if(host.endsWith(":8080"))
+			host = host.substring(0, host.length()-4) + "8443";
+		else if(host.endsWith(":8443"))
+			host = host.substring(0, host.length()-4) + "8080";
+		
+		return
+			(needsSecure?"https://":"http://") +
+			host +
+			request.getContextPath() +
+			request.getServletPath() +
+			'/' + encodedURL;
 	}
 	
 	public static final boolean isPost(final HttpServletRequest request)
