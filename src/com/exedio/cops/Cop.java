@@ -37,7 +37,7 @@ public abstract class Cop
 	
 	private static final char[] FORBIDDEN_IN_NAME = new char[] {'/', '?', '&', ';'};
 	
-	protected void addParameter(final String key, final String value)
+	protected final void addParameter(final String key, final String value)
 	{
 		if(url==null)
 		{
@@ -111,7 +111,7 @@ public abstract class Cop
 				replaceAll("'",  "&apos;");
 	}
 	
-	public static int getIntParameter(
+	public static final int getIntParameter(
 			final HttpServletRequest request,
 			final String name,
 			final int defaultValue)
