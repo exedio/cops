@@ -72,6 +72,8 @@ public class CopTest extends TestCase
 	{
 		CopsServlet.requests.set(new AbsReq());
 		assertEquals("scheme://host.exedio.com/contextPath/servletPath/test.html", new TestCop().toAbsolute());
+		assertEquals("scheme://host.exedio.com/contextPath/servletPath/test.html?param1=ding", new TestCop("ding").toAbsolute());
+		assertEquals("scheme://host.exedio.com/contextPath/servletPath/test.html?param1=ding&param2=dong", new TestCop("ding", "dong").toAbsolute());
 	}
 	
 	static final class AbsReq implements HttpServletRequest
