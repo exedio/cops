@@ -40,6 +40,19 @@ public class CopTest extends TestCase
 		{
 			super("test.html");
 		}
+		
+		TestCop(final String param1)
+		{
+			super("test.html");
+			addParameter("param1", param1);
+		}
+		
+		TestCop(final String param1, final String param2)
+		{
+			super("test.html");
+			addParameter("param1", param1);
+			addParameter("param2", param2);
+		}
 	}
 	
 	@Override
@@ -51,6 +64,8 @@ public class CopTest extends TestCase
 	public void testToString()
 	{
 		assertEquals("test.html", new TestCop().toString());
+		assertEquals("test.html?param1=ding", new TestCop("ding").toString());
+		assertEquals("test.html?param1=ding&param2=dong", new TestCop("ding", "dong").toString());
 	}
 	
 	public void testToAbsolute()
