@@ -70,7 +70,8 @@ public class CopTest extends TestCase
 	
 	public void testToAbsolute()
 	{
-		CopsServlet.requests.set(new AbsReq()); assertEquals("scheme://host.exedio.com/contextPath/servletPath/test.html", new TestCop().toAbsolute());
+		CopsServlet.requests.set(new AbsReq());
+		assertEquals("scheme://host.exedio.com/contextPath/servletPath/test.html", new TestCop().toAbsolute());
 	}
 	
 	static final class AbsReq implements HttpServletRequest
