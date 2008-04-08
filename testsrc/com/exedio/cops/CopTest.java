@@ -18,18 +18,6 @@
 
 package com.exedio.cops;
 
-import java.io.BufferedReader;
-import java.security.Principal;
-import java.util.Enumeration;
-import java.util.Locale;
-import java.util.Map;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletInputStream;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import junit.framework.TestCase;
 
 public class CopTest extends TestCase
@@ -76,13 +64,15 @@ public class CopTest extends TestCase
 		assertEquals("scheme://host.exedio.com/contextPath/servletPath/test.html?param1=ding&param2=dong", new TestCop("ding", "dong").toAbsolute());
 	}
 	
-	static final class AbsReq implements HttpServletRequest
+	static final class AbsReq extends DummyRequest
 	{
+		@Override
 		public String getScheme()
 		{
 			return "scheme";
 		}
 
+		@Override
 		public String getHeader(final String name)
 		{
 			if("Host".equals(name))
@@ -91,268 +81,16 @@ public class CopTest extends TestCase
 				throw new RuntimeException();
 		}
 
+		@Override
 		public String getContextPath()
 		{
 			return "/contextPath";
 		}
 
+		@Override
 		public String getServletPath()
 		{
 			return "/servletPath";
-		}
-
-		// --------- dummy -----------
-
-		public String getAuthType()
-		{
-			throw new RuntimeException();
-		}
-
-		public Cookie[] getCookies()
-		{
-			throw new RuntimeException();
-		}
-
-		public long getDateHeader(String arg0)
-		{
-			throw new RuntimeException();
-		}
-
-		public Enumeration<?> getHeaderNames()
-		{
-			throw new RuntimeException();
-		}
-
-		public Enumeration<?> getHeaders(String arg0)
-		{
-			throw new RuntimeException();
-		}
-
-		public int getIntHeader(String arg0)
-		{
-			throw new RuntimeException();
-		}
-
-		public String getMethod()
-		{
-			throw new RuntimeException();
-		}
-
-		public String getPathInfo()
-		{
-			throw new RuntimeException();
-		}
-
-		public String getPathTranslated()
-		{
-			throw new RuntimeException();
-		}
-
-		public String getQueryString()
-		{
-			throw new RuntimeException();
-		}
-
-		public String getRemoteUser()
-		{
-			throw new RuntimeException();
-		}
-
-		public String getRequestURI()
-		{
-			throw new RuntimeException();
-		}
-
-		public StringBuffer getRequestURL()
-		{
-			throw new RuntimeException();
-		}
-
-		public String getRequestedSessionId()
-		{
-			throw new RuntimeException();
-		}
-
-		public HttpSession getSession()
-		{
-			throw new RuntimeException();
-		}
-
-		public HttpSession getSession(boolean arg0)
-		{
-			throw new RuntimeException();
-		}
-
-		public Principal getUserPrincipal()
-		{
-			throw new RuntimeException();
-		}
-
-		public boolean isRequestedSessionIdFromCookie()
-		{
-			throw new RuntimeException();
-		}
-
-		public boolean isRequestedSessionIdFromURL()
-		{
-			throw new RuntimeException();
-		}
-
-		@Deprecated
-		public boolean isRequestedSessionIdFromUrl()
-		{
-			throw new RuntimeException();
-		}
-
-		public boolean isRequestedSessionIdValid()
-		{
-			throw new RuntimeException();
-		}
-
-		public boolean isUserInRole(String arg0)
-		{
-			throw new RuntimeException();
-		}
-
-		public Object getAttribute(String arg0)
-		{
-			throw new RuntimeException();
-		}
-
-		public Enumeration<?> getAttributeNames()
-		{
-			throw new RuntimeException();
-		}
-
-		public String getCharacterEncoding()
-		{
-			throw new RuntimeException();
-		}
-
-		public int getContentLength()
-		{
-			throw new RuntimeException();
-		}
-
-		public String getContentType()
-		{
-			throw new RuntimeException();
-		}
-
-		public ServletInputStream getInputStream()
-		{
-			throw new RuntimeException();
-		}
-
-		public String getLocalAddr()
-		{
-			throw new RuntimeException();
-		}
-
-		public String getLocalName()
-		{
-			throw new RuntimeException();
-		}
-
-		public int getLocalPort()
-		{
-			throw new RuntimeException();
-		}
-
-		public Locale getLocale()
-		{
-			throw new RuntimeException();
-		}
-
-		public Enumeration<?> getLocales()
-		{
-			throw new RuntimeException();
-		}
-
-		public String getParameter(String arg0)
-		{
-			throw new RuntimeException();
-		}
-
-		public Map<?,?> getParameterMap()
-		{
-			throw new RuntimeException();
-		}
-
-		public Enumeration<?> getParameterNames()
-		{
-			throw new RuntimeException();
-		}
-
-		public String[] getParameterValues(String arg0)
-		{
-			throw new RuntimeException();
-		}
-
-		public String getProtocol()
-		{
-			throw new RuntimeException();
-		}
-
-		public BufferedReader getReader()
-		{
-			throw new RuntimeException();
-		}
-
-		@Deprecated
-		public String getRealPath(String arg0)
-		{
-			throw new RuntimeException();
-		}
-
-		public String getRemoteAddr()
-		{
-			throw new RuntimeException();
-		}
-
-		public String getRemoteHost()
-		{
-			throw new RuntimeException();
-		}
-
-		public int getRemotePort()
-		{
-			throw new RuntimeException();
-		}
-
-		public RequestDispatcher getRequestDispatcher(String arg0)
-		{
-			throw new RuntimeException();
-		}
-
-		public String getServerName()
-		{
-			throw new RuntimeException();
-		}
-
-		public int getServerPort()
-		{
-			throw new RuntimeException();
-		}
-
-		public boolean isSecure()
-		{
-			throw new RuntimeException();
-		}
-
-		public void removeAttribute(String arg0)
-		{
-			throw new RuntimeException();
-		}
-
-		public void setAttribute(String arg0, Object arg1)
-		{
-			throw new RuntimeException();
-		}
-
-		public void setCharacterEncoding(String arg0)
-		{
-			throw new RuntimeException();
 		}
 	}
 }
