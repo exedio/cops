@@ -42,6 +42,12 @@ public class CopTest extends TestCase
 		}
 	}
 	
+	@Override
+	protected void tearDown() throws Exception
+	{
+		CopsServlet.requests.remove();
+	}
+	
 	public void testToString()
 	{
 		assertEquals("test.html", new TestCop().toString());
@@ -49,7 +55,7 @@ public class CopTest extends TestCase
 	
 	public void testToAbsolute()
 	{
-		assertEquals("scheme://host.exedio.com/contextPath/servletPath/test.html", new TestCop().toAbsolute(new AbsReq()));
+		CopsServlet.requests.set(new AbsReq()); assertEquals("scheme://host.exedio.com/contextPath/servletPath/test.html", new TestCop().toAbsolute());
 	}
 	
 	static final class AbsReq implements HttpServletRequest
