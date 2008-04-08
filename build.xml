@@ -41,6 +41,7 @@
 				optimize="off">
 			<classpath>
 				<pathelement location="build/classes" />
+				<pathelement location="lib/servlet-api.jar" />
 				<pathelement location="lib/junit.jar" />
 			</classpath>
 			<compilerarg value="-Xlint" />
@@ -57,6 +58,7 @@
 			<classpath>
 				<pathelement location="build/classes" />
 				<pathelement location="build/testclasses" />
+				<pathelement location="lib/servlet-api.jar" />
 			</classpath>
 			<test name="com.exedio.cops.PackageTest" todir="build/testresults" outfile="cops" />
 			<assertions><enable/></assertions>

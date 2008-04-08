@@ -26,6 +26,7 @@ public class PackageTest
 	public static Test suite()
 	{
 		final TestSuite suite = new TestSuite();
+		suite.addTestSuite(CopTest.class);
 		suite.addTestSuite(EncodeTest.class);
 		suite.addTestSuite(PagerTest.class);
 		return suite;

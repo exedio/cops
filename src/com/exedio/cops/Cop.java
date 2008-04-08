@@ -65,6 +65,21 @@ public abstract class Cop
 		return null;
 	}
 	
+	public final String toAbsolute(final HttpServletRequest request)
+	{
+		final String url = this.url!=null ? this.url.toString() : name;
+		
+		final HttpServletResponse response = CopsServlet.responses.get();
+		final String encodedURL = response!=null ? response.encodeURL(url) : url;
+		
+		return
+			request.getScheme() + "://" +
+			request.getHeader("Host") +
+			request.getContextPath() +
+			request.getServletPath() +
+			'/' + encodedURL;
+	}
+	
 	@Override
 	public final String toString()
 	{
