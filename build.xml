@@ -159,16 +159,8 @@
 		</javadoc>
 	</target>
 	
-	<target name="api.zip" depends="api">
-		<mkdir dir="build" />
-		<tar destfile="build/exedio-cops-api.tar.bz2"
-			  compression="bzip2">
-			<tarfileset dir="${basedir}/api" />
-		</tar>
-	</target>
-	
 	<target name="build" depends="compile, test, jar, api" />
-	<target name="all" depends="build, jar.src, api.zip, dist" />
+	<target name="all" depends="build, jar.src, dist" />
 
 	<target name="cruise" depends="all">
 		<delete dir="cruise" />
@@ -177,7 +169,6 @@
 			<fileset file="${basedir}/build/exedio-cops.jar" />
 			<fileset file="${basedir}/build/exedio-cops.jar-src.zip" />
 			<fileset file="${basedir}/build/exedio-cops-src-${build.file.tag}.tar.gz" />
-			<fileset file="${basedir}/build/exedio-cops-api.tar.bz2" />
 		</copy>
 	</target>
 	
