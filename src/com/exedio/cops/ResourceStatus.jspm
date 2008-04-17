@@ -62,19 +62,38 @@ final class ResourceStatus_Jspm
 				<th>Last Modified</th>
 			</tr><%
 			
+			long response200CountTotal = 0;
+			long response304CountTotal = 0;
+			long contentLengthTotal = 0;
+			
 			for(final Resource resource : resources)
 			{
+				final long response200Count = resource.getResponse200Count();
+				final long response304Count = resource.getResponse304Count();
+				final int contentLength = resource.getContentLength();
 			%>
 			<tr>
 				<td><a href="<%=resource%>"><%=encode(resource.getName())%></a></td>
-				<td><%=resource.getResponse200Count()%></td>
-				<td><%=resource.getResponse304Count()%></td>
+				<td><%=response200Count%></td>
+				<td><%=response304Count%></td>
 				<td><%=encode(resource.getContentType())%></td>
-				<td><%=resource.getContentLength()%></td>
+				<td><%=contentLength%></td>
 				<td><%=resource.getLastModified()%></td>
 			</tr><%
+			
+				response200CountTotal += response200Count;
+				response304CountTotal += response304Count;
+				contentLengthTotal += contentLength;
 			}
 		%>
+			<tr>
+				<th>Total</th>
+				<td><%=response200CountTotal%></td>
+				<td><%=response304CountTotal%></td>
+				<td></td>
+				<td><%=contentLengthTotal%></td>
+				<td></td>
+			</tr>
 		</table>
 		<%=encode(thePackage.getSpecificationTitle())%>
 		<%=encode(thePackage.getSpecificationVersion())%>
