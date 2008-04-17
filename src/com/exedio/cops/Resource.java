@@ -21,6 +21,7 @@ package com.exedio.cops;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -57,6 +58,26 @@ public final class Resource
 		this.lastModified = ((System.currentTimeMillis()/1000)+1)*1000;
 	}
 	
+	public String getName()
+	{
+		return name;
+	}
+
+	public String getContentType()
+	{
+		return contentType;
+	}
+
+	public Date getLastModified()
+	{
+		return new Date(lastModified);
+	}
+
+	public int getContentLength()
+	{
+		return content!=null ? content.length : -1;
+	}
+
 	@Override
 	public String toString()
 	{

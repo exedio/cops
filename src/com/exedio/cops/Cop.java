@@ -162,6 +162,11 @@ public abstract class Cop
 		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 	}
 	
+	public static final String encode(final String st)
+	{
+		return encodeXml(st);
+	}
+	
 	public static final String encodeXml(final String st)
 	{
 		if(st==null)

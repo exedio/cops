@@ -25,7 +25,8 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.HashMap;
+import java.security.Principal;
+import java.util.LinkedHashMap;
 import java.util.Random;
 
 import javax.servlet.ServletException;
@@ -40,7 +41,7 @@ public abstract class CopsServlet extends HttpServlet
 	
 	public static final String ENCODING = "utf-8";
 	
-	private final HashMap<String, Resource> resources = new HashMap<String, Resource>();
+	private final LinkedHashMap<String, Resource> resources = new LinkedHashMap<String, Resource>();
 	
 	private boolean contextPathOnResourcesToBeSet = false;
 	
@@ -92,6 +93,27 @@ public abstract class CopsServlet extends HttpServlet
 		{
 			response.sendRedirect(request.getContextPath() + request.getServletPath() + '/');
 			return;
+		}
+		
+		if("/copsResourceStatus.html".equals(pathInfo))
+		{
+			if(!request.isUserInRole("manager"))
+			{
+				response.addHeader("WWW-Authenticate", "Basic realm=\"Cops Resource Status\"");
+				response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+				return;
+			}
+			
+			response.setContentType("text/html; charset="+ENCODING);
+			final Principal principal = request.getUserPrincipal();
+			final String authentication = principal!=null ? principal.getName() : null;
+			final PrintStream out = new PrintStream(response.getOutputStream(), false, ENCODING);
+			ResourceStatus_Jspm.write(
+					out,
+					resources.values(),
+					authentication,
+					CopsServlet.class.getPackage());
+			out.close();
 		}
 		
 		final Resource resource = resources.get(pathInfo);
