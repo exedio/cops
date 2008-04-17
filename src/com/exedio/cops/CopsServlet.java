@@ -79,14 +79,6 @@ public abstract class CopsServlet extends HttpServlet
 			final HttpServletResponse response)
 		throws ServletException, IOException
 	{
-		if(contextPathOnResourcesToBeSet)
-		{
-			contextPathOnResourcesToBeSet = false;
-			final String path = request.getContextPath() + request.getServletPath() + '/';
-			for(final Resource resource : resources.values())
-				resource.setPath(path);
-		}
-		
 		final String pathInfo = request.getPathInfo();
 
 		if(pathInfo==null)
@@ -95,6 +87,13 @@ public abstract class CopsServlet extends HttpServlet
 			return;
 		}
 		
+		if(contextPathOnResourcesToBeSet)
+		{
+			contextPathOnResourcesToBeSet = false;
+			final String path = request.getContextPath() + request.getServletPath() + '/';
+			for(final Resource resource : resources.values())
+				resource.setPath(path);
+		}
 		if("/copsResourceStatus.html".equals(pathInfo))
 		{
 			if(!request.isUserInRole("manager"))
@@ -115,7 +114,6 @@ public abstract class CopsServlet extends HttpServlet
 					CopsServlet.class.getPackage());
 			out.close();
 		}
-		
 		final Resource resource = resources.get(pathInfo);
 		if(resource!=null)
 		{
