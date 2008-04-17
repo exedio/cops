@@ -55,6 +55,8 @@ final class ResourceStatus_Jspm
 		<table border="1">
 			<tr>
 				<th>Name</th>
+				<th>200</th>
+				<th>304</th>
 				<th>Content Type</th>
 				<th>Length</th>
 				<th>Last Modified</th>
@@ -65,6 +67,8 @@ final class ResourceStatus_Jspm
 			%>
 			<tr>
 				<td><a href="<%=resource%>"><%=encode(resource.getName())%></a></td>
+				<td><%=resource.getResponse200Count()%></td>
+				<td><%=resource.getResponse304Count()%></td>
 				<td><%=encode(resource.getContentType())%></td>
 				<td><%=resource.getContentLength()%></td>
 				<td><%=resource.getLastModified()%></td>

@@ -40,6 +40,9 @@ public final class Resource
 	private final Object contentLock = new Object();
 	private byte[] content;
 	private String toString;
+	
+	private volatile long response200Count = 0;
+	private volatile long response304Count = 0;
 
 	public Resource(final String name)
 	{
@@ -76,6 +79,16 @@ public final class Resource
 	public int getContentLength()
 	{
 		return content!=null ? content.length : -1;
+	}
+
+	public long getResponse200Count()
+	{
+		return response200Count;
+	}
+
+	public long getResponse304Count()
+	{
+		return response304Count;
 	}
 
 	@Override
@@ -163,6 +176,7 @@ public final class Resource
 		if(ifModifiedSince>=0 && ifModifiedSince>=lastModified)
 		{
 			response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
+			response304Count++; // may loose a few counts due to concurrency, but this is ok
 		}
 		else
 		{
@@ -179,6 +193,7 @@ public final class Resource
 				if(out!=null)
 					out.close();
 			}
+			response200Count++; // may loose a few counts due to concurrency, but this is ok
 		}
 	}
 	
