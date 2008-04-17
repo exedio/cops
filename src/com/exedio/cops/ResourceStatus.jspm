@@ -74,10 +74,10 @@ final class ResourceStatus_Jspm
 			%>
 			<tr>
 				<td><a href="<%=resource%>"><%=encode(resource.getName())%></a></td>
-				<td><%=response200Count%></td>
-				<td><%=response304Count%></td>
+				<td align="right"><%=response200Count%></td>
+				<td align="right"><%=response304Count%></td>
 				<td><%=encode(resource.getContentType())%></td>
-				<td><%=contentLength%></td>
+				<td align="right"><%=contentLength%></td>
 				<td><%=resource.getLastModified()%></td>
 			</tr><%
 			
@@ -88,10 +88,10 @@ final class ResourceStatus_Jspm
 		%>
 			<tr>
 				<th>Total</th>
-				<td><%=response200CountTotal%></td>
-				<td><%=response304CountTotal%></td>
+				<td align="right"><%=response200CountTotal%></td>
+				<td align="right"><%=response304CountTotal%></td>
 				<td></td>
-				<td><%=contentLengthTotal%></td>
+				<td align="right"><%=contentLengthTotal%></td>
 				<td></td>
 			</tr>
 		</table>
