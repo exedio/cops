@@ -41,7 +41,7 @@ public abstract class CopsServlet extends HttpServlet
 	
 	public static final String ENCODING = "utf-8";
 	
-	private final LinkedHashMap<String, Resource> resources = new LinkedHashMap<String, Resource>();
+	private final LinkedHashMap<String, Resource> resources;
 	
 	private boolean contextPathOnResourcesToBeSet = false;
 	
@@ -49,6 +49,7 @@ public abstract class CopsServlet extends HttpServlet
 	{
 		try
 		{
+			final LinkedHashMap<String, Resource> resources = new LinkedHashMap<String, Resource>();
 			final Class<?> clazz = getClass(); // TODO go to super class as well until CopsServlet
 			for(final java.lang.reflect.Field field : clazz.getDeclaredFields())
 			{
@@ -63,9 +64,10 @@ public abstract class CopsServlet extends HttpServlet
 					continue;
 				
 				resource.init(clazz);
-				this.resources.put('/'+resource.name, resource);
+				resources.put('/'+resource.name, resource);
 				contextPathOnResourcesToBeSet = true;
 			}
+			this.resources = resources.isEmpty() ? null : resources;
 		}
 		catch(IllegalAccessException e)
 		{
@@ -87,38 +89,41 @@ public abstract class CopsServlet extends HttpServlet
 			return;
 		}
 		
-		if(contextPathOnResourcesToBeSet)
+		if(resources!=null)
 		{
-			contextPathOnResourcesToBeSet = false;
-			final String path = request.getContextPath() + request.getServletPath() + '/';
-			for(final Resource resource : resources.values())
-				resource.setPath(path);
-		}
-		if("/copsResourceStatus.html".equals(pathInfo))
-		{
-			if(!request.isUserInRole("manager"))
+			if(contextPathOnResourcesToBeSet)
 			{
-				response.addHeader("WWW-Authenticate", "Basic realm=\"Cops Resource Status\"");
-				response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+				contextPathOnResourcesToBeSet = false;
+				final String path = request.getContextPath() + request.getServletPath() + '/';
+				for(final Resource resource : resources.values())
+					resource.setPath(path);
+			}
+			if("/copsResourceStatus.html".equals(pathInfo))
+			{
+				if(!request.isUserInRole("manager"))
+				{
+					response.addHeader("WWW-Authenticate", "Basic realm=\"Cops Resource Status\"");
+					response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+					return;
+				}
+				
+				response.setContentType("text/html; charset="+ENCODING);
+				final Principal principal = request.getUserPrincipal();
+				final String authentication = principal!=null ? principal.getName() : null;
+				final PrintStream out = new PrintStream(response.getOutputStream(), false, ENCODING);
+				ResourceStatus_Jspm.write(
+						out,
+						resources.values(),
+						authentication,
+						CopsServlet.class.getPackage());
+				out.close();
+			}
+			final Resource resource = resources.get(pathInfo);
+			if(resource!=null)
+			{
+				resource.doGet(request, response);
 				return;
 			}
-			
-			response.setContentType("text/html; charset="+ENCODING);
-			final Principal principal = request.getUserPrincipal();
-			final String authentication = principal!=null ? principal.getName() : null;
-			final PrintStream out = new PrintStream(response.getOutputStream(), false, ENCODING);
-			ResourceStatus_Jspm.write(
-					out,
-					resources.values(),
-					authentication,
-					CopsServlet.class.getPackage());
-			out.close();
-		}
-		final Resource resource = resources.get(pathInfo);
-		if(resource!=null)
-		{
-			resource.doGet(request, response);
-			return;
 		}
 		
 		doRequestPrivate(request, response);
