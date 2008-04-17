@@ -117,6 +117,7 @@ public abstract class CopsServlet extends HttpServlet
 						authentication,
 						CopsServlet.class.getPackage());
 				out.close();
+				return;
 			}
 			final Resource resource = resources.get(pathInfo);
 			if(resource!=null)
