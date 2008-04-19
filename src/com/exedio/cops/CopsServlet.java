@@ -102,8 +102,7 @@ public abstract class CopsServlet extends HttpServlet
 			{
 				if(!request.isUserInRole("manager"))
 				{
-					response.addHeader("WWW-Authenticate", "Basic realm=\"Cops Resource Status\"");
-					response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+					Cop.rejectAuthorizeBasic(response, "Cops Resource Status");
 					return;
 				}
 				
