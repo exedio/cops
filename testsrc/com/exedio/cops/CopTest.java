@@ -44,24 +44,31 @@ public class CopTest extends TestCase
 	}
 	
 	@Override
+	protected void setUp() throws Exception
+	{
+		CopsServlet.responses.set(new EncodeResponse());
+	}
+	
+	@Override
 	protected void tearDown() throws Exception
 	{
 		CopsServlet.requests.remove();
+		CopsServlet.responses.remove();
 	}
 	
 	public void testToString()
 	{
-		assertEquals("test.html", new TestCop().toString());
-		assertEquals("test.html?param1=ding", new TestCop("ding").toString());
-		assertEquals("test.html?param1=ding&param2=dong", new TestCop("ding", "dong").toString());
+		assertEquals("encoded(test.html)", new TestCop().toString());
+		assertEquals("encoded(test.html?param1=ding)", new TestCop("ding").toString());
+		assertEquals("encoded(test.html?param1=ding&param2=dong)", new TestCop("ding", "dong").toString());
 	}
 	
 	public void testToAbsolute()
 	{
 		CopsServlet.requests.set(new AbsReq());
-		assertEquals("scheme://host.exedio.com/contextPath/servletPath/test.html", new TestCop().toAbsolute());
-		assertEquals("scheme://host.exedio.com/contextPath/servletPath/test.html?param1=ding", new TestCop("ding").toAbsolute());
-		assertEquals("scheme://host.exedio.com/contextPath/servletPath/test.html?param1=ding&param2=dong", new TestCop("ding", "dong").toAbsolute());
+		assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(test.html)", new TestCop().toAbsolute());
+		assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(test.html?param1=ding)", new TestCop("ding").toAbsolute());
+		assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(test.html?param1=ding&param2=dong)", new TestCop("ding", "dong").toAbsolute());
 	}
 	
 	static final class AbsReq extends DummyRequest

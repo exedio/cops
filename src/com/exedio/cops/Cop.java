@@ -80,7 +80,7 @@ public abstract class Cop
 		final String url = this.url!=null ? this.url.toString() : name;
 		
 		final HttpServletResponse response = CopsServlet.responses.get();
-		final String encodedURL = response!=null ? response.encodeURL(url) : url;
+		final String encodedURL = response.encodeURL(url);
 		
 		final HttpServletRequest request = CopsServlet.requests.get();
 		return
@@ -97,15 +97,13 @@ public abstract class Cop
 		final String url = this.url!=null ? this.url.toString() : name;
 		
 		final HttpServletResponse response = CopsServlet.responses.get();
-		final String encodedURL = response!=null ? response.encodeURL(url) : url;
+		final String encodedURL = response.encodeURL(url);
 		
 		final Boolean needsSecure = needsSecure();
 		if(needsSecure==null)
 			return encodedURL;
 		
 		final HttpServletRequest request = CopsServlet.requests.get();
-		if(request==null)
-			return encodedURL;
 		
 		if(needsSecure.booleanValue()==request.isSecure())
 			return encodedURL;
