@@ -58,6 +58,7 @@ public class CopTest extends TestCase
 	
 	public void testToString()
 	{
+		
 		assertEquals("encoded(test.html)", new TestCop().toString());
 		assertEquals("encoded(test.html?param1=ding)", new TestCop("ding").toString());
 		assertEquals("encoded(test.html?param1=ding&param2=dong)", new TestCop("ding", "dong").toString());
