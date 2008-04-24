@@ -41,6 +41,13 @@ public class CopTest extends TestCase
 			addParameter("param1", param1);
 			addParameter("param2", param2);
 		}
+		
+		TestCop(double dummy, final String name)
+		{
+			super(name);
+			if(dummy==0.0)
+				dummy = 1.0;
+		}
 	}
 	
 	@Override
@@ -58,6 +65,38 @@ public class CopTest extends TestCase
 	
 	public void testToString()
 	{
+		try
+		{
+			new TestCop(0.0, "shop/hallo.html");
+		}
+		catch(IllegalArgumentException e)
+		{
+			assertEquals("cop name \"shop/hallo.html\" must not contain character /", e.getMessage());
+		}
+		try
+		{
+			new TestCop(0.0, "shop?hallo.html");
+		}
+		catch(IllegalArgumentException e)
+		{
+			assertEquals("cop name \"shop?hallo.html\" must not contain character ?", e.getMessage());
+		}
+		try
+		{
+			new TestCop(0.0, "shop&hallo.html");
+		}
+		catch(IllegalArgumentException e)
+		{
+			assertEquals("cop name \"shop&hallo.html\" must not contain character &", e.getMessage());
+		}
+		try
+		{
+			new TestCop(0.0, "shop;hallo.html");
+		}
+		catch(IllegalArgumentException e)
+		{
+			assertEquals("cop name \"shop;hallo.html\" must not contain character ;", e.getMessage());
+		}
 		try
 		{
 			new TestCop().toString();
