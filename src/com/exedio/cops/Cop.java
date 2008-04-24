@@ -35,7 +35,7 @@ public abstract class Cop
 		this.name = name;
 	}
 	
-	private static final char[] FORBIDDEN_IN_NAME = new char[] {'/', '?', '&', ';'};
+	private static final char[] FORBIDDEN_IN_NAME = new char[] {'?', '&', ';'};
 	
 	protected final void addParameter(final String key, final String value)
 	{

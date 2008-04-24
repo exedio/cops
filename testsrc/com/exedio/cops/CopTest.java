@@ -67,15 +67,6 @@ public class CopTest extends TestCase
 	{
 		try
 		{
-			new TestCop(0.0, "shop/hallo.html");
-			fail();
-		}
-		catch(IllegalArgumentException e)
-		{
-			assertEquals("cop name \"shop/hallo.html\" must not contain character /", e.getMessage());
-		}
-		try
-		{
 			new TestCop(0.0, "shop?hallo.html");
 			fail();
 		}
@@ -114,6 +105,7 @@ public class CopTest extends TestCase
 		assertEquals("/contextPath/servletPath/encoded(test.html)", new TestCop().toString());
 		assertEquals("/contextPath/servletPath/encoded(test.html?param1=ding)", new TestCop("ding").toString());
 		assertEquals("/contextPath/servletPath/encoded(test.html?param1=ding&param2=dong)", new TestCop("ding", "dong").toString());
+		assertEquals("/contextPath/servletPath/encoded(shop/hallo.html)", new TestCop(0.0, "shop/hallo.html").toString());
 	}
 	
 	public void testToAbsolute()
