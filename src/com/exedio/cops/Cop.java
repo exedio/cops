@@ -96,14 +96,13 @@ public abstract class Cop
 	{
 		final String url = this.url!=null ? this.url.toString() : name;
 		
+		final HttpServletRequest  request  = CopsServlet.requests.get();
 		final HttpServletResponse response = CopsServlet.responses.get();
-		final String encodedURL = response.encodeURL(url);
+		final String encodedURL = request.getContextPath() + request.getServletPath() + '/' + response.encodeURL(url);
 		
 		final Boolean needsSecure = needsSecure();
 		if(needsSecure==null)
 			return encodedURL;
-		
-		final HttpServletRequest request = CopsServlet.requests.get();
 		
 		if(needsSecure.booleanValue()==request.isSecure())
 			return encodedURL;
@@ -117,9 +116,7 @@ public abstract class Cop
 		return
 			(needsSecure?"https://":"http://") +
 			host +
-			request.getContextPath() +
-			request.getServletPath() +
-			'/' + encodedURL;
+			encodedURL;
 	}
 	
 	public static final boolean isPost(final HttpServletRequest request)

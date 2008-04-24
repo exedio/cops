@@ -58,10 +58,10 @@ public class CopTest extends TestCase
 	
 	public void testToString()
 	{
-		
-		assertEquals("encoded(test.html)", new TestCop().toString());
-		assertEquals("encoded(test.html?param1=ding)", new TestCop("ding").toString());
-		assertEquals("encoded(test.html?param1=ding&param2=dong)", new TestCop("ding", "dong").toString());
+		CopsServlet.requests.set(new AbsReq());
+		assertEquals("/contextPath/servletPath/encoded(test.html)", new TestCop().toString());
+		assertEquals("/contextPath/servletPath/encoded(test.html?param1=ding)", new TestCop("ding").toString());
+		assertEquals("/contextPath/servletPath/encoded(test.html?param1=ding&param2=dong)", new TestCop("ding", "dong").toString());
 	}
 	
 	public void testToAbsolute()
@@ -105,12 +105,12 @@ public class CopTest extends TestCase
 	public void testHttps()
 	{
 		CopsServlet.requests.set(new HttpsReq(false));
-		assertEquals("encoded(test.html?param1=value1)", new HttpsCop(null).toString());
-		assertEquals("encoded(test.html?param1=value1)", new HttpsCop(false).toString());
+		assertEquals("/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(null).toString());
+		assertEquals("/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(false).toString());
 		assertEquals("https://host.exedio.com/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(true).toString());
 		CopsServlet.requests.set(new HttpsReq(true));
-		assertEquals("encoded(test.html?param1=value1)", new HttpsCop(null).toString());
-		assertEquals("encoded(test.html?param1=value1)", new HttpsCop(true).toString());
+		assertEquals("/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(null).toString());
+		assertEquals("/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(true).toString());
 		assertEquals("http://host.exedio.com/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(false).toString());
 	}
 	
