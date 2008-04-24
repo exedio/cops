@@ -58,6 +58,14 @@ public class CopTest extends TestCase
 	
 	public void testToString()
 	{
+		try
+		{
+			new TestCop().toString();
+		}
+		catch(NullPointerException e)
+		{
+			assertEquals(null, e.getMessage());
+		}
 		CopsServlet.requests.set(new AbsReq());
 		assertEquals("/contextPath/servletPath/encoded(test.html)", new TestCop().toString());
 		assertEquals("/contextPath/servletPath/encoded(test.html?param1=ding)", new TestCop("ding").toString());
@@ -66,6 +74,14 @@ public class CopTest extends TestCase
 	
 	public void testToAbsolute()
 	{
+		try
+		{
+			new TestCop().toAbsolute();
+		}
+		catch(NullPointerException e)
+		{
+			assertEquals(null, e.getMessage());
+		}
 		CopsServlet.requests.set(new AbsReq());
 		assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(test.html)", new TestCop().toAbsolute());
 		assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(test.html?param1=ding)", new TestCop("ding").toAbsolute());
