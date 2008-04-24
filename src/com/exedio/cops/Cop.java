@@ -80,9 +80,13 @@ public abstract class Cop
 		final String url = this.url!=null ? this.url.toString() : name;
 		
 		final HttpServletResponse response = CopsServlet.responses.get();
+		if(response==null)
+			throw new IllegalStateException("no response available");
 		final String encodedURL = response.encodeURL(url);
 		
 		final HttpServletRequest request = CopsServlet.requests.get();
+		if(request==null)
+			throw new IllegalStateException("no request available");
 		return
 			request.getScheme() + "://" +
 			request.getHeader("Host") +
@@ -98,6 +102,10 @@ public abstract class Cop
 		
 		final HttpServletRequest  request  = CopsServlet.requests.get();
 		final HttpServletResponse response = CopsServlet.responses.get();
+		if(request==null)
+			throw new IllegalStateException("no request available");
+		if(response==null)
+			throw new IllegalStateException("no response available");
 		final String encodedURL = request.getContextPath() + request.getServletPath() + '/' + response.encodeURL(url);
 		
 		final Boolean needsSecure = needsSecure();

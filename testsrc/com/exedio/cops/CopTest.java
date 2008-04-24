@@ -62,9 +62,9 @@ public class CopTest extends TestCase
 		{
 			new TestCop().toString();
 		}
-		catch(NullPointerException e)
+		catch(IllegalStateException e)
 		{
-			assertEquals(null, e.getMessage());
+			assertEquals("no request available", e.getMessage());
 		}
 		CopsServlet.requests.set(new AbsReq());
 		assertEquals("/contextPath/servletPath/encoded(test.html)", new TestCop().toString());
@@ -78,9 +78,9 @@ public class CopTest extends TestCase
 		{
 			new TestCop().toAbsolute();
 		}
-		catch(NullPointerException e)
+		catch(IllegalStateException e)
 		{
-			assertEquals(null, e.getMessage());
+			assertEquals("no request available", e.getMessage());
 		}
 		CopsServlet.requests.set(new AbsReq());
 		assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(test.html)", new TestCop().toAbsolute());
