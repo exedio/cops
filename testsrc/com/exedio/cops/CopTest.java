@@ -68,6 +68,7 @@ public class CopTest extends TestCase
 		try
 		{
 			new TestCop(0.0, "shop/hallo.html");
+			fail();
 		}
 		catch(IllegalArgumentException e)
 		{
@@ -76,6 +77,7 @@ public class CopTest extends TestCase
 		try
 		{
 			new TestCop(0.0, "shop?hallo.html");
+			fail();
 		}
 		catch(IllegalArgumentException e)
 		{
@@ -84,6 +86,7 @@ public class CopTest extends TestCase
 		try
 		{
 			new TestCop(0.0, "shop&hallo.html");
+			fail();
 		}
 		catch(IllegalArgumentException e)
 		{
@@ -92,6 +95,7 @@ public class CopTest extends TestCase
 		try
 		{
 			new TestCop(0.0, "shop;hallo.html");
+			fail();
 		}
 		catch(IllegalArgumentException e)
 		{
@@ -100,6 +104,7 @@ public class CopTest extends TestCase
 		try
 		{
 			new TestCop().toString();
+			fail();
 		}
 		catch(IllegalStateException e)
 		{
@@ -116,6 +121,7 @@ public class CopTest extends TestCase
 		try
 		{
 			new TestCop().toAbsolute();
+			fail();
 		}
 		catch(IllegalStateException e)
 		{
