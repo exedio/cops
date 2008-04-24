@@ -101,4 +101,71 @@ public class CopTest extends TestCase
 			return "/servletPath";
 		}
 	}
+	
+	public void testHttps()
+	{
+		CopsServlet.requests.set(new HttpsReq(false));
+		assertEquals("encoded(test.html?param1=value1)", new HttpsCop(null).toString());
+		assertEquals("encoded(test.html?param1=value1)", new HttpsCop(false).toString());
+		assertEquals("https://host.exedio.com/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(true).toString());
+		CopsServlet.requests.set(new HttpsReq(true));
+		assertEquals("encoded(test.html?param1=value1)", new HttpsCop(null).toString());
+		assertEquals("encoded(test.html?param1=value1)", new HttpsCop(true).toString());
+		assertEquals("http://host.exedio.com/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(false).toString());
+	}
+	
+	static final class HttpsCop extends Cop
+	{
+		final Boolean needsSecure;
+		
+		HttpsCop(final Boolean needsSecure)
+		{
+			super("test.html");
+			this.needsSecure = needsSecure;
+			addParameter("param1", "value1");
+		}
+		
+		@Override
+		public Boolean needsSecure()
+		{
+			return needsSecure;
+		}
+	}
+	
+	static final class HttpsReq extends DummyRequest
+	{
+		final boolean secure;
+		
+		HttpsReq(final boolean secure)
+		{
+			this.secure = secure;
+		}
+		
+		@Override
+		public boolean isSecure()
+		{
+			return secure;
+		}
+
+		@Override
+		public String getHeader(final String name)
+		{
+			if("Host".equals(name))
+				return "host.exedio.com";
+			else
+				throw new RuntimeException();
+		}
+
+		@Override
+		public String getContextPath()
+		{
+			return "/contextPath";
+		}
+
+		@Override
+		public String getServletPath()
+		{
+			return "/servletPath";
+		}
+	}
 }
