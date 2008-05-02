@@ -58,6 +58,7 @@
 			<classpath>
 				<pathelement location="build/classes" />
 				<pathelement location="build/testclasses" />
+				<pathelement location="lib/junit.jar" />
 				<pathelement location="lib/servlet-api.jar" />
 			</classpath>
 			<test name="com.exedio.cops.PackageTest" todir="build/testresults" outfile="cops" />
