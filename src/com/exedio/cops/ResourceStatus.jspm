@@ -91,11 +91,6 @@ final class ResourceStatus_Jspm
 				text-align:left;
 			}
 			
-			div.footer
-			{
-				font-size:70%;
-			}
-			
 			img
 			{
 				border:0;
@@ -106,6 +101,11 @@ final class ResourceStatus_Jspm
 				float:right;
 				width:198px;
 				height:60px;
+			}
+			
+			div.footer
+			{
+				font-size:70%;
 			}
 		</style>
 	</head>
