@@ -26,6 +26,8 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.security.Principal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.LinkedHashMap;
 import java.util.Random;
 
@@ -111,6 +113,10 @@ public abstract class CopsServlet extends HttpServlet
 				response.setContentType("text/html; charset="+ENCODING);
 				final Principal principal = request.getUserPrincipal();
 				final String authentication = principal!=null ? principal.getName() : null;
+				final DecimalFormatSymbols nfs = new DecimalFormatSymbols();
+				nfs.setDecimalSeparator(',');
+				nfs.setGroupingSeparator('\'');
+				final DecimalFormat nf = new DecimalFormat("", nfs);
 				final PrintStream out = new PrintStream(response.getOutputStream(), false, ENCODING);
 				ResourceStatus_Jspm.write(
 						out,
@@ -118,6 +124,7 @@ public abstract class CopsServlet extends HttpServlet
 						resources.values(),
 						authentication,
 						request.getParameter(INLINE)!=null,
+						nf,
 						CopsServlet.class.getPackage());
 				out.close();
 				return;
