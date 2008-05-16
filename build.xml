@@ -91,6 +91,68 @@
 		</zip>
 	</target>
 	
+	<target name="example.jspm" depends="jspm.taskdef">
+		<jspm method="append">
+			<fileset dir="example/src" includes="**/*.jspm" />
+		</jspm>
+	</target>
+	
+	<target name="example.compile" depends="compile, example.jspm">
+		<mkdir dir="build/exampleclasses" />
+		<javac srcdir="example/src"
+				destdir="build/exampleclasses"
+				deprecation="on"
+				debug="on"
+				optimize="off">
+			<classpath>
+				<pathelement location="build/classes" />
+				<pathelement location="lib/servlet-api.jar" />
+			</classpath>
+			<compilerarg value="-Xlint" />
+		</javac>
+		<copy todir="build/exampleclasses">
+			<fileset dir="example/src">
+				<include name="**/*.png" />
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="example.web" depends="compile, example.compile">
+		<copy todir="example/web/WEB-INF/classes">
+			<fileset dir="build/classes" />
+			<fileset dir="build/exampleclasses" />
+		</copy>
+		<touch file="example/web/WEB-INF/web.xml" />
+	</target>
+		
+	<target name="catalina">
+		<property name="catalina.root" value="apache-tomcat-6.0.16" />
+		<untar src="lib/apache-tomcat.tar.gz"
+				 compression="gzip"
+				 dest="${basedir}">
+			<patternset>
+				<exclude name="${catalina.root}/conf/server.xml" />
+				<exclude name="${catalina.root}/conf/tomcat-users.xml" />
+				<exclude name="${catalina.root}/webapps/ROOT/**" />
+				<exclude name="${catalina.root}/webapps/docs/**" />
+				<exclude name="${catalina.root}/webapps/examples/**" />
+			</patternset>
+			<mapper type="glob" from="${catalina.root}/*" to="tomcat/*" />
+		</untar>
+		<chmod dir="tomcat/bin" perm="ugo+x" includes="*.sh" />
+		<copy todir="tomcat/conf">
+			<fileset dir="example/conf">
+				<include name="server.xml" />
+				<include name="tomcat-users.xml" />
+				<include name="keystore" />
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="example.tomcat" depends="example.web, catalina">
+		<copy file="example/context.xml" tofile="tomcat/conf/Catalina/localhost/cops.xml" />
+	</target>
+	
 	<target name="dist.tar">
 		<mkdir dir="build" />
 		<echo file="build/build.number" message="${build.tag}" />
@@ -100,6 +162,8 @@
 			<tarfileset dir="${basedir}">
 				<exclude name=".eclipse-output/**" />
 				<exclude name="build/**" />
+				<exclude name="tomcat/**" />
+				<exclude name="example/web/WEB-INF/classes/**" />
 				<exclude name="api/**" />
 				<exclude name="cruise/**" />
 				<exclude name="**/*_Jspm.java" />
@@ -120,8 +184,13 @@
 	
 	<target name="clean">
 		<delete dir="build" />
+		<delete dir="tomcat" />
+		<delete dir="example/web/WEB-INF/classes" />
 		<delete>
 			<fileset dir="src">
+				<include name="**/*_Jspm.java" />
+			</fileset>
+			<fileset dir="example/src">
 				<include name="**/*_Jspm.java" />
 			</fileset>
 		</delete>
@@ -160,7 +229,7 @@
 		</javadoc>
 	</target>
 	
-	<target name="build" depends="compile, test, jar, api" />
+	<target name="build" depends="compile, test, jar, example.tomcat, api" />
 	<target name="all" depends="build, jar.src, dist" />
 
 	<target name="cruise" depends="all">
