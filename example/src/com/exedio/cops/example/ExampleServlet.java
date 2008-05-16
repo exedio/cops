@@ -32,6 +32,7 @@ public final class ExampleServlet extends CopsServlet
 	private static final long serialVersionUID = 1l;
 
 	static final Resource logo = new Resource("logo.png");
+	static final Resource someClass = new Resource("ExampleServlet.class", "application/octet-steam");
 
 	private static final void writeBody(
 			final StringBuilder out,
