@@ -139,9 +139,9 @@ final class ResourceStatus_Jspm
 			}
 		%>
 			<tr>
-				<td align="right"><%=response200CountTotal%></td>
-				<td align="right"><%=response304CountTotal%></td>
-				<td align="right"><%=contentLengthTotal%></td>
+				<td><%=response200CountTotal%></td>
+				<td><%=response304CountTotal%></td>
+				<td><%=contentLengthTotal%></td>
 				<th colspan="3">Total</th>
 			</tr>
 		</table>
