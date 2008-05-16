@@ -38,11 +38,63 @@ final class ResourceStatus_Jspm
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=<%=CopsServlet.ENCODING%>">
 		<title>Cops Resource Status</title>
+		<style>
+			div.authenticated
+			{
+				font-size:70%;
+			}
+			
+			div.notauthenticated
+			{
+				font-size:70%;
+				color:#e00;
+			}
+			
+			table th
+			{
+				text-align:left;
+				vertical-align:top;
+				background:#ccc;
+				border:solid 1px #ccc;
+				padding:1px 3px;
+				font-weight:normal;
+			}
+			
+			table td
+			{
+				text-align:right;
+				vertical-align:top;
+				border:solid 1px #ccc;
+				padding:1px 3px;
+			}
+			
+			table td.text
+			{
+				text-align:left;
+			}
+			
+			div.footer
+			{
+				font-size:70%;
+			}
+			
+			img
+			{
+				border:0;
+			}
+			
+			img.logo
+			{
+				float:right;
+				width:198px;
+				height:60px;
+			}
+		</style>
 	</head>
 	<body>
-		<a href="http://cope.sourceforge.net/" target="_blank"><img src="http://cope.sourceforge.net/exedio.png" alt="Exedio Logo" align="right" width="198" height="60" border="0"></a>
+		<a href="http://cope.sourceforge.net/" target="_blank"><img src="http://cope.sourceforge.net/exedio.png" alt="Exedio Logo" class="logo"></a>
 		<h1>Cops Resource Status</h1>
-		<%
+		<div class="<% if(authentication==null){%>not<%} %>authenticated"><%
 		if(authentication!=null)
 		{
 			%>authenticated as <%=encode(authentication)%><%
@@ -51,8 +103,8 @@ final class ResourceStatus_Jspm
 		{
 			%>not authenticated<%
 		}
-		%>
-		<table border="1">
+		%></div>
+		<table>
 			<tr>
 				<th>Name</th>
 				<th>200</th>
@@ -73,12 +125,12 @@ final class ResourceStatus_Jspm
 				final int contentLength = resource.getContentLength();
 			%>
 			<tr>
-				<td><a href="<%=resource%>"><%=encode(resource.getName())%></a></td>
-				<td align="right"><%=response200Count%></td>
-				<td align="right"><%=response304Count%></td>
-				<td><%=encode(resource.getContentType())%></td>
-				<td align="right"><%=contentLength%></td>
-				<td><%=resource.getLastModified()%></td>
+				<td class="text"><a href="<%=resource%>"><%=encode(resource.getName())%></a></td>
+				<td><%=response200Count%></td>
+				<td><%=response304Count%></td>
+				<td class="text"><%=encode(resource.getContentType())%></td>
+				<td><%=contentLength%></td>
+				<td class="text"><%=resource.getLastModified()%></td>
 			</tr><%
 			
 				response200CountTotal += response200Count;
@@ -95,9 +147,11 @@ final class ResourceStatus_Jspm
 				<td></td>
 			</tr>
 		</table>
+		<div class="footer">
 		<%=encode(thePackage.getSpecificationTitle())%>
 		<%=encode(thePackage.getSpecificationVersion())%>
 		<%=new Date()%>
+		</div>
 	</body>
 </html>
 <%
