@@ -31,6 +31,7 @@ final class ResourceStatus_Jspm
 				final PrintStream out,
 				final Collection<Resource> resources,
 				final String authentication,
+				final boolean inline,
 				final Package thePackage)
 	{
 %><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  "http://www.w3.org/TR/html4/loose.dtd">
@@ -111,6 +112,10 @@ final class ResourceStatus_Jspm
 				<th>Length</th>
 				<th>304l</th>
 				<th>200l</th>
+				<th><a href="copsResourceStatus.html<%
+						if(!inline){ %>?<%=CopsServlet.INLINE%>=t<% } %>"><%
+						if(inline){ %>Image<% }else{ %>i<% }
+					%></a></th>
 				<th>Name</th>
 				<th>Content Type</th>
 				<th>Last Modified</th>
@@ -129,6 +134,8 @@ final class ResourceStatus_Jspm
 				final int contentLength = resource.getContentLength();
 				final long response304Length = response304Count * contentLength;
 				final long response200Length = response200Count * contentLength;
+				final String contentType = resource.getContentType();
+				final boolean inlineThis = inline && contentType.startsWith("image/");
 			%>
 			<tr>
 				<td><%=response304Count%></td>
@@ -136,8 +143,9 @@ final class ResourceStatus_Jspm
 				<td><%=contentLength%></td>
 				<td><%=response304Length%></td>
 				<td><%=response200Length%></td>
+				<td class="text"><% if(inlineThis){%><img src="<%=resource%>"><%} %></td>
 				<td class="text"><a href="<%=resource%>"><%=encode(resource.getName())%></a></td>
-				<td class="text"><%=encode(resource.getContentType())%></td>
+				<td class="text"><%=encode(contentType)%></td>
 				<td class="text"><%=resource.getLastModified()%></td>
 			</tr><%
 			
@@ -154,7 +162,7 @@ final class ResourceStatus_Jspm
 				<td><%=contentLengthTotal%></td>
 				<td><%=response304LengthTotal%></td>
 				<td><%=response200LengthTotal%></td>
-				<th colspan="3">Total</th>
+				<th colspan="4">Total</th>
 			</tr>
 		</table>
 		<div class="footer">

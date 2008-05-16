@@ -75,6 +75,8 @@ public abstract class CopsServlet extends HttpServlet
 		}
 	}
 
+	static final String INLINE = "inline";
+
 	@Override
 	protected final void doGet(
 			final HttpServletRequest request,
@@ -114,6 +116,7 @@ public abstract class CopsServlet extends HttpServlet
 						out,
 						resources.values(),
 						authentication,
+						request.getParameter(INLINE)!=null,
 						CopsServlet.class.getPackage());
 				out.close();
 				return;
