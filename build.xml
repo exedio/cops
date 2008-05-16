@@ -153,6 +153,8 @@
 		<copy file="example/context.xml" tofile="tomcat/conf/Catalina/localhost/cops.xml" />
 	</target>
 	
+	<target name="example" depends="example.tomcat" />
+	
 	<target name="dist.tar">
 		<mkdir dir="build" />
 		<echo file="build/build.number" message="${build.tag}" />
@@ -229,7 +231,7 @@
 		</javadoc>
 	</target>
 	
-	<target name="build" depends="compile, test, jar, example.tomcat, api" />
+	<target name="build" depends="compile, test, jar, example, api" />
 	<target name="all" depends="build, jar.src, dist" />
 
 	<target name="cruise" depends="all">
