@@ -28,6 +28,7 @@ import java.io.StringWriter;
 import java.security.Principal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.SimpleDateFormat;
 import java.util.LinkedHashMap;
 import java.util.Random;
 
@@ -125,6 +126,8 @@ public abstract class CopsServlet extends HttpServlet
 						authentication,
 						request.getParameter(INLINE)!=null,
 						nf,
+						new SimpleDateFormat("yyyy/MM/dd'&nbsp;'HH:mm:ss'<small>'.S'</small>'"),
+						new SimpleDateFormat("yyyy/MM/dd'&nbsp;'HH:mm:ss.SSS Z (z)"),
 						CopsServlet.class.getPackage());
 				out.close();
 				return;

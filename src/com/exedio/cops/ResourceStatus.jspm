@@ -23,6 +23,7 @@ import static com.exedio.cops.Cop.encode;
 
 import java.io.PrintStream;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 
@@ -35,6 +36,8 @@ final class ResourceStatus_Jspm
 				final String authentication,
 				final boolean inline,
 				final DecimalFormat nf,
+				final SimpleDateFormat dateFormat,
+				final SimpleDateFormat footerDateFormat,
 				final Package thePackage)
 	{
 %><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  "http://www.w3.org/TR/html4/loose.dtd">
@@ -161,7 +164,7 @@ final class ResourceStatus_Jspm
 				<td class="text"><% if(inlineThis){%><img src="<%=resource%>"><%} %></td>
 				<td class="text"><a href="<%=resource%>"><%=encode(resource.getName())%></a></td>
 				<td class="text"><%=encode(contentType)%></td>
-				<td class="text"><%=resource.getLastModified()%></td>
+				<td class="text"><%=dateFormat.format(resource.getLastModified())%></td>
 			</tr><%
 			
 				response304CountTotal += response304Count;
@@ -183,7 +186,7 @@ final class ResourceStatus_Jspm
 		<div class="footer">
 			<%=encode(thePackage.getSpecificationTitle())%>
 			<%=encode(thePackage.getSpecificationVersion())%>
-			<%=new Date()%>
+			<%=footerDateFormat.format(new Date())%>
 		</div>
 	</body>
 </html>
