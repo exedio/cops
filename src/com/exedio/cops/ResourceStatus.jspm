@@ -29,6 +29,7 @@ final class ResourceStatus_Jspm
 {
 	public static final void write(
 				final PrintStream out,
+				final String servletName,
 				final Collection<Resource> resources,
 				final String authentication,
 				final boolean inline,
@@ -38,7 +39,7 @@ final class ResourceStatus_Jspm
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=<%=CopsServlet.ENCODING%>">
-		<title>Cops Resource Status</title>
+		<title>Cops Servlet &quot;<%=servletName%>&quot; - Resource Status</title>
 		<style>
 			div.authenticated
 			{
@@ -49,6 +50,17 @@ final class ResourceStatus_Jspm
 			{
 				font-size:70%;
 				color:#e00;
+			}
+			
+			table caption
+			{
+				font-style:italic;
+				text-align:left;
+				white-space:nowrap;
+				background:#ccc;
+				padding:1px 5px;
+				border:solid 2px white;
+				border-bottom-width:0px;
 			}
 			
 			table th
@@ -94,7 +106,7 @@ final class ResourceStatus_Jspm
 	</head>
 	<body>
 		<a href="http://cope.sourceforge.net/" target="_blank"><img src="http://cope.sourceforge.net/exedio.png" alt="Exedio Logo" class="logo"></a>
-		<h1>Cops Resource Status</h1>
+		<h1>Cops Servlet &quot;<%=servletName%>&quot;</h1>
 		<div class="<% if(authentication==null){%>not<%} %>authenticated"><%
 			if(authentication!=null)
 			{
@@ -106,6 +118,7 @@ final class ResourceStatus_Jspm
 			}
 		%></div>
 		<table>
+			<caption>Resource Status</caption>
 			<tr>
 				<th>304</th>
 				<th>200</th>

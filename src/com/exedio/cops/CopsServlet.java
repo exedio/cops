@@ -114,6 +114,7 @@ public abstract class CopsServlet extends HttpServlet
 				final PrintStream out = new PrintStream(response.getOutputStream(), false, ENCODING);
 				ResourceStatus_Jspm.write(
 						out,
+						getServletConfig().getServletName(),
 						resources.values(),
 						authentication,
 						request.getParameter(INLINE)!=null,
