@@ -106,41 +106,41 @@ final class ResourceStatus_Jspm
 		%></div>
 		<table>
 			<tr>
-				<th>200</th>
 				<th>304</th>
+				<th>200</th>
 				<th>Length</th>
 				<th>Name</th>
 				<th>Content Type</th>
 				<th>Last Modified</th>
 			</tr><%
 			
-			long response200CountTotal = 0;
 			long response304CountTotal = 0;
+			long response200CountTotal = 0;
 			long contentLengthTotal = 0;
 			
 			for(final Resource resource : resources)
 			{
-				final long response200Count = resource.getResponse200Count();
 				final long response304Count = resource.getResponse304Count();
+				final long response200Count = resource.getResponse200Count();
 				final int contentLength = resource.getContentLength();
 			%>
 			<tr>
-				<td><%=response200Count%></td>
 				<td><%=response304Count%></td>
+				<td><%=response200Count%></td>
 				<td><%=contentLength%></td>
 				<td class="text"><a href="<%=resource%>"><%=encode(resource.getName())%></a></td>
 				<td class="text"><%=encode(resource.getContentType())%></td>
 				<td class="text"><%=resource.getLastModified()%></td>
 			</tr><%
 			
-				response200CountTotal += response200Count;
 				response304CountTotal += response304Count;
+				response200CountTotal += response200Count;
 				contentLengthTotal += contentLength;
 			}
 		%>
 			<tr>
-				<td><%=response200CountTotal%></td>
 				<td><%=response304CountTotal%></td>
+				<td><%=response200CountTotal%></td>
 				<td><%=contentLengthTotal%></td>
 				<th colspan="3">Total</th>
 			</tr>
