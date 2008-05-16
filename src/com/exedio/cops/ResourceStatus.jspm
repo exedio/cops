@@ -148,9 +148,9 @@ final class ResourceStatus_Jspm
 			</tr>
 		</table>
 		<div class="footer">
-		<%=encode(thePackage.getSpecificationTitle())%>
-		<%=encode(thePackage.getSpecificationVersion())%>
-		<%=new Date()%>
+			<%=encode(thePackage.getSpecificationTitle())%>
+			<%=encode(thePackage.getSpecificationVersion())%>
+			<%=new Date()%>
 		</div>
 	</body>
 </html>
