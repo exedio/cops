@@ -109,8 +109,8 @@ final class ResourceStatus_Jspm
 				<th>Name</th>
 				<th>200</th>
 				<th>304</th>
-				<th>Content Type</th>
 				<th>Length</th>
+				<th>Content Type</th>
 				<th>Last Modified</th>
 			</tr><%
 			
@@ -128,8 +128,8 @@ final class ResourceStatus_Jspm
 				<td class="text"><a href="<%=resource%>"><%=encode(resource.getName())%></a></td>
 				<td><%=response200Count%></td>
 				<td><%=response304Count%></td>
-				<td class="text"><%=encode(resource.getContentType())%></td>
 				<td><%=contentLength%></td>
+				<td class="text"><%=encode(resource.getContentType())%></td>
 				<td class="text"><%=resource.getLastModified()%></td>
 			</tr><%
 			
@@ -142,8 +142,8 @@ final class ResourceStatus_Jspm
 				<th>Total</th>
 				<td align="right"><%=response200CountTotal%></td>
 				<td align="right"><%=response304CountTotal%></td>
-				<td></td>
 				<td align="right"><%=contentLengthTotal%></td>
+				<td></td>
 				<td></td>
 			</tr>
 		</table>
