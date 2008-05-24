@@ -91,9 +91,68 @@ public class PagerTest extends TestCase
 		assertIt(i(second.last(), 10, 20), 10, 10, 11, 20, 20, true, true, false, true);
 	}
 	
+	public void testConfig()
+	{
+		try
+		{
+			new Pager.Config(null);
+			fail();
+		}
+		catch(NullPointerException e)
+		{
+			assertEquals("limits must not be null", e.getMessage());
+		}
+		try
+		{
+			new Pager.Config(new int[]{});
+			fail();
+		}
+		catch(IllegalArgumentException e)
+		{
+			assertEquals("limits must not be empty", e.getMessage());
+		}
+		try
+		{
+			new Pager.Config(-10);
+			fail();
+		}
+		catch(IllegalArgumentException e)
+		{
+			assertEquals("limits must be greater zero, but was -10 at index 0", e.getMessage());
+		}
+		try
+		{
+			new Pager.Config(1, 0);
+			fail();
+		}
+		catch(IllegalArgumentException e)
+		{
+			assertEquals("limits must be greater zero, but was 0 at index 1", e.getMessage());
+		}
+		try
+		{
+			new Pager.Config(10, 5);
+			fail();
+		}
+		catch(IllegalArgumentException e)
+		{
+			assertEquals("limits must be monotonously increasing, but was 10>=5 at index 1", e.getMessage());
+		}
+		try
+		{
+			new Pager.Config(10, 20, 20);
+			fail();
+		}
+		catch(IllegalArgumentException e)
+		{
+			assertEquals("limits must be monotonously increasing, but was 20>=20 at index 2", e.getMessage());
+		}
+	}
+	
 	private static final Pager p(final int limit)
 	{
-		return new Pager(limit);
+		assertEquals(10, limit);
+		return new Pager.Config(10, 20, 50, 100, 200, 500).newPager();
 	}
 	
 	private static final Pager i(final Pager pager, final int page, final int total)

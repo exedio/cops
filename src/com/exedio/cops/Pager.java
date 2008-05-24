@@ -25,28 +25,65 @@ import javax.servlet.http.HttpServletRequest;
 
 public final class Pager
 {
+	public static final class Config
+	{
+		final int[] limits;
+		final int limitDefault;
+		final int limitCeiling;
+		
+		public Config(final int... limits)
+		{
+			if(limits==null)
+				throw new NullPointerException("limits must not be null");
+			if(limits.length==0)
+				throw new IllegalArgumentException("limits must not be empty");
+			int n = 0;
+			for(int i = 0; i<limits.length; i++)
+			{
+				final int limit = limits[i];
+				if(limit<1)
+					throw new IllegalArgumentException("limits must be greater zero, but was " + limit + " at index " + i);
+				if(n>=limit)
+					throw new IllegalArgumentException("limits must be monotonously increasing, but was " + n + ">=" + limit + " at index " + i);
+				n = limit;
+			}
+			
+			this.limits = limits;
+			this.limitDefault = limits[0];
+			this.limitCeiling = limits[limits.length-1];
+		}
+
+		public Pager newPager()
+		{
+			return new Pager(this, OFFSET_MIN, limitDefault, false);
+		}
+		
+		public Pager newPager(final HttpServletRequest request)
+		{
+			return new Pager(
+					this,
+					Cop.getIntParameter(request, OFFSET, OFFSET_MIN),
+					Cop.getIntParameter(request, LIMIT,  limitDefault),
+					false);
+		}
+	}
+	
 	private static final String OFFSET = "off";
 	private static final String LIMIT  = "lim";
 
 	private static final int OFFSET_MIN = 0;
-	private final int limitDefault;
 
-	private static final int limitCeiling = 1000;
+	private final Config config;
 	private final int offset;
 	private final int limit;
 	private final boolean neutral;
 	
-	public Pager(final int limitDefault)
+	Pager(final Config config, final int offset, int limit, final boolean neutral)
 	{
-		this(limitDefault, OFFSET_MIN, limitDefault, false);
-	}
-	
-	private Pager(final int limitDefault, final int offset, int limit, final boolean neutral)
-	{
-		if(limit>limitCeiling)
-			limit = limitCeiling;
+		if(limit>config.limitCeiling)
+			limit = config.limitCeiling;
 
-		this.limitDefault = limitDefault;
+		this.config = config;
 		this.offset = offset;
 		this.limit = limit;
 		this.neutral = neutral;
@@ -56,7 +93,7 @@ public final class Pager
 	{
 		if(offset!=OFFSET_MIN)
 			cop.addParameter(OFFSET, String.valueOf(offset));
-		if(limit!=limitDefault)
+		if(limit!=config.limitDefault)
 			cop.addParameter(LIMIT, String.valueOf(limit));
 	}
 	
@@ -116,13 +153,13 @@ public final class Pager
 	
 	public Pager first()
 	{
-		return new Pager(limitDefault, OFFSET_MIN, limit, offset==OFFSET_MIN);
+		return new Pager(config, OFFSET_MIN, limit, offset==OFFSET_MIN);
 	}
 	
 	public Pager last()
 	{
 		final int newOffset = ((total()-1)/limit)*limit;
-		return new Pager(limitDefault, newOffset, limit, offset==newOffset);
+		return new Pager(config, newOffset, limit, offset==newOffset);
 	}
 	
 	public Pager previous()
@@ -130,7 +167,7 @@ public final class Pager
 		int newOffset = offset - limit;
 		if(newOffset<OFFSET_MIN)
 			newOffset = OFFSET_MIN;
-		return new Pager(limitDefault, newOffset, limit, offset==newOffset);
+		return new Pager(config, newOffset, limit, offset==newOffset);
 	}
 	
 	public Pager next()
@@ -138,33 +175,22 @@ public final class Pager
 		final int newOffset = offset + limit;
 		if(newOffset>=total())
 			return last();
-		return new Pager(limitDefault, newOffset, limit, offset==newOffset);
+		return new Pager(config, newOffset, limit, offset==newOffset);
 	}
 	
 	public Pager switchLimit(final int newLimit)
 	{
-		return new Pager(limitDefault, offset, newLimit, limit==newLimit);
+		return new Pager(config, offset, newLimit, limit==newLimit);
 	}
 	
 	public List<Pager> newLimits()
 	{
 		final ArrayList<Pager> result = new ArrayList<Pager>();
-		final int max = Math.min(total(), limitCeiling);
-		for(int factor = 1; true; factor*=10)
+		final int max = Math.min(total(), config.limitCeiling);
+		for(final int limit : config.limits)
 		{
-			final int one = limitDefault * factor;
-			result.add(switchLimit(one));
-			if(one>=max)
-				break;
-			
-			final int two = 2*one;
-			result.add(switchLimit(two));
-			if(two>=max)
-				break;
-			
-			final int five = 5*one;
-			result.add(switchLimit(five));
-			if(five>=max)
+			result.add(switchLimit(limit));
+			if(limit>=max)
 				break;
 		}
 		return result;
@@ -192,19 +218,11 @@ public final class Pager
 	
 	public boolean isNeeded()
 	{
-		return total()>limitDefault;
+		return total()>config.limitDefault;
 	}
 
 	public boolean isNeutral()
 	{
 		return neutral;
-	}
-
-	public static final Pager newPager(final HttpServletRequest request, final int limitDefault)
-	{
-		return new Pager(limitDefault,
-				Cop.getIntParameter(request, OFFSET, OFFSET_MIN),
-				Cop.getIntParameter(request, LIMIT,  limitDefault),
-				false);
 	}
 }
