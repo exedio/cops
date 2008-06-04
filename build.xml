@@ -8,13 +8,13 @@
 				classname="com.exedio.jspm.AntTask"
 				classpath="lib/exedio-jspm.jar" />
 	
-	<target name="jspm">
+	<target name="runtime.jspm">
 		<jspm>
 			<fileset dir="src" includes="**/*.jspm" />
 		</jspm>
 	</target>
 	
-	<target name="compile" depends="jspm">
+	<target name="compile" depends="runtime.jspm">
 		<mkdir dir="build/classes" />
 		<javac srcdir="src"
 				destdir="build/classes"
@@ -229,6 +229,7 @@
 		</javadoc>
 	</target>
 	
+	<target name="jspm" depends="runtime.jspm, example.jspm" />
 	<target name="build" depends="compile, test, jar, example, api" />
 	<target name="all" depends="build, jar.src, dist" />
 
