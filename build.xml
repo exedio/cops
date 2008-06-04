@@ -4,13 +4,11 @@
 
 	<property name="build.file.tag" value="unlabeled" />
 	
-	<target name="jspm.taskdef">
-		<taskdef name="jspm"
-					classname="com.exedio.jspm.AntTask"
-					classpath="lib/exedio-jspm.jar" />
-	</target>
+	<taskdef name="jspm"
+				classname="com.exedio.jspm.AntTask"
+				classpath="lib/exedio-jspm.jar" />
 	
-	<target name="jspm" depends="jspm.taskdef">
+	<target name="jspm">
 		<jspm>
 			<fileset dir="src" includes="**/*.jspm" />
 		</jspm>
@@ -91,7 +89,7 @@
 		</zip>
 	</target>
 	
-	<target name="example.jspm" depends="jspm.taskdef">
+	<target name="example.jspm">
 		<jspm method="append">
 			<fileset dir="example/src" includes="**/*.jspm" />
 		</jspm>
