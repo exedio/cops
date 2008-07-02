@@ -35,12 +35,15 @@ final class Example_Jspm
 		<img src="<%=ExampleServlet.logo%>">
 		<br>
 		<a href="<%=cop%>">THIS</a> |
+		<a href="<%=cop.toggle()%>">TOGGLE</a> |
 		<a href="<%=cop.add(10)%>">PLUS10</a> |
 		<a href="<%=cop.add(-10)%>">MINUS10</a>
 		<br>
 		<a href="<%=cop.toAbsolute()%>">absolute</a>
 		<br>
 		<a href="copsResourceStatus.html">resourceStatus</a>
+		<br>
+		<tt><%=cop.toStringNonEncoded()%></tt>
 		<br>
 		tomcat:
 		<a href="/manager/html" target="_blank">manager</a>,

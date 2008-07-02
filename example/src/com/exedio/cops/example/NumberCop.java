@@ -26,27 +26,37 @@ public class NumberCop extends Cop
 {
 	private static final String NAME = "number.html";
 	private static final String NUMBER = "n";
+	private static final String BOOL = "b";
 	
 	private final int number;
+	private final boolean bool;
 	
-	NumberCop(final int number)
+	NumberCop(final int number, final boolean bool)
 	{
 		super(NAME);
 		this.number = number;
+		this.bool = bool;
 		
 		if(number!=0)
 			addParameter(NUMBER, String.valueOf(number));
+		if(bool)
+			addParameter(BOOL, "t");
 	}
 	
 	static NumberCop getCop(final HttpServletRequest request)
 	{
 		final String number = request.getParameter(NUMBER);
-		return new NumberCop(number!=null ? Integer.valueOf(number) : 0);
+		return new NumberCop(number!=null ? Integer.valueOf(number) : 0, request.getParameter(BOOL)!=null);
 	}
 	
 	public NumberCop add(final int addend)
 	{
-		return new NumberCop(number + addend);
+		return new NumberCop(number + addend, bool);
+	}
+	
+	public NumberCop toggle()
+	{
+		return new NumberCop(number, !bool);
 	}
 	
 	@Override
