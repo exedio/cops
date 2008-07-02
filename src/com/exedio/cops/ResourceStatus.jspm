@@ -19,7 +19,7 @@
 
 package com.exedio.cops;
 
-import static com.exedio.cops.Cop.encode;
+import static com.exedio.cops.XMLEncoder.encode;
 
 import java.io.PrintStream;
 import java.text.DecimalFormat;

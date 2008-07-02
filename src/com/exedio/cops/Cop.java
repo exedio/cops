@@ -165,22 +165,22 @@ public abstract class Cop
 		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 	}
 	
+	/**
+	 * @deprecated Use {@link XMLEncoder#encode(String)} instead
+	 */
+	@Deprecated
 	public static final String encode(final String st)
 	{
-		return encodeXml(st);
+		return XMLEncoder.encode(st);
 	}
 	
+	/**
+	 * @deprecated Use {@link XMLEncoder#encode(String)} instead
+	 */
+	@Deprecated
 	public static final String encodeXml(final String st)
 	{
-		if(st==null)
-			return null;
-		
-		return
-			st.replaceAll("&",  "&amp;").
-				replaceAll("<",  "&lt;").
-				replaceAll(">",  "&gt;").
-				replaceAll("\"", "&quot;").
-				replaceAll("'",  "&apos;");
+		return XMLEncoder.encode(st);
 	}
 	
 	public static final int getIntParameter(

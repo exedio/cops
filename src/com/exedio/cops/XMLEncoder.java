@@ -18,21 +18,23 @@
 
 package com.exedio.cops;
 
-import junit.framework.TestCase;
-
-public class EncodeTest extends TestCase
+public final class XMLEncoder
 {
-	public void testEncode()
+	private XMLEncoder()
 	{
-		assertEquals(null, XMLEncoder.encode(null));
-		assertEquals("", XMLEncoder.encode(""));
-		assertEquals("x", XMLEncoder.encode("x"));
-		assertEquals("&lt;", XMLEncoder.encode("<"));
-		assertEquals("&gt;", XMLEncoder.encode(">"));
-		assertEquals("&quot;", XMLEncoder.encode("\""));
-		assertEquals("&apos;", XMLEncoder.encode("'"));
-		assertEquals("&amp;", XMLEncoder.encode("&"));
-		assertEquals("&apos;tralla&quot;", XMLEncoder.encode("'tralla\""));
-		assertEquals("&gt;kno&amp;llo&lt;", XMLEncoder.encode(">kno&llo<"));
+		// forbid instantiation
+	}
+	
+	public static final String encode(final String st)
+	{
+		if(st==null)
+			return null;
+		
+		return
+			st.replaceAll("&",  "&amp;").
+				replaceAll("<",  "&lt;").
+				replaceAll(">",  "&gt;").
+				replaceAll("\"", "&quot;").
+				replaceAll("'",  "&apos;");
 	}
 }
