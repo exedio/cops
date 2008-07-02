@@ -95,13 +95,13 @@ public abstract class Cop
 			'/' + encodedURL;
 	}
 	
-	public final String encode()
-	{
-		return XMLEncoder.encode(toString());
-	}
-	
 	@Override
 	public final String toString()
+	{
+		return XMLEncoder.encode(toStringNonEncoded());
+	}
+	
+	public final String toStringNonEncoded()
 	{
 		final String url = this.url!=null ? this.url.toString() : name;
 		
