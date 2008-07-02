@@ -95,6 +95,11 @@ public abstract class Cop
 			'/' + encodedURL;
 	}
 	
+	public final String encode()
+	{
+		return XMLEncoder.encode(toString());
+	}
+	
 	@Override
 	public final String toString()
 	{
