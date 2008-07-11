@@ -42,43 +42,43 @@ public class EnvironmentTest extends TestCase
 	public void testIt()
 	{
 		{
-			
-			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html", new TestCop().toString());
-			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html", new TestCop().toStringNonEncoded());
-			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html", new TestCop().toAbsolute());
+			final TestCop cop = new TestCop();
+			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html", cop.toString());
+			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html", cop.toStringNonEncoded());
+			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html", cop.toAbsolute());
 		}
 		{
-			
-			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding", new TestCop("ding").toString());
-			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding", new TestCop("ding").toStringNonEncoded());
-			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding", new TestCop("ding").toAbsolute());
+			final TestCop cop = new TestCop("ding");
+			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding", cop.toString());
+			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding", cop.toStringNonEncoded());
+			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding", cop.toAbsolute());
 		}
 		{
-			
-			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding&amp;param2=dong", new TestCop("ding", "dong").toString());
-			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding&param2=dong", new TestCop("ding", "dong").toStringNonEncoded());
-			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding&param2=dong", new TestCop("ding", "dong").toAbsolute());
+			final TestCop cop = new TestCop("ding", "dong");
+			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding&amp;param2=dong", cop.toString());
+			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding&param2=dong", cop.toStringNonEncoded());
+			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding&param2=dong", cop.toAbsolute());
 		}
 		{
-			
-			assertEquals("http://host.exedio.com/contextPath/servletPath/shop/hallo.html", new TestCop(0.0, "shop/hallo.html").toString());
-			assertEquals("http://host.exedio.com/contextPath/servletPath/shop/hallo.html", new TestCop(0.0, "shop/hallo.html").toStringNonEncoded());
-			assertEquals("http://host.exedio.com/contextPath/servletPath/shop/hallo.html", new TestCop(0.0, "shop/hallo.html").toAbsolute());
+			final TestCop cop = new TestCop(0.0, "shop/hallo.html");
+			assertEquals("http://host.exedio.com/contextPath/servletPath/shop/hallo.html", cop.toString());
+			assertEquals("http://host.exedio.com/contextPath/servletPath/shop/hallo.html", cop.toStringNonEncoded());
+			assertEquals("http://host.exedio.com/contextPath/servletPath/shop/hallo.html", cop.toAbsolute());
 		}
 		{
-			
-			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=value1",  new HttpsCop(null ).toString());
-			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=value1",  new HttpsCop(null ).toAbsolute());
+			final HttpsCop cop = new HttpsCop(null);
+			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=value1", cop.toString());
+			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=value1", cop.toAbsolute());
 		}
 		{
-			
-			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=value1",  new HttpsCop(false).toString());
-			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=value1",  new HttpsCop(false).toAbsolute());
+			final HttpsCop cop = new HttpsCop(false);
+			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=value1", cop.toString());
+			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=value1", cop.toAbsolute());
 		}
 		{
-			
-			assertEquals("https://host.exedio.com/contextPath/servletPath/test.html?param1=value1", new HttpsCop(true ).toString());
-			assertEquals("https://host.exedio.com/contextPath/servletPath/test.html?param1=value1", new HttpsCop(true ).toAbsolute());
+			final HttpsCop cop = new HttpsCop(true);
+			assertEquals("https://host.exedio.com/contextPath/servletPath/test.html?param1=value1", cop.toString());
+			assertEquals("https://host.exedio.com/contextPath/servletPath/test.html?param1=value1", cop.toAbsolute());
 		}
 	}
 }
