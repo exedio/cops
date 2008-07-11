@@ -106,16 +106,19 @@ public class CopTest extends TestCase
 			final TestCop cop = new TestCop();
 			assertEquals("/contextPath/servletPath/encoded(test.html)", cop.toString());
 			assertEquals("/contextPath/servletPath/encoded(test.html)", cop.toStringNonEncoded());
+			assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(test.html)", cop.toAbsolute());
 		}
 		{
 			final TestCop cop = new TestCop("ding");
 			assertEquals("/contextPath/servletPath/encoded(test.html?param1=ding)", cop.toString());
 			assertEquals("/contextPath/servletPath/encoded(test.html?param1=ding)", cop.toStringNonEncoded());
+			assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(test.html?param1=ding)", cop.toAbsolute());
 		}
 		{
 			final TestCop cop = new TestCop("ding", "dong");
 			assertEquals("/contextPath/servletPath/encoded(test.html?param1=ding&amp;param2=dong)", cop.toString());
 			assertEquals("/contextPath/servletPath/encoded(test.html?param1=ding&param2=dong)", cop.toStringNonEncoded());
+			assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(test.html?param1=ding&param2=dong)", cop.toAbsolute());
 		}
 		{
 			final TestCop cop = new TestCop(0.0, "shop/hallo.html");
@@ -140,9 +143,6 @@ public class CopTest extends TestCase
 			assertEquals("no request available", e.getMessage());
 		}
 		CopsServlet.requests.set(new AbsReq());
-		assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(test.html)", new TestCop().toAbsolute());
-		assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(test.html?param1=ding)", new TestCop("ding").toAbsolute());
-		assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(test.html?param1=ding&param2=dong)", new TestCop("ding", "dong").toAbsolute());
 	}
 	
 	static final class AbsReq extends DummyRequest
