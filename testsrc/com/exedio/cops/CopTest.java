@@ -103,20 +103,24 @@ public class CopTest extends TestCase
 		}
 		CopsServlet.requests.set(new AbsReq());
 		{
-			assertEquals("/contextPath/servletPath/encoded(test.html)", new TestCop().toString());
-			assertEquals("/contextPath/servletPath/encoded(test.html)", new TestCop().toStringNonEncoded());
+			final TestCop cop = new TestCop();
+			assertEquals("/contextPath/servletPath/encoded(test.html)", cop.toString());
+			assertEquals("/contextPath/servletPath/encoded(test.html)", cop.toStringNonEncoded());
 		}
 		{
-			assertEquals("/contextPath/servletPath/encoded(test.html?param1=ding)", new TestCop("ding").toString());
-			assertEquals("/contextPath/servletPath/encoded(test.html?param1=ding)", new TestCop("ding").toStringNonEncoded());
+			final TestCop cop = new TestCop("ding");
+			assertEquals("/contextPath/servletPath/encoded(test.html?param1=ding)", cop.toString());
+			assertEquals("/contextPath/servletPath/encoded(test.html?param1=ding)", cop.toStringNonEncoded());
 		}
 		{
-			assertEquals("/contextPath/servletPath/encoded(test.html?param1=ding&amp;param2=dong)", new TestCop("ding", "dong").toString());
-			assertEquals("/contextPath/servletPath/encoded(test.html?param1=ding&param2=dong)", new TestCop("ding", "dong").toStringNonEncoded());
+			final TestCop cop = new TestCop("ding", "dong");
+			assertEquals("/contextPath/servletPath/encoded(test.html?param1=ding&amp;param2=dong)", cop.toString());
+			assertEquals("/contextPath/servletPath/encoded(test.html?param1=ding&param2=dong)", cop.toStringNonEncoded());
 		}
 		{
-			assertEquals("/contextPath/servletPath/encoded(shop/hallo.html)", new TestCop(0.0, "shop/hallo.html").toString());
-			assertEquals("/contextPath/servletPath/encoded(shop/hallo.html)", new TestCop(0.0, "shop/hallo.html").toStringNonEncoded());
+			final TestCop cop = new TestCop(0.0, "shop/hallo.html");
+			assertEquals("/contextPath/servletPath/encoded(shop/hallo.html)", cop.toString());
+			assertEquals("/contextPath/servletPath/encoded(shop/hallo.html)", cop.toStringNonEncoded());
 		}
 		
 		assertEquals(ENVIRONMENT, Cop.getEnvironment());
