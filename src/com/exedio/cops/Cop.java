@@ -65,16 +65,6 @@ public abstract class Cop
 		return null;
 	}
 	
-	/**
-	 * @deprecated use {@link #toAbsolute()} instead.
-	 */
-	@Deprecated
-	public final String toAbsolute(final HttpServletRequest request)
-	{
-		assert request==CopsServlet.requests.get();
-		return toAbsolute();
-	}
-	
 	public final String toAbsolute()
 	{
 		final String url = this.url!=null ? this.url.toString() : name;
@@ -195,5 +185,17 @@ public abstract class Cop
 	{
 		final String value = request.getParameter(name);
 		return (value==null) ? defaultValue : Integer.parseInt(value);
+	}
+	
+	// ------------------- deprecated stuff -------------------
+	
+	/**
+	 * @deprecated use {@link #toAbsolute()} instead.
+	 */
+	@Deprecated
+	public final String toAbsolute(final HttpServletRequest request)
+	{
+		assert request==CopsServlet.requests.get();
+		return toAbsolute();
 	}
 }
