@@ -101,6 +101,15 @@ public class CopTest extends TestCase
 		{
 			assertEquals("no request available", e.getMessage());
 		}
+		try
+		{
+			new TestCop().toAbsolute();
+			fail();
+		}
+		catch(IllegalStateException e)
+		{
+			assertEquals("no request available", e.getMessage());
+		}
 		CopsServlet.requests.set(new AbsReq());
 		{
 			final TestCop cop = new TestCop();
@@ -130,20 +139,6 @@ public class CopTest extends TestCase
 	}
 	
 	static final String ENVIRONMENT = "host.exedio.com/contextPath/servletPath";
-	
-	public void testToAbsolute()
-	{
-		try
-		{
-			new TestCop().toAbsolute();
-			fail();
-		}
-		catch(IllegalStateException e)
-		{
-			assertEquals("no request available", e.getMessage());
-		}
-		CopsServlet.requests.set(new AbsReq());
-	}
 	
 	static final class AbsReq extends DummyRequest
 	{
