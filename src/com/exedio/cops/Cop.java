@@ -72,6 +72,18 @@ public abstract class Cop
 		final HttpServletResponse response = CopsServlet.responses.get();
 		if(response==null)
 			throw new IllegalStateException("no response available");
+		if(response instanceof EnvironmentResponse)
+		{
+			final HttpServletRequest request = CopsServlet.requests.get();
+			if(request==null)
+				throw new IllegalStateException("no request available");
+			final Boolean needsSecure = needsSecure();
+			final boolean secure = needsSecure!=null && needsSecure.booleanValue();
+			return
+				(secure ? "https://" : "http://") +
+				((EnvironmentRequest)request).environment +
+				'/' + url;
+		}
 		final String encodedURL = response.encodeURL(url);
 		
 		final HttpServletRequest request = CopsServlet.requests.get();
@@ -101,6 +113,17 @@ public abstract class Cop
 			throw new IllegalStateException("no request available");
 		if(response==null)
 			throw new IllegalStateException("no response available");
+		
+		if(request instanceof EnvironmentRequest)
+		{
+			final Boolean needsSecure = needsSecure();
+			final boolean secure = needsSecure!=null && needsSecure.booleanValue();
+			return
+				(secure ? "https://" : "http://") +
+				((EnvironmentRequest)request).environment +
+				'/' + url;
+		}
+		
 		final String encodedURL = request.getContextPath() + request.getServletPath() + '/' + response.encodeURL(url);
 		
 		final Boolean needsSecure = needsSecure();
@@ -120,6 +143,26 @@ public abstract class Cop
 			(needsSecure?"https://":"http://") +
 			host +
 			encodedURL;
+	}
+	
+	public static String getEnvironment()
+	{
+		final HttpServletRequest  request  = CopsServlet.requests.get();
+		if(request==null)
+			throw new IllegalStateException("no request available");
+		return request.getHeader("Host") + request.getContextPath() + request.getServletPath();
+	}
+	
+	public static void setEnvironment(final String environment)
+	{
+		CopsServlet.requests.set(new EnvironmentRequest(environment));
+		CopsServlet.responses.set(new EnvironmentResponse());
+	}
+	
+	public static void removeEnvironment()
+	{
+		CopsServlet.requests.remove();
+		CopsServlet.responses.remove();
 	}
 	
 	public static final boolean isPost(final HttpServletRequest request)

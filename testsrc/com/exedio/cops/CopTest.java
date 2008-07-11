@@ -111,7 +111,11 @@ public class CopTest extends TestCase
 		assertEquals("/contextPath/servletPath/encoded(test.html?param1=ding)", new TestCop("ding").toStringNonEncoded());
 		assertEquals("/contextPath/servletPath/encoded(test.html?param1=ding&param2=dong)", new TestCop("ding", "dong").toStringNonEncoded());
 		assertEquals("/contextPath/servletPath/encoded(shop/hallo.html)", new TestCop(0.0, "shop/hallo.html").toStringNonEncoded());
+		
+		assertEquals(ENVIRONMENT, Cop.getEnvironment());
 	}
+	
+	static final String ENVIRONMENT = "host.exedio.com/contextPath/servletPath";
 	
 	public void testToAbsolute()
 	{
