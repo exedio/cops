@@ -103,6 +103,9 @@ public abstract class Cop
 		return XMLEncoder.encode(toStringNonEncoded());
 	}
 	
+	/**
+	 * Use this method for instance with {@link HttpServletResponse.sendRedirect(String)}.
+	 */
 	public final String toStringNonEncoded()
 	{
 		final String url = this.url!=null ? this.url.toString() : name;
