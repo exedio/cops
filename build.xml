@@ -232,6 +232,7 @@
 	<target name="jspm" depends="runtime.jspm, example.jspm" />
 	<target name="build" depends="compile, test, jar, example, api" />
 	<target name="all" depends="build, jar.src, dist" />
+	<target name="tomcat" depends="example.tomcat" />
 
 	<target name="cruise" depends="all">
 		<delete dir="cruise" />
