@@ -24,6 +24,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.exedio.cops.Cop;
 import com.exedio.cops.CopsServlet;
 import com.exedio.cops.Resource;
 
@@ -33,6 +34,8 @@ public final class ExampleServlet extends CopsServlet
 
 	static final Resource logo = new Resource("logo.png");
 	static final Resource someClass = new Resource("ExampleServlet.class", "application/octet-steam");
+	
+	static final String START_SESSION = "startsession";
 
 	private static final void writeBody(
 			final StringBuilder out,
@@ -62,6 +65,15 @@ public final class ExampleServlet extends CopsServlet
 		//System.out.println("request ---" + request.getMethod() + "---" + request.getContextPath() + "---" + request.getServletPath() + "---" + request.getPathInfo() + "---" + request.getQueryString() + "---");
 		
 		final NumberCop cop = NumberCop.getCop(request);
+		if(Cop.isPost(request))
+		{
+			if(request.getParameter(START_SESSION)!=null)
+			{
+				request.getSession();
+				response.sendRedirect(cop.toStringNonEncoded());
+				return;
+			}
+		}
 
 		final StringBuilder out = new StringBuilder();
 		Example_Jspm.write(out, cop);

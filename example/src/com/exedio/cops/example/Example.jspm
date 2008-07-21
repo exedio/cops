@@ -52,6 +52,9 @@ final class Example_Jspm
 		<br>
 		<tt><%=cop.toStringNonEncoded()%></tt>
 		<br>
+		<form action="<%=cop%>" method="POST">
+			<input type="submit" name="<%=ExampleServlet.START_SESSION%>" value="Start Session">
+		</form>
 		tomcat:
 		<a href="/manager/html" target="_blank">manager</a>,
 		<a href="/host-manager/html" target="_blank">host-manager</a>
