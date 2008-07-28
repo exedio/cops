@@ -104,7 +104,7 @@ public abstract class Cop
 	}
 	
 	/**
-	 * Use this method for instance with {@link HttpServletResponse.sendRedirect(String)}.
+	 * Use this method for instance with {@link HttpServletResponse#sendRedirect(String)}.
 	 */
 	public final String toStringNonEncoded()
 	{
