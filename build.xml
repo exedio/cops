@@ -9,7 +9,7 @@
 				classpath="lib/exedio-jspm.jar" />
 	
 	<target name="runtime.jspm">
-		<jspm>
+		<jspm method="print">
 			<fileset dir="src" includes="**/*.jspm" />
 		</jspm>
 	</target>
