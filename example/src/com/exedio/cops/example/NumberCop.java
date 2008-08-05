@@ -53,7 +53,10 @@ public class NumberCop extends Cop
 	static NumberCop getCop(final HttpServletRequest request)
 	{
 		
-		return new NumberCop(getIntParameter(request, NUMBER, NUMBER_DEFAULT), request.getParameter(BOOL)!=null, request.getParameter(STRING));
+		return new NumberCop(
+				getIntParameter(request, NUMBER, NUMBER_DEFAULT),
+				request.getParameter(BOOL)!=null,
+				request.getParameter(STRING));
 	}
 	
 	public NumberCop add(final int addend)
