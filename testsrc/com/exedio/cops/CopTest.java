@@ -42,6 +42,12 @@ public class CopTest extends TestCase
 			addParameter("param2", param2);
 		}
 		
+		TestCop(final boolean param1)
+		{
+			super("test.html");
+			addParameter("param1", param1);
+		}
+		
 		TestCop(final int param1)
 		{
 			super("test.html");
@@ -151,6 +157,14 @@ public class CopTest extends TestCase
 		{
 			final TestCop cop = new TestCop("ding", null);
 			assertEquals("/contextPath/servletPath/encoded(test.html?param1=ding)", cop.toString());
+		}
+		{
+			final TestCop cop = new TestCop(false);
+			assertEquals("/contextPath/servletPath/encoded(test.html)", cop.toString());
+		}
+		{
+			final TestCop cop = new TestCop(true);
+			assertEquals("/contextPath/servletPath/encoded(test.html?param1=t)", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop(0);

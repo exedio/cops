@@ -44,8 +44,8 @@ public class NumberCop extends Cop
 		
 		
 		addParameter(NUMBER, number, NUMBER_DEFAULT);
-		if(bool)
-			addParameter(BOOL, "t");
+		
+		addParameter(BOOL, bool);
 		
 		addParameter(STRING, string);
 	}
@@ -55,7 +55,7 @@ public class NumberCop extends Cop
 		
 		return new NumberCop(
 				getIntParameter(request, NUMBER, NUMBER_DEFAULT),
-				request.getParameter(BOOL)!=null,
+				getBooleanParameter(request, BOOL),
 				request.getParameter(STRING));
 	}
 	

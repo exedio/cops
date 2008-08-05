@@ -40,6 +40,12 @@ public abstract class Cop
 	
 	private static final char[] FORBIDDEN_IN_NAME = new char[] {'?', '&', ';'};
 	
+	protected final void addParameter(final String key, final boolean value)
+	{
+		if(value)
+			addParameter(key, "t");
+	}
+	
 	protected final void addParameter(final String key, final int value, final int defaultValue)
 	{
 		if(value==defaultValue)
@@ -246,6 +252,13 @@ public abstract class Cop
 	public static final String encodeXml(final String st)
 	{
 		return XMLEncoder.encode(st);
+	}
+	
+	public static final boolean getBooleanParameter(
+			final HttpServletRequest request,
+			final String name)
+	{
+		return request.getParameter(name)!=null;
 	}
 	
 	public static final int getIntParameter(
