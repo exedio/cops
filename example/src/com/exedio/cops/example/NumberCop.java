@@ -31,7 +31,7 @@ public class NumberCop extends Cop
 	
 	private final int number;
 	private final boolean bool;
-	private final String string;
+	final String string;
 	
 	NumberCop(final int number, final boolean bool, final String string)
 	{

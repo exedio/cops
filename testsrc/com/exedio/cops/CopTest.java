@@ -134,6 +134,14 @@ public class CopTest extends TestCase
 			assertEquals("/contextPath/servletPath/encoded(shop/hallo.html)", cop.toString());
 			assertEquals("/contextPath/servletPath/encoded(shop/hallo.html)", cop.toStringNonEncoded());
 		}
+		{
+			final String ding = "slash/semi;question?amp&uuml\u00fcgarten#";
+			final String dingenc = "slash/semi;question?amp&amp;uuml\u00fcgarten#";
+			final TestCop cop = new TestCop(ding, "dong");
+			assertEquals("/contextPath/servletPath/encoded(test.html?param1=" + dingenc + "&amp;param2=dong)", cop.toString());
+			assertEquals("/contextPath/servletPath/encoded(test.html?param1=" + ding + "&param2=dong)", cop.toStringNonEncoded());
+			assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(test.html?param1=" + ding + "&param2=dong)", cop.toAbsolute());
+		}
 		
 		assertEquals(ENVIRONMENT, Cop.getEnvironment());
 	}
