@@ -91,10 +91,10 @@ public final class Pager
 	
 	public void addParameters(final Cop cop)
 	{
-		if(offset!=OFFSET_MIN)
-			cop.addParameter(OFFSET, String.valueOf(offset));
-		if(limit!=config.limitDefault)
-			cop.addParameter(LIMIT, String.valueOf(limit));
+		
+		cop.addParameter(OFFSET, offset, OFFSET_MIN);
+		
+		cop.addParameter(LIMIT, limit, config.limitDefault);
 	}
 	
 	public int getOffset()
