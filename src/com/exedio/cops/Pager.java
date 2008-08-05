@@ -91,9 +91,7 @@ public final class Pager
 	
 	public void addParameters(final Cop cop)
 	{
-		
 		cop.addParameter(OFFSET, offset, OFFSET_MIN);
-		
 		cop.addParameter(LIMIT, limit, config.limitDefault);
 	}
 	
