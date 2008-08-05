@@ -44,8 +44,8 @@ public class NumberCop extends Cop
 			addParameter(NUMBER, String.valueOf(number));
 		if(bool)
 			addParameter(BOOL, "t");
-		if(string!=null)
-			addParameter(STRING, string);
+		
+		addParameter(STRING, string);
 	}
 	
 	static NumberCop getCop(final HttpServletRequest request)

@@ -40,8 +40,14 @@ public abstract class Cop
 	
 	private static final char[] FORBIDDEN_IN_NAME = new char[] {'?', '&', ';'};
 	
+	/**
+	 * Does nothing, if <tt>value==null</tt>.
+	 */
 	protected final void addParameter(final String key, final String value)
 	{
+		if(value==null)
+			return;
+		
 		if(url==null)
 		{
 			url = new StringBuilder(name);
