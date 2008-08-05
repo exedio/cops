@@ -44,15 +44,12 @@ public class NumberCop extends Cop
 		
 		
 		addParameter(NUMBER, number, NUMBER_DEFAULT);
-		
 		addParameter(BOOL, bool);
-		
 		addParameter(STRING, string);
 	}
 	
 	static NumberCop getCop(final HttpServletRequest request)
 	{
-		
 		return new NumberCop(
 				getIntParameter(request, NUMBER, NUMBER_DEFAULT),
 				getBooleanParameter(request, BOOL),
