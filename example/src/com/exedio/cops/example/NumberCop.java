@@ -29,6 +29,8 @@ public class NumberCop extends Cop
 	private static final String BOOL = "b";
 	private static final String STRING = "s";
 	
+	private static final int NUMBER_DEFAULT = 0;
+	
 	private final int number;
 	private final boolean bool;
 	final String string;
@@ -40,8 +42,8 @@ public class NumberCop extends Cop
 		this.bool = bool;
 		this.string = string;
 		
-		if(number!=0)
-			addParameter(NUMBER, String.valueOf(number));
+		
+		addParameter(NUMBER, number, NUMBER_DEFAULT);
 		if(bool)
 			addParameter(BOOL, "t");
 		
@@ -50,8 +52,8 @@ public class NumberCop extends Cop
 	
 	static NumberCop getCop(final HttpServletRequest request)
 	{
-		final String number = request.getParameter(NUMBER);
-		return new NumberCop(number!=null ? Integer.valueOf(number) : 0, request.getParameter(BOOL)!=null, request.getParameter(STRING));
+		
+		return new NumberCop(getIntParameter(request, NUMBER, NUMBER_DEFAULT), request.getParameter(BOOL)!=null, request.getParameter(STRING));
 	}
 	
 	public NumberCop add(final int addend)

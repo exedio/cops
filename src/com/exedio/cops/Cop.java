@@ -40,6 +40,14 @@ public abstract class Cop
 	
 	private static final char[] FORBIDDEN_IN_NAME = new char[] {'?', '&', ';'};
 	
+	protected final void addParameter(final String key, final int value, final int defaultValue)
+	{
+		if(value==defaultValue)
+			return;
+		
+		addParameter(key, String.valueOf(value));
+	}
+	
 	/**
 	 * Does nothing, if <tt>value==null</tt>.
 	 */
