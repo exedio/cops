@@ -194,6 +194,23 @@ public final class Pager
 		return result;
 	}
 	
+	private static final int PAGE_CONTEXT = 3; 
+	private static final int PAGE_CONTEXT_SPAN = 2*PAGE_CONTEXT; 
+	
+	public List<Pager> newPages()
+	{
+		final int page = offset / limit;
+		final int fromPage = Math.max(page-PAGE_CONTEXT, 0);
+		final int toPage   = Math.min(fromPage+PAGE_CONTEXT_SPAN, ((total()-1) / limit));
+		final ArrayList<Pager> result = new ArrayList<Pager>();
+		for(int newPage = fromPage; newPage<=toPage; newPage++)
+		{
+			final int pageOffset = newPage*limit; // TODO replace multiply by add
+			result.add(new Pager(config, pageOffset, limit, pageOffset==offset));
+		}
+		return result;
+	}
+	
 	public int getFrom()
 	{
 		return offset + 1;

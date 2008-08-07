@@ -110,6 +110,9 @@ public class NumberCop extends Cop implements Pageable
 			out.append(pager.getPage());
 			out.append(" of ");
 			out.append(pager.getTotalPages());
+			out.append(" pages ");
+			for(final Pager newPage : pager.newPages())
+				writePagerButton(out, cop, newPage, String.valueOf(newPage.getPage()));
 		}
 	}
 	
