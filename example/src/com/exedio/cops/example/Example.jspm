@@ -19,11 +19,15 @@
 
 package com.exedio.cops.example;
 
+import java.util.List;
+
 import com.exedio.cops.CopsServlet;
+import com.exedio.cops.Pageable;
+import com.exedio.cops.Pager;
 
 final class Example_Jspm
 {
-	static final void write(final StringBuilder out, final NumberCop cop)
+	static final void write(final StringBuilder out, final NumberCop cop, final List<String> searchResult)
 	{
 %><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -64,12 +68,33 @@ final class Example_Jspm
 		<form action="<%=cop%>" method="POST">
 			<input type="submit" name="<%=ExampleServlet.START_SESSION%>" value="Start Session">
 		</form>
+		<%
+		NumberCop.writePager(out, cop);
+		%>
+		<ol><%
+		for(String s : searchResult)
+		{
+		%>
+			<li><%=s%></li><%
+		}
+		%>
+		</ol>
 		tomcat:
 		<a href="/manager/html" target="_blank">manager</a>,
 		<a href="/host-manager/html" target="_blank">host-manager</a>
 	</body>
 </html><%
 		
+	}
+	
+	static final void writePagerButton(
+			final StringBuilder out,
+			final Pageable cop,
+			final Pager href,
+			final String text)
+	{
+				%>
+				<a href="<%=cop.toPage(href)%>"<% if(href.isNeutral()){%> style="background:grey;"<%}%>><%=text%></a><%
 	}
 }
 %>

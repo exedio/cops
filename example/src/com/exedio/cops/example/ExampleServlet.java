@@ -19,6 +19,8 @@
 package com.exedio.cops.example;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.exedio.cops.Cop;
 import com.exedio.cops.CopsServlet;
+import com.exedio.cops.Pager;
 import com.exedio.cops.Resource;
 
 public final class ExampleServlet extends CopsServlet
@@ -36,6 +39,14 @@ public final class ExampleServlet extends CopsServlet
 	static final Resource someClass = new Resource("ExampleServlet.class", "application/octet-steam");
 	
 	static final String START_SESSION = "startsession";
+	
+	private final ArrayList<String> searchSet = new ArrayList<String>();
+	
+	public ExampleServlet()
+	{
+		for(int i = 1; i<=84; i++)
+			searchSet.add("paged " + i);
+	}
 
 	private static final void writeBody(
 			final StringBuilder out,
@@ -56,6 +67,12 @@ public final class ExampleServlet extends CopsServlet
 		}
 	}
 	
+	private static final <E> List<E> subList(final List<E> list, final int fromIndex, final int toIndex)
+	{
+		final int size = list.size();
+		return list.subList(fromIndex, (toIndex>size) ? size : toIndex);
+	}
+	
 	@Override
 	protected void doRequest(
 			final HttpServletRequest request,
@@ -65,6 +82,11 @@ public final class ExampleServlet extends CopsServlet
 		//System.out.println("request ---" + request.getMethod() + "---" + request.getContextPath() + "---" + request.getServletPath() + "---" + request.getPathInfo() + "---" + request.getQueryString() + "---");
 		
 		final NumberCop cop = NumberCop.getCop(request);
+		
+		final Pager pager = cop.pager;
+		final List<String> searchResult = subList(searchSet, pager.getOffset(), pager.getOffset()+pager.getLimit());
+		pager.init(searchResult.size(), searchSet.size());
+		
 		if(Cop.isPost(request))
 		{
 			if(request.getParameter(START_SESSION)!=null)
@@ -76,7 +98,7 @@ public final class ExampleServlet extends CopsServlet
 		}
 
 		final StringBuilder out = new StringBuilder();
-		Example_Jspm.write(out, cop);
+		Example_Jspm.write(out, cop, searchResult);
 		writeBody(out, response);
 	}
 }
