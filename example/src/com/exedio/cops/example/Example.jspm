@@ -67,8 +67,8 @@ final class Example_Jspm
 		<br>
 		<form action="<%=cop%>" method="POST">
 			<input type="submit" name="<%=ExampleServlet.START_SESSION%>" value="Start Session">
-		</form>
-		<%
+		</form><%
+		
 		NumberCop.writePager(out, cop);
 		%>
 		<ol><%
