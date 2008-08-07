@@ -214,6 +214,16 @@ public final class Pager
 		return total()==0;
 	}
 	
+	public int getPage()
+	{
+		return (offset / limit) + 1;
+	}
+	
+	public int getTotalPages()
+	{
+		return ((total()-1) / limit) + 1;
+	}
+	
 	public boolean isNeeded()
 	{
 		return total()>config.limitDefault;

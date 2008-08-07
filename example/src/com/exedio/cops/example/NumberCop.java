@@ -100,12 +100,16 @@ public class NumberCop extends Cop implements Pageable
 			writePagerButton(out, cop, pager.last(),     "&gt;&gt;");
 			for(final Pager newLimit : pager.newLimits())
 				writePagerButton(out, cop, newLimit, String.valueOf(newLimit.getLimit()));
-			out.append(' ');
+			out.append(" item ");
 			out.append(pager.getFrom());
 			out.append('-');
 			out.append(pager.getTo());
-			out.append('/');
+			out.append(" of ");
 			out.append(pager.getTotal());
+			out.append("<br> page ");
+			out.append(pager.getPage());
+			out.append(" of ");
+			out.append(pager.getTotalPages());
 		}
 	}
 	

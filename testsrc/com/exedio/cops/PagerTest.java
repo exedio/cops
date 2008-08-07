@@ -27,68 +27,68 @@ public class PagerTest extends TestCase
 	public void testPager()
 	{
 		final Pager first = i(p(10), 10, 45);
-		assertIt(first, 0, 10, 1, 10, 45, true, false, true, false);
+		assertIt(first, 0, 10, 1, 10, 45, 1, 5, true, false, true, false);
 		
-		assertIt(i(first.previous(), 10, 45), 0, 10, 1, 10, 45, true, true, true, false);
-		assertIt(i(first.first()   , 10, 45), 0, 10, 1, 10, 45, true, true, true, false);
+		assertIt(i(first.previous(), 10, 45), 0, 10, 1, 10, 45, 1, 5, true, true, true, false);
+		assertIt(i(first.first()   , 10, 45), 0, 10, 1, 10, 45, 1, 5, true, true, true, false);
 
 		final Pager page2 = i(first.next(), 10, 45);
-		assertIt(page2, 10, 10, 11, 20, 45, true, false, false, false);
+		assertIt(page2, 10, 10, 11, 20, 45, 2, 5, true, false, false, false);
 		
 		final Pager first2 = i(page2.previous(), 10, 45);
-		assertIt(first2, 0, 10, 1, 10, 45, true, false, true, false);
+		assertIt(first2, 0, 10, 1, 10, 45, 1, 5, true, false, true, false);
 		
 		final Pager last = i(first.last(), 5, 45);
-		assertIt(last, 40, 10, 41, 45, 45, true, false, false, true);
+		assertIt(last, 40, 10, 41, 45, 45, 5, 5, true, false, false, true);
 		
-		assertIt(i(last.next(), 5, 45), 40, 10, 41, 45, 45, true, true, false, true);
-		assertIt(i(last.last(), 5, 45), 40, 10, 41, 45, 45, true, true, false, true);
+		assertIt(i(last.next(), 5, 45), 40, 10, 41, 45, 45, 5, 5, true, true, false, true);
+		assertIt(i(last.last(), 5, 45), 40, 10, 41, 45, 45, 5, 5, true, true, false, true);
 		
 		final Pager first3 = i(last.first(), 10, 45);
-		assertIt(first3, 0, 10, 1, 10, 45, true, false, true, false);
+		assertIt(first3, 0, 10, 1, 10, 45, 1, 5, true, false, true, false);
 		
 		final Pager page2l20 = i(page2.switchLimit(20), 20, 45);
-		assertIt(page2l20, 10, 20, 11, 30, 45, true, false, false, false);
-		assertIt(i(page2.switchLimit(10), 10, 45), 10, 10, 11, 20, 45, true, true, false, false);
+		assertIt(page2l20, 10, 20, 11, 30, 45, 1, 3, true, false, false, false);
+		assertIt(i(page2.switchLimit(10), 10, 45), 10, 10, 11, 20, 45, 2, 5, true, true, false, false);
 
-		assertIt(i(page2l20.previous(), 20, 45),  0, 20,  1, 20, 45, true, false, true, false);
-		assertIt(i(page2l20.first(),    20, 45),  0, 20,  1, 20, 45, true, false, true, false);
-		assertIt(i(page2l20.next(),     15, 45), 30, 20, 31, 45, 45, true, false, false, true);
-		assertIt(i(page2l20.last(),      5, 45), 40, 20, 41, 45, 45, true, false, false, true);
+		assertIt(i(page2l20.previous(), 20, 45),  0, 20,  1, 20, 45, 1, 3, true, false, true, false);
+		assertIt(i(page2l20.first(),    20, 45),  0, 20,  1, 20, 45, 1, 3, true, false, true, false);
+		assertIt(i(page2l20.next(),     15, 45), 30, 20, 31, 45, 45, 2, 3, true, false, false, true);
+		assertIt(i(page2l20.last(),      5, 45), 40, 20, 41, 45, 45, 3, 3, true, false, false, true);
 	}
 	
 	public void testNotNeeded()
 	{
 		final Pager p = i(p(10), 10, 10);
-		assertIt(p, 0, 10, 1, 10, 10, false, false, true, true);
+		assertIt(p, 0, 10, 1, 10, 10, 1, 1, false, false, true, true);
 
 		final Pager pn = i(p(10), 10, 11);
-		assertIt(pn, 0, 10, 1, 10, 11, true, false, true, false);
+		assertIt(pn, 0, 10, 1, 10, 11, 1, 2, true, false, true, false);
 	}
 	
 	public void testNewLimit()
 	{
 		final Pager p = i(p(10), 10, 500);
 		final Iterator<Pager> i = p.newLimits().iterator();
-		assertIt(i(i.next(),  10, 500), 0,  10, 1,  10, 500, true, true,  true, false);
-		assertIt(i(i.next(),  20, 500), 0,  20, 1,  20, 500, true, false, true, false);
-		assertIt(i(i.next(),  50, 500), 0,  50, 1,  50, 500, true, false, true, false);
-		assertIt(i(i.next(), 100, 500), 0, 100, 1, 100, 500, true, false, true, false);
-		assertIt(i(i.next(), 200, 500), 0, 200, 1, 200, 500, true, false, true, false);
-		assertIt(i(i.next(), 500, 500), 0, 500, 1, 500, 500, true, false, true, true);
+		assertIt(i(i.next(),  10, 500), 0,  10, 1,  10, 500, 1, 50, true, true,  true, false);
+		assertIt(i(i.next(),  20, 500), 0,  20, 1,  20, 500, 1, 25, true, false, true, false);
+		assertIt(i(i.next(),  50, 500), 0,  50, 1,  50, 500, 1, 10, true, false, true, false);
+		assertIt(i(i.next(), 100, 500), 0, 100, 1, 100, 500, 1,  5, true, false, true, false);
+		assertIt(i(i.next(), 200, 500), 0, 200, 1, 200, 500, 1,  3, true, false, true, false);
+		assertIt(i(i.next(), 500, 500), 0, 500, 1, 500, 500, 1,  1, true, false, true, true);
 		assertFalse(i.hasNext());
 	}
 	
 	public void testFullLastPage()
 	{
 		final Pager first = i(p(10), 10, 20);
-		assertIt(first, 0, 10, 1, 10, 20, true, false, true, false);
+		assertIt(first, 0, 10, 1, 10, 20, 1, 2, true, false, true, false);
 		
 		final Pager second = i(first.next(), 10, 20);
-		assertIt(second, 10, 10, 11, 20, 20, true, false, false, true);
+		assertIt(second, 10, 10, 11, 20, 20, 2, 2, true, false, false, true);
 		
-		assertIt(i(second.next(), 10, 20), 10, 10, 11, 20, 20, true, true, false, true);
-		assertIt(i(second.last(), 10, 20), 10, 10, 11, 20, 20, true, true, false, true);
+		assertIt(i(second.next(), 10, 20), 10, 10, 11, 20, 20, 2, 2, true, true, false, true);
+		assertIt(i(second.last(), 10, 20), 10, 10, 11, 20, 20, 2, 2, true, true, false, true);
 	}
 	
 	public void testConfig()
@@ -166,6 +166,7 @@ public class PagerTest extends TestCase
 			final int offset, final int limit,
 			final int from, final int to,
 			final int total,
+			final int page, final int totalPages,
 			final boolean needed, final boolean neutral,
 			final boolean first, final boolean last)
 	{
@@ -174,6 +175,8 @@ public class PagerTest extends TestCase
 		assertEquals(from,    pager.getFrom());
 		assertEquals(to,      pager.getTo());
 		assertEquals(total,   pager.getTotal());
+		assertEquals(page,    pager.getPage());
+		assertEquals(totalPages, pager.getTotalPages());
 		assertEquals(needed,  pager.isNeeded());
 		assertEquals(neutral, pager.isNeutral());
 		assertEquals(first,   pager.isFirst());
