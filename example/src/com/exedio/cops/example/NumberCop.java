@@ -60,7 +60,8 @@ public class NumberCop extends Cop implements Pageable
 		return new NumberCop(
 				getIntParameter(request, NUMBER, NUMBER_DEFAULT),
 				getBooleanParameter(request, BOOL),
-				request.getParameter(STRING), PAGER_CONFIG.newPager(request));
+				request.getParameter(STRING),
+				PAGER_CONFIG.newPager(request));
 	}
 	
 	public NumberCop add(final int addend)
