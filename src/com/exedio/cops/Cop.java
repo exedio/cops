@@ -236,24 +236,6 @@ public abstract class Cop
 		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 	}
 	
-	/**
-	 * @deprecated Use {@link XMLEncoder#encode(String)} instead
-	 */
-	@Deprecated
-	public static final String encode(final String st)
-	{
-		return XMLEncoder.encode(st);
-	}
-	
-	/**
-	 * @deprecated Use {@link XMLEncoder#encode(String)} instead
-	 */
-	@Deprecated
-	public static final String encodeXml(final String st)
-	{
-		return XMLEncoder.encode(st);
-	}
-	
 	public static final boolean getBooleanParameter(
 			final HttpServletRequest request,
 			final String name)
@@ -271,6 +253,24 @@ public abstract class Cop
 	}
 	
 	// ------------------- deprecated stuff -------------------
+	
+	/**
+	 * @deprecated Use {@link XMLEncoder#encode(String)} instead
+	 */
+	@Deprecated
+	public static final String encode(final String st)
+	{
+		return XMLEncoder.encode(st);
+	}
+	
+	/**
+	 * @deprecated Use {@link XMLEncoder#encode(String)} instead
+	 */
+	@Deprecated
+	public static final String encodeXml(final String st)
+	{
+		return XMLEncoder.encode(st);
+	}
 	
 	/**
 	 * @deprecated use {@link #toAbsolute()} instead.
