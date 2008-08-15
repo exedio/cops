@@ -180,7 +180,7 @@ public abstract class Cop
 	
 	public static String getEnvironment()
 	{
-		final HttpServletRequest  request  = CopsServlet.requests.get();
+		final HttpServletRequest request  = CopsServlet.requests.get();
 		if(request==null)
 			throw new IllegalStateException("no request available");
 		if(request instanceof EnvironmentRequest)
