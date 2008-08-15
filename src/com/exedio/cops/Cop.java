@@ -188,7 +188,10 @@ public abstract class Cop
 		if(request instanceof EnvironmentRequest)
 			return ((EnvironmentRequest)request).environment;
 		
-		return request.getHeader("Host") + request.getContextPath() + request.getServletPath();
+		return
+			request.getHeader("Host") +
+			request.getContextPath() +
+			request.getServletPath();
 	}
 	
 	public static void setEnvironment(final String environment)
