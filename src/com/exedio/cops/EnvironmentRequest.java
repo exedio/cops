@@ -58,12 +58,12 @@ final class EnvironmentRequest implements HttpServletRequest
 
 	public long getDateHeader(String arg0)
 	{
-		throw new RuntimeException();
+		throw new RuntimeException(arg0);
 	}
 
 	public String getHeader(String arg0)
 	{
-		throw new RuntimeException();
+		throw new RuntimeException(arg0);
 	}
 
 	@Deprecated
@@ -75,12 +75,12 @@ final class EnvironmentRequest implements HttpServletRequest
 	@Deprecated
 	public Enumeration<?> getHeaders(String arg0)
 	{
-		throw new RuntimeException();
+		throw new RuntimeException(arg0);
 	}
 
 	public int getIntHeader(String arg0)
 	{
-		throw new RuntimeException();
+		throw new RuntimeException(arg0);
 	}
 
 	public String getMethod()
@@ -228,7 +228,7 @@ final class EnvironmentRequest implements HttpServletRequest
 
 	public String getParameter(String arg0)
 	{
-		throw new RuntimeException();
+		throw new RuntimeException(arg0);
 	}
 
 	@Deprecated
@@ -245,7 +245,7 @@ final class EnvironmentRequest implements HttpServletRequest
 
 	public String[] getParameterValues(String arg0)
 	{
-		throw new RuntimeException();
+		throw new RuntimeException(arg0);
 	}
 
 	public String getProtocol()
@@ -261,7 +261,7 @@ final class EnvironmentRequest implements HttpServletRequest
 	@Deprecated
 	public String getRealPath(String arg0)
 	{
-		throw new RuntimeException();
+		throw new RuntimeException(arg0);
 	}
 
 	public String getRemoteAddr()
@@ -281,7 +281,7 @@ final class EnvironmentRequest implements HttpServletRequest
 
 	public RequestDispatcher getRequestDispatcher(String arg0)
 	{
-		throw new RuntimeException();
+		throw new RuntimeException(arg0);
 	}
 
 	public String getScheme()
@@ -306,17 +306,17 @@ final class EnvironmentRequest implements HttpServletRequest
 
 	public void removeAttribute(String arg0)
 	{
-		throw new RuntimeException();
+		throw new RuntimeException(arg0);
 	}
 
 	public void setAttribute(String arg0, Object arg1)
 	{
-		throw new RuntimeException();
+		throw new RuntimeException(arg0);
 	}
 
 	public void setCharacterEncoding(String arg0)
 			throws UnsupportedEncodingException
 	{
-		throw new UnsupportedEncodingException();
+		throw new UnsupportedEncodingException(arg0);
 	}
 }
