@@ -30,6 +30,21 @@
 		</javac>
 	</target>
 	
+	<target name="catalina.compile">
+		<mkdir dir="build/classes" />
+		<javac srcdir="catalinasrc"
+				destdir="build/classes"
+				includeAntRuntime="false"
+				deprecation="on"
+				debug="on"
+				optimize="off">
+			<classpath>
+				<pathelement location="lib/servlet-api.jar" />
+				<pathelement location="lib/catalina.jar" />
+			</classpath>
+		</javac>
+	</target>
+	
 	<target name="test.compile" depends="compile">
 		<mkdir dir="build/testclasses" />
 		<javac srcdir="testsrc"
@@ -66,7 +81,7 @@
 	
 	<target name="test" depends="test.run" />
 	
-	<target name="jar" depends="compile">
+	<target name="jar" depends="compile, catalina.compile">
 		<jar jarfile="build/exedio-cops.jar" basedir="build/classes" duplicate="fail">
 			<manifest>
 				<attribute name="Specification-Title" value="exedio cops"/>
@@ -84,6 +99,9 @@
 		<mkdir dir="build" />
 		<zip destfile="build/exedio-cops.jar-src.zip">
 			<zipfileset dir="${basedir}/src">
+				<include name="**/*.java" />
+			</zipfileset>
+			<zipfileset dir="${basedir}/catalinasrc">
 				<include name="**/*.java" />
 			</zipfileset>
 		</zip>
@@ -115,7 +133,9 @@
 		</copy>
 	</target>
 	
-	<target name="example.web" depends="compile, example.compile">
+	<target name="example.web" depends="compile, catalina.compile, example.compile">
+		<mkdir dir="example/web/files" />
+		<touch file="example/web/files/hallo.txt" />
 		<copy todir="example/web/WEB-INF/classes">
 			<fileset dir="build/classes" />
 			<fileset dir="build/exampleclasses" />
@@ -185,6 +205,7 @@
 	<target name="clean">
 		<delete dir="build" />
 		<delete dir="tomcat" />
+		<delete dir="example/web/files" />
 		<delete dir="example/web/WEB-INF/classes" />
 		<delete>
 			<fileset dir="src">
@@ -230,7 +251,7 @@
 	</target>
 	
 	<target name="jspm" depends="runtime.jspm, example.jspm" />
-	<target name="build" depends="compile, test, jar, example, api" />
+	<target name="build" depends="compile, catalina.compile, test, jar, example, api" />
 	<target name="all" depends="build, jar.src, dist" />
 	<target name="tomcat" depends="example.tomcat" />
 

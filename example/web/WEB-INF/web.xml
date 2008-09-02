@@ -29,4 +29,17 @@
 		<auth-constraint><role-name>manager</role-name></auth-constraint>
 	</security-constraint>
 
+	<servlet>
+		<servlet-name>files</servlet-name>
+		<servlet-class>com.exedio.cops.FileServlet</servlet-class>
+		<init-param>
+			<param-name>listings</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>files</servlet-name>
+		<url-pattern>/files/*</url-pattern>
+	</servlet-mapping>
+
 </web-app>
