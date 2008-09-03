@@ -97,6 +97,17 @@ public final class Resource
 		return toString;
 	}
 	
+	public String toAbsolute()
+	{
+		final HttpServletRequest request = CopsServlet.requests.get();
+		if(request==null)
+			throw new IllegalStateException("no request available");
+		return
+			request.getScheme() + "://" +
+			request.getHeader("Host") +
+			toString;
+	}
+	
 	void setPath(final String path)
 	{
 		toString = path + name;
