@@ -55,6 +55,11 @@ final class Example_Jspm
 		<a href="<%=cop.setString("garten#zaun")%>">garten#zaun</a> |
 		<a href="<%=cop.setString(null)%>">null</a> |
 		<br>
+		needsSecure:
+		<a href="<%=cop.toSecure(NumberCop.Secure.ANY  )%>">ANY</a>
+		<a href="<%=cop.toSecure(NumberCop.Secure.FALSE)%>">FALSE</a>
+		<a href="<%=cop.toSecure(NumberCop.Secure.TRUE )%>">TRUE</a>
+		<br>
 		<a href="copsResourceStatus.html">resourceStatus</a>
 		<br>
 		<tt><%=cop.toStringNonEncoded()%></tt><%

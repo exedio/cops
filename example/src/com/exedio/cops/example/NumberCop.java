@@ -33,50 +33,69 @@ public class NumberCop extends Cop implements Pageable
 	private static final String BOOL = "b";
 	private static final String STRING = "s";
 	
+	private static final String SECURE = "sec";
+	
 	private static final int NUMBER_DEFAULT = 0;
 	private static final Pager.Config PAGER_CONFIG = new Pager.Config(10, 20, 23, 100, 500);
 	
 	private final int number;
 	private final boolean bool;
 	final String string;
+	
+	enum Secure
+	{
+		ANY, FALSE, TRUE;
+	}
+	private final Secure secure;
+	
 	final Pager pager;
 	
-	NumberCop(final int number, final boolean bool, final String string, final Pager pager)
+	NumberCop(final int number, final boolean bool, final String string, final Secure secure, final Pager pager)
 	{
 		super(NAME);
 		this.number = number;
 		this.bool = bool;
 		this.string = string;
+		this.secure = secure;
 		this.pager = pager;
 		
 		addParameter(NUMBER, number, NUMBER_DEFAULT);
 		addParameter(BOOL, bool);
 		addParameter(STRING, string);
+		if(secure!=Secure.ANY)
+			addParameter(SECURE, secure.name());
 		pager.addParameters(this);
 	}
 	
 	static NumberCop getCop(final HttpServletRequest request)
 	{
+		final String secure = request.getParameter(SECURE);
 		return new NumberCop(
 				getIntParameter(request, NUMBER, NUMBER_DEFAULT),
 				getBooleanParameter(request, BOOL),
 				request.getParameter(STRING),
+				secure!=null ? Secure.valueOf(request.getParameter(SECURE)) : Secure.ANY,
 				PAGER_CONFIG.newPager(request));
 	}
 	
 	public NumberCop add(final int addend)
 	{
-		return new NumberCop(number + addend, bool, string, pager);
+		return new NumberCop(number + addend, bool, string, secure, pager);
 	}
 	
 	public NumberCop toggle()
 	{
-		return new NumberCop(number, !bool, string, pager);
+		return new NumberCop(number, !bool, string, secure, pager);
 	}
 	
 	public NumberCop setString(final String string)
 	{
-		return new NumberCop(number, bool, string, pager);
+		return new NumberCop(number, bool, string, secure, pager);
+	}
+	
+	public NumberCop toSecure(final Secure secure)
+	{
+		return new NumberCop(number, bool, string, secure, pager);
 	}
 	
 	public Pager getPager()
@@ -86,7 +105,7 @@ public class NumberCop extends Cop implements Pageable
 	
 	public NumberCop toPage(final Pager pager)
 	{
-		return new NumberCop(number, bool, string, pager);
+		return new NumberCop(number, bool, string, secure, pager);
 	}
 	
 	static void writePager(final StringBuilder out, final Pageable cop)
@@ -119,11 +138,13 @@ public class NumberCop extends Cop implements Pageable
 	@Override
 	protected Boolean needsSecure()
 	{
-		if(number<0)
-			return Boolean.FALSE;
-		else if(number>100)
-			return Boolean.TRUE;
-		else
-			return null;
+		switch(secure)
+		{
+			case ANY:   return null;
+			case FALSE: return Boolean.FALSE;
+			case TRUE:  return Boolean.TRUE;
+			default:
+				throw new RuntimeException(secure.name());
+		}
 	}
 }
