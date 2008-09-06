@@ -54,6 +54,14 @@ public abstract class Cop
 		addParameter(key, String.valueOf(value));
 	}
 	
+	protected final void addParameter(final String key, final long value, final long defaultValue)
+	{
+		if(value==defaultValue)
+			return;
+		
+		addParameter(key, String.valueOf(value));
+	}
+	
 	/**
 	 * Does nothing, if <tt>value==null</tt>.
 	 */
