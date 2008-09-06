@@ -260,6 +260,15 @@ public abstract class Cop
 		return (value==null) ? defaultValue : Integer.parseInt(value);
 	}
 	
+	public static final long getLongParameter(
+			final HttpServletRequest request,
+			final String name,
+			final long defaultValue)
+	{
+		final String value = request.getParameter(name);
+		return (value==null) ? defaultValue : Long.parseLong(value);
+	}
+	
 	// ------------------- deprecated stuff -------------------
 	
 	/**
