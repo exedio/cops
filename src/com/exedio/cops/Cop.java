@@ -62,6 +62,16 @@ public abstract class Cop
 		addParameter(key, String.valueOf(value));
 	}
 	
+	private static final int COMPACT_LONG_RADIX = Character.MAX_RADIX;
+	
+	protected final void addParameterCompact(final String key, final long value, final long defaultValue)
+	{
+		if(value==defaultValue)
+			return;
+		
+		addParameter(key, Long.toString(value, COMPACT_LONG_RADIX));
+	}
+	
 	/**
 	 * Does nothing, if <tt>value==null</tt>.
 	 */
@@ -275,6 +285,15 @@ public abstract class Cop
 	{
 		final String value = request.getParameter(name);
 		return (value==null) ? defaultValue : Long.parseLong(value);
+	}
+	
+	public static final long getLongParameterCompact(
+			final HttpServletRequest request,
+			final String name,
+			final long defaultValue)
+	{
+		final String value = request.getParameter(name);
+		return (value==null) ? defaultValue : Long.parseLong(value, COMPACT_LONG_RADIX);
 	}
 	
 	// ------------------- deprecated stuff -------------------
