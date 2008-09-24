@@ -194,8 +194,8 @@ public final class Pager
 		return result;
 	}
 	
-	private static final int PAGE_CONTEXT = 3; 
-	private static final int PAGE_CONTEXT_SPAN = 2*PAGE_CONTEXT; 
+	private static final int PAGE_CONTEXT = 3;
+	private static final int PAGE_CONTEXT_SPAN = 2*PAGE_CONTEXT;
 	
 	public List<Pager> newPages()
 	{
