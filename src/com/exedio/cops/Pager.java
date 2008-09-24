@@ -197,6 +197,19 @@ public final class Pager
 	private static final int PAGE_CONTEXT = 3;
 	private static final int PAGE_CONTEXT_SPAN = 2*PAGE_CONTEXT;
 	
+	public boolean hasBeforeNewPages()
+	{
+		final int page = offset / limit;
+		return (page-PAGE_CONTEXT)>0;
+	}
+	
+	public boolean hasAfterNewPages()
+	{
+		final int page = offset / limit;
+		final int fromPage = Math.max(page-PAGE_CONTEXT, 0);
+		return (fromPage+PAGE_CONTEXT_SPAN) < ((total()-1) / limit);
+	}
+	
 	public List<Pager> newPages()
 	{
 		final int page = offset / limit;
