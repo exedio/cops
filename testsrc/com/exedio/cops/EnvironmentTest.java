@@ -81,5 +81,16 @@ public class EnvironmentTest extends TestCase
 			assertEquals("https://host.exedio.com/contextPath/servletPath/test.html?param1=value1", cop.toAbsolute());
 		}
 		assertEquals(CopTest.ENVIRONMENT, Cop.getEnvironment());
+		
+		try
+		{
+			Cop.setEnvironment("zack");
+			fail();
+		}
+		catch(IllegalStateException e)
+		{
+			assertEquals("environment already available", e.getMessage());
+		}
+		assertEquals(CopTest.ENVIRONMENT, Cop.getEnvironment());
 	}
 }

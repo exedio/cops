@@ -214,6 +214,10 @@ public abstract class Cop
 	
 	public static void setEnvironment(final String environment)
 	{
+		if(CopsServlet.requests.get()!=null)
+			throw new IllegalStateException("environment already available");
+		assert CopsServlet.responses.get()==null;
+		
 		CopsServlet.requests.set(new EnvironmentRequest(environment));
 		CopsServlet.responses.set(new EnvironmentResponse());
 	}
