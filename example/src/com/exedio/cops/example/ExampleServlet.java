@@ -39,6 +39,7 @@ public final class ExampleServlet extends CopsServlet
 	static final Resource someClass = new Resource("ExampleServlet.class", "application/octet-steam");
 	
 	static final String START_SESSION = "startsession";
+	static final String REPORT_EXCEPTION = "reportexception";
 	
 	private final ArrayList<String> searchSet = new ArrayList<String>();
 	
@@ -87,6 +88,7 @@ public final class ExampleServlet extends CopsServlet
 		final List<String> searchResult = subList(searchSet, pager.getOffset(), pager.getOffset()+pager.getLimit());
 		pager.init(searchResult.size(), searchSet.size());
 		
+		String reportedException = null;
 		if(Cop.isPost(request))
 		{
 			if(request.getParameter(START_SESSION)!=null)
@@ -95,10 +97,14 @@ public final class ExampleServlet extends CopsServlet
 				response.sendRedirect(cop.toStringNonEncoded());
 				return;
 			}
+			else if(request.getParameter(REPORT_EXCEPTION)!=null)
+			{
+				reportedException = reportException(new NullPointerException("example exception for CopsServlet.reportException"));
+			}
 		}
 
 		final StringBuilder out = new StringBuilder();
-		Example_Jspm.write(out, cop, searchResult);
+		Example_Jspm.write(out, cop, searchResult, reportedException);
 		writeBody(out, response);
 	}
 }
