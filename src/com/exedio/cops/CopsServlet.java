@@ -29,6 +29,7 @@ import java.security.Principal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Random;
 
@@ -231,11 +232,20 @@ public abstract class CopsServlet extends HttpServlet
 	}
 	
 	private final Random random = new Random();
+	
+	private static final void printHeader(final HttpServletRequest request, final String name)
+	{
+		final String value = request.getHeader(name);
+		if(value!=null)
+			System.out.println(name + ": >" + value + '<');
+		else
+			System.out.println(name + " does not exist");
+	}
 
 	/**
 	 * Returns the id under with the exception has been reported in the log.
 	 */
-	public final String reportException(final Exception exception)
+	public final String reportException(final HttpServletRequest request, final Exception exception)
 	{
 		final long idLong;
 		synchronized(random)
@@ -244,8 +254,26 @@ public abstract class CopsServlet extends HttpServlet
 		}
 		final String id = String.valueOf(Math.abs(idLong));
 		System.out.println("--------"+id+"-----");
+		System.out.println("Date: " + new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS Z (z)").format(new Date()));
+		if(request!=null)
+		{
+			printHeader(request, "Host");
+			printHeader(request, "Referer");
+			printHeader(request, "User-Agent");
+		}
 		printException(System.out, exception);
 		System.out.println("-------/"+id+"-----");
 		return id;
+	}
+	
+	// ------------------- deprecated stuff -------------------
+	
+	/**
+	 * @deprecated Use {@link reportException(HttpServletRequest, Exception)} instead.
+	 */
+	@Deprecated
+	public final String reportException(final Exception exception)
+	{
+		return reportException(null, exception);
 	}
 }

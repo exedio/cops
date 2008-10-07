@@ -99,7 +99,7 @@ public final class ExampleServlet extends CopsServlet
 			}
 			else if(request.getParameter(REPORT_EXCEPTION)!=null)
 			{
-				reportedException = reportException(new NullPointerException("example exception for CopsServlet.reportException"));
+				reportedException = reportException(request, new NullPointerException("example exception for CopsServlet.reportException"));
 			}
 		}
 
