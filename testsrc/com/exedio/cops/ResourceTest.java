@@ -133,6 +133,33 @@ public class ResourceTest extends TestCase
 		assertEquals(0, r1.getResponse304Count());
 		assertEquals("/contextPath/servletPath/ResourceTest.class", r1.toString());
 		assertEquals("scheme://host/contextPath/servletPath/ResourceTest.class", r1.toAbsolute());
+		
+		
+		CopsServlet.requests.remove();
+		assertEquals("ResourceTest.class", r1.getName());
+		assertEquals("major/minor", r1.getContentType());
+		assertEquals(lastModified, r1.getLastModified());
+		assertEquals(contentLength, r1.getContentLength());
+		assertEquals(0, r1.getResponse200Count());
+		assertEquals(0, r1.getResponse304Count());
+		try
+		{
+			r1.toString();
+			fail();
+		}
+		catch(IllegalStateException e)
+		{
+			assertEquals("no request available", e.getMessage());
+		}
+		try
+		{
+			r1.toAbsolute();
+			fail();
+		}
+		catch(IllegalStateException e)
+		{
+			assertEquals("no request available", e.getMessage());
+		}
 	}
 	
 	@Override
