@@ -69,6 +69,7 @@ public class ResourceTest extends TestCase
 		}
 		
 		
+		// test idempotence of init
 		r1.init(ResourceTest.class);
 		assertEquals("ResourceTest.class", r1.getName());
 		assertEquals("major/minor", r1.getContentType());
