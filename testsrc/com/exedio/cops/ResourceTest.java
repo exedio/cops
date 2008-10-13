@@ -37,7 +37,15 @@ public class ResourceTest extends TestCase
 		assertEquals(-1, r1.getContentLength());
 		assertEquals(0, r1.getResponse200Count());
 		assertEquals(0, r1.getResponse304Count());
-		assertEquals(null, r1.toString());
+		try
+		{
+			r1.toString();
+			fail();
+		}
+		catch(IllegalStateException e)
+		{
+			assertEquals("no request available", e.getMessage());
+		}
 		try
 		{
 			r1.toAbsolute();
@@ -57,7 +65,15 @@ public class ResourceTest extends TestCase
 		assertTrue(String.valueOf(contentLength), contentLength>5);
 		assertEquals(0, r1.getResponse200Count());
 		assertEquals(0, r1.getResponse304Count());
-		assertEquals(null, r1.toString());
+		try
+		{
+			r1.toString();
+			fail();
+		}
+		catch(IllegalStateException e)
+		{
+			assertEquals("no request available", e.getMessage());
+		}
 		try
 		{
 			r1.toAbsolute();
@@ -77,26 +93,15 @@ public class ResourceTest extends TestCase
 		assertEquals(contentLength, r1.getContentLength());
 		assertEquals(0, r1.getResponse200Count());
 		assertEquals(0, r1.getResponse304Count());
-		assertEquals(null, r1.toString());
 		try
 		{
-			r1.toAbsolute();
+			r1.toString();
 			fail();
 		}
 		catch(IllegalStateException e)
 		{
 			assertEquals("no request available", e.getMessage());
 		}
-		
-		
-		r1.setPath("/contextPath/servletPath/");
-		assertEquals("ResourceTest.class", r1.getName());
-		assertEquals("major/minor", r1.getContentType());
-		assertEquals(lastModified, r1.getLastModified());
-		assertEquals(contentLength, r1.getContentLength());
-		assertEquals(0, r1.getResponse200Count());
-		assertEquals(0, r1.getResponse304Count());
-		assertEquals("/contextPath/servletPath/ResourceTest.class", r1.toString());
 		try
 		{
 			r1.toAbsolute();
@@ -110,6 +115,8 @@ public class ResourceTest extends TestCase
 		
 		CopsServlet.requests.set(new DummyRequest(){
 			@Override public String getScheme(){return "scheme";}
+			@Override public String getContextPath(){return "/contextPath";}
+			@Override public String getServletPath(){return "/servletPath";}
 			@Override public String getHeader(String name)
 			{
 				if("Host".equals(name))

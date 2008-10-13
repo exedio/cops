@@ -48,8 +48,6 @@ public abstract class CopsServlet extends HttpServlet
 	
 	private final LinkedHashMap<String, Resource> resources;
 	
-	private boolean contextPathOnResourcesToBeSet = false;
-	
 	protected CopsServlet()
 	{
 		try
@@ -70,7 +68,6 @@ public abstract class CopsServlet extends HttpServlet
 				
 				resource.init(clazz);
 				resources.put('/'+resource.name, resource);
-				contextPathOnResourcesToBeSet = true;
 			}
 			this.resources = resources.isEmpty() ? null : resources;
 		}
@@ -98,13 +95,6 @@ public abstract class CopsServlet extends HttpServlet
 		
 		if(resources!=null)
 		{
-			if(contextPathOnResourcesToBeSet)
-			{
-				contextPathOnResourcesToBeSet = false;
-				final String path = request.getContextPath() + request.getServletPath() + '/';
-				for(final Resource resource : resources.values())
-					resource.setPath(path);
-			}
 			if("/copsResourceStatus.html".equals(pathInfo))
 			{
 				if(!request.isUserInRole("manager"))

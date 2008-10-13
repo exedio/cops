@@ -39,7 +39,6 @@ public final class Resource
 
 	private final Object contentLock = new Object();
 	private byte[] content;
-	private String toString;
 	
 	private volatile long response200Count = 0;
 	private volatile long response304Count = 0;
@@ -94,7 +93,10 @@ public final class Resource
 	@Override
 	public String toString()
 	{
-		return toString;
+		final HttpServletRequest request = CopsServlet.requests.get();
+		if(request==null)
+			throw new IllegalStateException("no request available");
+		return request.getContextPath() + request.getServletPath() + '/' + name;
 	}
 	
 	public String toAbsolute()
@@ -105,12 +107,9 @@ public final class Resource
 		return
 			request.getScheme() + "://" +
 			request.getHeader("Host") +
-			toString;
-	}
-	
-	void setPath(final String path)
-	{
-		toString = path + name;
+			request.getContextPath() +
+			request.getServletPath() +
+			'/' + name;
 	}
 	
 	void init(final Class<?> resourceLoader)
