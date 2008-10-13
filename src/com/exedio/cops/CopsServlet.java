@@ -281,7 +281,7 @@ public abstract class CopsServlet extends HttpServlet
 	// ------------------- deprecated stuff -------------------
 	
 	/**
-	 * @deprecated Use {@link reportException(HttpServletRequest, Exception)} instead.
+	 * @deprecated Use {@link #reportException(HttpServletRequest, Exception)} instead.
 	 */
 	@Deprecated
 	public final String reportException(final Exception exception)
