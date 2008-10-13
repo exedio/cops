@@ -234,15 +234,6 @@ public abstract class CopsServlet extends HttpServlet
 	
 	private final Random random = new Random();
 	
-	private static final void printHeader(final HttpServletRequest request, final String name)
-	{
-		final String value = request.getHeader(name);
-		if(value!=null)
-			System.out.println("header " + name + ": >" + value + '<');
-		else
-			System.out.println("header " + name + " does not exist");
-	}
-
 	/**
 	 * Returns the id under with the exception has been reported in the log.
 	 */
@@ -272,7 +263,9 @@ public abstract class CopsServlet extends HttpServlet
 			System.out.println("userPrincipal: >" + request.getUserPrincipal() + '<');
 			for(final Enumeration<?> e = request.getHeaderNames(); e.hasMoreElements(); )
 			{
-				printHeader(request, (String)e.nextElement());
+				final String name = (String)e.nextElement();
+				for(final Enumeration<?> ev = request.getHeaders(name); ev.hasMoreElements(); )
+					System.out.println("header >" + name + "<: >" + ((String)ev.nextElement()) + '<');
 			}
 			for(final Enumeration<?> e = request.getParameterNames(); e.hasMoreElements(); )
 			{
