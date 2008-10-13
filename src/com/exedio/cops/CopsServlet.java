@@ -274,6 +274,13 @@ public abstract class CopsServlet extends HttpServlet
 			{
 				printHeader(request, (String)e.nextElement());
 			}
+			for(final Enumeration<?> e = request.getParameterNames(); e.hasMoreElements(); )
+			{
+				final String name = (String)e.nextElement();
+				final String[] values = request.getParameterValues(name);
+				for(final String value : values)
+					System.out.println("parameter >" + name + "<: >" + value + '<');
+			}
 		}
 		printException(System.out, exception);
 		System.out.println("-------/"+id+"-----");
