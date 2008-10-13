@@ -237,9 +237,9 @@ public abstract class CopsServlet extends HttpServlet
 	{
 		final String value = request.getHeader(name);
 		if(value!=null)
-			System.out.println(name + ": >" + value + '<');
+			System.out.println("header " + name + ": >" + value + '<');
 		else
-			System.out.println(name + " does not exist");
+			System.out.println("header " + name + " does not exist");
 	}
 
 	/**
@@ -257,6 +257,18 @@ public abstract class CopsServlet extends HttpServlet
 		System.out.println("Date: " + new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS Z (z)").format(new Date()));
 		if(request!=null)
 		{
+			System.out.println("remoteAddr:  >" + request.getRemoteAddr()      + '<');
+			System.out.println("protocol:    >" + request.getProtocol()        + '<');
+			System.out.println("method:      >" + request.getMethod()          + '<');
+			System.out.println("remoteUser:  >" + request.getRemoteUser()      + '<');
+			System.out.println("requestURI:  >" + request.getRequestURI()      + '<');
+			System.out.println("contextPath: >" + request.getContextPath()     + '<');
+			System.out.println("servletPath: >" + request.getServletPath()     + '<');
+			System.out.println("pathInfo:    >" + request.getPathInfo()        + '<');
+			System.out.println("queryString: >" + request.getQueryString()     + '<');
+			System.out.println("scheme:      >" + request.getScheme()          + '<');
+			System.out.println("secure:      >" + request.isSecure()           + '<');
+			System.out.println("userPrincipal: >" + request.getUserPrincipal() + '<');
 			printHeader(request, "Host");
 			printHeader(request, "Referer");
 			printHeader(request, "User-Agent");
