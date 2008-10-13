@@ -30,6 +30,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.LinkedHashMap;
 import java.util.Random;
 
@@ -269,9 +270,10 @@ public abstract class CopsServlet extends HttpServlet
 			System.out.println("scheme:      >" + request.getScheme()          + '<');
 			System.out.println("secure:      >" + request.isSecure()           + '<');
 			System.out.println("userPrincipal: >" + request.getUserPrincipal() + '<');
-			printHeader(request, "Host");
-			printHeader(request, "Referer");
-			printHeader(request, "User-Agent");
+			for(final Enumeration<?> e = request.getHeaderNames(); e.hasMoreElements(); )
+			{
+				printHeader(request, (String)e.nextElement());
+			}
 		}
 		printException(System.out, exception);
 		System.out.println("-------/"+id+"-----");
