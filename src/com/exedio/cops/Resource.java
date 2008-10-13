@@ -96,6 +96,10 @@ public final class Resource
 		final HttpServletRequest request = CopsServlet.requests.get();
 		if(request==null)
 			throw new IllegalStateException("no request available");
+		
+		if(request instanceof EnvironmentRequest)
+			return "http://" + ((EnvironmentRequest)request).environment + '/' + name;
+		
 		return request.getContextPath() + request.getServletPath() + '/' + name;
 	}
 	
@@ -104,6 +108,10 @@ public final class Resource
 		final HttpServletRequest request = CopsServlet.requests.get();
 		if(request==null)
 			throw new IllegalStateException("no request available");
+		
+		if(request instanceof EnvironmentRequest)
+			return "http://" + ((EnvironmentRequest)request).environment + '/' + name;
+		
 		return
 			request.getScheme() + "://" +
 			request.getHeader("Host") +

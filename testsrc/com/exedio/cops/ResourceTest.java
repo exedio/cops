@@ -25,6 +25,8 @@ import junit.framework.TestCase;
 
 public class ResourceTest extends TestCase
 {
+	static final String ENVIRONMENT = "host/contextPath/servletPath";
+	
 	public void testToString()
 	{
 		final Date before = new Date();
@@ -133,6 +135,7 @@ public class ResourceTest extends TestCase
 		assertEquals(0, r1.getResponse304Count());
 		assertEquals("/contextPath/servletPath/ResourceTest.class", r1.toString());
 		assertEquals("scheme://host/contextPath/servletPath/ResourceTest.class", r1.toAbsolute());
+		assertEquals(ENVIRONMENT, Cop.getEnvironment());
 		
 		
 		CopsServlet.requests.remove();
@@ -154,6 +157,76 @@ public class ResourceTest extends TestCase
 		try
 		{
 			r1.toAbsolute();
+			fail();
+		}
+		catch(IllegalStateException e)
+		{
+			assertEquals("no request available", e.getMessage());
+		}
+	}
+	
+	public void testEnironment()
+	{
+		final Resource r1 = new Resource("ResourceTest.class", "major/minor");
+		
+		
+		try
+		{
+			r1.toString();
+			fail();
+		}
+		catch(IllegalStateException e)
+		{
+			assertEquals("no request available", e.getMessage());
+		}
+		try
+		{
+			r1.toAbsolute();
+			fail();
+		}
+		catch(IllegalStateException e)
+		{
+			assertEquals("no request available", e.getMessage());
+		}
+		try
+		{
+			Cop.getEnvironment();
+			fail();
+		}
+		catch(IllegalStateException e)
+		{
+			assertEquals("no request available", e.getMessage());
+		}
+		
+		
+		Cop.setEnvironment(ENVIRONMENT);
+		assertEquals("http://host/contextPath/servletPath/ResourceTest.class", r1.toString());
+		assertEquals("http://host/contextPath/servletPath/ResourceTest.class", r1.toAbsolute());
+		assertEquals(ENVIRONMENT, Cop.getEnvironment());
+		
+		
+		Cop.removeEnvironment();
+		try
+		{
+			r1.toString();
+			fail();
+		}
+		catch(IllegalStateException e)
+		{
+			assertEquals("no request available", e.getMessage());
+		}
+		try
+		{
+			r1.toAbsolute();
+			fail();
+		}
+		catch(IllegalStateException e)
+		{
+			assertEquals("no request available", e.getMessage());
+		}
+		try
+		{
+			Cop.getEnvironment();
 			fail();
 		}
 		catch(IllegalStateException e)
