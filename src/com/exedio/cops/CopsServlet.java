@@ -115,16 +115,16 @@ public abstract class CopsServlet extends HttpServlet
 				{
 					assert requests.get()==null;
 					requests.set(request);
-				ResourceStatus_Jspm.write(
-						out,
-						getServletConfig().getServletName(),
-						resources.values(),
-						authentication,
-						request.getParameter(INLINE)!=null,
-						nf,
-						new SimpleDateFormat("yyyy/MM/dd'&nbsp;'HH:mm:ss'<small>'.S'</small>'"),
-						new SimpleDateFormat("yyyy/MM/dd'&nbsp;'HH:mm:ss.SSS Z (z)"),
-						CopsServlet.class.getPackage());
+					ResourceStatus_Jspm.write(
+							out,
+							getServletConfig().getServletName(),
+							resources.values(),
+							authentication,
+							request.getParameter(INLINE)!=null,
+							nf,
+							new SimpleDateFormat("yyyy/MM/dd'&nbsp;'HH:mm:ss'<small>'.S'</small>'"),
+							new SimpleDateFormat("yyyy/MM/dd'&nbsp;'HH:mm:ss.SSS Z (z)"),
+							CopsServlet.class.getPackage());
 				}
 				finally
 				{
