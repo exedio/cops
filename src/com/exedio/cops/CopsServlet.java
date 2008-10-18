@@ -111,6 +111,10 @@ public abstract class CopsServlet extends HttpServlet
 				nfs.setGroupingSeparator('\'');
 				final DecimalFormat nf = new DecimalFormat("", nfs);
 				final PrintStream out = new PrintStream(response.getOutputStream(), false, ENCODING);
+				try
+				{
+					assert requests.get()==null;
+					requests.set(request);
 				ResourceStatus_Jspm.write(
 						out,
 						getServletConfig().getServletName(),
@@ -121,6 +125,11 @@ public abstract class CopsServlet extends HttpServlet
 						new SimpleDateFormat("yyyy/MM/dd'&nbsp;'HH:mm:ss'<small>'.S'</small>'"),
 						new SimpleDateFormat("yyyy/MM/dd'&nbsp;'HH:mm:ss.SSS Z (z)"),
 						CopsServlet.class.getPackage());
+				}
+				finally
+				{
+					requests.remove();
+				}
 				out.close();
 				return;
 			}
