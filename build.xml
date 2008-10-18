@@ -251,6 +251,7 @@
 	</target>
 	
 	<target name="jspm" depends="runtime.jspm, example.jspm" />
+	<target name="src" depends="jspm" description="creates all sources, so the IDE does not complain" />
 	<target name="build" depends="compile, catalina.compile, test, jar, example, api" />
 	<target name="all" depends="build, jar.src, dist" />
 	<target name="tomcat" depends="example.tomcat" />
