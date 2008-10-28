@@ -247,35 +247,44 @@ public abstract class CopsServlet extends HttpServlet
 		System.out.println("--------"+id+"-----");
 		System.out.println("Date: " + new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS Z (z)").format(new Date()));
 		if(request!=null)
-		{
-			System.out.println("remoteAddr:  >" + request.getRemoteAddr()      + '<');
-			System.out.println("protocol:    >" + request.getProtocol()        + '<');
-			System.out.println("method:      >" + request.getMethod()          + '<');
-			System.out.println("remoteUser:  >" + request.getRemoteUser()      + '<');
-			System.out.println("requestURI:  >" + request.getRequestURI()      + '<');
-			System.out.println("contextPath: >" + request.getContextPath()     + '<');
-			System.out.println("servletPath: >" + request.getServletPath()     + '<');
-			System.out.println("pathInfo:    >" + request.getPathInfo()        + '<');
-			System.out.println("queryString: >" + request.getQueryString()     + '<');
-			System.out.println("scheme:      >" + request.getScheme()          + '<');
-			System.out.println("secure:      >" + request.isSecure()           + '<');
-			System.out.println("userPrincipal: >" + request.getUserPrincipal() + '<');
-			for(final Enumeration<?> e = request.getHeaderNames(); e.hasMoreElements(); )
-			{
-				final String name = (String)e.nextElement();
-				for(final Enumeration<?> ev = request.getHeaders(name); ev.hasMoreElements(); )
-					System.out.println("header >" + name + "<: >" + ((String)ev.nextElement()) + '<');
-			}
-			for(final Enumeration<?> e = request.getParameterNames(); e.hasMoreElements(); )
-			{
-				final String name = (String)e.nextElement();
-				for(final String value : request.getParameterValues(name))
-					System.out.println("parameter >" + name + "<: >" + value + '<');
-			}
-		}
+			System.out.print(report(request));
 		printException(System.out, exception);
 		System.out.println("-------/"+id+"-----");
 		return id;
+	}
+	
+	public final String report(final HttpServletRequest request)
+	{
+		final StringBuilder bf = new StringBuilder();
+		
+		bf.append("remoteAddr: >").append(request.getRemoteAddr()).append("<\n");
+		bf.append("protocol: >").append(request.getProtocol()).append("<\n");
+		bf.append("method: >").append(request.getMethod()).append("<\n");
+		bf.append("remoteUser: >").append(request.getRemoteUser()).append("<\n");
+		bf.append("requestURI: >").append(request.getRequestURI()).append("<\n");
+		bf.append("contextPath: >").append(request.getContextPath()).append("<\n");
+		bf.append("servletPath: >").append(request.getServletPath()).append("<\n");
+		bf.append("pathInfo: >").append(request.getPathInfo()).append("<\n");
+		bf.append("queryString: >").append(request.getQueryString()).append("<\n");
+		bf.append("scheme: >").append(request.getScheme()).append("<\n");
+		bf.append("secure: >").append(request.isSecure()).append("<\n");
+		bf.append("userPrincipal: >").append(request.getUserPrincipal()).append("<\n");
+		
+		for(final Enumeration<?> e = request.getHeaderNames(); e.hasMoreElements(); )
+		{
+			final String name = (String)e.nextElement();
+			for(final Enumeration<?> ev = request.getHeaders(name); ev.hasMoreElements(); )
+				bf.append("header >").append(name).append("<: >").append(((String)ev.nextElement())).append("<\n");
+		}
+		
+		for(final Enumeration<?> e = request.getParameterNames(); e.hasMoreElements(); )
+		{
+			final String name = (String)e.nextElement();
+			for(final String value : request.getParameterValues(name))
+				bf.append("parameter >").append(name).append("<: >").append(value + '<');
+		}
+		
+		return bf.toString();
 	}
 	
 	// ------------------- deprecated stuff -------------------
