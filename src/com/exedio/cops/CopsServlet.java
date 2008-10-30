@@ -281,7 +281,7 @@ public abstract class CopsServlet extends HttpServlet
 		{
 			final String name = (String)e.nextElement();
 			for(final String value : request.getParameterValues(name))
-				bf.append("parameter >").append(name).append("<: >").append(value + '<');
+				bf.append("parameter >").append(name).append("<: >").append(value + "<\n");
 		}
 		
 		return bf.toString();
