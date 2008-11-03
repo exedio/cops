@@ -253,7 +253,7 @@ public abstract class CopsServlet extends HttpServlet
 		return id;
 	}
 	
-	public final String report(final HttpServletRequest request)
+	public static final String report(final HttpServletRequest request)
 	{
 		final StringBuilder bf = new StringBuilder();
 		
