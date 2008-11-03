@@ -42,4 +42,12 @@
 		<url-pattern>/files/*</url-pattern>
 	</servlet-mapping>
 
+	<!-- don't know, why this is needed here,
+		  requestLimiter.html protects itself -->
+	<security-role><role-name>manager</role-name></security-role>
+	<security-constraint>
+		<web-resource-collection><url-pattern>/copsRequestLimiterStatus.html</url-pattern></web-resource-collection>
+		<auth-constraint><role-name>manager</role-name></auth-constraint>
+	</security-constraint>
+
 </web-app>

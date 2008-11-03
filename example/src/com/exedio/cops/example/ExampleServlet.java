@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.exedio.cops.Cop;
 import com.exedio.cops.CopsServlet;
 import com.exedio.cops.Pager;
+import com.exedio.cops.RequestLimiter;
 import com.exedio.cops.Resource;
 
 public final class ExampleServlet extends CopsServlet
@@ -42,11 +44,18 @@ public final class ExampleServlet extends CopsServlet
 	static final String REPORT_EXCEPTION = "reportexception";
 	
 	private final ArrayList<String> searchSet = new ArrayList<String>();
+	private final RequestLimiter requestLimiter = new RequestLimiter(200, 1000, "Sorry, please try again later.");
 	
 	public ExampleServlet()
 	{
 		for(int i = 1; i<=84; i++)
 			searchSet.add("paged " + i);
+	}
+
+	@Override
+	public void init(final ServletConfig config)
+	{
+		requestLimiter.init(config);
 	}
 
 	private static final void writeBody(
@@ -81,6 +90,9 @@ public final class ExampleServlet extends CopsServlet
 		throws IOException
 	{
 		//System.out.println("request ---" + request.getMethod() + "---" + request.getContextPath() + "---" + request.getServletPath() + "---" + request.getPathInfo() + "---" + request.getQueryString() + "---");
+		
+		if(requestLimiter.doRequest(request, response))
+			return;
 		
 		final NumberCop cop = NumberCop.getCop(request);
 		
