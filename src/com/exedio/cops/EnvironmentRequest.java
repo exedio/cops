@@ -40,6 +40,31 @@ final class EnvironmentRequest implements HttpServletRequest
 	{
 		this.environment = environment;
 	}
+	
+	String getURL(final Boolean needsSecure, final String url)
+	{
+		final boolean secure = needsSecure!=null && needsSecure.booleanValue();
+		
+		String e = environment;
+		if(secure)
+		{
+			final int pos = e.indexOf(":8080/");
+			if(pos>0)
+				e = e.substring(0, pos) + ":8443" + e.substring(pos+5);
+		}
+		else
+		{
+			final int pos = e.indexOf(":8443/");
+			if(pos>0)
+				e = e.substring(0, pos) + ":8080" + e.substring(pos+5);
+		}
+		
+		return
+			(secure ? "https://" : "http://") +
+			e +
+			'/' + url;
+		
+	}
 
 	public String getAuthType()
 	{
