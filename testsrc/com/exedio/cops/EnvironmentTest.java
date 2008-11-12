@@ -112,21 +112,21 @@ public class EnvironmentTest extends TestCase
 		}
 		{
 			final HttpsCop cop = new HttpsCop(true);
-			assertEquals("https://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", cop.toString()); // TODO should be 8443
-			assertEquals("https://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", cop.toAbsolute()); // TODO should be 8443
+			assertEquals("https://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", cop.toString());
+			assertEquals("https://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", cop.toAbsolute());
 		}
 		Cop.removeEnvironment();
 		Cop.setEnvironment(ENVIRONMENT_8443);
 		assertEquals(ENVIRONMENT_8443, Cop.getEnvironment());
 		{
 			final HttpsCop cop = new HttpsCop(null);
-			assertEquals("http://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", cop.toString()); // TODO should be 8080
-			assertEquals("http://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", cop.toAbsolute()); // TODO should be 8080
+			assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", cop.toString());
+			assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", cop.toAbsolute());
 		}
 		{
 			final HttpsCop cop = new HttpsCop(false);
-			assertEquals("http://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", cop.toString()); // TODO should be 8080
-			assertEquals("http://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", cop.toAbsolute()); // TODO should be 8080
+			assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", cop.toString());
+			assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", cop.toAbsolute());
 		}
 		{
 			final HttpsCop cop = new HttpsCop(true);

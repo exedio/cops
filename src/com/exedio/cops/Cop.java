@@ -127,9 +127,24 @@ public abstract class Cop
 				throw new IllegalStateException("no request available");
 			final Boolean needsSecure = needsSecure();
 			final boolean secure = needsSecure!=null && needsSecure.booleanValue();
+			
+			String environment = ((EnvironmentRequest)request).environment;
+			if(secure)
+			{
+				final int pos = environment.indexOf(":8080/");
+				if(pos>0)
+					environment = environment.substring(0, pos) + ":8443" + environment.substring(pos+5);
+			}
+			else
+			{
+				final int pos = environment.indexOf(":8443/");
+				if(pos>0)
+					environment = environment.substring(0, pos) + ":8080" + environment.substring(pos+5);
+			}
+			
 			return
 				(secure ? "https://" : "http://") +
-				((EnvironmentRequest)request).environment +
+				environment +
 				'/' + url;
 		}
 		final String encodedURL = response.encodeURL(url);
@@ -169,9 +184,24 @@ public abstract class Cop
 		{
 			final Boolean needsSecure = needsSecure();
 			final boolean secure = needsSecure!=null && needsSecure.booleanValue();
+			
+			String environment = ((EnvironmentRequest)request).environment;
+			if(secure)
+			{
+				final int pos = environment.indexOf(":8080/");
+				if(pos>0)
+					environment = environment.substring(0, pos) + ":8443" + environment.substring(pos+5);
+			}
+			else
+			{
+				final int pos = environment.indexOf(":8443/");
+				if(pos>0)
+					environment = environment.substring(0, pos) + ":8080" + environment.substring(pos+5);
+			}
+				
 			return
 				(secure ? "https://" : "http://") +
-				((EnvironmentRequest)request).environment +
+				environment +
 				'/' + url;
 		}
 		
