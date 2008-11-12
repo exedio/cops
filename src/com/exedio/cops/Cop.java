@@ -181,14 +181,21 @@ public abstract class Cop
 		if(needsSecure==null)
 			return encodedURL;
 		
-		if(needsSecure.booleanValue()==request.isSecure())
+		final boolean isSecure = request.isSecure();
+		if(needsSecure.booleanValue()==isSecure)
 			return encodedURL;
 		
 		String host = request.getHeader("Host");
-		if(host.endsWith(":8080"))
-			host = host.substring(0, host.length()-4) + "8443";
-		else if(host.endsWith(":8443"))
-			host = host.substring(0, host.length()-4) + "8080";
+		if(!isSecure)
+		{
+			if(host.endsWith(":8080"))
+				host = host.substring(0, host.length()-4) + "8443";
+		}
+		else
+		{
+			if(host.endsWith(":8443"))
+				host = host.substring(0, host.length()-4) + "8080";
+		}
 		
 		return
 			(needsSecure?"https://":"http://") +
