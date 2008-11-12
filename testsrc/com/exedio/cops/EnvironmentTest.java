@@ -41,6 +41,7 @@ public class EnvironmentTest extends TestCase
 	
 	static final String ENVIRONMENT_8080 = "host.exedio.com:8080/contextPath/servletPath";
 	static final String ENVIRONMENT_8443 = "host.exedio.com:8443/contextPath/servletPath";
+	static final Resource resource = new Resource("ResourceTest.class", "major/minor");
 	
 	public void testIt()
 	{
@@ -84,6 +85,8 @@ public class EnvironmentTest extends TestCase
 			assertEquals("https://host.exedio.com/contextPath/servletPath/test.html?param1=value1", cop.toAbsolute());
 		}
 		assertEquals(CopTest.ENVIRONMENT, Cop.getEnvironment());
+		assertEquals("http://host.exedio.com/contextPath/servletPath/ResourceTest.class", resource.toString());
+		assertEquals("http://host.exedio.com/contextPath/servletPath/ResourceTest.class", resource.toAbsolute());
 		
 		try
 		{
@@ -95,6 +98,7 @@ public class EnvironmentTest extends TestCase
 			assertEquals("environment already available", e.getMessage());
 		}
 		assertEquals(CopTest.ENVIRONMENT, Cop.getEnvironment());
+		
 		
 		// port adjustments
 		Cop.removeEnvironment();
@@ -115,7 +119,10 @@ public class EnvironmentTest extends TestCase
 			assertEquals("https://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", cop.toString());
 			assertEquals("https://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", cop.toAbsolute());
 		}
+		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", resource.toString());
+		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", resource.toAbsolute());
 		Cop.removeEnvironment();
+		
 		Cop.setEnvironment(ENVIRONMENT_8443);
 		assertEquals(ENVIRONMENT_8443, Cop.getEnvironment());
 		{
@@ -133,5 +140,7 @@ public class EnvironmentTest extends TestCase
 			assertEquals("https://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", cop.toString());
 			assertEquals("https://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", cop.toAbsolute());
 		}
+		assertEquals("http://host.exedio.com:8443/contextPath/servletPath/ResourceTest.class", resource.toString()); // TODO should be 8080
+		assertEquals("http://host.exedio.com:8443/contextPath/servletPath/ResourceTest.class", resource.toAbsolute()); // TODO should be 8080
 	}
 }
