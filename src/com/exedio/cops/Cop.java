@@ -228,24 +228,6 @@ public abstract class Cop
 		return "POST".equals(request.getMethod());
 	}
 	
-	/**
-	 * @deprecated Use {@link BasicAuthorization#getUserAndPassword(HttpServletRequest)} instead
-	 */
-	@Deprecated
-	public static final String[] authorizeBasic(final HttpServletRequest request)
-	{
-		return BasicAuthorization.getUserAndPassword(request);
-	}
-	
-	/**
-	 * @deprecated Use {@link BasicAuthorization#reject(HttpServletResponse, String)} instead
-	 */
-	@Deprecated
-	public static final void rejectAuthorizeBasic(final HttpServletResponse response, final String realm)
-	{
-		BasicAuthorization.reject(response, realm);
-	}
-	
 	public static final boolean getBooleanParameter(
 			final HttpServletRequest request,
 			final String name)
@@ -308,5 +290,23 @@ public abstract class Cop
 	{
 		assert request==CopsServlet.requests.get();
 		return toAbsolute();
+	}
+	
+	/**
+	 * @deprecated Use {@link BasicAuthorization#getUserAndPassword(HttpServletRequest)} instead
+	 */
+	@Deprecated
+	public static final String[] authorizeBasic(final HttpServletRequest request)
+	{
+		return BasicAuthorization.getUserAndPassword(request);
+	}
+	
+	/**
+	 * @deprecated Use {@link BasicAuthorization#reject(HttpServletResponse, String)} instead
+	 */
+	@Deprecated
+	public static final void rejectAuthorizeBasic(final HttpServletResponse response, final String realm)
+	{
+		BasicAuthorization.reject(response, realm);
 	}
 }
