@@ -98,7 +98,7 @@ public final class Resource
 			throw new IllegalStateException("no request available");
 		
 		if(request instanceof EnvironmentRequest)
-			return "http://" + ((EnvironmentRequest)request).environment + '/' + name;
+			return ((EnvironmentRequest)request).getURL(null, name);
 		
 		return request.getContextPath() + request.getServletPath() + '/' + name;
 	}
@@ -110,7 +110,7 @@ public final class Resource
 			throw new IllegalStateException("no request available");
 		
 		if(request instanceof EnvironmentRequest)
-			return "http://" + ((EnvironmentRequest)request).environment + '/' + name;
+			return ((EnvironmentRequest)request).getURL(null, name);
 		
 		return
 			request.getScheme() + "://" +

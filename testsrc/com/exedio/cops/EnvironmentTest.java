@@ -140,7 +140,7 @@ public class EnvironmentTest extends TestCase
 			assertEquals("https://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", cop.toString());
 			assertEquals("https://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", cop.toAbsolute());
 		}
-		assertEquals("http://host.exedio.com:8443/contextPath/servletPath/ResourceTest.class", resource.toString()); // TODO should be 8080
-		assertEquals("http://host.exedio.com:8443/contextPath/servletPath/ResourceTest.class", resource.toAbsolute()); // TODO should be 8080
+		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", resource.toString());
+		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", resource.toAbsolute());
 	}
 }
