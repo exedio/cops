@@ -59,10 +59,7 @@ final class EnvironmentRequest implements HttpServletRequest
 				e = e.substring(0, pos) + ":8080" + e.substring(pos+5);
 		}
 		
-		return
-			(secure ? "https://" : "http://") +
-			e +
-			'/' + url;
+		return (secure ? "https://" : "http://") + e + '/' + url;
 		
 	}
 
