@@ -99,7 +99,7 @@ public abstract class CopsServlet extends HttpServlet
 			{
 				if(!request.isUserInRole("manager"))
 				{
-					Cop.rejectAuthorizeBasic(response, "Cops Resource Status");
+					BasicAuthorization.reject(response, "Cops Resource Status");
 					return;
 				}
 				

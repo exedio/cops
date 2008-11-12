@@ -228,37 +228,22 @@ public abstract class Cop
 		return "POST".equals(request.getMethod());
 	}
 	
-	private static final String BASIC = "Basic ";
-	private static final int BASIC_LENGTH = BASIC.length();
-	
+	/**
+	 * @deprecated Use {@link BasicAuthorization#getUserAndPassword(HttpServletRequest)} instead
+	 */
+	@Deprecated
 	public static final String[] authorizeBasic(final HttpServletRequest request)
 	{
-		final String authorization = request.getHeader("Authorization");
-		//System.out.println("authorization:"+authorization);
-		if(authorization==null||!authorization.startsWith(BASIC))
-			return null;
-		
-		final String basicCookie = authorization.substring(BASIC_LENGTH);
-		//System.out.println("basicCookie:"+basicCookie);
-		
-		final String basicCookiePlain = new String(Base64.decode(basicCookie));
-		//System.out.println("basicCookiePlain:"+basicCookiePlain);
-		
-		final int colon = basicCookiePlain.indexOf(':');
-		if(colon<=0 || colon+1>=basicCookiePlain.length())
-			return null;
-		
-		final String userid = basicCookiePlain.substring(0, colon);
-		final String password = basicCookiePlain.substring(colon+1);
-		//System.out.println("userid:"+userid);
-		//System.out.println("password:"+password);
-		return new String[]{userid, password};
+		return BasicAuthorization.getUserAndPassword(request);
 	}
 	
+	/**
+	 * @deprecated Use {@link BasicAuthorization#reject(HttpServletResponse, String)} instead
+	 */
+	@Deprecated
 	public static final void rejectAuthorizeBasic(final HttpServletResponse response, final String realm)
 	{
-		response.addHeader("WWW-Authenticate", "Basic realm=\"" + realm + '"');
-		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+		BasicAuthorization.reject(response, realm);
 	}
 	
 	public static final boolean getBooleanParameter(

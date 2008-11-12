@@ -137,7 +137,7 @@ public final class RequestLimiter
 	{
 		if(!request.isUserInRole("manager"))
 		{
-			Cop.rejectAuthorizeBasic(response, "Cops Request Limiter");
+			BasicAuthorization.reject(response, "Cops Request Limiter");
 			return;
 		}
 		
