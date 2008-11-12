@@ -224,6 +224,16 @@ public class CopTest extends TestCase
 		assertEquals("/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(null).toString());
 		assertEquals("/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(true).toString());
 		assertEquals("http://host.exedio.com/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(false).toString());
+		
+		// port adjustments
+		CopsServlet.requests.set(new HttpsReq(false, 8080));
+		assertEquals("/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(null).toString());
+		assertEquals("/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(false).toString());
+		assertEquals("https://host.exedio.com:8443/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(true).toString());
+		CopsServlet.requests.set(new HttpsReq(true,  8443));
+		assertEquals("/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(null).toString());
+		assertEquals("/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(true).toString());
+		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(false).toString());
 	}
 	
 	static final class HttpsCop extends Cop
@@ -247,10 +257,17 @@ public class CopTest extends TestCase
 	static final class HttpsReq extends DummyRequest
 	{
 		final boolean secure;
+		final int port;
 		
 		HttpsReq(final boolean secure)
 		{
+			this(secure, -1);
+		}
+		
+		HttpsReq(final boolean secure, final int port)
+		{
 			this.secure = secure;
+			this.port = port;
 		}
 		
 		@Override
@@ -263,7 +280,7 @@ public class CopTest extends TestCase
 		public String getHeader(final String name)
 		{
 			if("Host".equals(name))
-				return "host.exedio.com";
+				return "host.exedio.com" + (port>=0 ? (":"+port) : "");
 			else
 				throw new RuntimeException();
 		}
