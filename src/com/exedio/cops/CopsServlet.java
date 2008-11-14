@@ -34,6 +34,7 @@ import java.util.Enumeration;
 import java.util.LinkedHashMap;
 import java.util.Random;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -115,9 +116,10 @@ public abstract class CopsServlet extends HttpServlet
 				{
 					assert requests.get()==null;
 					requests.set(request);
+					final ServletConfig config = getServletConfig();
 					ResourceStatus_Jspm.write(
 							out,
-							getServletConfig().getServletName(),
+							config!=null ? config.getServletName() : null, // TODO why can config be null?
 							resources.values(),
 							authentication,
 							request.getParameter(INLINE)!=null,
