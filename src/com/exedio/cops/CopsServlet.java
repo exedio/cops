@@ -105,8 +105,6 @@ public abstract class CopsServlet extends HttpServlet
 				}
 				
 				response.setContentType("text/html; charset="+ENCODING);
-				final Principal principal = request.getUserPrincipal();
-				final String authentication = principal!=null ? principal.getName() : null;
 				final DecimalFormatSymbols nfs = new DecimalFormatSymbols();
 				nfs.setDecimalSeparator(',');
 				nfs.setGroupingSeparator('\'');
@@ -121,7 +119,7 @@ public abstract class CopsServlet extends HttpServlet
 							out,
 							config!=null ? config.getServletName() : null, // TODO why can config be null?
 							resources.values(),
-							authentication,
+							getAuthentication(request),
 							request.getParameter(INLINE)!=null,
 							nf,
 							new SimpleDateFormat("yyyy/MM/dd'&nbsp;'HH:mm:ss'<small>'.S'</small>'"),
@@ -184,6 +182,12 @@ public abstract class CopsServlet extends HttpServlet
 	protected abstract void doRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException;
 
+
+	public static final String getAuthentication(final HttpServletRequest request)
+	{
+		final Principal principal = request.getUserPrincipal();
+		return principal!=null ? principal.getName() : null;
+	}
 
 	public final void printException(final PrintStream out, final Exception exception)
 	{
