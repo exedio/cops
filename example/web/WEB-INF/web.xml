@@ -30,6 +30,15 @@
 	</security-constraint>
 
 	<servlet>
+		<servlet-name>coloredTable</servlet-name>
+		<servlet-class>com.exedio.cops.example.ColoredTableServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>coloredTable</servlet-name>
+		<url-pattern>/coloredTable</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
 		<servlet-name>files</servlet-name>
 		<servlet-class>com.exedio.cops.FileServlet</servlet-class>
 		<init-param>

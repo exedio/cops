@@ -1,0 +1,93 @@
+<%
+/*
+ * Copyright (C) 2004-2008  exedio GmbH (www.exedio.com)
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
+package com.exedio.cops.example;
+
+import java.io.PrintStream;
+
+import com.exedio.cops.ColoredTable;
+import com.exedio.cops.CopsServlet;
+
+final class ColoredTableServlet_Jspm
+{
+	static final void write(final PrintStream out)
+	{
+%><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=<%=CopsServlet.ENCODING%>">
+		<title>Cops Example Colored Table</title>
+		<style>
+			table th
+			{
+				text-align:left;
+				vertical-align:top;
+				background:#ccc;
+				border:solid 1px #ccc;
+				padding:1px 3px;
+				font-weight:normal;
+			}
+			
+			table td
+			{
+				text-align:right;
+				vertical-align:top;
+				border:solid 1px #ccc;
+				padding:1px 3px;
+			}
+			
+			table th.color0 { margin:0px; background:#ccc; border-color:#ccc; text-align:left; padding-left:0.3em; }
+			table th.color1 { margin:0px; background:#fff; border-color:#fff; text-align:left; padding-left:0.3em; }
+			
+			table th.color0s { margin:0px; background:#ccc; border-color:#ccc; text-align:center; min-width:1.5em; }
+			table th.color1s { margin:0px; background:#fff; border-color:#fff; text-align:center; min-width:1.5em; }
+			
+			table td.color0 { margin:0px; background:#ddf; border-color:#ddf; }
+			table td.color1 { margin:0px; background:#fff; border-color:#ddf; }
+			
+			span.help
+			{
+				font-size:70%;
+				vertical-align:top;
+				color:#375798;
+			}
+		</style>
+	</head>
+	<body>
+		<table id="coloredTable"><%
+			ColoredTable.writeHeader(
+				out,
+				new String[]{"name1", "name2", "name3", "name4", "name5"},
+				new String[]{"sn1", "sn2", "sn3"});
+			%>
+			<tr><%
+				ColoredTable.writeData(out, new String[]{"a1", "a2", "a3", "a4", "a5"});
+				%>
+			</tr>
+			<tr><%
+				ColoredTable.writeData(out, new String[]{"b1", "b2", "b3", "b4", "b5"});
+				%>
+			</tr>
+		</table>
+	</body>
+</html><%
+		
+	}
+}
+%>
