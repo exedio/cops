@@ -28,7 +28,7 @@ import com.exedio.cops.Pager;
 
 public class NumberCop extends Cop implements Pageable
 {
-	private static final String NAME = "number.html";
+	private static final String PATH_INFO = "number.html";
 	private static final String NUMBER = "n";
 	private static final String BOOL = "b";
 	private static final String STRING = "s";
@@ -52,7 +52,7 @@ public class NumberCop extends Cop implements Pageable
 	
 	NumberCop(final int number, final boolean bool, final String string, final Secure secure, final Pager pager)
 	{
-		super(NAME);
+		super(PATH_INFO);
 		this.number = number;
 		this.bool = bool;
 		this.string = string;
