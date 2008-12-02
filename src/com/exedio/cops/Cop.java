@@ -191,6 +191,41 @@ public abstract class Cop
 			encodedURL;
 	}
 	
+	public final boolean redirectToCanonical()
+	{
+		final HttpServletRequest request = CopsServlet.requests.get();
+		if(request==null)
+			throw new IllegalStateException("no request available");
+		if(request instanceof EnvironmentRequest)
+			throw new RuntimeException("redirectToCanonical not implemented for setEnvironment");
+		if(!"GET".equals(request.getMethod()))
+			return false;
+		
+		final String expected = "/" + (this.url!=null ? this.url.toString() : name);
+		final String actualPathInfo = request.getPathInfo();
+		final String actualQueryString = request.getQueryString();
+		final String actual = actualQueryString!=null ? (actualPathInfo + '?' + actualQueryString) : actualPathInfo;
+		if(expected.equals(actual))
+		{
+			final Boolean needsSecure = needsSecure();
+			if(needsSecure==null)
+				return false;
+			
+			final boolean isSecure = request.isSecure();
+			if(needsSecure.booleanValue()==isSecure)
+				return false;
+		}
+		
+		final String location = toStringNonEncoded();
+		System.out.println("cops redirectToCanonical from --" + actual + "-- to --" + location + "--");
+		
+		final HttpServletResponse response = CopsServlet.responses.get();
+		response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
+		response.setHeader("Location", location);
+		
+		return true;
+	}
+	
 	public static String getEnvironment()
 	{
 		final HttpServletRequest request  = CopsServlet.requests.get();

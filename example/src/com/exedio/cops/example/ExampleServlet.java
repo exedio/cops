@@ -95,6 +95,8 @@ public final class ExampleServlet extends CopsServlet
 			return;
 		
 		final NumberCop cop = NumberCop.getCop(request);
+		if(cop.redirectToCanonical())
+			return;
 		
 		final Pager pager = cop.pager;
 		final List<String> searchResult = subList(searchSet, pager.getOffset(), pager.getOffset()+pager.getLimit());
