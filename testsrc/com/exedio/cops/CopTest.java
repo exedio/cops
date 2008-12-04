@@ -113,7 +113,7 @@ public class CopTest extends TestCase
 		}
 		catch(IllegalArgumentException e)
 		{
-			assertEquals("cop name \"shop?hallo.html\" must not contain character ?", e.getMessage());
+			assertEquals("cop pathInfo \"shop?hallo.html\" must not contain character ?", e.getMessage());
 		}
 		try
 		{
@@ -122,7 +122,7 @@ public class CopTest extends TestCase
 		}
 		catch(IllegalArgumentException e)
 		{
-			assertEquals("cop name \"shop&hallo.html\" must not contain character &", e.getMessage());
+			assertEquals("cop pathInfo \"shop&hallo.html\" must not contain character &", e.getMessage());
 		}
 		try
 		{
@@ -131,7 +131,7 @@ public class CopTest extends TestCase
 		}
 		catch(IllegalArgumentException e)
 		{
-			assertEquals("cop name \"shop;hallo.html\" must not contain character ;", e.getMessage());
+			assertEquals("cop pathInfo \"shop;hallo.html\" must not contain character ;", e.getMessage());
 		}
 		try
 		{

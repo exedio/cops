@@ -26,19 +26,19 @@ import javax.servlet.http.HttpServletResponse;
 
 public abstract class Cop
 {
-	private final String name;
+	private final String pathInfo;
 	private StringBuilder url = null;
 	
-	public Cop(final String name)
+	public Cop(final String pathInfo)
 	{
-		for(final char c : FORBIDDEN_IN_NAME)
-			if(name.indexOf(c)>=0)
-				throw new IllegalArgumentException("cop name \"" + name + "\" must not contain character " + c);
+		for(final char c : FORBIDDEN_IN_PATH_INFO)
+			if(pathInfo.indexOf(c)>=0)
+				throw new IllegalArgumentException("cop pathInfo \"" + pathInfo + "\" must not contain character " + c);
 
-		this.name = name;
+		this.pathInfo = pathInfo;
 	}
 	
-	private static final char[] FORBIDDEN_IN_NAME = new char[] {'?', '&', ';'};
+	private static final char[] FORBIDDEN_IN_PATH_INFO = new char[] {'?', '&', ';'};
 	
 	protected final void addParameter(final String key, final boolean value)
 	{
@@ -82,7 +82,7 @@ public abstract class Cop
 		
 		if(url==null)
 		{
-			url = new StringBuilder(name);
+			url = new StringBuilder(pathInfo);
 			url.append('?');
 		}
 		else
@@ -115,7 +115,7 @@ public abstract class Cop
 	
 	public final String toAbsolute()
 	{
-		final String url = this.url!=null ? this.url.toString() : name;
+		final String url = this.url!=null ? this.url.toString() : pathInfo;
 		
 		final HttpServletResponse response = CopsServlet.responses.get();
 		if(response==null)
@@ -151,7 +151,7 @@ public abstract class Cop
 	 */
 	public final String toStringNonEncoded()
 	{
-		final String url = this.url!=null ? this.url.toString() : name;
+		final String url = this.url!=null ? this.url.toString() : pathInfo;
 		
 		final HttpServletRequest  request  = CopsServlet.requests.get();
 		final HttpServletResponse response = CopsServlet.responses.get();
@@ -213,7 +213,7 @@ public abstract class Cop
 		if(!"GET".equals(request.getMethod()))
 			return false;
 		
-		final String expected = request.getContextPath() + request.getServletPath() + '/' + (this.url!=null ? this.url.toString() : name);
+		final String expected = request.getContextPath() + request.getServletPath() + '/' + (this.url!=null ? this.url.toString() : pathInfo);
 		final String actualRequestURI = request.getRequestURI();
 		final String actualQueryString = request.getQueryString();
 		final String actual = actualQueryString!=null ? (actualRequestURI + '?' + actualQueryString) : actualRequestURI;
