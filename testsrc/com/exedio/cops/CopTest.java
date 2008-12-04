@@ -142,9 +142,9 @@ public class CopTest extends TestCase
 			assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(test.html?param1=ding&param2=dong)", cop.toAbsolute());
 		}
 		{
-			final TestCop cop = new TestCop(0.0, "shop/hallo.html");
-			assertEquals("/contextPath/servletPath/encoded(shop/hallo.html)", cop.toString());
-			assertEquals("/contextPath/servletPath/encoded(shop/hallo.html)", cop.toStringNonEncoded());
+			final TestCop cop = new TestCop(0.0, "shopXhallo.html");
+			assertEquals("/contextPath/servletPath/encoded(shopXhallo.html)", cop.toString());
+			assertEquals("/contextPath/servletPath/encoded(shopXhallo.html)", cop.toStringNonEncoded());
 		}
 		{
 			final String ding = "slash/semi;question?amp&uuml\u00fcgarten#";
