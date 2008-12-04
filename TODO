@@ -6,6 +6,7 @@ TODO for cops
 	- with text or with image
 	- on IE as well, with just .x and .y for images
 	- with reliable value, independent of button description
+* general solution against url guessing
 * RequestLimiter
 	- customizable error page
 	- error mail
