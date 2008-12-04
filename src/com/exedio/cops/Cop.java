@@ -26,25 +26,19 @@ import javax.servlet.http.HttpServletResponse;
 
 public abstract class Cop
 {
-	private final String[] dirs;
 	private final String name;
 	private StringBuilder url = null;
 	
 	public Cop(final String name)
 	{
-		this((String[])null, name);
-	}
-	public Cop(final String[] dirs, final String name)
-	{
 		for(final char c : FORBIDDEN_IN_NAME)
 			if(name.indexOf(c)>=0)
 				throw new IllegalArgumentException("cop name \"" + name + "\" must not contain character " + c);
 
-		this.dirs = dirs;
 		this.name = name;
 	}
 	
-	private static final char[] FORBIDDEN_IN_NAME = new char[] {'?', '&', ';', '/'};
+	private static final char[] FORBIDDEN_IN_NAME = new char[] {'?', '&', ';'};
 	
 	protected final void addParameter(final String key, final boolean value)
 	{
@@ -78,18 +72,6 @@ public abstract class Cop
 		addParameter(key, Long.toString(value, COMPACT_LONG_RADIX));
 	}
 	
-	private static final String encodeDir(final String s)
-	{
-		try
-		{
-			return URLEncoder.encode(s.replace(' ', '-'), CopsServlet.ENCODING);
-		}
-		catch(UnsupportedEncodingException e)
-		{
-			throw new RuntimeException(e);
-		}
-	}
-	
 	/**
 	 * Does nothing, if <tt>value==null</tt>.
 	 */
@@ -100,15 +82,7 @@ public abstract class Cop
 		
 		if(url==null)
 		{
-			if(dirs==null)
-				url = new StringBuilder(name);
-			else
-			{
-				url = new StringBuilder();
-				for(String dir : dirs)
-					url.append(encodeDir(dir)).append('/');
-				url.append(name);
-			}
+			url = new StringBuilder(name);
 			url.append('?');
 		}
 		else
@@ -227,21 +201,7 @@ public abstract class Cop
 		if(!"GET".equals(request.getMethod()))
 			return false;
 		
-		final String expected;
-		if(url!=null)
-		{
-			expected = "/" + this.url.toString();
-		}
-		else
-		{
-			final StringBuilder bf = new StringBuilder();
-			bf.append('/');
-			if(dirs!=null)
-				for(String dir : dirs)
-					bf.append(encodeDir(dir)).append('/');
-			bf.append(name);
-			expected = bf.toString();
-		}
+		final String expected = "/" + (this.url!=null ? this.url.toString() : name);
 		final String actualPathInfo = request.getPathInfo();
 		final String actualQueryString = request.getQueryString();
 		final String actual = actualQueryString!=null ? (actualPathInfo + '?' + actualQueryString) : actualPathInfo;
