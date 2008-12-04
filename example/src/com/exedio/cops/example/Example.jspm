@@ -101,6 +101,13 @@ final class Example_Jspm
 		}
 		%>
 		</ol>
+		Directory Level:
+		<a href="<%=cop.toDirLevel(0)%>">0</a> |
+		<a href="<%=cop.toDirLevel(1)%>">1</a> |
+		<a href="<%=cop.toDirLevel(2)%>">2</a> |
+		<a href="<%=cop.toDirLevel(3)%>">3</a> |
+		<a href="<%=cop.toDirLevel(4)%>">4</a>
+		<br>
 		<a href="files/" target="_blank">files</a>
 		<br>
 		<a href="copsRequestLimiterStatus.html" target="_blank">requestLimiterStatus</a>

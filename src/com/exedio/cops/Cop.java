@@ -191,6 +191,18 @@ public abstract class Cop
 			encodedURL;
 	}
 	
+	public static final String encodeNaturalLanguageSegment(final String s)
+	{
+		try
+		{
+			return URLEncoder.encode(s.replace(' ', '-').replace('/', '-'), CopsServlet.ENCODING);
+		}
+		catch(UnsupportedEncodingException e)
+		{
+			throw new RuntimeException(e);
+		}
+	}
+	
 	public final boolean redirectToCanonical()
 	{
 		final HttpServletRequest request = CopsServlet.requests.get();
@@ -201,10 +213,10 @@ public abstract class Cop
 		if(!"GET".equals(request.getMethod()))
 			return false;
 		
-		final String expected = "/" + (this.url!=null ? this.url.toString() : name);
-		final String actualPathInfo = request.getPathInfo();
+		final String expected = request.getContextPath() + request.getServletPath() + '/' + (this.url!=null ? this.url.toString() : name);
+		final String actualRequestURI = request.getRequestURI();
 		final String actualQueryString = request.getQueryString();
-		final String actual = actualQueryString!=null ? (actualPathInfo + '?' + actualQueryString) : actualPathInfo;
+		final String actual = actualQueryString!=null ? (actualRequestURI + '?' + actualQueryString) : actualRequestURI;
 		if(expected.equals(actual))
 		{
 			final Boolean needsSecure = needsSecure();
