@@ -157,7 +157,7 @@ public final class RequestLimiter
 			try
 			{
 				outStream = response.getOutputStream();
-				out = new PrintStream(outStream, false, CopsServlet.ENCODING);
+				out = new PrintStream(outStream, false, CopsServlet.UTF8);
 				RequestLimiter_Jspm.write(out, path, threshold, interval, deniedRequests);
 			}
 			finally

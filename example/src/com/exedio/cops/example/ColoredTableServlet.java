@@ -37,7 +37,7 @@ public final class ColoredTableServlet extends HttpServlet
 			final HttpServletResponse response)
 		throws IOException
 	{
-			final PrintStream out = new PrintStream(response.getOutputStream(), false, CopsServlet.ENCODING);
+			final PrintStream out = new PrintStream(response.getOutputStream(), false, CopsServlet.UTF8);
 			ColoredTableServlet_Jspm.write(out);
 			out.close();
 	}

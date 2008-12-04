@@ -92,7 +92,7 @@ public abstract class Cop
 		url.append('=');
 		try
 		{
-			url.append(URLEncoder.encode(value, CopsServlet.ENCODING));
+			url.append(URLEncoder.encode(value, CopsServlet.UTF8));
 		}
 		catch(UnsupportedEncodingException e)
 		{
@@ -195,7 +195,7 @@ public abstract class Cop
 	{
 		try
 		{
-			return URLEncoder.encode(s.replace(' ', '-').replace('/', '-'), CopsServlet.ENCODING);
+			return URLEncoder.encode(s.replace(' ', '-').replace('/', '-'), CopsServlet.UTF8);
 		}
 		catch(UnsupportedEncodingException e)
 		{

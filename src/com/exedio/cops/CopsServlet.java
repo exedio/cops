@@ -45,7 +45,7 @@ public abstract class CopsServlet extends HttpServlet
 	static final ThreadLocal<HttpServletRequest> requests = new ThreadLocal<HttpServletRequest>();
 	static final ThreadLocal<HttpServletResponse> responses = new ThreadLocal<HttpServletResponse>();
 	
-	public static final String ENCODING = "utf-8";
+	public static final String UTF8 = "utf-8";
 	
 	private final LinkedHashMap<String, Resource> resources;
 	
@@ -104,12 +104,12 @@ public abstract class CopsServlet extends HttpServlet
 					return;
 				}
 				
-				response.setContentType("text/html; charset="+ENCODING);
+				response.setContentType("text/html; charset="+UTF8);
 				final DecimalFormatSymbols nfs = new DecimalFormatSymbols();
 				nfs.setDecimalSeparator(',');
 				nfs.setGroupingSeparator('\'');
 				final DecimalFormat nf = new DecimalFormat("", nfs);
-				final PrintStream out = new PrintStream(response.getOutputStream(), false, ENCODING);
+				final PrintStream out = new PrintStream(response.getOutputStream(), false, UTF8);
 				try
 				{
 					assert requests.get()==null;
@@ -156,8 +156,8 @@ public abstract class CopsServlet extends HttpServlet
 	private final void doRequestPrivate(final HttpServletRequest request, final HttpServletResponse response)
 		throws ServletException, IOException
 	{
-		request.setCharacterEncoding(ENCODING);
-		response.setContentType("text/html; charset="+ENCODING);
+		request.setCharacterEncoding(UTF8);
+		response.setContentType("text/html; charset="+UTF8);
 
 		response.addHeader("Cache-Control", "no-cache");
 		response.addHeader("Cache-Control", "no-store");
@@ -303,4 +303,10 @@ public abstract class CopsServlet extends HttpServlet
 	{
 		return reportException(null, exception);
 	}
+	
+	/**
+	 * @deprecated Use {@link #UTF8} instead
+	 */
+	@Deprecated
+	public static final String ENCODING = UTF8;
 }

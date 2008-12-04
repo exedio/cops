@@ -67,7 +67,7 @@ public final class ExampleServlet extends CopsServlet
 		try
 		{
 			outStream = response.getOutputStream();
-			final byte[] outBytes = out.toString().getBytes(ENCODING);
+			final byte[] outBytes = out.toString().getBytes(UTF8);
 			outStream.write(outBytes);
 		}
 		finally
