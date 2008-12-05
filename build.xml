@@ -27,6 +27,8 @@
 				<pathelement location="lib/commons-fileupload.jar" />
 				<pathelement location="lib/commons-io.jar" />
 			</classpath>
+			<compilerarg value="-encoding" />
+			<compilerarg value="ascii" />
 		</javac>
 	</target>
 	
@@ -42,6 +44,8 @@
 				<pathelement location="lib/servlet-api.jar" />
 				<pathelement location="lib/catalina.jar" />
 			</classpath>
+			<compilerarg value="-encoding" />
+			<compilerarg value="ascii" />
 		</javac>
 	</target>
 	
@@ -58,6 +62,8 @@
 				<pathelement location="lib/junit.jar" />
 			</classpath>
 			<compilerarg value="-Xlint" />
+			<compilerarg value="-encoding" />
+			<compilerarg value="ascii" />
 		</javac>
 	</target>
 	
@@ -125,6 +131,8 @@
 				<pathelement location="lib/servlet-api.jar" />
 			</classpath>
 			<compilerarg value="-Xlint" />
+			<compilerarg value="-encoding" />
+			<compilerarg value="ascii" />
 		</javac>
 		<copy todir="build/exampleclasses">
 			<fileset dir="example/src">
