@@ -203,21 +203,21 @@ public class CopTest extends TestCase
 		}
 		{
 			final TestCop cop = new TestCop(new String[]{"dir1", "dir2 /;\u00e4"});
-			assertEquals("/contextPath/servletPath/encoded(dir1/dir2-/test.html)", cop.toString()); // TODO
-			assertEquals("/contextPath/servletPath/encoded(dir1/dir2-/test.html)", cop.toStringNonEncoded()); // TODO
-			assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(dir1/dir2-/test.html)", cop.toAbsolute()); // TODO
+			assertEquals("/contextPath/servletPath/encoded(dir1/dir2/test.html)", cop.toString());
+			assertEquals("/contextPath/servletPath/encoded(dir1/dir2/test.html)", cop.toStringNonEncoded());
+			assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(dir1/dir2/test.html)", cop.toAbsolute());
 		}
 		{
 			final TestCop cop = new TestCop(new String[]{"dir1", "dir2 /;\u00e4"}, "dong");
-			assertEquals("/contextPath/servletPath/encoded(dir1/dir2-/test.html?param1=dong)", cop.toString()); // TODO
-			assertEquals("/contextPath/servletPath/encoded(dir1/dir2-/test.html?param1=dong)", cop.toStringNonEncoded()); // TODO
-			assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(dir1/dir2-/test.html?param1=dong)", cop.toAbsolute()); // TODO
+			assertEquals("/contextPath/servletPath/encoded(dir1/dir2/test.html?param1=dong)", cop.toString());
+			assertEquals("/contextPath/servletPath/encoded(dir1/dir2/test.html?param1=dong)", cop.toStringNonEncoded());
+			assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(dir1/dir2/test.html?param1=dong)", cop.toAbsolute());
 		}
 		{
 			final TestCop cop = new TestCop(new String[]{"dir1", "dir2 /;\u00e4"}, "dong", "ding");
-			assertEquals("/contextPath/servletPath/encoded(dir1/dir2-/test.html?param1=dong&amp;param2=ding)", cop.toString()); // TODO
-			assertEquals("/contextPath/servletPath/encoded(dir1/dir2-/test.html?param1=dong&param2=ding)", cop.toStringNonEncoded()); // TODO
-			assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(dir1/dir2-/test.html?param1=dong&param2=ding)", cop.toAbsolute()); // TODO
+			assertEquals("/contextPath/servletPath/encoded(dir1/dir2/test.html?param1=dong&amp;param2=ding)", cop.toString());
+			assertEquals("/contextPath/servletPath/encoded(dir1/dir2/test.html?param1=dong&param2=ding)", cop.toStringNonEncoded());
+			assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(dir1/dir2/test.html?param1=dong&param2=ding)", cop.toAbsolute());
 		}
 		{
 			final TestCop cop = new TestCop("ding", null);

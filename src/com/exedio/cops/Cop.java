@@ -207,22 +207,22 @@ public abstract class Cop
 				final StringBuilder bf = new StringBuilder(l);
 				if(i>0)
 					bf.append(s.substring(0, i));
-				boolean firstSkipped = true;
+				boolean skipped = false;
 				for(; i<l; i++)
 				{
 					final char c2 = s.charAt(i);
 					if(('0'<=c2&&c2<='9')||('a'<=c2&&c2<='z')||('A'<=c2&&c2<='Z'))
 					{
+						if(skipped)
+						{
+							bf.append(NATURAL_PLACE_HOLDER);
+							skipped = false;
+						}
 						bf.append(c2);
-						firstSkipped = true;
 					}
 					else
 					{
-						if(firstSkipped)
-						{
-							bf.append(NATURAL_PLACE_HOLDER);
-							firstSkipped = false;
-						}
+						skipped = true;
 					}
 				}
 				if(bf.length()==1 && bf.charAt(0)==NATURAL_PLACE_HOLDER)
