@@ -30,9 +30,9 @@ public class NaturalLanguageEncodeTest extends TestCase
 		assertEquals("a", e("a"));
 		assertEquals("", e("."));
 		assertEquals("", e(".."));
-		assertEquals("-a-a", e(".a.a.")); // TODO
-		assertEquals("-a-a", e("..a..a..")); // TODO
-		assertEquals("-a-a", e("...a...a...")); // TODO
+		assertEquals("-a-b", e(".a.b.")); // TODO
+		assertEquals("-a-b", e("..a..b..")); // TODO
+		assertEquals("-a-b", e("...a...b...")); // TODO
 		assertEquals("09AZaz", e("09AZaz"));
 		assertEquals("", e("^!\"$%&/()=?`'{}[]\\*+~#,;.:-_\n\r\u00e4"));
 		assertEquals("abc-def", e("abc...def"));
