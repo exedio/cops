@@ -191,16 +191,46 @@ public abstract class Cop
 			encodedURL;
 	}
 	
+	private static final char NATURAL_PLACE_HOLDER = '-';
+	
 	public static final String encodeNaturalLanguageSegment(final String s)
 	{
-		try
+		if(s==null)
+			return null;
+		
+		final int l = s.length();
+		for(int i = 0; i<l; i++)
 		{
-			return URLEncoder.encode(s.replace(' ', '-').replace('/', '-'), CopsServlet.UTF8);
+			final char c = s.charAt(i);
+			if(!(('0'<=c&&c<='9')||('a'<=c&&c<='z')||('A'<=c&&c<='Z')))
+			{
+				final StringBuilder bf = new StringBuilder(l);
+				if(i>0)
+					bf.append(s.substring(0, i));
+				boolean firstSkipped = true;
+				for(; i<l; i++)
+				{
+					final char c2 = s.charAt(i);
+					if(('0'<=c2&&c2<='9')||('a'<=c2&&c2<='z')||('A'<=c2&&c2<='Z'))
+					{
+						bf.append(c2);
+						firstSkipped = true;
+					}
+					else
+					{
+						if(firstSkipped)
+						{
+							bf.append(NATURAL_PLACE_HOLDER);
+							firstSkipped = false;
+						}
+					}
+				}
+				if(bf.length()==1 && bf.charAt(0)==NATURAL_PLACE_HOLDER)
+					return "";
+				return bf.toString();
+			}
 		}
-		catch(UnsupportedEncodingException e)
-		{
-			throw new RuntimeException(e);
-		}
+		return s;
 	}
 	
 	public final boolean redirectToCanonical()

@@ -26,6 +26,7 @@ public class PackageTest
 	public static Test suite()
 	{
 		final TestSuite suite = new TestSuite();
+		suite.addTestSuite(NaturalLanguageEncodeTest.class);
 		suite.addTestSuite(CopTest.class);
 		suite.addTestSuite(ResourceTest.class);
 		suite.addTestSuite(EnvironmentTest.class);
