@@ -2,6 +2,7 @@
 TODO for cops
 
 * general solution against double-click
+* general solution against url-guessing
 * general solution for submit button
 	- with text or with image
 	- on IE as well, with just .x and .y for images
