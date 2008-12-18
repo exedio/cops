@@ -268,12 +268,12 @@
 		<delete dir="cruise" />
 		<mkdir dir="cruise" />
 		<copy todir="${basedir}/cruise">
+			<fileset file="${basedir}/getlib.properties" />
 			<fileset file="${basedir}/build/exedio-cops.jar" />
 			<fileset file="${basedir}/build/exedio-cops.jar-src.zip" />
 			<fileset file="${basedir}/build/exedio-cops-src-${build.file.tag}.tar.gz" />
 		</copy>
 		<copy file="CHANGELOG" tofile="${basedir}/cruise/exedio-cops.jar-CHANGELOG" />
-		<copy file="getlib.properties" tofile="${basedir}/cruise/getlib.properties" />
 	</target>
 	
 </project>
