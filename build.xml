@@ -265,8 +265,6 @@
 	<target name="tomcat" depends="example.tomcat" />
 
 	<target name="cruise" depends="clean, all">
-		<delete dir="cruise" />
-		<mkdir dir="cruise" />
 		<copy todir="${basedir}/cruise">
 			<fileset file="${basedir}/getlib.properties" />
 			<fileset file="${basedir}/build/exedio-cops.jar" />
