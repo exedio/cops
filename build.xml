@@ -213,6 +213,7 @@
 	<target name="clean">
 		<delete dir="build" />
 		<delete dir="tomcat" />
+		<delete dir="cruise" />
 		<delete dir="example/web/files" />
 		<delete dir="example/web/WEB-INF/classes" />
 		<delete>
@@ -265,8 +266,6 @@
 	<target name="tomcat" depends="example.tomcat" />
 
 	<target name="cruise" depends="clean, all">
-		<delete dir="cruise" />
-		<mkdir dir="cruise" />
 		<copy todir="${basedir}/cruise">
 			<fileset file="${basedir}/build/exedio-cops.jar" />
 			<fileset file="${basedir}/build/exedio-cops.jar-src.zip" />
