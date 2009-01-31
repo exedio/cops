@@ -229,6 +229,8 @@ public final class Resource
 			return "image/gif";
 		else if(name.endsWith(".jpg"))
 			return "image/jpeg";
+		else if(name.endsWith(".ico"))
+			return "image/x-icon";
 		else
 			throw new RuntimeException("no content type known for " + name + ", specify content type explicitly");
 	}
