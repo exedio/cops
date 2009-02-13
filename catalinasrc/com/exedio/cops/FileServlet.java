@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.catalina.servlets.DefaultServlet;
 
-public class FileServlet extends DefaultServlet
+public final class FileServlet extends DefaultServlet
 {
 	private static final long serialVersionUID = 1l;
 	
