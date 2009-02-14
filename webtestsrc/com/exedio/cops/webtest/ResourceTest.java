@@ -55,11 +55,11 @@ public class ResourceTest extends AbstractWebTest
 	{
 		final Date before = new Date();
 		final HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-		conn.setFollowRedirects(false);
+		HttpURLConnection.setFollowRedirects(false);
 		if(ifModifiedSince>=0)
 			conn.setIfModifiedSince(ifModifiedSince);
 		conn.connect();
-		assertEquals(expectNotModified ? conn.HTTP_NOT_MODIFIED : conn.HTTP_OK, conn.getResponseCode());
+		assertEquals(expectNotModified ? HttpURLConnection.HTTP_NOT_MODIFIED : HttpURLConnection.HTTP_OK, conn.getResponseCode());
 		assertEquals(expectNotModified ? "Not Modified" : "OK", conn.getResponseMessage());
 		final long date = conn.getDate();
 		final Date after = new Date();
