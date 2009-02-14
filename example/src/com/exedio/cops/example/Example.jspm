@@ -42,6 +42,7 @@ final class Example_Jspm
 	<body>
 		<img src="<%=ExampleServlet.logo%>">
 		<img src="<%=ExampleServlet.logo.toAbsolute()%>"><%=ExampleServlet.logo.toAbsolute()%>
+		[<a href="<%=ExampleServlet.test%>">test</a>]
 		<br>
 		<a href="<%=cop%>">this</a> |
 		<a href="<%=cop.toggle()%>">toggle</a> |

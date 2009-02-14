@@ -4,6 +4,8 @@
 
 	<property name="build.file.tag" value="unlabeled" />
 	
+	<taskdef classpath="lib/ant-contrib.jar" resource="net/sf/antcontrib/antcontrib.properties" />
+	
 	<taskdef name="jspm"
 				classname="com.exedio.jspm.AntTask"
 				classpath="lib/exedio-jspm.jar" />
@@ -137,6 +139,7 @@
 		<copy todir="build/exampleclasses">
 			<fileset dir="example/src">
 				<include name="**/*.png" />
+				<include name="**/*.txt" />
 			</fileset>
 		</copy>
 	</target>
@@ -181,6 +184,72 @@
 	
 	<target name="example" depends="example.tomcat" />
 	
+	<target name="webtest.compile">
+		<mkdir dir="build/webtestclasses" />
+		<javac srcdir="webtestsrc"
+					destdir="build/webtestclasses"
+					includeAntRuntime="false"
+					source="1.5"
+					deprecation="on"
+					debug="on"
+					optimize="off">
+			<classpath>
+				<pathelement location="lib/junit.jar" />
+			</classpath>
+			<compilerarg value="-Xlint" />
+			<compilerarg value="-encoding" />
+			<compilerarg value="ascii" />
+		</javac>
+	</target>
+	
+	<target name="webtest" depends="example.tomcat, webtest.compile">
+		<trycatch>
+			<try>
+				<echo message="tomcat: starting ..." />
+				<forget>
+					<exec executable="${basedir}/tomcat/bin/catalina.sh"
+							failonerror="true"
+							output="build/catalina-start.log">
+						<arg value="run" />
+					</exec>
+				</forget>
+				<echo message="tomcat: waiting to be ready ..." />
+				<waitfor
+						maxwait="40" maxwaitunit="second"
+						checkevery="5" checkeveryunit="second"
+						timeoutproperty="server.app.init.failed">
+					<http url="http://127.0.0.1:8080/cops" />
+				</waitfor>
+				<echo message="tomcat: ready ..." />
+				<fail if="server.app.init.failed" message="tomcat could not be started." />
+				<mkdir dir="build/testresults" />
+				<junit fork="yes"
+						haltonerror="true" haltonfailure="true"
+						showoutput="true" printsummary="true">
+					<formatter type="brief" usefile="false" />
+					<formatter type="xml" />
+					<classpath>
+						<pathelement location="build/webtestclasses" />
+						<pathelement location="lib/junit.jar" />
+					</classpath>
+					<test name="com.exedio.cops.webtest.PackageTest" todir="build/testresults" outfile="copsweb" />
+					<assertions><enable/></assertions>
+				</junit>
+			</try>
+			<finally>
+				<echo message="tomcat: stoping ..." />
+				<exec executable="${basedir}/tomcat/bin/catalina.sh"
+						failonerror="true"
+						output="build/catalina-stop.log">
+					<arg value="stop" />
+				</exec>
+				<echo message="tomcat: waiting to be stoped ..." />
+				<sleep seconds="10" />
+				<echo message="tomcat: stoped." />
+			</finally>
+		</trycatch>
+	</target>
+
 	<target name="dist.tar">
 		<mkdir dir="build" />
 		<echo file="build/build.number" message="${build.tag}" />
@@ -260,7 +329,7 @@
 	
 	<target name="jspm" depends="runtime.jspm, example.jspm" />
 	<target name="src" depends="jspm" description="creates all sources, so the IDE does not complain" />
-	<target name="build" depends="compile, catalina.compile, test, jar, example, api" />
+	<target name="build" depends="compile, catalina.compile, test, webtest, jar, example, api" />
 	<target name="all" depends="build, jar.src, dist" />
 	<target name="tomcat" depends="example.tomcat" />
 

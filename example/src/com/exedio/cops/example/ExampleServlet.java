@@ -40,6 +40,9 @@ public final class ExampleServlet extends CopsServlet
 	static final Resource logo = new Resource("logo.png");
 	static final Resource someClass = new Resource("ExampleServlet.class", "application/octet-steam");
 	
+	// For ResourceTest.
+	static final Resource test = new Resource("resource-test.txt");
+	
 	static final String START_SESSION = "startsession";
 	static final String REPORT_EXCEPTION = "reportexception";
 	
