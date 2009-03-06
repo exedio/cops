@@ -8,7 +8,6 @@ TODO for cops
 	- with reliable value, independent of button description
 * general solution against url guessing
 * RequestLimiter
-	- customizable error page
 	- error mail
 * resource status
 	- total on top
