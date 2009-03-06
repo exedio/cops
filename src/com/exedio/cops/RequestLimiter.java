@@ -20,6 +20,7 @@ package com.exedio.cops;
 
 import java.io.IOException;
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletOutputStream;
@@ -35,6 +36,7 @@ public final class RequestLimiter
 	private volatile int threshold;
 	private volatile int interval;
 	private final String denyMessage;
+	private final byte[] denyBody;
 	
 	/**
 	 * @param threshold
@@ -45,6 +47,18 @@ public final class RequestLimiter
 	 */
 	public RequestLimiter(final int threshold, final int interval, final String denyMessage)
 	{
+		this(threshold, interval, denyMessage, null);
+	}
+	
+	/**
+	 * @param threshold
+	 *        the number of request allowed in one interval,
+	 *        until further requests in that interval are denied
+	 * @param interval
+	 *        the length of the interval in milliseconds
+	 */
+	public RequestLimiter(final int threshold, final int interval, final String denyMessage, final String denyBody)
+	{
 		if(threshold<=0)
 			throw new IllegalArgumentException("threshold must be greater than zero, but was " + threshold);
 		if(interval<=0)
@@ -53,6 +67,21 @@ public final class RequestLimiter
 		this.threshold = threshold;
 		this.interval = interval;
 		this.denyMessage = denyMessage;
+		if(denyBody!=null)
+		{
+			try
+			{
+				this.denyBody = denyBody.getBytes(CopsServlet.UTF8);
+			}
+			catch(UnsupportedEncodingException e)
+			{
+				throw new RuntimeException(e);
+			}
+		}
+		else
+		{
+			this.denyBody = null;
+		}
 	}
 	
 	public void init(final ServletConfig config)
@@ -90,6 +119,7 @@ public final class RequestLimiter
 	 *         Do the following at the beginning of processing the request:
 	 *         <tt>if(requestLimiter.doRequest(request, response)) return;</tt>
 	 */
+	@SuppressWarnings("deprecation")
 	public boolean doRequest(
 			final HttpServletRequest request,
 			final HttpServletResponse response)
@@ -108,7 +138,25 @@ public final class RequestLimiter
 			{
 				if(requestsInInterval>=threshold && request.getSession(false)==null)
 				{
-					response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE, denyMessage);
+					if(denyBody!=null)
+					{
+						response.setStatus(HttpServletResponse.SC_SERVICE_UNAVAILABLE, denyMessage);
+						ServletOutputStream out = null;
+						try
+						{
+							out = response.getOutputStream();
+							out.write(denyBody);
+						}
+						finally
+						{
+							if(out!=null)
+								out.close();
+						}
+					}
+					else
+					{
+						response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE, denyMessage);
+					}
 					deniedRequests++;
 					//System.out.println("copsRequestLimiter denied " + deniedRequests);
 					return true;

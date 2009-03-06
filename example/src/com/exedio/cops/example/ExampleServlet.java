@@ -47,7 +47,7 @@ public final class ExampleServlet extends CopsServlet
 	static final String REPORT_EXCEPTION = "reportexception";
 	
 	private final ArrayList<String> searchSet = new ArrayList<String>();
-	private final RequestLimiter requestLimiter = new RequestLimiter(200, 1000, "Sorry, please try again later.");
+	private final RequestLimiter requestLimiter = new RequestLimiter(200, 1000, "Sorry, please try again later.", "<html><body>Request Limiter limited request.</body></html>");
 	
 	public ExampleServlet()
 	{
