@@ -12,3 +12,8 @@ TODO for cops
 * resource status
 	- total on top
 	- ratio for 304/200
+* common infrastructure for suburls, such as
+	- Resource
+	- ResourceStatus
+	- Ignore 404
+	- RequestLimiter status
