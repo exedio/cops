@@ -114,12 +114,17 @@ public final class RequestLimiter
 	private volatile int requestsInInterval = 0;
 	private volatile long deniedRequests = 0;
 	
+	@SuppressWarnings("deprecation")
+	private static final void setStatus503WithBody(final HttpServletResponse response, final String denyMessage)
+	{
+		response.setStatus(HttpServletResponse.SC_SERVICE_UNAVAILABLE, denyMessage);
+	}
+	
 	/**
 	 * @return whether this call has handled the request.
 	 *         Do the following at the beginning of processing the request:
 	 *         <tt>if(requestLimiter.doRequest(request, response)) return;</tt>
 	 */
-	@SuppressWarnings("deprecation")
 	public boolean doRequest(
 			final HttpServletRequest request,
 			final HttpServletResponse response)
@@ -140,7 +145,7 @@ public final class RequestLimiter
 				{
 					if(denyBody!=null)
 					{
-						response.setStatus(HttpServletResponse.SC_SERVICE_UNAVAILABLE, denyMessage);
+						setStatus503WithBody(response, denyMessage);
 						ServletOutputStream out = null;
 						try
 						{
