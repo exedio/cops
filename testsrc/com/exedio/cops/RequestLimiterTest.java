@@ -18,21 +18,30 @@
 
 package com.exedio.cops;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import junit.framework.TestCase;
 
-public class PackageTest
+public class RequestLimiterTest extends TestCase
 {
-	public static Test suite()
+	public void testIt()
 	{
-		final TestSuite suite = new TestSuite();
-		suite.addTestSuite(NaturalLanguageEncodeTest.class);
-		suite.addTestSuite(CopTest.class);
-		suite.addTestSuite(ResourceTest.class);
-		suite.addTestSuite(EnvironmentTest.class);
-		suite.addTestSuite(EncodeTest.class);
-		suite.addTestSuite(PagerTest.class);
-		suite.addTestSuite(RequestLimiterTest.class);
-		return suite;
+		try
+		{
+			new RequestLimiter(0, 0, null);
+			fail();
+		}
+		catch(IllegalArgumentException e)
+		{
+			assertEquals("threshold must be greater than zero, but was 0", e.getMessage());
+		}
+		try
+		{
+			new RequestLimiter(1, 0, null);
+			fail();
+		}
+		catch(IllegalArgumentException e)
+		{
+			assertEquals("interval must be greater than zero, but was 0", e.getMessage());
+		}
+		new RequestLimiter(1, 1, null);
 	}
 }
