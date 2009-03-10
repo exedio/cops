@@ -60,6 +60,9 @@ public class DummySession implements HttpSession
 		throw new RuntimeException();
 	}
 
+	/**
+	 * @deprecated otherwise javac prints a warning
+	 */
 	@Deprecated
 	public javax.servlet.http.HttpSessionContext getSessionContext()
 	{
