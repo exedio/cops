@@ -18,11 +18,73 @@
 
 package com.exedio.cops;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpSession;
+
 import junit.framework.TestCase;
 
 public class RequestLimiterTest extends TestCase
 {
-	public void testIt()
+	static class Request extends DummyRequest
+	{
+		final HttpSession session;
+		
+		Request(final boolean session)
+		{
+			this.session = session ? new DummySession() : null;
+		}
+		@Override
+		public String getPathInfo()
+		{
+			return "dingdong";
+		}
+
+		@Override
+		public HttpSession getSession(final boolean create)
+		{
+			assertFalse(create);
+			return session;
+		}
+	}
+	
+	public void testSession() throws IOException
+	{
+		final RequestLimiter rl = new RequestLimiter(3, 1000, "Deny Message");
+		
+		final Request requestSession = new Request(true);
+		final DummyResponse response = new DummyResponse();
+		assertFalse(rl.doRequest(requestSession, response));
+		assertFalse(rl.doRequest(requestSession, response));
+		assertFalse(rl.doRequest(requestSession, response));
+		assertFalse(rl.doRequest(requestSession, response));
+		assertFalse(rl.doRequest(requestSession, response));
+	}
+	
+	public void testNoSession() throws IOException
+	{
+		final RequestLimiter rl = new RequestLimiter(3, 1000, "Deny Message");
+		
+		final Request request = new Request(false);
+		final DummyResponse responseOk = new DummyResponse();
+		assertFalse(rl.doRequest(request, responseOk));
+		assertFalse(rl.doRequest(request, responseOk));
+		assertFalse(rl.doRequest(request, responseOk));
+		assertFalse(rl.doRequest(request, responseOk)); // TODO should fail already
+		
+		final DummyResponse responseDeny = new DummyResponse(){
+			@Override
+			public void sendError(final int status, final String message)
+			{
+				assertEquals(503, status);
+				assertEquals("Deny Message", message);
+			}
+		};
+		assertTrue(rl.doRequest(request, responseDeny));
+		assertTrue(rl.doRequest(request, responseDeny));
+	}
+		
+	public void testError()
 	{
 		try
 		{
