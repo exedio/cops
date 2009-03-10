@@ -70,7 +70,6 @@ public class RequestLimiterTest extends TestCase
 		assertFalse(rl.doRequest(request, responseOk));
 		assertFalse(rl.doRequest(request, responseOk));
 		assertFalse(rl.doRequest(request, responseOk));
-		assertFalse(rl.doRequest(request, responseOk)); // TODO should fail already
 		
 		final DummyResponse responseDeny = new DummyResponse(){
 			@Override

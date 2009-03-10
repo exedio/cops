@@ -111,7 +111,7 @@ public final class RequestLimiter
 	}
 	
 	private volatile long lastInterval = Long.MIN_VALUE;
-	private volatile int requestsInInterval = 0;
+	private volatile int requestsInInterval = 1;
 	private volatile long deniedRequests = 0;
 	
 	@SuppressWarnings("deprecation")
@@ -177,7 +177,7 @@ public final class RequestLimiter
 			{
 				//System.out.println("copsRequestLimiter new interval " + lastInterval + "-->" + nowInterval + " got " + requestsInInterval);
 				lastInterval = nowInterval;
-				requestsInInterval = 0;
+				requestsInInterval = 1;
 				return false;
 			}
 		}
