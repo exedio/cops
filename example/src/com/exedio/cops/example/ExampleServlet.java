@@ -121,7 +121,7 @@ public final class ExampleServlet extends CopsServlet
 		}
 
 		final StringBuilder out = new StringBuilder();
-		Example_Jspm.write(out, cop, searchResult, reportedException);
+		Example_Jspm.write(out, cop, request, searchResult, reportedException);
 		writeBody(out, response);
 	}
 }

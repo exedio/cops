@@ -19,7 +19,11 @@
 
 package com.exedio.cops.example;
 
+import java.util.Enumeration;
 import java.util.List;
+import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
 
 import com.exedio.cops.CopsServlet;
 import com.exedio.cops.Pageable;
@@ -30,6 +34,7 @@ final class Example_Jspm
 	static final void write(
 			final StringBuilder out,
 			final NumberCop cop,
+			final HttpServletRequest request,
 			final List<String> searchResult,
 			final String reportedException)
 	{
@@ -113,6 +118,13 @@ final class Example_Jspm
 		<br>
 		<a href="copsRequestLimiterStatus.html" target="_blank">requestLimiterStatus</a>
 		<br>
+		Locale: <% write(out, request.getLocale()); %>all: <%
+		for(final Enumeration<?> e = request.getLocales(); e.hasMoreElements(); )
+		{
+			%><% write(out, (Locale)e.nextElement()); %><%
+		}
+		%> raw: <u><%=request.getHeader("Accept-Language")%></u>
+		<br>
 		tomcat:
 		<a href="/manager/html" target="_blank">manager</a>,
 		<a href="/host-manager/html" target="_blank">host-manager</a>
@@ -129,6 +141,16 @@ final class Example_Jspm
 	{
 				%>
 				<a href="<%=cop.toPage(href)%>"<% if(href.isNeutral()){%> style="background:grey;"<%}%>><%=text%></a><%
+	}
+	
+	static final void write(
+			final StringBuilder out,
+			final Locale l)
+	{
+			%><u><%=l%></u> (<u><%=
+				l.getLanguage()%></u>[<u><%=l.getISO3Language()%></u>], <u><%=
+				l.getCountry()%></u>[<u><%=l.getISO3Country()%></u>], <u><%=
+				l.getVariant()%></u>), <%
 	}
 }
 %>
