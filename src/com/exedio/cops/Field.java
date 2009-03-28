@@ -35,7 +35,7 @@ public abstract class Field
 	public Field(final Form form, final Object key, final String name, final String value)
 	{
 		if(name==null)
-			throw new NullPointerException("name must not be null");
+			throw new NullPointerException("name");
 
 		this.key = key;
 		this.name = name;

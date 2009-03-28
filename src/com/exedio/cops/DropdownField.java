@@ -36,7 +36,7 @@ public class DropdownField extends Field
 		super(form, key, name, value);
 
 		if(value==null)
-			throw new NullPointerException("value for field "+name+" must not be null");
+			throw new NullPointerException("value for " + name);
 	}
 	
 	/**
@@ -48,7 +48,7 @@ public class DropdownField extends Field
 		super(form, key, name);
 
 		if(value==null)
-			throw new NullPointerException("value for field "+name+" must be in request");
+			throw new NullPointerException("value for " + name);
 	}
 	
 	public String getValue(final String name)
@@ -67,9 +67,9 @@ public class DropdownField extends Field
 	public void addOption(final String name, final String value)
 	{
 		if(name==null)
-			throw new NullPointerException("name must not be null");
+			throw new NullPointerException("name");
 		if(value==null)
-			throw new NullPointerException("value must not be null");
+			throw new NullPointerException("value");
 		
 		names.add(name);
 		values.put(name, value);

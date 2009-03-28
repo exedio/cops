@@ -49,7 +49,7 @@ public class DateField extends TextField
 		this.content = value;
 
 		if(pattern==null)
-			throw new NullPointerException("pattern must not be null");
+			throw new NullPointerException("pattern");
 	}
 	
 	/**

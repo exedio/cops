@@ -32,7 +32,7 @@ public abstract class TextField extends Field
 		super(form, key, name, value);
 
 		if(value==null)
-			throw new NullPointerException("value for field "+name+" must not be null");
+			throw new NullPointerException("value for " + name);
 	}
 	
 	/**
@@ -44,7 +44,7 @@ public abstract class TextField extends Field
 		super(form, key, name);
 
 		if(value==null)
-			throw new NullPointerException("value for field "+name+" must be in request");
+			throw new NullPointerException("value for " + name);
 	}
 	
 	/**

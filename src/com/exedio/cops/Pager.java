@@ -34,7 +34,7 @@ public final class Pager
 		public Config(final int... limits)
 		{
 			if(limits==null)
-				throw new NullPointerException("limits must not be null");
+				throw new NullPointerException("limits");
 			if(limits.length==0)
 				throw new IllegalArgumentException("limits must not be empty");
 			int n = 0;

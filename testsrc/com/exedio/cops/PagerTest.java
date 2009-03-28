@@ -100,7 +100,7 @@ public class PagerTest extends TestCase
 		}
 		catch(NullPointerException e)
 		{
-			assertEquals("limits must not be null", e.getMessage());
+			assertEquals("limits", e.getMessage());
 		}
 		try
 		{
