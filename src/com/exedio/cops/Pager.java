@@ -21,6 +21,7 @@ package com.exedio.cops;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 public final class Pager
@@ -66,6 +67,15 @@ public final class Pager
 					Cop.getIntParameter(request, LIMIT,  limitDefault),
 					false);
 		}
+		
+		public Pager newPager(final Map<String,String> parameters)
+		{
+			return new Pager(
+					this,
+					Cop.getIntParameter(parameters, OFFSET, OFFSET_MIN),
+					Cop.getIntParameter(parameters, LIMIT,  limitDefault),
+					false);
+		}		
 	}
 	
 	private static final String OFFSET = "off";
