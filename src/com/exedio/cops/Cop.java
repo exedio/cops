@@ -21,7 +21,6 @@ package com.exedio.cops;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -76,7 +75,7 @@ public abstract class Cop
 	/**
 	 * Does nothing, if <tt>value==null</tt>.
 	 */
-	protected void addParameter(final String key, final String value)
+	protected final void addParameter(final String key, final String value)
 	{
 		if(value==null)
 			return;
@@ -322,15 +321,6 @@ public abstract class Cop
 		return (value==null) ? defaultValue : Integer.parseInt(value);
 	}
 	
-	public static final int getIntParameter(
-			final Map<String,String> parameters,
-			final String name,
-			final int defaultValue)
-	{
-		final String value = parameters.get(name);
-		return (value==null) ? defaultValue : Integer.parseInt(value);
-	}
-	
 	public static final long getLongParameter(
 			final HttpServletRequest request,
 			final String name,
@@ -348,16 +338,6 @@ public abstract class Cop
 		final String value = request.getParameter(name);
 		return (value==null) ? defaultValue : Long.parseLong(value, COMPACT_LONG_RADIX);
 	}
-
-	public static final long getLongParameterCompact(
-			final Map<String,String> parameters,
-			final String name,
-			final long defaultValue)
-	{
-		final String value = parameters.get(name);
-		return (value==null) ? defaultValue : Long.parseLong(value, COMPACT_LONG_RADIX);
-	}
-	
 	
 	// ------------------- deprecated stuff -------------------
 	
