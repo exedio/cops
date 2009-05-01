@@ -133,9 +133,10 @@ public class CopTest extends TestCase
 		{
 			assertEquals("cop pathInfo \"shop;hallo.html\" must not contain character ;", e.getMessage());
 		}
+		assertEquals("test.html", new TestCop().toString());
 		try
 		{
-			new TestCop().toString();
+			new TestCop().toURL();
 			fail();
 		}
 		catch(IllegalStateException e)
@@ -154,83 +155,93 @@ public class CopTest extends TestCase
 		CopsServlet.requests.set(new AbsReq());
 		{
 			final TestCop cop = new TestCop();
-			assertEquals("/contextPath/servletPath/encoded(test.html)", cop.toString());
+			assertEquals("/contextPath/servletPath/encoded(test.html)", cop.toURL());
 			assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(test.html)", cop.toAbsolute());
+			assertEquals("test.html", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop("ding");
-			assertEquals("/contextPath/servletPath/encoded(test.html?param1=ding)", cop.toString());
+			assertEquals("/contextPath/servletPath/encoded(test.html?param1=ding)", cop.toURL());
 			assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(test.html?param1=ding)", cop.toAbsolute());
+			assertEquals("test.html?param1=ding", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop("ding", "dong");
-			assertEquals("/contextPath/servletPath/encoded(test.html?param1=ding&param2=dong)", cop.toString());
+			assertEquals("/contextPath/servletPath/encoded(test.html?param1=ding&param2=dong)", cop.toURL());
 			assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(test.html?param1=ding&param2=dong)", cop.toAbsolute());
+			assertEquals("test.html?param1=ding&param2=dong", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop(0.0, "shop/hallo.html");
-			assertEquals("/contextPath/servletPath/encoded(shop/hallo.html)", cop.toString());
+			assertEquals("/contextPath/servletPath/encoded(shop/hallo.html)", cop.toURL());
 		}
 		{
 			final String ding = "slash/semi;question?amp&uuml\u00fcgarten#";
 			final String dingenc = "slash%2Fsemi%3Bquestion%3Famp%26uuml%C3%BCgarten%23";
 			final TestCop cop = new TestCop(ding, "dong");
-			assertEquals("/contextPath/servletPath/encoded(test.html?param1=" + dingenc + "&param2=dong)", cop.toString());
+			assertEquals("/contextPath/servletPath/encoded(test.html?param1=" + dingenc + "&param2=dong)", cop.toURL());
 			assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(test.html?param1=" + dingenc + "&param2=dong)", cop.toAbsolute());
+			assertEquals("test.html?param1=" + dingenc + "&param2=dong", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop(new String[]{"dir1"});
-			assertEquals("/contextPath/servletPath/encoded(dir1/test.html)", cop.toString());
+			assertEquals("/contextPath/servletPath/encoded(dir1/test.html)", cop.toURL());
 			assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(dir1/test.html)", cop.toAbsolute());
+			assertEquals("dir1/test.html", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop(new String[]{"dir1"}, "dong");
-			assertEquals("/contextPath/servletPath/encoded(dir1/test.html?param1=dong)", cop.toString());
+			assertEquals("/contextPath/servletPath/encoded(dir1/test.html?param1=dong)", cop.toURL());
 			assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(dir1/test.html?param1=dong)", cop.toAbsolute());
+			assertEquals("dir1/test.html?param1=dong", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop(new String[]{"dir1"}, "dong", "ding");
-			assertEquals("/contextPath/servletPath/encoded(dir1/test.html?param1=dong&param2=ding)", cop.toString());
+			assertEquals("/contextPath/servletPath/encoded(dir1/test.html?param1=dong&param2=ding)", cop.toURL());
 			assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(dir1/test.html?param1=dong&param2=ding)", cop.toAbsolute());
+			assertEquals("dir1/test.html?param1=dong&param2=ding", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop(new String[]{"dir1", "dir2 /;\u00e4"});
-			assertEquals("/contextPath/servletPath/encoded(dir1/dir2/test.html)", cop.toString());
+			assertEquals("/contextPath/servletPath/encoded(dir1/dir2/test.html)", cop.toURL());
 			assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(dir1/dir2/test.html)", cop.toAbsolute());
+			assertEquals("dir1/dir2/test.html", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop(new String[]{"dir1", "dir2 /;\u00e4"}, "dong");
-			assertEquals("/contextPath/servletPath/encoded(dir1/dir2/test.html?param1=dong)", cop.toString());
+			assertEquals("/contextPath/servletPath/encoded(dir1/dir2/test.html?param1=dong)", cop.toURL());
 			assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(dir1/dir2/test.html?param1=dong)", cop.toAbsolute());
+			assertEquals("dir1/dir2/test.html?param1=dong", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop(new String[]{"dir1", "dir2 /;\u00e4"}, "dong", "ding");
-			assertEquals("/contextPath/servletPath/encoded(dir1/dir2/test.html?param1=dong&param2=ding)", cop.toString());
+			assertEquals("/contextPath/servletPath/encoded(dir1/dir2/test.html?param1=dong&param2=ding)", cop.toURL());
 			assertEquals("scheme://host.exedio.com/contextPath/servletPath/encoded(dir1/dir2/test.html?param1=dong&param2=ding)", cop.toAbsolute());
+			assertEquals("dir1/dir2/test.html?param1=dong&param2=ding", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop("ding", null);
-			assertEquals("/contextPath/servletPath/encoded(test.html?param1=ding)", cop.toString());
+			assertEquals("/contextPath/servletPath/encoded(test.html?param1=ding)", cop.toURL());
 		}
 		{
 			final TestCop cop = new TestCop(false);
-			assertEquals("/contextPath/servletPath/encoded(test.html)", cop.toString());
+			assertEquals("/contextPath/servletPath/encoded(test.html)", cop.toURL());
 		}
 		{
 			final TestCop cop = new TestCop(true);
-			assertEquals("/contextPath/servletPath/encoded(test.html?param1=t)", cop.toString());
+			assertEquals("/contextPath/servletPath/encoded(test.html?param1=t)", cop.toURL());
 		}
 		{
 			final TestCop cop = new TestCop(0);
-			assertEquals("/contextPath/servletPath/encoded(test.html)", cop.toString());
+			assertEquals("/contextPath/servletPath/encoded(test.html)", cop.toURL());
 		}
 		{
 			final TestCop cop = new TestCop(1);
-			assertEquals("/contextPath/servletPath/encoded(test.html?param1=1)", cop.toString());
+			assertEquals("/contextPath/servletPath/encoded(test.html?param1=1)", cop.toURL());
 		}
 		{
 			final TestCop cop = new TestCop(-1);
-			assertEquals("/contextPath/servletPath/encoded(test.html?param1=-1)", cop.toString());
+			assertEquals("/contextPath/servletPath/encoded(test.html?param1=-1)", cop.toURL());
 		}
 		
 		assertEquals(ENVIRONMENT, Cop.getEnvironment());
@@ -271,23 +282,23 @@ public class CopTest extends TestCase
 	public void testHttps()
 	{
 		CopsServlet.requests.set(new HttpsReq(false));
-		assertEquals("/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(null).toString());
-		assertEquals("/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(false).toString());
-		assertEquals("https://host.exedio.com/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(true).toString());
+		assertEquals("/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(null).toURL());
+		assertEquals("/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(false).toURL());
+		assertEquals("https://host.exedio.com/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(true).toURL());
 		CopsServlet.requests.set(new HttpsReq(true));
-		assertEquals("/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(null).toString());
-		assertEquals("/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(true).toString());
-		assertEquals("http://host.exedio.com/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(false).toString());
+		assertEquals("/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(null).toURL());
+		assertEquals("/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(true).toURL());
+		assertEquals("http://host.exedio.com/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(false).toURL());
 		
 		// port adjustments
 		CopsServlet.requests.set(new HttpsReq(false, 8080));
-		assertEquals("/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(null).toString());
-		assertEquals("/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(false).toString());
-		assertEquals("https://host.exedio.com:8443/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(true).toString());
+		assertEquals("/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(null).toURL());
+		assertEquals("/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(false).toURL());
+		assertEquals("https://host.exedio.com:8443/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(true).toURL());
 		CopsServlet.requests.set(new HttpsReq(true,  8443));
-		assertEquals("/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(null).toString());
-		assertEquals("/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(true).toString());
-		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(false).toString());
+		assertEquals("/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(null).toURL());
+		assertEquals("/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(true).toURL());
+		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/encoded(test.html?param1=value1)", new HttpsCop(false).toURL());
 	}
 	
 	static final class HttpsCop extends Cop

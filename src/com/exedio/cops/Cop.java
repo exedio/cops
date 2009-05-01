@@ -143,6 +143,11 @@ public abstract class Cop
 	@Override
 	public final String toString()
 	{
+		return url!=null ? url.toString() : pathInfo;
+	}
+	
+	public final String toURL()
+	{
 		final String url = this.url!=null ? this.url.toString() : pathInfo;
 		
 		final HttpServletRequest  request  = CopsServlet.requests.get();
