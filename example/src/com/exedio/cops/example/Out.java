@@ -18,20 +18,19 @@
 
 package com.exedio.cops.example;
 
+import java.io.IOException;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+
 import com.exedio.cops.Cop;
+import com.exedio.cops.CopsServlet;
 import com.exedio.cops.Resource;
 import com.exedio.cops.XMLEncoder;
 
 final class Out
 {
-	private final StringBuilder bf;
-	
-	Out(final StringBuilder bf)
-	{
-		this.bf = bf;
-		
-		assert bf!=null;
-	}
+	private StringBuilder bf = new StringBuilder();
 	
 	void append(final char c)
 	{
@@ -56,5 +55,26 @@ final class Out
 	void append(final Cop cop)
 	{
 		bf.append(XMLEncoder.encode(cop.toString()));
+	}
+	
+	void writeBody(final HttpServletResponse response) throws IOException
+	{
+		final StringBuilder bf = this.bf;
+		if(bf==null)
+			throw new IllegalStateException();
+		this.bf = null; // prevent this instance to be used anymore
+		
+		ServletOutputStream stream = null;
+		try
+		{
+			stream = response.getOutputStream();
+			final byte[] bytes = bf.toString().getBytes(CopsServlet.UTF8);
+			stream.write(bytes);
+		}
+		finally
+		{
+			if(stream!=null)
+				stream.close();
+		}
 	}
 }

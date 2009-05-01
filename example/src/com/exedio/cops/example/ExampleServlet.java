@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -61,25 +60,6 @@ public final class ExampleServlet extends CopsServlet
 		requestLimiter.init(config);
 	}
 
-	private static final void writeBody(
-			final StringBuilder out,
-			final HttpServletResponse response)
-		throws IOException
-	{
-		ServletOutputStream outStream = null;
-		try
-		{
-			outStream = response.getOutputStream();
-			final byte[] outBytes = out.toString().getBytes(UTF8);
-			outStream.write(outBytes);
-		}
-		finally
-		{
-			if(outStream!=null)
-				outStream.close();
-		}
-	}
-	
 	private static final <E> List<E> subList(final List<E> list, final int fromIndex, final int toIndex)
 	{
 		final int size = list.size();
@@ -120,8 +100,8 @@ public final class ExampleServlet extends CopsServlet
 			}
 		}
 
-		final StringBuilder out = new StringBuilder();
-		Example_Jspm.write(new Out(out), cop, request, searchResult, reportedException);
-		writeBody(out, response);
+		final Out out = new Out();
+		Example_Jspm.write(out, cop, request, searchResult, reportedException);
+		out.writeBody(response);
 	}
 }
