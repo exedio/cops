@@ -48,25 +48,21 @@ public class EnvironmentTest extends TestCase
 		{
 			final TestCop cop = new TestCop();
 			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html", cop.toString());
-			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html", cop.toStringNonEncoded());
 			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html", cop.toAbsolute());
 		}
 		{
 			final TestCop cop = new TestCop("ding");
 			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding", cop.toString());
-			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding", cop.toStringNonEncoded());
 			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding", cop.toAbsolute());
 		}
 		{
 			final TestCop cop = new TestCop("ding", "dong");
 			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding&param2=dong", cop.toString());
-			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding&param2=dong", cop.toStringNonEncoded());
 			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding&param2=dong", cop.toAbsolute());
 		}
 		{
 			final TestCop cop = new TestCop(0.0, "shop/hallo.html");
 			assertEquals("http://host.exedio.com/contextPath/servletPath/shop/hallo.html", cop.toString());
-			assertEquals("http://host.exedio.com/contextPath/servletPath/shop/hallo.html", cop.toStringNonEncoded());
 			assertEquals("http://host.exedio.com/contextPath/servletPath/shop/hallo.html", cop.toAbsolute());
 		}
 		{

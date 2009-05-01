@@ -143,14 +143,6 @@ public abstract class Cop
 	@Override
 	public final String toString()
 	{
-		return toStringNonEncoded();
-	}
-	
-	/**
-	 * Use this method for instance with {@link HttpServletResponse#sendRedirect(String)}.
-	 */
-	public final String toStringNonEncoded()
-	{
 		final String url = this.url!=null ? this.url.toString() : pathInfo;
 		
 		final HttpServletRequest  request  = CopsServlet.requests.get();
@@ -258,7 +250,7 @@ public abstract class Cop
 				return false;
 		}
 		
-		final String location = toStringNonEncoded();
+		final String location = toString();
 		System.out.println("cops redirectToCanonical from --" + actual + "-- to --" + location + "--");
 		
 		final HttpServletResponse response = CopsServlet.responses.get();
