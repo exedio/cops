@@ -28,11 +28,12 @@ import javax.servlet.http.HttpServletRequest;
 import com.exedio.cops.CopsServlet;
 import com.exedio.cops.Pageable;
 import com.exedio.cops.Pager;
+import com.exedio.cops.XMLEncoder;
 
 final class Example_Jspm
 {
 	static final void write(
-			final StringBuilder out,
+			final Out out,
 			final NumberCop cop,
 			final HttpServletRequest request,
 			final List<String> searchResult,
@@ -54,7 +55,7 @@ final class Example_Jspm
 		<a href="<%=cop.add(10)%>">+10</a> |
 		<a href="<%=cop.add(-10)%>">-10</a>
 		<br>
-		<a href="<%=cop.toAbsolute()%>">absolute</a>
+		<a href="<%=XMLEncoder.encode(cop.toAbsolute())%>">absolute</a>
 		<br>
 		<a href="<%=cop.setString("zack")%>">zack</a> |
 		<a href="<%=cop.setString("sla/sh")%>">slash</a> |
@@ -72,7 +73,7 @@ final class Example_Jspm
 		<br>
 		<a href="copsResourceStatus.html">resourceStatus</a>
 		<br>
-		<tt><%=cop.toStringNonEncoded()%></tt><%
+		<tt><%=cop%></tt><%
 		
 		if(cop.string!=null)
 		{
@@ -134,7 +135,7 @@ final class Example_Jspm
 	}
 	
 	static final void writePagerButton(
-			final StringBuilder out,
+			final Out out,
 			final Pageable cop,
 			final Pager href,
 			final String text)
@@ -144,10 +145,10 @@ final class Example_Jspm
 	}
 	
 	static final void write(
-			final StringBuilder out,
+			final Out out,
 			final Locale l)
 	{
-			%><u><%=l%></u> (<u><%=
+			%><u><%=l.toString()%></u> (<u><%=
 				l.getLanguage()%></u>[<u><%=l.getISO3Language()%></u>], <u><%=
 				l.getCountry()%></u>[<u><%=l.getISO3Country()%></u>], <u><%=
 				l.getVariant()%></u>), <%

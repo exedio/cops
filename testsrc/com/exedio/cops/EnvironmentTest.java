@@ -59,7 +59,7 @@ public class EnvironmentTest extends TestCase
 		}
 		{
 			final TestCop cop = new TestCop("ding", "dong");
-			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding&amp;param2=dong", cop.toString());
+			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding&param2=dong", cop.toString());
 			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding&param2=dong", cop.toStringNonEncoded());
 			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding&param2=dong", cop.toAbsolute());
 		}

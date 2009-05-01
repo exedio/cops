@@ -143,7 +143,7 @@ public abstract class Cop
 	@Override
 	public final String toString()
 	{
-		return XMLEncoder.encode(toStringNonEncoded());
+		return toStringNonEncoded();
 	}
 	
 	/**

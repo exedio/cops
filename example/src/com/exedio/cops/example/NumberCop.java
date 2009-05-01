@@ -130,7 +130,7 @@ public class NumberCop extends Cop implements Pageable
 		return new NumberCop(number, bool, string, secure, pager, dirLevel);
 	}
 	
-	static void writePager(final StringBuilder out, final Pageable cop)
+	static void writePager(final Out out, final Pageable cop)
 	{
 		final Pager pager = cop.getPager();
 		if(pager.isNeeded())
