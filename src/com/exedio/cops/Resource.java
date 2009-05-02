@@ -93,6 +93,11 @@ public final class Resource
 	@Override
 	public String toString()
 	{
+		return name;
+	}
+	
+	public String toURL()
+	{
 		final HttpServletRequest request = CopsServlet.requests.get();
 		if(request==null)
 			throw new IllegalStateException("no request available");

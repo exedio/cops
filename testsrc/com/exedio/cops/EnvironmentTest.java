@@ -88,8 +88,9 @@ public class EnvironmentTest extends TestCase
 			assertEquals("test.html?param1=value1", cop.toString());
 		}
 		assertEquals(CopTest.ENVIRONMENT, Cop.getEnvironment());
-		assertEquals("http://host.exedio.com/contextPath/servletPath/ResourceTest.class", resource.toString());
+		assertEquals("http://host.exedio.com/contextPath/servletPath/ResourceTest.class", resource.toURL());
 		assertEquals("http://host.exedio.com/contextPath/servletPath/ResourceTest.class", resource.toAbsolute());
+		assertEquals("ResourceTest.class", resource.toString());
 		
 		try
 		{
@@ -125,8 +126,9 @@ public class EnvironmentTest extends TestCase
 			assertEquals("https://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", cop.toAbsolute());
 			assertEquals("test.html?param1=value1", cop.toString());
 		}
-		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", resource.toString());
+		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", resource.toURL());
 		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", resource.toAbsolute());
+		assertEquals("ResourceTest.class", resource.toString());
 		Cop.removeEnvironment();
 		
 		Cop.setEnvironment(ENVIRONMENT_8443);
@@ -149,7 +151,8 @@ public class EnvironmentTest extends TestCase
 			assertEquals("https://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", cop.toAbsolute());
 			assertEquals("test.html?param1=value1", cop.toString());
 		}
-		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", resource.toString());
+		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", resource.toURL());
 		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", resource.toAbsolute());
+		assertEquals("ResourceTest.class", resource.toString());
 	}
 }

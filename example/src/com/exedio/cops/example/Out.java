@@ -49,7 +49,7 @@ final class Out
 	
 	void append(final Resource resource)
 	{
-		bf.append(resource.toString());
+		bf.append(resource.toURL());
 	}
 	
 	void append(final Cop cop)

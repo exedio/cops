@@ -39,9 +39,10 @@ public class ResourceTest extends TestCase
 		assertEquals(-1, r1.getContentLength());
 		assertEquals(0, r1.getResponse200Count());
 		assertEquals(0, r1.getResponse304Count());
+		assertEquals("ResourceTest.class", r1.toString());
 		try
 		{
-			r1.toString();
+			r1.toURL();
 			fail();
 		}
 		catch(IllegalStateException e)
@@ -67,9 +68,10 @@ public class ResourceTest extends TestCase
 		assertTrue(String.valueOf(contentLength), contentLength>5);
 		assertEquals(0, r1.getResponse200Count());
 		assertEquals(0, r1.getResponse304Count());
+		assertEquals("ResourceTest.class", r1.toString());
 		try
 		{
-			r1.toString();
+			r1.toURL();
 			fail();
 		}
 		catch(IllegalStateException e)
@@ -95,9 +97,10 @@ public class ResourceTest extends TestCase
 		assertEquals(contentLength, r1.getContentLength());
 		assertEquals(0, r1.getResponse200Count());
 		assertEquals(0, r1.getResponse304Count());
+		assertEquals("ResourceTest.class", r1.toString());
 		try
 		{
-			r1.toString();
+			r1.toURL();
 			fail();
 		}
 		catch(IllegalStateException e)
@@ -133,8 +136,9 @@ public class ResourceTest extends TestCase
 		assertEquals(contentLength, r1.getContentLength());
 		assertEquals(0, r1.getResponse200Count());
 		assertEquals(0, r1.getResponse304Count());
-		assertEquals("/contextPath/servletPath/ResourceTest.class", r1.toString());
+		assertEquals("/contextPath/servletPath/ResourceTest.class", r1.toURL());
 		assertEquals("scheme://host/contextPath/servletPath/ResourceTest.class", r1.toAbsolute());
+		assertEquals("ResourceTest.class", r1.toString());
 		assertEquals(ENVIRONMENT, Cop.getEnvironment());
 		
 		
@@ -145,9 +149,10 @@ public class ResourceTest extends TestCase
 		assertEquals(contentLength, r1.getContentLength());
 		assertEquals(0, r1.getResponse200Count());
 		assertEquals(0, r1.getResponse304Count());
+		assertEquals("ResourceTest.class", r1.toString());
 		try
 		{
-			r1.toString();
+			r1.toURL();
 			fail();
 		}
 		catch(IllegalStateException e)
@@ -169,10 +174,10 @@ public class ResourceTest extends TestCase
 	{
 		final Resource r1 = new Resource("ResourceTest.class", "major/minor");
 		
-		
+		assertEquals("ResourceTest.class", r1.toString());
 		try
 		{
-			r1.toString();
+			r1.toURL();
 			fail();
 		}
 		catch(IllegalStateException e)
@@ -200,15 +205,17 @@ public class ResourceTest extends TestCase
 		
 		
 		Cop.setEnvironment(ENVIRONMENT);
-		assertEquals("http://host/contextPath/servletPath/ResourceTest.class", r1.toString());
+		assertEquals("http://host/contextPath/servletPath/ResourceTest.class", r1.toURL());
 		assertEquals("http://host/contextPath/servletPath/ResourceTest.class", r1.toAbsolute());
+		assertEquals("ResourceTest.class", r1.toString());
 		assertEquals(ENVIRONMENT, Cop.getEnvironment());
 		
 		
 		Cop.removeEnvironment();
+		assertEquals("ResourceTest.class", r1.toString());
 		try
 		{
-			r1.toString();
+			r1.toURL();
 			fail();
 		}
 		catch(IllegalStateException e)
