@@ -51,9 +51,9 @@ public final class Resource
 	public Resource(final String name, final String contentType)
 	{
 		if(name==null)
-			throw new NullPointerException();
+			throw new NullPointerException("name");
 		if(contentType==null)
-			throw new NullPointerException();
+			throw new NullPointerException("contentType");
 
 		this.name = name;
 		this.contentType = contentType;

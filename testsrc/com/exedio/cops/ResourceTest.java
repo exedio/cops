@@ -29,6 +29,23 @@ public class ResourceTest extends TestCase
 	
 	public void testToString()
 	{
+		try
+		{
+			new Resource(null, null);
+		}
+		catch(NullPointerException e)
+		{
+			assertEquals("name", e.getMessage());
+		}
+		try
+		{
+			new Resource("ResourceTest.class", null);
+		}
+		catch(NullPointerException e)
+		{
+			assertEquals("contentType", e.getMessage());
+		}
+		
 		final Date before = new Date();
 		final Resource r1 = new Resource("ResourceTest.class", "major/minor");
 		final Date after = new Date();
