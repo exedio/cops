@@ -170,7 +170,7 @@ public class ResourceTest extends TestCase
 		}
 	}
 	
-	public void testEnironment()
+	public void testEnvironment()
 	{
 		final Resource r1 = new Resource("ResourceTest.class", "major/minor");
 		
