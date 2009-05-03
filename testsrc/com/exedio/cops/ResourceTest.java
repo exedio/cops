@@ -158,7 +158,7 @@ public class ResourceTest extends TestCase
 		assertEquals("/contextPath/servletPath/ResourceTest.class", r1.toURL(request));
 		assertEquals("scheme://host/contextPath/servletPath/ResourceTest.class", r1.toAbsolute(request));
 		assertEquals("ResourceTest.class", r1.toString());
-		assertEquals(ENVIRONMENT, Cop.getEnvironment(request));
+		assertEquals(ENVIRONMENT, Absolute.getEnvironment(request));
 		
 		
 	}
@@ -188,7 +188,7 @@ public class ResourceTest extends TestCase
 		}
 		try
 		{
-			Cop.getEnvironment(null);
+			Absolute.getEnvironment(null);
 			fail();
 		}
 		catch(NullPointerException e)
@@ -201,7 +201,7 @@ public class ResourceTest extends TestCase
 		assertEquals("http://host/contextPath/servletPath/ResourceTest.class", r1.toURL(request));
 		assertEquals("http://host/contextPath/servletPath/ResourceTest.class", r1.toAbsolute(request));
 		assertEquals("ResourceTest.class", r1.toString());
-		assertEquals(ENVIRONMENT, Cop.getEnvironment(request));
+		assertEquals(ENVIRONMENT, Absolute.getEnvironment(request));
 		
 		
 	}

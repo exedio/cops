@@ -249,20 +249,6 @@ public abstract class Cop
 		return true;
 	}
 	
-	public static String getEnvironment(final HttpServletRequest request)
-	{
-		if(request==null)
-			throw new NullPointerException("request");
-		
-		if(request instanceof EnvironmentRequest)
-			return ((EnvironmentRequest)request).environment;
-		
-		return
-			request.getHeader("Host") +
-			request.getContextPath() +
-			request.getServletPath();
-	}
-	
 	public static final boolean isPost(final HttpServletRequest request)
 	{
 		return "POST".equals(request.getMethod());

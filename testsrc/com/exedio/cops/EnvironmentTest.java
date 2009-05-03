@@ -80,13 +80,13 @@ public class EnvironmentTest extends TestCase
 		assertEquals("http://host.exedio.com/contextPath/servletPath/ResourceTest.class", resource.toAbsolute(request));
 		assertEquals("ResourceTest.class", resource.toString());
 		
-		assertEquals(CopTest.ENVIRONMENT, Cop.getEnvironment(request));
+		assertEquals(CopTest.ENVIRONMENT, Absolute.getEnvironment(request));
 		
 		
 		// port adjustments
 		
 		request = new EnvironmentRequest(ENVIRONMENT_8080);
-		assertEquals(ENVIRONMENT_8080, Cop.getEnvironment(request));
+		assertEquals(ENVIRONMENT_8080, Absolute.getEnvironment(request));
 		{
 			final HttpsCop cop = new HttpsCop(null);
 			assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", cop.getURL(request));
@@ -111,7 +111,7 @@ public class EnvironmentTest extends TestCase
 		
 		
 		request = new EnvironmentRequest(ENVIRONMENT_8443);
-		assertEquals(ENVIRONMENT_8443, Cop.getEnvironment(request));
+		assertEquals(ENVIRONMENT_8443, Absolute.getEnvironment(request));
 		{
 			final HttpsCop cop = new HttpsCop(null);
 			assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", cop.getURL(request));
