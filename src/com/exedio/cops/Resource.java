@@ -104,7 +104,7 @@ public final class Resource
 		return request.getContextPath() + request.getServletPath() + '/' + name;
 	}
 	
-	public String toAbsolute(final HttpServletRequest request)
+	public String getAbsoluteURL(final HttpServletRequest request)
 	{
 		if(request==null)
 			throw new NullPointerException("request");

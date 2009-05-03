@@ -66,7 +66,7 @@ final class Out
 
 	void appendAbsolute(final Resource resource)
 	{
-		bf.append(resource.toAbsolute(request));
+		bf.append(resource.getAbsoluteURL(request));
 	}
 	
 	void append(final Cop cop)
