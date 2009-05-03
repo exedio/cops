@@ -119,8 +119,6 @@ public abstract class Cop
 		
 		if(request==null)
 			throw new NullPointerException("request");
-		if(request instanceof EnvironmentRequest)
-			return ((EnvironmentRequest)request).getURL(needsSecure(), url);
 		
 		return
 			request.getScheme() + "://" +
@@ -128,6 +126,15 @@ public abstract class Cop
 			request.getContextPath() +
 			request.getServletPath() +
 			'/' + url;
+	}
+	
+	public final String getAbsoluteURL(final String token)
+	{
+		final String url = this.url!=null ? this.url.toString() : pathInfo;
+		
+		if(token==null)
+			throw new NullPointerException("token");
+		return EnvironmentRequest.getURL(token, needsSecure(), url);
 	}
 	
 	@Override
@@ -142,9 +149,6 @@ public abstract class Cop
 		
 		if(request==null)
 			throw new NullPointerException("request");
-		
-		if(request instanceof EnvironmentRequest)
-			return ((EnvironmentRequest)request).getURL(needsSecure(), url);
 		
 		final String fullURL = request.getContextPath() + request.getServletPath() + '/' + url;
 		
@@ -220,8 +224,6 @@ public abstract class Cop
 	{
 		if(request==null)
 			throw new NullPointerException();
-		if(request instanceof EnvironmentRequest)
-			throw new RuntimeException("redirectToCanonical not implemented for setEnvironment");
 		if(!"GET".equals(request.getMethod()))
 			return false;
 		
@@ -253,9 +255,6 @@ public abstract class Cop
 	{
 		if(request==null)
 			throw new NullPointerException("request");
-		
-		if(request instanceof EnvironmentRequest)
-			return ((EnvironmentRequest)request).environment;
 		
 		return
 			request.getHeader("Host") +

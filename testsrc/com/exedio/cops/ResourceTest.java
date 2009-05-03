@@ -197,13 +197,10 @@ public class ResourceTest extends TestCase
 		}
 		
 		
-		final HttpServletRequest request = new EnvironmentRequest(ENVIRONMENT);
-		assertEquals("http://host/contextPath/servletPath/ResourceTest.class", r1.toURL(request));
-		assertEquals("http://host/contextPath/servletPath/ResourceTest.class", r1.toAbsolute(request));
+		
+		
+		assertEquals("http://host/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(ENVIRONMENT));
 		assertEquals("ResourceTest.class", r1.toString());
-		assertEquals(ENVIRONMENT, Cop.getEnvironment(request));
-		
-		
 	}
 	
 	private static final String DATE_FORMAT_FULL = "dd.MM.yyyy HH:mm:ss.SSS";

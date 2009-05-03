@@ -134,7 +134,7 @@ public class CopTest extends TestCase
 		}
 		try
 		{
-			new TestCop().getAbsoluteURL(null);
+			new TestCop().getAbsoluteURL((HttpServletRequest)null);
 			fail();
 		}
 		catch(NullPointerException e)

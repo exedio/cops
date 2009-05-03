@@ -101,9 +101,6 @@ public final class Resource
 		if(request==null)
 			throw new NullPointerException("request");
 		
-		if(request instanceof EnvironmentRequest)
-			return ((EnvironmentRequest)request).getURL(null, name);
-		
 		return request.getContextPath() + request.getServletPath() + '/' + name;
 	}
 	
@@ -112,15 +109,19 @@ public final class Resource
 		if(request==null)
 			throw new NullPointerException("request");
 		
-		if(request instanceof EnvironmentRequest)
-			return ((EnvironmentRequest)request).getURL(null, name);
-		
 		return
 			request.getScheme() + "://" +
 			request.getHeader("Host") +
 			request.getContextPath() +
 			request.getServletPath() +
 			'/' + name;
+	}
+	
+	public final String getAbsoluteURL(final String token)
+	{
+		if(token==null)
+			throw new NullPointerException("token");
+		return EnvironmentRequest.getURL(token, null, name);
 	}
 	
 	void init(final Class<?> resourceLoader)
