@@ -197,7 +197,7 @@ public class ResourceTest extends TestCase
 		}
 		
 		
-		final HttpServletRequest request = new EnvironmentRequest(ENVIRONMENT);
+		final HttpServletRequest request = new AbsoluteRequest(ENVIRONMENT);
 		assertEquals("http://host/contextPath/servletPath/ResourceTest.class", r1.toURL(request));
 		assertEquals("http://host/contextPath/servletPath/ResourceTest.class", r1.toAbsolute(request));
 		assertEquals("ResourceTest.class", r1.toString());

@@ -32,8 +32,8 @@ public final class Absolute
 		if(request==null)
 			throw new NullPointerException("request");
 		
-		if(request instanceof EnvironmentRequest)
-			return ((EnvironmentRequest)request).environment;
+		if(request instanceof AbsoluteRequest)
+			return ((AbsoluteRequest)request).environment;
 		
 		return
 			request.getHeader("Host") +
