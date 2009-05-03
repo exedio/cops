@@ -107,19 +107,17 @@ public abstract class CopsServlet extends HttpServlet
 				nfs.setGroupingSeparator('\'');
 				final DecimalFormat nf = new DecimalFormat("", nfs);
 				final PrintStream out = new PrintStream(response.getOutputStream(), false, UTF8);
-				{
-					final ServletConfig config = getServletConfig();
-					ResourceStatus_Jspm.write(
-							out,
-							config!=null ? config.getServletName() : null, // TODO why can config be null?
-							resources.values(),
-							getAuthentication(request),
-							request.getParameter(INLINE)!=null,
-							nf,
-							new SimpleDateFormat("yyyy/MM/dd'&nbsp;'HH:mm:ss'<small>'.S'</small>'"),
-							new SimpleDateFormat("yyyy/MM/dd'&nbsp;'HH:mm:ss.SSS Z (z)"),
-							CopsServlet.class.getPackage());
-				}
+				final ServletConfig config = getServletConfig();
+				ResourceStatus_Jspm.write(
+						out,
+						config!=null ? config.getServletName() : null, // TODO why can config be null?
+						resources.values(),
+						getAuthentication(request),
+						request.getParameter(INLINE)!=null,
+						nf,
+						new SimpleDateFormat("yyyy/MM/dd'&nbsp;'HH:mm:ss'<small>'.S'</small>'"),
+						new SimpleDateFormat("yyyy/MM/dd'&nbsp;'HH:mm:ss.SSS Z (z)"),
+						CopsServlet.class.getPackage());
 				out.close();
 				return;
 			}
@@ -156,9 +154,7 @@ public abstract class CopsServlet extends HttpServlet
 		response.setHeader("Pragma", "no-cache");
 		response.setDateHeader("Expires", System.currentTimeMillis());
 		
-		{
-			doRequest(request, response);
-		}
+		doRequest(request, response);
 	}
 
 	protected abstract void doRequest(HttpServletRequest request, HttpServletResponse response)
