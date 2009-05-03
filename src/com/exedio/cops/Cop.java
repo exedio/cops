@@ -124,14 +124,13 @@ public abstract class Cop
 		{
 			return ((EnvironmentRequest)request).getURL(needsSecure(), url);
 		}
-		final String encodedURL = url; // TODO remove
 		
 		return
 			request.getScheme() + "://" +
 			request.getHeader("Host") +
 			request.getContextPath() +
 			request.getServletPath() +
-			'/' + encodedURL;
+			'/' + url;
 	}
 	
 	@Override
@@ -151,15 +150,15 @@ public abstract class Cop
 		if(request instanceof EnvironmentRequest)
 			return ((EnvironmentRequest)request).getURL(needsSecure(), url);
 		
-		final String encodedURL = request.getContextPath() + request.getServletPath() + '/' + url; // TODO rename
+		final String fullURL = request.getContextPath() + request.getServletPath() + '/' + url;
 		
 		final Boolean needsSecure = needsSecure();
 		if(needsSecure==null)
-			return encodedURL;
+			return fullURL;
 		
 		final boolean isSecure = request.isSecure();
 		if(needsSecure.booleanValue()==isSecure)
-			return encodedURL;
+			return fullURL;
 		
 		String host = request.getHeader("Host");
 		if(!isSecure)
@@ -176,7 +175,7 @@ public abstract class Cop
 		return
 			(needsSecure?"https://":"http://") +
 			host +
-			encodedURL;
+			fullURL;
 	}
 	
 	private static final char NATURAL_PLACE_HOLDER = '-';
