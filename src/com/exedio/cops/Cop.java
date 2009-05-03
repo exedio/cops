@@ -117,21 +117,15 @@ public abstract class Cop
 	{
 		final String url = this.url!=null ? this.url.toString() : pathInfo;
 		
-		final HttpServletResponse response = CopsServlet.responses.get();
-		if(response==null)
-			throw new IllegalStateException("no response available");
-		if(response instanceof EnvironmentResponse)
-		{
-			final HttpServletRequest request = CopsServlet.requests.get();
-			if(request==null)
-				throw new IllegalStateException("no request available");
-			return ((EnvironmentRequest)request).getURL(needsSecure(), url);
-		}
-		final String encodedURL = response.encodeURL(url);
-		
 		final HttpServletRequest request = CopsServlet.requests.get();
 		if(request==null)
 			throw new IllegalStateException("no request available");
+		if(request instanceof EnvironmentRequest)
+		{
+			return ((EnvironmentRequest)request).getURL(needsSecure(), url);
+		}
+		final String encodedURL = url; // TODO remove
+		
 		return
 			request.getScheme() + "://" +
 			request.getHeader("Host") +
@@ -151,16 +145,13 @@ public abstract class Cop
 		final String url = this.url!=null ? this.url.toString() : pathInfo;
 		
 		final HttpServletRequest  request  = CopsServlet.requests.get();
-		final HttpServletResponse response = CopsServlet.responses.get();
 		if(request==null)
 			throw new IllegalStateException("no request available");
-		if(response==null)
-			throw new IllegalStateException("no response available");
 		
 		if(request instanceof EnvironmentRequest)
 			return ((EnvironmentRequest)request).getURL(needsSecure(), url);
 		
-		final String encodedURL = request.getContextPath() + request.getServletPath() + '/' + response.encodeURL(url);
+		final String encodedURL = request.getContextPath() + request.getServletPath() + '/' + url; // TODO rename
 		
 		final Boolean needsSecure = needsSecure();
 		if(needsSecure==null)
@@ -230,7 +221,7 @@ public abstract class Cop
 		return s;
 	}
 	
-	public final boolean redirectToCanonical()
+	public final boolean redirectToCanonical(final HttpServletResponse response)
 	{
 		final HttpServletRequest request = CopsServlet.requests.get();
 		if(request==null)
@@ -255,10 +246,9 @@ public abstract class Cop
 				return false;
 		}
 		
-		final String location = toString();
+		final String location = response.encodeRedirectURL(toURL());
 		System.out.println("cops redirectToCanonical from --" + actual + "-- to --" + location + "--");
 		
-		final HttpServletResponse response = CopsServlet.responses.get();
 		response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 		response.setHeader("Location", location);
 		
@@ -285,16 +275,13 @@ public abstract class Cop
 	{
 		if(CopsServlet.requests.get()!=null)
 			throw new IllegalStateException("environment already available");
-		assert CopsServlet.responses.get()==null;
 		
 		CopsServlet.requests.set(new EnvironmentRequest(environment));
-		CopsServlet.responses.set(new EnvironmentResponse());
 	}
 	
 	public static void removeEnvironment()
 	{
 		CopsServlet.requests.remove();
-		CopsServlet.responses.remove();
 	}
 	
 	public static final boolean isPost(final HttpServletRequest request)

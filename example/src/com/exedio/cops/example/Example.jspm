@@ -28,7 +28,6 @@ import javax.servlet.http.HttpServletRequest;
 import com.exedio.cops.CopsServlet;
 import com.exedio.cops.Pageable;
 import com.exedio.cops.Pager;
-import com.exedio.cops.XMLEncoder;
 
 final class Example_Jspm
 {
@@ -55,7 +54,7 @@ final class Example_Jspm
 		<a href="<%=cop.add(10)%>">+10</a> |
 		<a href="<%=cop.add(-10)%>">-10</a>
 		<br>
-		<a href="<%=XMLEncoder.encode(cop.toAbsolute())%>">absolute</a>
+		<a href="<%=out.encodeURLandXML(cop.toAbsolute())%>">absolute</a>
 		<br>
 		<a href="<%=cop.setString("zack")%>">zack</a> |
 		<a href="<%=cop.setString("sla/sh")%>">slash</a> |

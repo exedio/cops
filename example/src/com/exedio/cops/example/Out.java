@@ -31,6 +31,14 @@ import com.exedio.cops.XMLEncoder;
 final class Out
 {
 	private StringBuilder bf = new StringBuilder();
+	private final HttpServletResponse response;
+	
+	Out(final HttpServletResponse response)
+	{
+		assert response!=null;
+		
+		this.response = response;
+	}
 	
 	void append(final char c)
 	{
@@ -46,6 +54,11 @@ final class Out
 	{
 		bf.append(i);
 	}
+
+	String encodeURLandXML(final String url)
+	{
+		return XMLEncoder.encode(response.encodeURL(url));
+	}
 	
 	void append(final Resource resource)
 	{
@@ -54,10 +67,10 @@ final class Out
 	
 	void append(final Cop cop)
 	{
-		bf.append(XMLEncoder.encode(cop.toURL()));
+		bf.append(XMLEncoder.encode(response.encodeURL(cop.toURL())));
 	}
 	
-	void writeBody(final HttpServletResponse response) throws IOException
+	void writeBody() throws IOException
 	{
 		final StringBuilder bf = this.bf;
 		if(bf==null)

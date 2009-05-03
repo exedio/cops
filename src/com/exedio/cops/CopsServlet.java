@@ -43,7 +43,6 @@ import javax.servlet.http.HttpServletResponse;
 public abstract class CopsServlet extends HttpServlet
 {
 	static final ThreadLocal<HttpServletRequest> requests = new ThreadLocal<HttpServletRequest>();
-	static final ThreadLocal<HttpServletResponse> responses = new ThreadLocal<HttpServletResponse>();
 	
 	public static final String UTF8 = "utf-8";
 	
@@ -169,13 +168,11 @@ public abstract class CopsServlet extends HttpServlet
 		try
 		{
 			requests.set(request);
-			responses.set(response);
 			doRequest(request, response);
 		}
 		finally
 		{
 			requests.remove();
-			responses.remove();
 		}
 	}
 

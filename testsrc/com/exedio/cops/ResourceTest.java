@@ -263,7 +263,6 @@ public class ResourceTest extends TestCase
 	protected void tearDown() throws Exception
 	{
 		CopsServlet.requests.remove();
-		CopsServlet.responses.remove();
 	}
 	
 	private static final String DATE_FORMAT_FULL = "dd.MM.yyyy HH:mm:ss.SSS";
