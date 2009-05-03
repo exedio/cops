@@ -32,11 +32,11 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-final class AbsoluteRequest implements HttpServletRequest
+final class EnvironmentRequest implements HttpServletRequest
 {
 	final String environment;
 	
-	AbsoluteRequest(final String environment)
+	EnvironmentRequest(final String environment)
 	{
 		this.environment = environment;
 	}

@@ -119,8 +119,8 @@ public abstract class Cop
 		
 		if(request==null)
 			throw new NullPointerException("request");
-		if(request instanceof AbsoluteRequest)
-			return ((AbsoluteRequest)request).getURL(needsSecure(), url);
+		if(request instanceof EnvironmentRequest)
+			return ((EnvironmentRequest)request).getURL(needsSecure(), url);
 		
 		return
 			request.getScheme() + "://" +
@@ -143,8 +143,8 @@ public abstract class Cop
 		if(request==null)
 			throw new NullPointerException("request");
 		
-		if(request instanceof AbsoluteRequest)
-			return ((AbsoluteRequest)request).getURL(needsSecure(), url);
+		if(request instanceof EnvironmentRequest)
+			return ((EnvironmentRequest)request).getURL(needsSecure(), url);
 		
 		final String fullURL = request.getContextPath() + request.getServletPath() + '/' + url;
 		
@@ -220,7 +220,7 @@ public abstract class Cop
 	{
 		if(request==null)
 			throw new NullPointerException();
-		if(request instanceof AbsoluteRequest)
+		if(request instanceof EnvironmentRequest)
 			throw new RuntimeException("redirectToCanonical not implemented for setEnvironment");
 		if(!"GET".equals(request.getMethod()))
 			return false;
@@ -247,6 +247,20 @@ public abstract class Cop
 		response.setHeader("Location", location);
 		
 		return true;
+	}
+	
+	public static String getEnvironment(final HttpServletRequest request)
+	{
+		if(request==null)
+			throw new NullPointerException("request");
+		
+		if(request instanceof EnvironmentRequest)
+			return ((EnvironmentRequest)request).environment;
+		
+		return
+			request.getHeader("Host") +
+			request.getContextPath() +
+			request.getServletPath();
 	}
 	
 	public static final boolean isPost(final HttpServletRequest request)

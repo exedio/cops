@@ -16,6 +16,5 @@ The items are sorted inversely, i.e. lastest items are on top
   - toURL() and toAbsolute() on classes Cop and Resource do need a parameter HttpServletRequest
   - rename method toAbsolute to getAbsoluteURL
   - rename method toURL to getURL
-  - move Cop.getEnvironment to new class Absolute
 * updated jspm library to build.14, added getlib.properties and check.version target to getlib.xml
 

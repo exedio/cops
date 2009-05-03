@@ -233,7 +233,7 @@ public class CopTest extends TestCase
 			assertEquals("/contextPath/servletPath/test.html?param1=-1", cop.getURL(request));
 		}
 		
-		assertEquals(ENVIRONMENT, Absolute.getEnvironment(request));
+		assertEquals(ENVIRONMENT, Cop.getEnvironment(request));
 	}
 	
 	static final String ENVIRONMENT = "host.exedio.com/contextPath/servletPath";
