@@ -42,8 +42,6 @@ import javax.servlet.http.HttpServletResponse;
 
 public abstract class CopsServlet extends HttpServlet
 {
-	static final ThreadLocal<HttpServletRequest> requests = new ThreadLocal<HttpServletRequest>();
-	
 	public static final String UTF8 = "utf-8";
 	
 	private final LinkedHashMap<String, Resource> resources;
@@ -109,10 +107,7 @@ public abstract class CopsServlet extends HttpServlet
 				nfs.setGroupingSeparator('\'');
 				final DecimalFormat nf = new DecimalFormat("", nfs);
 				final PrintStream out = new PrintStream(response.getOutputStream(), false, UTF8);
-				try
 				{
-					assert requests.get()==null;
-					requests.set(request);
 					final ServletConfig config = getServletConfig();
 					ResourceStatus_Jspm.write(
 							out,
@@ -124,10 +119,6 @@ public abstract class CopsServlet extends HttpServlet
 							new SimpleDateFormat("yyyy/MM/dd'&nbsp;'HH:mm:ss'<small>'.S'</small>'"),
 							new SimpleDateFormat("yyyy/MM/dd'&nbsp;'HH:mm:ss.SSS Z (z)"),
 							CopsServlet.class.getPackage());
-				}
-				finally
-				{
-					requests.remove();
 				}
 				out.close();
 				return;
@@ -165,14 +156,8 @@ public abstract class CopsServlet extends HttpServlet
 		response.setHeader("Pragma", "no-cache");
 		response.setDateHeader("Expires", System.currentTimeMillis());
 		
-		try
 		{
-			requests.set(request);
 			doRequest(request, response);
-		}
-		finally
-		{
-			requests.remove();
 		}
 	}
 

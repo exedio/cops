@@ -21,6 +21,8 @@ package com.exedio.cops;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
 import junit.framework.TestCase;
 
 public class ResourceTest extends TestCase
@@ -59,21 +61,21 @@ public class ResourceTest extends TestCase
 		assertEquals("ResourceTest.class", r1.toString());
 		try
 		{
-			r1.toURL();
+			r1.toURL(null);
 			fail();
 		}
-		catch(IllegalStateException e)
+		catch(NullPointerException e)
 		{
-			assertEquals("no request available", e.getMessage());
+			assertEquals("request", e.getMessage());
 		}
 		try
 		{
-			r1.toAbsolute();
+			r1.toAbsolute(null);
 			fail();
 		}
-		catch(IllegalStateException e)
+		catch(NullPointerException e)
 		{
-			assertEquals("no request available", e.getMessage());
+			assertEquals("request", e.getMessage());
 		}
 		
 		
@@ -88,21 +90,21 @@ public class ResourceTest extends TestCase
 		assertEquals("ResourceTest.class", r1.toString());
 		try
 		{
-			r1.toURL();
+			r1.toURL(null);
 			fail();
 		}
-		catch(IllegalStateException e)
+		catch(NullPointerException e)
 		{
-			assertEquals("no request available", e.getMessage());
+			assertEquals("request", e.getMessage());
 		}
 		try
 		{
-			r1.toAbsolute();
+			r1.toAbsolute(null);
 			fail();
 		}
-		catch(IllegalStateException e)
+		catch(NullPointerException e)
 		{
-			assertEquals("no request available", e.getMessage());
+			assertEquals("request", e.getMessage());
 		}
 		
 		
@@ -117,25 +119,25 @@ public class ResourceTest extends TestCase
 		assertEquals("ResourceTest.class", r1.toString());
 		try
 		{
-			r1.toURL();
+			r1.toURL(null);
 			fail();
 		}
-		catch(IllegalStateException e)
+		catch(NullPointerException e)
 		{
-			assertEquals("no request available", e.getMessage());
+			assertEquals("request", e.getMessage());
 		}
 		try
 		{
-			r1.toAbsolute();
+			r1.toAbsolute(null);
 			fail();
 		}
-		catch(IllegalStateException e)
+		catch(NullPointerException e)
 		{
-			assertEquals("no request available", e.getMessage());
+			assertEquals("request", e.getMessage());
 		}
 		
 		
-		CopsServlet.requests.set(new DummyRequest(){
+		final HttpServletRequest request = new DummyRequest(){
 			@Override public String getScheme(){return "scheme";}
 			@Override public String getContextPath(){return "/contextPath";}
 			@Override public String getServletPath(){return "/servletPath";}
@@ -146,45 +148,19 @@ public class ResourceTest extends TestCase
 				else
 					throw new RuntimeException(name);
 			}
-		});
+		};
 		assertEquals("ResourceTest.class", r1.getName());
 		assertEquals("major/minor", r1.getContentType());
 		assertEquals(lastModified, r1.getLastModified());
 		assertEquals(contentLength, r1.getContentLength());
 		assertEquals(0, r1.getResponse200Count());
 		assertEquals(0, r1.getResponse304Count());
-		assertEquals("/contextPath/servletPath/ResourceTest.class", r1.toURL());
-		assertEquals("scheme://host/contextPath/servletPath/ResourceTest.class", r1.toAbsolute());
+		assertEquals("/contextPath/servletPath/ResourceTest.class", r1.toURL(request));
+		assertEquals("scheme://host/contextPath/servletPath/ResourceTest.class", r1.toAbsolute(request));
 		assertEquals("ResourceTest.class", r1.toString());
-		assertEquals(ENVIRONMENT, Cop.getEnvironment());
+		assertEquals(ENVIRONMENT, Cop.getEnvironment(request));
 		
 		
-		CopsServlet.requests.remove();
-		assertEquals("ResourceTest.class", r1.getName());
-		assertEquals("major/minor", r1.getContentType());
-		assertEquals(lastModified, r1.getLastModified());
-		assertEquals(contentLength, r1.getContentLength());
-		assertEquals(0, r1.getResponse200Count());
-		assertEquals(0, r1.getResponse304Count());
-		assertEquals("ResourceTest.class", r1.toString());
-		try
-		{
-			r1.toURL();
-			fail();
-		}
-		catch(IllegalStateException e)
-		{
-			assertEquals("no request available", e.getMessage());
-		}
-		try
-		{
-			r1.toAbsolute();
-			fail();
-		}
-		catch(IllegalStateException e)
-		{
-			assertEquals("no request available", e.getMessage());
-		}
 	}
 	
 	public void testEnvironment()
@@ -194,75 +170,40 @@ public class ResourceTest extends TestCase
 		assertEquals("ResourceTest.class", r1.toString());
 		try
 		{
-			r1.toURL();
+			r1.toURL(null);
 			fail();
 		}
-		catch(IllegalStateException e)
+		catch(NullPointerException e)
 		{
-			assertEquals("no request available", e.getMessage());
+			assertEquals("request", e.getMessage());
 		}
 		try
 		{
-			r1.toAbsolute();
+			r1.toAbsolute(null);
 			fail();
 		}
-		catch(IllegalStateException e)
+		catch(NullPointerException e)
 		{
-			assertEquals("no request available", e.getMessage());
+			assertEquals("request", e.getMessage());
 		}
 		try
 		{
-			Cop.getEnvironment();
+			Cop.getEnvironment(null);
 			fail();
 		}
-		catch(IllegalStateException e)
+		catch(NullPointerException e)
 		{
-			assertEquals("no request available", e.getMessage());
+			assertEquals("request", e.getMessage());
 		}
 		
 		
-		Cop.setEnvironment(ENVIRONMENT);
-		assertEquals("http://host/contextPath/servletPath/ResourceTest.class", r1.toURL());
-		assertEquals("http://host/contextPath/servletPath/ResourceTest.class", r1.toAbsolute());
+		final HttpServletRequest request = new EnvironmentRequest(ENVIRONMENT);
+		assertEquals("http://host/contextPath/servletPath/ResourceTest.class", r1.toURL(request));
+		assertEquals("http://host/contextPath/servletPath/ResourceTest.class", r1.toAbsolute(request));
 		assertEquals("ResourceTest.class", r1.toString());
-		assertEquals(ENVIRONMENT, Cop.getEnvironment());
+		assertEquals(ENVIRONMENT, Cop.getEnvironment(request));
 		
 		
-		Cop.removeEnvironment();
-		assertEquals("ResourceTest.class", r1.toString());
-		try
-		{
-			r1.toURL();
-			fail();
-		}
-		catch(IllegalStateException e)
-		{
-			assertEquals("no request available", e.getMessage());
-		}
-		try
-		{
-			r1.toAbsolute();
-			fail();
-		}
-		catch(IllegalStateException e)
-		{
-			assertEquals("no request available", e.getMessage());
-		}
-		try
-		{
-			Cop.getEnvironment();
-			fail();
-		}
-		catch(IllegalStateException e)
-		{
-			assertEquals("no request available", e.getMessage());
-		}
-	}
-	
-	@Override
-	protected void tearDown() throws Exception
-	{
-		CopsServlet.requests.remove();
 	}
 	
 	private static final String DATE_FORMAT_FULL = "dd.MM.yyyy HH:mm:ss.SSS";

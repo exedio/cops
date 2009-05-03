@@ -78,7 +78,7 @@ public final class ExampleServlet extends CopsServlet
 			return;
 		
 		final NumberCop cop = NumberCop.getCop(request);
-		if(cop.redirectToCanonical(response))
+		if(cop.redirectToCanonical(request, response))
 			return;
 		
 		final Pager pager = cop.pager;
@@ -91,7 +91,7 @@ public final class ExampleServlet extends CopsServlet
 			if(request.getParameter(START_SESSION)!=null)
 			{
 				request.getSession();
-				response.sendRedirect(response.encodeRedirectURL(cop.toURL()));
+				response.sendRedirect(response.encodeRedirectURL(cop.toURL(request)));
 				return;
 			}
 			else if(request.getParameter(REPORT_EXCEPTION)!=null)
@@ -100,7 +100,7 @@ public final class ExampleServlet extends CopsServlet
 			}
 		}
 
-		final Out out = new Out(response);
+		final Out out = new Out(request, response);
 		Example_Jspm.write(out, cop, request, searchResult, reportedException);
 		out.writeBody();
 	}

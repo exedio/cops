@@ -113,13 +113,12 @@ public abstract class Cop
 		return null;
 	}
 	
-	public final String toAbsolute()
+	public final String toAbsolute(final HttpServletRequest request)
 	{
 		final String url = this.url!=null ? this.url.toString() : pathInfo;
 		
-		final HttpServletRequest request = CopsServlet.requests.get();
 		if(request==null)
-			throw new IllegalStateException("no request available");
+			throw new NullPointerException("request");
 		if(request instanceof EnvironmentRequest)
 			return ((EnvironmentRequest)request).getURL(needsSecure(), url);
 		
@@ -137,13 +136,12 @@ public abstract class Cop
 		return url!=null ? url.toString() : pathInfo;
 	}
 	
-	public final String toURL()
+	public final String toURL(final HttpServletRequest request)
 	{
 		final String url = this.url!=null ? this.url.toString() : pathInfo;
 		
-		final HttpServletRequest  request  = CopsServlet.requests.get();
 		if(request==null)
-			throw new IllegalStateException("no request available");
+			throw new NullPointerException("request");
 		
 		if(request instanceof EnvironmentRequest)
 			return ((EnvironmentRequest)request).getURL(needsSecure(), url);
@@ -218,11 +216,10 @@ public abstract class Cop
 		return s;
 	}
 	
-	public final boolean redirectToCanonical(final HttpServletResponse response)
+	public final boolean redirectToCanonical(final HttpServletRequest request, final HttpServletResponse response)
 	{
-		final HttpServletRequest request = CopsServlet.requests.get();
 		if(request==null)
-			throw new IllegalStateException("no request available");
+			throw new NullPointerException();
 		if(request instanceof EnvironmentRequest)
 			throw new RuntimeException("redirectToCanonical not implemented for setEnvironment");
 		if(!"GET".equals(request.getMethod()))
@@ -243,7 +240,7 @@ public abstract class Cop
 				return false;
 		}
 		
-		final String location = response.encodeRedirectURL(toURL());
+		final String location = response.encodeRedirectURL(toURL(request));
 		System.out.println("cops redirectToCanonical from --" + actual + "-- to --" + location + "--");
 		
 		response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
@@ -252,12 +249,10 @@ public abstract class Cop
 		return true;
 	}
 	
-	public static String getEnvironment()
+	public static String getEnvironment(final HttpServletRequest request)
 	{
-		final HttpServletRequest request  = CopsServlet.requests.get();
-		
 		if(request==null)
-			throw new IllegalStateException("no request available");
+			throw new NullPointerException("request");
 		
 		if(request instanceof EnvironmentRequest)
 			return ((EnvironmentRequest)request).environment;
@@ -266,19 +261,6 @@ public abstract class Cop
 			request.getHeader("Host") +
 			request.getContextPath() +
 			request.getServletPath();
-	}
-	
-	public static void setEnvironment(final String environment)
-	{
-		if(CopsServlet.requests.get()!=null)
-			throw new IllegalStateException("environment already available");
-		
-		CopsServlet.requests.set(new EnvironmentRequest(environment));
-	}
-	
-	public static void removeEnvironment()
-	{
-		CopsServlet.requests.remove();
 	}
 	
 	public static final boolean isPost(final HttpServletRequest request)
@@ -338,16 +320,6 @@ public abstract class Cop
 	public static final String encodeXml(final String st)
 	{
 		return XMLEncoder.encode(st);
-	}
-	
-	/**
-	 * @deprecated use {@link #toAbsolute()} instead.
-	 */
-	@Deprecated
-	public final String toAbsolute(final HttpServletRequest request)
-	{
-		assert request==CopsServlet.requests.get();
-		return toAbsolute();
 	}
 	
 	/**

@@ -21,6 +21,7 @@ package com.exedio.cops.example;
 import java.io.IOException;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.exedio.cops.Cop;
@@ -31,12 +32,15 @@ import com.exedio.cops.XMLEncoder;
 final class Out
 {
 	private StringBuilder bf = new StringBuilder();
+	private final HttpServletRequest request;
 	private final HttpServletResponse response;
 	
-	Out(final HttpServletResponse response)
+	Out(final HttpServletRequest request, final HttpServletResponse response)
 	{
+		assert request !=null;
 		assert response!=null;
 		
+		this.request  = request;
 		this.response = response;
 	}
 	
@@ -57,17 +61,22 @@ final class Out
 	
 	void append(final Resource resource)
 	{
-		bf.append(resource.toURL());
+		bf.append(resource.toURL(request));
+	}
+
+	void appendAbsolute(final Resource resource)
+	{
+		bf.append(resource.toAbsolute(request));
 	}
 	
 	void append(final Cop cop)
 	{
-		bf.append(XMLEncoder.encode(response.encodeURL(cop.toURL())));
+		bf.append(XMLEncoder.encode(response.encodeURL(cop.toURL(request))));
 	}
 
 	void appendAbsolute(final Cop cop)
 	{
-		bf.append(XMLEncoder.encode(response.encodeURL(cop.toAbsolute())));
+		bf.append(XMLEncoder.encode(response.encodeURL(cop.toAbsolute(request))));
 	}
 	
 	void writeBody() throws IOException

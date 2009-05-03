@@ -96,11 +96,10 @@ public final class Resource
 		return name;
 	}
 	
-	public String toURL()
+	public String toURL(final HttpServletRequest request)
 	{
-		final HttpServletRequest request = CopsServlet.requests.get();
 		if(request==null)
-			throw new IllegalStateException("no request available");
+			throw new NullPointerException("request");
 		
 		if(request instanceof EnvironmentRequest)
 			return ((EnvironmentRequest)request).getURL(null, name);
@@ -108,11 +107,10 @@ public final class Resource
 		return request.getContextPath() + request.getServletPath() + '/' + name;
 	}
 	
-	public String toAbsolute()
+	public String toAbsolute(final HttpServletRequest request)
 	{
-		final HttpServletRequest request = CopsServlet.requests.get();
 		if(request==null)
-			throw new IllegalStateException("no request available");
+			throw new NullPointerException("request");
 		
 		if(request instanceof EnvironmentRequest)
 			return ((EnvironmentRequest)request).getURL(null, name);
