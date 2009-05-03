@@ -121,9 +121,7 @@ public abstract class Cop
 		if(request==null)
 			throw new IllegalStateException("no request available");
 		if(request instanceof EnvironmentRequest)
-		{
 			return ((EnvironmentRequest)request).getURL(needsSecure(), url);
-		}
 		
 		return
 			request.getScheme() + "://" +
