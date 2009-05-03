@@ -61,7 +61,7 @@ public class ResourceTest extends TestCase
 		assertEquals("ResourceTest.class", r1.toString());
 		try
 		{
-			r1.toURL(null);
+			r1.getURL(null);
 			fail();
 		}
 		catch(NullPointerException e)
@@ -90,7 +90,7 @@ public class ResourceTest extends TestCase
 		assertEquals("ResourceTest.class", r1.toString());
 		try
 		{
-			r1.toURL(null);
+			r1.getURL(null);
 			fail();
 		}
 		catch(NullPointerException e)
@@ -119,7 +119,7 @@ public class ResourceTest extends TestCase
 		assertEquals("ResourceTest.class", r1.toString());
 		try
 		{
-			r1.toURL(null);
+			r1.getURL(null);
 			fail();
 		}
 		catch(NullPointerException e)
@@ -155,7 +155,7 @@ public class ResourceTest extends TestCase
 		assertEquals(contentLength, r1.getContentLength());
 		assertEquals(0, r1.getResponse200Count());
 		assertEquals(0, r1.getResponse304Count());
-		assertEquals("/contextPath/servletPath/ResourceTest.class", r1.toURL(request));
+		assertEquals("/contextPath/servletPath/ResourceTest.class", r1.getURL(request));
 		assertEquals("scheme://host/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(request));
 		assertEquals("ResourceTest.class", r1.toString());
 		assertEquals(ENVIRONMENT, Cop.getEnvironment(request));
@@ -170,7 +170,7 @@ public class ResourceTest extends TestCase
 		assertEquals("ResourceTest.class", r1.toString());
 		try
 		{
-			r1.toURL(null);
+			r1.getURL(null);
 			fail();
 		}
 		catch(NullPointerException e)

@@ -96,7 +96,7 @@ public final class Resource
 		return name;
 	}
 	
-	public String toURL(final HttpServletRequest request)
+	public String getURL(final HttpServletRequest request)
 	{
 		if(request==null)
 			throw new NullPointerException("request");

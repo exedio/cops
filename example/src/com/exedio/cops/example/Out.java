@@ -61,7 +61,7 @@ final class Out
 	
 	void append(final Resource resource)
 	{
-		bf.append(resource.toURL(request));
+		bf.append(resource.getURL(request));
 	}
 
 	void appendAbsolute(final Resource resource)
