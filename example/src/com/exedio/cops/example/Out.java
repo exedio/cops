@@ -54,11 +54,6 @@ final class Out
 	{
 		bf.append(i);
 	}
-
-	String encodeURLandXML(final String url)
-	{
-		return XMLEncoder.encode(response.encodeURL(url));
-	}
 	
 	void append(final Resource resource)
 	{
@@ -68,6 +63,11 @@ final class Out
 	void append(final Cop cop)
 	{
 		bf.append(XMLEncoder.encode(response.encodeURL(cop.toURL())));
+	}
+
+	void appendAbsolute(final Cop cop)
+	{
+		bf.append(XMLEncoder.encode(response.encodeURL(cop.toAbsolute())));
 	}
 	
 	void writeBody() throws IOException
