@@ -251,7 +251,7 @@ public abstract class Cop
 		return true;
 	}
 	
-	public static String getEnvironment(final HttpServletRequest request)
+	public static String getToken(final HttpServletRequest request)
 	{
 		if(request==null)
 			throw new NullPointerException("request");
