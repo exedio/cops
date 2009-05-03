@@ -91,7 +91,7 @@ public final class ExampleServlet extends CopsServlet
 			if(request.getParameter(START_SESSION)!=null)
 			{
 				request.getSession();
-				response.sendRedirect(response.encodeRedirectURL(cop.toURL(request)));
+				response.sendRedirect(response.encodeRedirectURL(cop.getURL(request)));
 				return;
 			}
 			else if(request.getParameter(REPORT_EXCEPTION)!=null)

@@ -136,7 +136,7 @@ public abstract class Cop
 		return url!=null ? url.toString() : pathInfo;
 	}
 	
-	public final String toURL(final HttpServletRequest request)
+	public final String getURL(final HttpServletRequest request)
 	{
 		final String url = this.url!=null ? this.url.toString() : pathInfo;
 		
@@ -240,7 +240,7 @@ public abstract class Cop
 				return false;
 		}
 		
-		final String location = response.encodeRedirectURL(toURL(request));
+		final String location = response.encodeRedirectURL(getURL(request));
 		System.out.println("cops redirectToCanonical from --" + actual + "-- to --" + location + "--");
 		
 		response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);

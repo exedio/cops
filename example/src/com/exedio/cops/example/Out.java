@@ -71,7 +71,7 @@ final class Out
 	
 	void append(final Cop cop)
 	{
-		bf.append(XMLEncoder.encode(response.encodeURL(cop.toURL(request))));
+		bf.append(XMLEncoder.encode(response.encodeURL(cop.getURL(request))));
 	}
 
 	void appendAbsolute(final Cop cop)
