@@ -113,7 +113,7 @@ public abstract class Cop
 		return null;
 	}
 	
-	public final String toAbsolute(final HttpServletRequest request)
+	public final String getAbsoluteURL(final HttpServletRequest request)
 	{
 		final String url = this.url!=null ? this.url.toString() : pathInfo;
 		

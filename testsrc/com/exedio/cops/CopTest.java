@@ -134,7 +134,7 @@ public class CopTest extends TestCase
 		}
 		try
 		{
-			new TestCop().toAbsolute(null);
+			new TestCop().getAbsoluteURL(null);
 			fail();
 		}
 		catch(NullPointerException e)
@@ -145,19 +145,19 @@ public class CopTest extends TestCase
 		{
 			final TestCop cop = new TestCop();
 			assertEquals("/contextPath/servletPath/test.html", cop.toURL(request));
-			assertEquals("scheme://host.exedio.com/contextPath/servletPath/test.html", cop.toAbsolute(request));
+			assertEquals("scheme://host.exedio.com/contextPath/servletPath/test.html", cop.getAbsoluteURL(request));
 			assertEquals("test.html", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop("ding");
 			assertEquals("/contextPath/servletPath/test.html?param1=ding", cop.toURL(request));
-			assertEquals("scheme://host.exedio.com/contextPath/servletPath/test.html?param1=ding", cop.toAbsolute(request));
+			assertEquals("scheme://host.exedio.com/contextPath/servletPath/test.html?param1=ding", cop.getAbsoluteURL(request));
 			assertEquals("test.html?param1=ding", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop("ding", "dong");
 			assertEquals("/contextPath/servletPath/test.html?param1=ding&param2=dong", cop.toURL(request));
-			assertEquals("scheme://host.exedio.com/contextPath/servletPath/test.html?param1=ding&param2=dong", cop.toAbsolute(request));
+			assertEquals("scheme://host.exedio.com/contextPath/servletPath/test.html?param1=ding&param2=dong", cop.getAbsoluteURL(request));
 			assertEquals("test.html?param1=ding&param2=dong", cop.toString());
 		}
 		{
@@ -169,43 +169,43 @@ public class CopTest extends TestCase
 			final String dingenc = "slash%2Fsemi%3Bquestion%3Famp%26uuml%C3%BCgarten%23";
 			final TestCop cop = new TestCop(ding, "dong");
 			assertEquals("/contextPath/servletPath/test.html?param1=" + dingenc + "&param2=dong", cop.toURL(request));
-			assertEquals("scheme://host.exedio.com/contextPath/servletPath/test.html?param1=" + dingenc + "&param2=dong", cop.toAbsolute(request));
+			assertEquals("scheme://host.exedio.com/contextPath/servletPath/test.html?param1=" + dingenc + "&param2=dong", cop.getAbsoluteURL(request));
 			assertEquals("test.html?param1=" + dingenc + "&param2=dong", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop(new String[]{"dir1"});
 			assertEquals("/contextPath/servletPath/dir1/test.html", cop.toURL(request));
-			assertEquals("scheme://host.exedio.com/contextPath/servletPath/dir1/test.html", cop.toAbsolute(request));
+			assertEquals("scheme://host.exedio.com/contextPath/servletPath/dir1/test.html", cop.getAbsoluteURL(request));
 			assertEquals("dir1/test.html", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop(new String[]{"dir1"}, "dong");
 			assertEquals("/contextPath/servletPath/dir1/test.html?param1=dong", cop.toURL(request));
-			assertEquals("scheme://host.exedio.com/contextPath/servletPath/dir1/test.html?param1=dong", cop.toAbsolute(request));
+			assertEquals("scheme://host.exedio.com/contextPath/servletPath/dir1/test.html?param1=dong", cop.getAbsoluteURL(request));
 			assertEquals("dir1/test.html?param1=dong", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop(new String[]{"dir1"}, "dong", "ding");
 			assertEquals("/contextPath/servletPath/dir1/test.html?param1=dong&param2=ding", cop.toURL(request));
-			assertEquals("scheme://host.exedio.com/contextPath/servletPath/dir1/test.html?param1=dong&param2=ding", cop.toAbsolute(request));
+			assertEquals("scheme://host.exedio.com/contextPath/servletPath/dir1/test.html?param1=dong&param2=ding", cop.getAbsoluteURL(request));
 			assertEquals("dir1/test.html?param1=dong&param2=ding", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop(new String[]{"dir1", "dir2 /;\u00e4"});
 			assertEquals("/contextPath/servletPath/dir1/dir2/test.html", cop.toURL(request));
-			assertEquals("scheme://host.exedio.com/contextPath/servletPath/dir1/dir2/test.html", cop.toAbsolute(request));
+			assertEquals("scheme://host.exedio.com/contextPath/servletPath/dir1/dir2/test.html", cop.getAbsoluteURL(request));
 			assertEquals("dir1/dir2/test.html", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop(new String[]{"dir1", "dir2 /;\u00e4"}, "dong");
 			assertEquals("/contextPath/servletPath/dir1/dir2/test.html?param1=dong", cop.toURL(request));
-			assertEquals("scheme://host.exedio.com/contextPath/servletPath/dir1/dir2/test.html?param1=dong", cop.toAbsolute(request));
+			assertEquals("scheme://host.exedio.com/contextPath/servletPath/dir1/dir2/test.html?param1=dong", cop.getAbsoluteURL(request));
 			assertEquals("dir1/dir2/test.html?param1=dong", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop(new String[]{"dir1", "dir2 /;\u00e4"}, "dong", "ding");
 			assertEquals("/contextPath/servletPath/dir1/dir2/test.html?param1=dong&param2=ding", cop.toURL(request));
-			assertEquals("scheme://host.exedio.com/contextPath/servletPath/dir1/dir2/test.html?param1=dong&param2=ding", cop.toAbsolute(request));
+			assertEquals("scheme://host.exedio.com/contextPath/servletPath/dir1/dir2/test.html?param1=dong&param2=ding", cop.getAbsoluteURL(request));
 			assertEquals("dir1/dir2/test.html?param1=dong&param2=ding", cop.toString());
 		}
 		{

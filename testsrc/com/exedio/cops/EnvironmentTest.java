@@ -37,43 +37,43 @@ public class EnvironmentTest extends TestCase
 		{
 			final TestCop cop = new TestCop();
 			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html", cop.toURL(request));
-			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html", cop.toAbsolute(request));
+			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html", cop.getAbsoluteURL(request));
 			assertEquals("test.html", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop("ding");
 			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding", cop.toURL(request));
-			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding", cop.toAbsolute(request));
+			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding", cop.getAbsoluteURL(request));
 			assertEquals("test.html?param1=ding", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop("ding", "dong");
 			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding&param2=dong", cop.toURL(request));
-			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding&param2=dong", cop.toAbsolute(request));
+			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding&param2=dong", cop.getAbsoluteURL(request));
 			assertEquals("test.html?param1=ding&param2=dong", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop(0.0, "shop/hallo.html");
 			assertEquals("http://host.exedio.com/contextPath/servletPath/shop/hallo.html", cop.toURL(request));
-			assertEquals("http://host.exedio.com/contextPath/servletPath/shop/hallo.html", cop.toAbsolute(request));
+			assertEquals("http://host.exedio.com/contextPath/servletPath/shop/hallo.html", cop.getAbsoluteURL(request));
 			assertEquals("shop/hallo.html", cop.toString());
 		}
 		{
 			final HttpsCop cop = new HttpsCop(null);
 			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=value1", cop.toURL(request));
-			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=value1", cop.toAbsolute(request));
+			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=value1", cop.getAbsoluteURL(request));
 			assertEquals("test.html?param1=value1", cop.toString());
 		}
 		{
 			final HttpsCop cop = new HttpsCop(false);
 			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=value1", cop.toURL(request));
-			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=value1", cop.toAbsolute(request));
+			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=value1", cop.getAbsoluteURL(request));
 			assertEquals("test.html?param1=value1", cop.toString());
 		}
 		{
 			final HttpsCop cop = new HttpsCop(true);
 			assertEquals("https://host.exedio.com/contextPath/servletPath/test.html?param1=value1", cop.toURL(request));
-			assertEquals("https://host.exedio.com/contextPath/servletPath/test.html?param1=value1", cop.toAbsolute(request));
+			assertEquals("https://host.exedio.com/contextPath/servletPath/test.html?param1=value1", cop.getAbsoluteURL(request));
 			assertEquals("test.html?param1=value1", cop.toString());
 		}
 		assertEquals("http://host.exedio.com/contextPath/servletPath/ResourceTest.class", resource.toURL(request));
@@ -90,19 +90,19 @@ public class EnvironmentTest extends TestCase
 		{
 			final HttpsCop cop = new HttpsCop(null);
 			assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", cop.toURL(request));
-			assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", cop.toAbsolute(request));
+			assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", cop.getAbsoluteURL(request));
 			assertEquals("test.html?param1=value1", cop.toString());
 		}
 		{
 			final HttpsCop cop = new HttpsCop(false);
 			assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", cop.toURL(request));
-			assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", cop.toAbsolute(request));
+			assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", cop.getAbsoluteURL(request));
 			assertEquals("test.html?param1=value1", cop.toString());
 		}
 		{
 			final HttpsCop cop = new HttpsCop(true);
 			assertEquals("https://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", cop.toURL(request));
-			assertEquals("https://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", cop.toAbsolute(request));
+			assertEquals("https://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", cop.getAbsoluteURL(request));
 			assertEquals("test.html?param1=value1", cop.toString());
 		}
 		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", resource.toURL(request));
@@ -115,19 +115,19 @@ public class EnvironmentTest extends TestCase
 		{
 			final HttpsCop cop = new HttpsCop(null);
 			assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", cop.toURL(request));
-			assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", cop.toAbsolute(request));
+			assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", cop.getAbsoluteURL(request));
 			assertEquals("test.html?param1=value1", cop.toString());
 		}
 		{
 			final HttpsCop cop = new HttpsCop(false);
 			assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", cop.toURL(request));
-			assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", cop.toAbsolute(request));
+			assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", cop.getAbsoluteURL(request));
 			assertEquals("test.html?param1=value1", cop.toString());
 		}
 		{
 			final HttpsCop cop = new HttpsCop(true);
 			assertEquals("https://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", cop.toURL(request));
-			assertEquals("https://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", cop.toAbsolute(request));
+			assertEquals("https://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", cop.getAbsoluteURL(request));
 			assertEquals("test.html?param1=value1", cop.toString());
 		}
 		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", resource.toURL(request));

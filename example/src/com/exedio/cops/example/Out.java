@@ -76,7 +76,7 @@ final class Out
 
 	void appendAbsolute(final Cop cop)
 	{
-		bf.append(XMLEncoder.encode(response.encodeURL(cop.toAbsolute(request))));
+		bf.append(XMLEncoder.encode(response.encodeURL(cop.getAbsoluteURL(request))));
 	}
 	
 	void writeBody() throws IOException
