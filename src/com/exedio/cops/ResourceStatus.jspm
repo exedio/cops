@@ -27,10 +27,13 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
 final class ResourceStatus_Jspm
 {
 	public static final void write(
 				final PrintStream out,
+				final HttpServletRequest request,
 				final String servletName,
 				final Collection<Resource> resources,
 				final String authentication,
@@ -167,8 +170,8 @@ final class ResourceStatus_Jspm
 				<td><%=nf.format(contentLength)%></td>
 				<td><%=nf.format(response304Length)%></td>
 				<td><%=nf.format(response200Length)%></td>
-				<td class="text"><% if(inlineThis){%><img src="<%=resource%>"><%} %></td>
-				<td class="text"><a href="<%=resource%>"><%=encode(resource.getName())%></a></td>
+				<td class="text"><% if(inlineThis){%><img src="<%=resource.getURL(request)%>"><%} %></td>
+				<td class="text"><a href="<%=resource.getURL(request)%>"><%=encode(resource.getName())%></a></td>
 				<td class="text"><%=encode(contentType)%></td>
 				<td class="text"><%=dateFormat.format(resource.getLastModified())%></td>
 			</tr><%
