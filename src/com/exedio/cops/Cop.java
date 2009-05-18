@@ -262,6 +262,8 @@ public abstract class Cop
 			request.getServletPath();
 	}
 	
+	// ------------------- static helpers -------------------
+	
 	public static final boolean isPost(final HttpServletRequest request)
 	{
 		return "POST".equals(request.getMethod());
