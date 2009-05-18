@@ -137,12 +137,6 @@ public abstract class Cop
 		return EnvironmentRequest.getURL(token, needsSecure(), url);
 	}
 	
-	@Override
-	public final String toString()
-	{
-		return url!=null ? url.toString() : pathInfo;
-	}
-	
 	public final String getURL(final HttpServletRequest request)
 	{
 		final String url = this.url!=null ? this.url.toString() : pathInfo;
@@ -176,6 +170,12 @@ public abstract class Cop
 			(needsSecure?"https://":"http://") +
 			host +
 			fullURL;
+	}
+	
+	@Override
+	public final String toString()
+	{
+		return url!=null ? url.toString() : pathInfo;
 	}
 	
 	private static final char NATURAL_PLACE_HOLDER = '-';
