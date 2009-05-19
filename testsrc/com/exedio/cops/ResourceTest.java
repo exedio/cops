@@ -172,19 +172,6 @@ public class ResourceTest extends TestCase
 		assertEquals(CopTest.TOKEN, Cop.getToken(request));
 	}
 	
-	public void testEnvironment()
-	{
-		try
-		{
-			Cop.getToken(null);
-			fail();
-		}
-		catch(NullPointerException e)
-		{
-			assertEquals("request", e.getMessage());
-		}
-	}
-	
 	private static final String DATE_FORMAT_FULL = "dd.MM.yyyy HH:mm:ss.SSS";
 	
 	public static final void assertWithin(final Date expectedBefore, final Date expectedAfter, final Date actual)

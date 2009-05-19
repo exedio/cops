@@ -150,6 +150,15 @@ public class CopTest extends TestCase
 		{
 			assertEquals("token", e.getMessage());
 		}
+		try
+		{
+			Cop.getToken(null);
+			fail();
+		}
+		catch(NullPointerException e)
+		{
+			assertEquals("request", e.getMessage());
+		}
 		
 		final HttpServletRequest request = new AbsReq();
 		{
