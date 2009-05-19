@@ -176,7 +176,6 @@ public class ResourceTest extends TestCase
 	{
 		final Resource r1 = new Resource("ResourceTest.class", "major/minor");
 		
-		assertEquals("ResourceTest.class", r1.toString());
 		try
 		{
 			r1.getURL(null);
