@@ -29,7 +29,6 @@ public class PackageTest
 		suite.addTestSuite(NaturalLanguageEncodeTest.class);
 		suite.addTestSuite(CopTest.class);
 		suite.addTestSuite(ResourceTest.class);
-		suite.addTestSuite(EnvironmentTest.class);
 		suite.addTestSuite(EncodeTest.class);
 		suite.addTestSuite(PagerTest.class);
 		suite.addTestSuite(RequestLimiterTest.class);
