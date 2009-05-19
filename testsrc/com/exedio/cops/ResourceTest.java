@@ -106,6 +106,15 @@ public class ResourceTest extends TestCase
 		{
 			assertEquals("request", e.getMessage());
 		}
+		try
+		{
+			r1.getAbsoluteURL((String)null);
+			fail();
+		}
+		catch(NullPointerException e)
+		{
+			assertEquals("token", e.getMessage());
+		}
 		
 		
 		// test idempotence of init
