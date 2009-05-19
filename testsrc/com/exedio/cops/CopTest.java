@@ -156,27 +156,27 @@ public class CopTest extends TestCase
 			final TestCop cop = new TestCop();
 			assertEquals("/contextPath/servletPath/test.html", cop.getURL(request));
 			assertEquals("scheme://host.exedio.com/contextPath/servletPath/test.html", cop.getAbsoluteURL(request));
-			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html", cop.getAbsoluteURL(ENVIRONMENT));
+			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html", cop.getAbsoluteURL(TOKEN));
 			assertEquals("test.html", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop("ding");
 			assertEquals("/contextPath/servletPath/test.html?param1=ding", cop.getURL(request));
 			assertEquals("scheme://host.exedio.com/contextPath/servletPath/test.html?param1=ding", cop.getAbsoluteURL(request));
-			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding", cop.getAbsoluteURL(ENVIRONMENT));
+			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding", cop.getAbsoluteURL(TOKEN));
 			assertEquals("test.html?param1=ding", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop("ding", "dong");
 			assertEquals("/contextPath/servletPath/test.html?param1=ding&param2=dong", cop.getURL(request));
 			assertEquals("scheme://host.exedio.com/contextPath/servletPath/test.html?param1=ding&param2=dong", cop.getAbsoluteURL(request));
-			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding&param2=dong", cop.getAbsoluteURL(ENVIRONMENT));
+			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding&param2=dong", cop.getAbsoluteURL(TOKEN));
 			assertEquals("test.html?param1=ding&param2=dong", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop(0.0, "shop/hallo.html");
 			assertEquals("/contextPath/servletPath/shop/hallo.html", cop.getURL(request));
-			assertEquals("http://host.exedio.com/contextPath/servletPath/shop/hallo.html", cop.getAbsoluteURL(CopTest.ENVIRONMENT));
+			assertEquals("http://host.exedio.com/contextPath/servletPath/shop/hallo.html", cop.getAbsoluteURL(CopTest.TOKEN));
 			assertEquals("shop/hallo.html", cop.toString());
 		}
 		{
@@ -248,10 +248,10 @@ public class CopTest extends TestCase
 			assertEquals("/contextPath/servletPath/test.html?param1=-1", cop.getURL(request));
 		}
 		
-		assertEquals(ENVIRONMENT, Cop.getToken(request));
+		assertEquals(TOKEN, Cop.getToken(request));
 	}
 	
-	static final String ENVIRONMENT = "host.exedio.com/contextPath/servletPath";
+	static final String TOKEN = "host.exedio.com/contextPath/servletPath";
 	
 	static final class AbsReq extends DummyRequest
 	{
