@@ -156,23 +156,28 @@ public class CopTest extends TestCase
 			final TestCop cop = new TestCop();
 			assertEquals("/contextPath/servletPath/test.html", cop.getURL(request));
 			assertEquals("scheme://host.exedio.com/contextPath/servletPath/test.html", cop.getAbsoluteURL(request));
+			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html", cop.getAbsoluteURL(ENVIRONMENT));
 			assertEquals("test.html", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop("ding");
 			assertEquals("/contextPath/servletPath/test.html?param1=ding", cop.getURL(request));
 			assertEquals("scheme://host.exedio.com/contextPath/servletPath/test.html?param1=ding", cop.getAbsoluteURL(request));
+			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding", cop.getAbsoluteURL(ENVIRONMENT));
 			assertEquals("test.html?param1=ding", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop("ding", "dong");
 			assertEquals("/contextPath/servletPath/test.html?param1=ding&param2=dong", cop.getURL(request));
 			assertEquals("scheme://host.exedio.com/contextPath/servletPath/test.html?param1=ding&param2=dong", cop.getAbsoluteURL(request));
+			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding&param2=dong", cop.getAbsoluteURL(ENVIRONMENT));
 			assertEquals("test.html?param1=ding&param2=dong", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop(0.0, "shop/hallo.html");
 			assertEquals("/contextPath/servletPath/shop/hallo.html", cop.getURL(request));
+			assertEquals("http://host.exedio.com/contextPath/servletPath/shop/hallo.html", cop.getAbsoluteURL(CopTest.ENVIRONMENT));
+			assertEquals("shop/hallo.html", cop.toString());
 		}
 		{
 			final String ding = "slash/semi;question?amp&uuml\u00fcgarten#";
