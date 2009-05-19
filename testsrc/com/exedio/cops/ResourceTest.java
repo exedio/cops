@@ -27,7 +27,7 @@ import junit.framework.TestCase;
 
 public class ResourceTest extends TestCase
 {
-	static final String ENVIRONMENT = "host/contextPath/servletPath";
+	static final String TOKEN = "host/contextPath/servletPath";
 	
 	public void testToString()
 	{
@@ -171,7 +171,7 @@ public class ResourceTest extends TestCase
 		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(CopTest.TOKEN_8080));
 		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(CopTest.TOKEN_8443));
 		assertEquals("ResourceTest.class", r1.toString());
-		assertEquals(ENVIRONMENT, Cop.getToken(request));
+		assertEquals(TOKEN, Cop.getToken(request));
 	}
 	
 	public void testEnvironment()
@@ -210,7 +210,7 @@ public class ResourceTest extends TestCase
 		
 		
 		
-		assertEquals("http://host/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(ENVIRONMENT));
+		assertEquals("http://host/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(TOKEN));
 		assertEquals("ResourceTest.class", r1.toString());
 	}
 	
