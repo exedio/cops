@@ -27,8 +27,6 @@ import junit.framework.TestCase;
 
 public class ResourceTest extends TestCase
 {
-	static final String TOKEN = "host/contextPath/servletPath";
-	
 	public void testToString()
 	{
 		try
@@ -153,7 +151,7 @@ public class ResourceTest extends TestCase
 			@Override public String getHeader(String name)
 			{
 				if("Host".equals(name))
-					return "host";
+					return "host.exedio.com";
 				else
 					throw new RuntimeException(name);
 			}
@@ -165,13 +163,13 @@ public class ResourceTest extends TestCase
 		assertEquals(0, r1.getResponse200Count());
 		assertEquals(0, r1.getResponse304Count());
 		assertEquals("/contextPath/servletPath/ResourceTest.class", r1.getURL(request));
-		assertEquals("scheme://host/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(request));
+		assertEquals("scheme://host.exedio.com/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(request));
 		assertEquals("http://host.exedio.com/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(CopTest.TOKEN));
 		// port adjustments
 		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(CopTest.TOKEN_8080));
 		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(CopTest.TOKEN_8443));
 		assertEquals("ResourceTest.class", r1.toString());
-		assertEquals(TOKEN, Cop.getToken(request));
+		assertEquals(CopTest.TOKEN, Cop.getToken(request));
 	}
 	
 	public void testEnvironment()
@@ -210,7 +208,7 @@ public class ResourceTest extends TestCase
 		
 		
 		
-		assertEquals("http://host/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(TOKEN));
+		assertEquals("http://host.exedio.com/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(CopTest.TOKEN));
 		assertEquals("ResourceTest.class", r1.toString());
 	}
 	
