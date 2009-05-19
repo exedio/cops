@@ -141,6 +141,16 @@ public class CopTest extends TestCase
 		{
 			assertEquals("request", e.getMessage());
 		}
+		try
+		{
+			new TestCop().getAbsoluteURL((String)null);
+			fail();
+		}
+		catch(NullPointerException e)
+		{
+			assertEquals("token", e.getMessage());
+		}
+		
 		final HttpServletRequest request = new AbsReq();
 		{
 			final TestCop cop = new TestCop();
