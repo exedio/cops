@@ -278,33 +278,33 @@ public class CopTest extends TestCase
 		}
 	}
 	
-	public void testHttps()
+	public void testSecure()
 	{
-		HttpServletRequest request = new HttpsReq(false);
-		assertEquals("/contextPath/servletPath/test.html?param1=value1", new HttpsCop(null).getURL(request));
-		assertEquals("/contextPath/servletPath/test.html?param1=value1", new HttpsCop(false).getURL(request));
-		assertEquals("https://host.exedio.com/contextPath/servletPath/test.html?param1=value1", new HttpsCop(true).getURL(request));
-		request = new HttpsReq(true);
-		assertEquals("/contextPath/servletPath/test.html?param1=value1", new HttpsCop(null).getURL(request));
-		assertEquals("/contextPath/servletPath/test.html?param1=value1", new HttpsCop(true).getURL(request));
-		assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=value1", new HttpsCop(false).getURL(request));
+		HttpServletRequest request = new SecureRequest(false);
+		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop(null).getURL(request));
+		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop(false).getURL(request));
+		assertEquals("https://host.exedio.com/contextPath/servletPath/test.html?param1=value1", new SecureCop(true).getURL(request));
+		request = new SecureRequest(true);
+		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop(null).getURL(request));
+		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop(true).getURL(request));
+		assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=value1", new SecureCop(false).getURL(request));
 		
 		// port adjustments
-		request = new HttpsReq(false, 8080);
-		assertEquals("/contextPath/servletPath/test.html?param1=value1", new HttpsCop(null).getURL(request));
-		assertEquals("/contextPath/servletPath/test.html?param1=value1", new HttpsCop(false).getURL(request));
-		assertEquals("https://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", new HttpsCop(true).getURL(request));
-		request = new HttpsReq(true,  8443);
-		assertEquals("/contextPath/servletPath/test.html?param1=value1", new HttpsCop(null).getURL(request));
-		assertEquals("/contextPath/servletPath/test.html?param1=value1", new HttpsCop(true).getURL(request));
-		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", new HttpsCop(false).getURL(request));
+		request = new SecureRequest(false, 8080);
+		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop(null).getURL(request));
+		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop(false).getURL(request));
+		assertEquals("https://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", new SecureCop(true).getURL(request));
+		request = new SecureRequest(true,  8443);
+		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop(null).getURL(request));
+		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop(true).getURL(request));
+		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", new SecureCop(false).getURL(request));
 	}
 	
-	static final class HttpsCop extends Cop
+	static final class SecureCop extends Cop
 	{
 		final Boolean needsSecure;
 		
-		HttpsCop(final Boolean needsSecure)
+		SecureCop(final Boolean needsSecure)
 		{
 			super("test.html");
 			this.needsSecure = needsSecure;
@@ -318,17 +318,17 @@ public class CopTest extends TestCase
 		}
 	}
 	
-	static final class HttpsReq extends DummyRequest
+	static final class SecureRequest extends DummyRequest
 	{
 		final boolean secure;
 		final int port;
 		
-		HttpsReq(final boolean secure)
+		SecureRequest(final boolean secure)
 		{
 			this(secure, -1);
 		}
 		
-		HttpsReq(final boolean secure, final int port)
+		SecureRequest(final boolean secure, final int port)
 		{
 			this.secure = secure;
 			this.port = port;

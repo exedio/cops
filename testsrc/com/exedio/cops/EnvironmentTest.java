@@ -20,7 +20,7 @@ package com.exedio.cops;
 
 import junit.framework.TestCase;
 
-import com.exedio.cops.CopTest.HttpsCop;
+import com.exedio.cops.CopTest.SecureCop;
 import com.exedio.cops.CopTest.TestCop;
 
 public class EnvironmentTest extends TestCase
@@ -56,19 +56,19 @@ public class EnvironmentTest extends TestCase
 			assertEquals("shop/hallo.html", cop.toString());
 		}
 		{
-			final HttpsCop cop = new HttpsCop(null);
+			final SecureCop cop = new SecureCop(null);
 			
 			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=value1", cop.getAbsoluteURL(CopTest.ENVIRONMENT));
 			assertEquals("test.html?param1=value1", cop.toString());
 		}
 		{
-			final HttpsCop cop = new HttpsCop(false);
+			final SecureCop cop = new SecureCop(false);
 			
 			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=value1", cop.getAbsoluteURL(CopTest.ENVIRONMENT));
 			assertEquals("test.html?param1=value1", cop.toString());
 		}
 		{
-			final HttpsCop cop = new HttpsCop(true);
+			final SecureCop cop = new SecureCop(true);
 			
 			assertEquals("https://host.exedio.com/contextPath/servletPath/test.html?param1=value1", cop.getAbsoluteURL(CopTest.ENVIRONMENT));
 			assertEquals("test.html?param1=value1", cop.toString());
@@ -81,19 +81,19 @@ public class EnvironmentTest extends TestCase
 		// port adjustments
 		
 		{
-			final HttpsCop cop = new HttpsCop(null);
+			final SecureCop cop = new SecureCop(null);
 			
 			assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", cop.getAbsoluteURL(ENVIRONMENT_8080));
 			assertEquals("test.html?param1=value1", cop.toString());
 		}
 		{
-			final HttpsCop cop = new HttpsCop(false);
+			final SecureCop cop = new SecureCop(false);
 			
 			assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", cop.getAbsoluteURL(ENVIRONMENT_8080));
 			assertEquals("test.html?param1=value1", cop.toString());
 		}
 		{
-			final HttpsCop cop = new HttpsCop(true);
+			final SecureCop cop = new SecureCop(true);
 			
 			assertEquals("https://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", cop.getAbsoluteURL(ENVIRONMENT_8080));
 			assertEquals("test.html?param1=value1", cop.toString());
@@ -104,19 +104,19 @@ public class EnvironmentTest extends TestCase
 		
 		
 		{
-			final HttpsCop cop = new HttpsCop(null);
+			final SecureCop cop = new SecureCop(null);
 			
 			assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", cop.getAbsoluteURL(ENVIRONMENT_8443));
 			assertEquals("test.html?param1=value1", cop.toString());
 		}
 		{
-			final HttpsCop cop = new HttpsCop(false);
+			final SecureCop cop = new SecureCop(false);
 			
 			assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", cop.getAbsoluteURL(ENVIRONMENT_8443));
 			assertEquals("test.html?param1=value1", cop.toString());
 		}
 		{
-			final HttpsCop cop = new HttpsCop(true);
+			final SecureCop cop = new SecureCop(true);
 			
 			assertEquals("https://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", cop.getAbsoluteURL(ENVIRONMENT_8443));
 			assertEquals("test.html?param1=value1", cop.toString());
