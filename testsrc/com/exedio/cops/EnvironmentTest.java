@@ -22,8 +22,6 @@ import junit.framework.TestCase;
 
 public class EnvironmentTest extends TestCase
 {
-	static final String TOKEN_8080 = "host.exedio.com:8080/contextPath/servletPath";
-	static final String TOKEN_8443 = "host.exedio.com:8443/contextPath/servletPath";
 	static final Resource resource = new Resource("ResourceTest.class", "major/minor");
 	
 	public void testIt()
@@ -32,9 +30,9 @@ public class EnvironmentTest extends TestCase
 		assertEquals("ResourceTest.class", resource.toString());
 		
 		// port adjustments
-		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", resource.getAbsoluteURL(TOKEN_8080));
+		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", resource.getAbsoluteURL(CopTest.TOKEN_8080));
 		assertEquals("ResourceTest.class", resource.toString());
-		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", resource.getAbsoluteURL(TOKEN_8443));
+		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", resource.getAbsoluteURL(CopTest.TOKEN_8443));
 		assertEquals("ResourceTest.class", resource.toString());
 	}
 }
