@@ -27,7 +27,7 @@ import junit.framework.TestCase;
 
 public class ResourceTest extends TestCase
 {
-	public void testToString()
+	public void testURL()
 	{
 		try
 		{

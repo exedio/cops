@@ -93,7 +93,7 @@ public class CopTest extends TestCase
 		}
 	}
 	
-	public void testToString()
+	public void testURL()
 	{
 		try
 		{
