@@ -20,8 +20,6 @@ package com.exedio.cops;
 
 import junit.framework.TestCase;
 
-import com.exedio.cops.CopTest.SecureCop;
-
 public class EnvironmentTest extends TestCase
 {
 	static final String TOKEN_8080 = "host.exedio.com:8080/contextPath/servletPath";
@@ -30,73 +28,12 @@ public class EnvironmentTest extends TestCase
 	
 	public void testIt()
 	{
-		{
-			final SecureCop cop = new SecureCop(null);
-			
-			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=value1", cop.getAbsoluteURL(CopTest.TOKEN));
-			assertEquals("test.html?param1=value1", cop.toString());
-		}
-		{
-			final SecureCop cop = new SecureCop(false);
-			
-			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=value1", cop.getAbsoluteURL(CopTest.TOKEN));
-			assertEquals("test.html?param1=value1", cop.toString());
-		}
-		{
-			final SecureCop cop = new SecureCop(true);
-			
-			assertEquals("https://host.exedio.com/contextPath/servletPath/test.html?param1=value1", cop.getAbsoluteURL(CopTest.TOKEN));
-			assertEquals("test.html?param1=value1", cop.toString());
-		}
-		
 		assertEquals("http://host.exedio.com/contextPath/servletPath/ResourceTest.class", resource.getAbsoluteURL(CopTest.TOKEN));
 		assertEquals("ResourceTest.class", resource.toString());
 		
-		
 		// port adjustments
-		
-		{
-			final SecureCop cop = new SecureCop(null);
-			
-			assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", cop.getAbsoluteURL(TOKEN_8080));
-			assertEquals("test.html?param1=value1", cop.toString());
-		}
-		{
-			final SecureCop cop = new SecureCop(false);
-			
-			assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", cop.getAbsoluteURL(TOKEN_8080));
-			assertEquals("test.html?param1=value1", cop.toString());
-		}
-		{
-			final SecureCop cop = new SecureCop(true);
-			
-			assertEquals("https://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", cop.getAbsoluteURL(TOKEN_8080));
-			assertEquals("test.html?param1=value1", cop.toString());
-		}
-		
 		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", resource.getAbsoluteURL(TOKEN_8080));
 		assertEquals("ResourceTest.class", resource.toString());
-		
-		
-		{
-			final SecureCop cop = new SecureCop(null);
-			
-			assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", cop.getAbsoluteURL(TOKEN_8443));
-			assertEquals("test.html?param1=value1", cop.toString());
-		}
-		{
-			final SecureCop cop = new SecureCop(false);
-			
-			assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1", cop.getAbsoluteURL(TOKEN_8443));
-			assertEquals("test.html?param1=value1", cop.toString());
-		}
-		{
-			final SecureCop cop = new SecureCop(true);
-			
-			assertEquals("https://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", cop.getAbsoluteURL(TOKEN_8443));
-			assertEquals("test.html?param1=value1", cop.toString());
-		}
-		
 		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", resource.getAbsoluteURL(TOKEN_8443));
 		assertEquals("ResourceTest.class", resource.toString());
 	}
