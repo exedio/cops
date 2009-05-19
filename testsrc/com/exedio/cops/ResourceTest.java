@@ -204,12 +204,6 @@ public class ResourceTest extends TestCase
 		{
 			assertEquals("request", e.getMessage());
 		}
-		
-		
-		
-		
-		assertEquals("http://host.exedio.com/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(CopTest.TOKEN));
-		assertEquals("ResourceTest.class", r1.toString());
 	}
 	
 	private static final String DATE_FORMAT_FULL = "dd.MM.yyyy HH:mm:ss.SSS";
