@@ -290,12 +290,15 @@ public class CopTest extends TestCase
 		assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=value1",  new SecureCop(null ).getAbsoluteURL(TOKEN));
 		assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=value1",  new SecureCop(false).getAbsoluteURL(TOKEN));
 		assertEquals("https://host.exedio.com/contextPath/servletPath/test.html?param1=value1", new SecureCop(true ).getAbsoluteURL(TOKEN));
+		
+		// port adjustments
 		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1",  new SecureCop(null ).getAbsoluteURL(TOKEN_8080));
 		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1",  new SecureCop(false).getAbsoluteURL(TOKEN_8080));
 		assertEquals("https://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", new SecureCop(true ).getAbsoluteURL(TOKEN_8080));
 		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1",  new SecureCop(null ).getAbsoluteURL(TOKEN_8443));
 		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1",  new SecureCop(false).getAbsoluteURL(TOKEN_8443));
 		assertEquals("https://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", new SecureCop(true ).getAbsoluteURL(TOKEN_8443));
+
 		
 		HttpServletRequest request = new SecureRequest(false);
 		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop(null).getURL(request));
