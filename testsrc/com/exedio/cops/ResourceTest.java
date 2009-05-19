@@ -174,26 +174,6 @@ public class ResourceTest extends TestCase
 	
 	public void testEnvironment()
 	{
-		final Resource r1 = new Resource("ResourceTest.class", "major/minor");
-		
-		try
-		{
-			r1.getURL(null);
-			fail();
-		}
-		catch(NullPointerException e)
-		{
-			assertEquals("request", e.getMessage());
-		}
-		try
-		{
-			r1.getAbsoluteURL((HttpServletRequest)null);
-			fail();
-		}
-		catch(NullPointerException e)
-		{
-			assertEquals("request", e.getMessage());
-		}
 		try
 		{
 			Cop.getToken(null);
