@@ -128,6 +128,23 @@ public abstract class Cop
 			'/' + url;
 	}
 	
+	/**
+	 * @see #getAbsoluteURL(String)
+	 */
+	public static String getToken(final HttpServletRequest request)
+	{
+		if(request==null)
+			throw new NullPointerException("request");
+		
+		return
+			request.getHeader("Host") +
+			request.getContextPath() +
+			request.getServletPath();
+	}
+	
+	/**
+	 * @see #getToken(HttpServletRequest)
+	 */
 	public final String getAbsoluteURL(final String token)
 	{
 		final String url = this.url!=null ? this.url.toString() : pathInfo;
@@ -249,17 +266,6 @@ public abstract class Cop
 		response.setHeader("Location", location);
 		
 		return true;
-	}
-	
-	public static String getToken(final HttpServletRequest request)
-	{
-		if(request==null)
-			throw new NullPointerException("request");
-		
-		return
-			request.getHeader("Host") +
-			request.getContextPath() +
-			request.getServletPath();
 	}
 	
 	// ------------------- static helpers -------------------
