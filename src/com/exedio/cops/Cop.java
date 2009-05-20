@@ -113,6 +113,8 @@ public abstract class Cop
 		return null;
 	}
 	
+	private static final String HOST = "Host";
+	
 	public final String getAbsoluteURL(final HttpServletRequest request)
 	{
 		final String url = this.url!=null ? this.url.toString() : pathInfo;
@@ -122,7 +124,7 @@ public abstract class Cop
 		
 		return
 			request.getScheme() + "://" +
-			request.getHeader("Host") +
+			request.getHeader(HOST) +
 			request.getContextPath() +
 			request.getServletPath() +
 			'/' + url;
@@ -137,7 +139,7 @@ public abstract class Cop
 			throw new NullPointerException("request");
 		
 		return
-			request.getHeader("Host") +
+			request.getHeader(HOST) +
 			request.getContextPath() +
 			request.getServletPath();
 	}
@@ -171,7 +173,7 @@ public abstract class Cop
 		if(needsSecure.booleanValue()==isSecure)
 			return fullURL;
 		
-		String host = request.getHeader("Host");
+		String host = request.getHeader(HOST);
 		if(!isSecure)
 		{
 			if(host.endsWith(":8080"))
