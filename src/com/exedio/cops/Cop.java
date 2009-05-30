@@ -72,6 +72,14 @@ public abstract class Cop
 		addParameter(key, Long.toString(value, COMPACT_LONG_RADIX));
 	}
 	
+	protected final void addParameter(final String key, final Cop value)
+	{
+		if(value==null)
+			return;
+		
+		addParameter(key, value.toString());
+	}
+	
 	/**
 	 * Does nothing, if <tt>value==null</tt>.
 	 */
@@ -309,6 +317,14 @@ public abstract class Cop
 	{
 		final String value = request.getParameter(name);
 		return (value==null) ? defaultValue : Long.parseLong(value, COMPACT_LONG_RADIX);
+	}
+	
+	public static final HttpServletRequest getCopParameter(
+			final HttpServletRequest request,
+			final String name)
+	{
+		final String value = request.getParameter(name);
+		return (value==null) ? null : new CopParameterRequest(request, value);
 	}
 	
 	// ------------------- deprecated stuff -------------------
