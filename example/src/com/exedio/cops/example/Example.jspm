@@ -48,6 +48,7 @@ final class Example_Jspm
 		<img src="<%=ExampleServlet.logo%>">
 		<img src="<% out.appendAbsolute(ExampleServlet.logo); %>"><% out.appendAbsolute(ExampleServlet.logo); %>
 		[<a href="<%=ExampleServlet.test%>">test</a>]
+		<img src="<%=ExampleSuperServlet.logoSmall%>">
 		<br>
 		<a href="<%=cop%>">this</a> |
 		<a href="<%=cop.toggle()%>">toggle</a> |

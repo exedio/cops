@@ -51,21 +51,23 @@ public abstract class CopsServlet extends HttpServlet
 		try
 		{
 			final LinkedHashMap<String, Resource> resources = new LinkedHashMap<String, Resource>();
-			final Class<?> clazz = getClass(); // TODO go to super class as well until CopsServlet
-			for(final java.lang.reflect.Field field : clazz.getDeclaredFields())
+			for(Class<?> clazz = getClass(); clazz!=CopsServlet.class; clazz = clazz.getSuperclass())
 			{
-				if((field.getModifiers() & (STATIC | FINAL)) != (STATIC | FINAL))
-					continue;
-				if(!Resource.class.isAssignableFrom(field.getType()))
-					continue;
-
-				field.setAccessible(true);
-				final Resource resource = (Resource)field.get(null); // always static
-				if(resource==null)
-					continue;
-				
-				resource.init(clazz);
-				resources.put('/'+resource.name, resource);
+				for(final java.lang.reflect.Field field : clazz.getDeclaredFields())
+				{
+					if((field.getModifiers() & (STATIC | FINAL)) != (STATIC | FINAL))
+						continue;
+					if(!Resource.class.isAssignableFrom(field.getType()))
+						continue;
+	
+					field.setAccessible(true);
+					final Resource resource = (Resource)field.get(null); // always static
+					if(resource==null)
+						continue;
+					
+					resource.init(clazz);
+					resources.put('/'+resource.name, resource);
+				}
 			}
 			this.resources = resources.isEmpty() ? null : resources;
 		}

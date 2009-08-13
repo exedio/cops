@@ -27,12 +27,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.exedio.cops.Cop;
-import com.exedio.cops.CopsServlet;
 import com.exedio.cops.Pager;
 import com.exedio.cops.RequestLimiter;
 import com.exedio.cops.Resource;
 
-public final class ExampleServlet extends CopsServlet
+public final class ExampleServlet extends ExampleSuperServlet
 {
 	private static final long serialVersionUID = 1l;
 
