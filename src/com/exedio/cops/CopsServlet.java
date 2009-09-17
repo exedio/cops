@@ -42,6 +42,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public abstract class CopsServlet extends HttpServlet
 {
+	private static final long serialVersionUID = 1l;
+	
 	public static final String UTF8 = "utf-8";
 	
 	private final LinkedHashMap<String, Resource> resources;

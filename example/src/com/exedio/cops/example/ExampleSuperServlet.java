@@ -23,5 +23,7 @@ import com.exedio.cops.Resource;
 
 public abstract class ExampleSuperServlet extends CopsServlet
 {
+	private static final long serialVersionUID = 1l;
+	
 	static final Resource logoSmall = new Resource("logoSmall.png");
 }
