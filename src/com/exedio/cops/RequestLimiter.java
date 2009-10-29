@@ -146,17 +146,7 @@ public final class RequestLimiter
 					if(denyBody!=null)
 					{
 						setStatus503WithBody(response, denyMessage);
-						ServletOutputStream out = null;
-						try
-						{
-							out = response.getOutputStream();
-							out.write(denyBody);
-						}
-						finally
-						{
-							if(out!=null)
-								out.close();
-						}
+						BodySender.send(response, denyBody);
 					}
 					else
 					{

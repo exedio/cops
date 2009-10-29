@@ -20,10 +20,10 @@ package com.exedio.cops.example;
 
 import java.io.IOException;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.exedio.cops.BodySender;
 import com.exedio.cops.Cop;
 import com.exedio.cops.CopsServlet;
 import com.exedio.cops.Resource;
@@ -86,17 +86,6 @@ final class Out
 			throw new IllegalStateException();
 		this.bf = null; // prevent this instance to be used anymore
 		
-		ServletOutputStream stream = null;
-		try
-		{
-			stream = response.getOutputStream();
-			final byte[] bytes = bf.toString().getBytes(CopsServlet.UTF8);
-			stream.write(bytes);
-		}
-		finally
-		{
-			if(stream!=null)
-				stream.close();
-		}
+		BodySender.send(response, bf, CopsServlet.UTF8);
 	}
 }

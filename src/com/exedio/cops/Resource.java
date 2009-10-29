@@ -23,7 +23,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -202,19 +201,7 @@ public final class Resource
 		}
 		else
 		{
-			response.setContentLength(content.length);
-	
-			ServletOutputStream out = null;
-			try
-			{
-				out = response.getOutputStream();
-				out.write(content);
-			}
-			finally
-			{
-				if(out!=null)
-					out.close();
-			}
+			BodySender.send(response, content);
 			response200Count++; // may loose a few counts due to concurrency, but this is ok
 		}
 	}
