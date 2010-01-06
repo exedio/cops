@@ -4,6 +4,6 @@
 
 	<import file="getlib/getlib-contrib.xml"/>
 
-	<target name="getlib" depends="commons-fileupload, commons-io, exedio-jspm" />
+	<target name="getlib" depends="commons-fileupload, commons-io, exedio-jspm, exedio-cope-util" />
 
 </project>

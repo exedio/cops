@@ -22,6 +22,7 @@ import junit.framework.TestCase;
 
 public class EncodeTest extends TestCase
 {
+	@Deprecated
 	public void testEncode()
 	{
 		assertEquals(null, XMLEncoder.encode(null));

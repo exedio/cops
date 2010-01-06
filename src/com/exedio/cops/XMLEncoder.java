@@ -18,6 +18,10 @@
 
 package com.exedio.cops;
 
+/**
+ * @deprecated Use {@link com.exedio.cope.util.XMLEncoder} instead.
+ */
+@Deprecated
 public final class XMLEncoder
 {
 	private XMLEncoder()
@@ -27,14 +31,6 @@ public final class XMLEncoder
 	
 	public static final String encode(final String st)
 	{
-		if(st==null)
-			return null;
-		
-		return
-			st.replaceAll("&",  "&amp;").
-				replaceAll("<",  "&lt;").
-				replaceAll(">",  "&gt;").
-				replaceAll("\"", "&quot;").
-				replaceAll("'",  "&apos;");
+		return com.exedio.cope.util.XMLEncoder.encode(st);
 	}
 }

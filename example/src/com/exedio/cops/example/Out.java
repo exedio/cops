@@ -27,7 +27,7 @@ import com.exedio.cops.BodySender;
 import com.exedio.cops.Cop;
 import com.exedio.cops.CopsServlet;
 import com.exedio.cops.Resource;
-import com.exedio.cops.XMLEncoder;
+import com.exedio.cope.util.XMLEncoder;
 
 final class Out
 {
