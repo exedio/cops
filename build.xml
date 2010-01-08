@@ -337,6 +337,7 @@
 			<classpath>
 				<pathelement location="lib/servlet-api.jar" />
 				<pathelement location="lib/commons-fileupload.jar" />
+				<pathelement location="lib/exedio-cope-util.jar" />
 			</classpath>
 		</javadoc>
 	</target>
