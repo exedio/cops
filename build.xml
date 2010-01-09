@@ -6,8 +6,8 @@
 	
 	<taskdef classpath="lib/ant-contrib.jar" resource="net/sf/antcontrib/antcontrib.properties" />
 	
-	<taskdef name="jspm"
-				classname="com.exedio.jspm.AntTask"
+	<taskdef
+				resource="com/exedio/jspm/ant.properties"
 				classpath="lib/exedio-jspm.jar" />
 	
 	<target name="runtime.jspm">
