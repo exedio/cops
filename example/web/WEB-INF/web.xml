@@ -51,6 +51,15 @@
 		<url-pattern>/files/*</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>properties</servlet-name>
+		<servlet-class>com.exedio.cops.example.PropertiesServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>properties</servlet-name>
+		<url-pattern>/properties/*</url-pattern>
+	</servlet-mapping>
+
 	<!-- don't know, why this is needed here,
 		  requestLimiter.html protects itself -->
 	<security-role><role-name>manager</role-name></security-role>

@@ -12,7 +12,15 @@
 	
 	<target name="runtime.jspm">
 		<jspm method="print">
-			<fileset dir="src" includes="**/*.jspm" />
+			<fileset dir="src">
+				<include name="**/*.jspm" />
+				<exclude name="com/exedio/cops/Properties.jspm" />
+			</fileset>
+		</jspm>
+		<jspm>
+			<fileset dir="src">
+				<include name="com/exedio/cops/Properties.jspm" />
+			</fileset>
 		</jspm>
 	</target>
 	
@@ -33,6 +41,12 @@
 			<compilerarg value="-encoding" />
 			<compilerarg value="ascii" />
 		</javac>
+		<copy todir="build/classes">
+			<fileset dir="src">
+				<include name="**/*.css" />
+				<include name="**/*.png" />
+			</fileset>
+		</copy>
 	</target>
 	
 	<target name="catalina.compile">

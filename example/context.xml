@@ -3,4 +3,5 @@
 			debug="0"
 			privileged="true"
 			cookies="false">
+	<Parameter name="smtp.host" value="mailgrab2.exedio.com" />
 </Context>
