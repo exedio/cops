@@ -166,6 +166,7 @@ public class CopTest extends TestCase
 			assertEquals("/contextPath/servletPath/test.html", cop.getURL(request));
 			assertEquals("scheme://host.exedio.com/contextPath/servletPath/test.html", cop.getAbsoluteURL(request));
 			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html", cop.getAbsoluteURL(TOKEN));
+			assertEquals("http://host.exedio.com/test.html", cop.getAbsoluteURL(ROOT_TOKEN));
 			assertEquals("test.html", cop.toString());
 		}
 		{
@@ -173,6 +174,7 @@ public class CopTest extends TestCase
 			assertEquals("/contextPath/servletPath/test.html?param1=ding", cop.getURL(request));
 			assertEquals("scheme://host.exedio.com/contextPath/servletPath/test.html?param1=ding", cop.getAbsoluteURL(request));
 			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding", cop.getAbsoluteURL(TOKEN));
+			assertEquals("http://host.exedio.com/test.html?param1=ding", cop.getAbsoluteURL(ROOT_TOKEN));
 			assertEquals("test.html?param1=ding", cop.toString());
 		}
 		{
@@ -180,12 +182,14 @@ public class CopTest extends TestCase
 			assertEquals("/contextPath/servletPath/test.html?param1=ding&param2=dong", cop.getURL(request));
 			assertEquals("scheme://host.exedio.com/contextPath/servletPath/test.html?param1=ding&param2=dong", cop.getAbsoluteURL(request));
 			assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=ding&param2=dong", cop.getAbsoluteURL(TOKEN));
+			assertEquals("http://host.exedio.com/test.html?param1=ding&param2=dong", cop.getAbsoluteURL(ROOT_TOKEN));
 			assertEquals("test.html?param1=ding&param2=dong", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop(0.0, "shop/hallo.html");
 			assertEquals("/contextPath/servletPath/shop/hallo.html", cop.getURL(request));
 			assertEquals("http://host.exedio.com/contextPath/servletPath/shop/hallo.html", cop.getAbsoluteURL(CopTest.TOKEN));
+			assertEquals("http://host.exedio.com/shop/hallo.html", cop.getAbsoluteURL(CopTest.ROOT_TOKEN));
 			assertEquals("shop/hallo.html", cop.toString());
 		}
 		{
@@ -261,8 +265,11 @@ public class CopTest extends TestCase
 	}
 	
 	static final String TOKEN = "host.exedio.com/contextPath/servletPath";
+	static final String ROOT_TOKEN = "host.exedio.com";
 	static final String TOKEN_8080 = "host.exedio.com:8080/contextPath/servletPath";
 	static final String TOKEN_8443 = "host.exedio.com:8443/contextPath/servletPath";
+	static final String ROOT_TOKEN_8080 = "host.exedio.com:8080";
+	static final String ROOT_TOKEN_8443 = "host.exedio.com:8443";
 	
 	static final class AbsReq extends DummyRequest
 	{
@@ -297,16 +304,25 @@ public class CopTest extends TestCase
 	public void testSecure()
 	{
 		assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=value1",  new SecureCop(null ).getAbsoluteURL(TOKEN));
+		assertEquals("http://host.exedio.com/test.html?param1=value1",  new SecureCop(null ).getAbsoluteURL(ROOT_TOKEN));
 		assertEquals("http://host.exedio.com/contextPath/servletPath/test.html?param1=value1",  new SecureCop(false).getAbsoluteURL(TOKEN));
+		assertEquals("http://host.exedio.com/test.html?param1=value1",  new SecureCop(false).getAbsoluteURL(ROOT_TOKEN));
 		assertEquals("https://host.exedio.com/contextPath/servletPath/test.html?param1=value1", new SecureCop(true ).getAbsoluteURL(TOKEN));
+		assertEquals("https://host.exedio.com/test.html?param1=value1", new SecureCop(true ).getAbsoluteURL(ROOT_TOKEN));
 		
 		// port adjustments
 		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1",  new SecureCop(null ).getAbsoluteURL(TOKEN_8080));
+		assertEquals("http://host.exedio.com:8080/test.html?param1=value1",  new SecureCop(null ).getAbsoluteURL(ROOT_TOKEN_8080));
 		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1",  new SecureCop(false).getAbsoluteURL(TOKEN_8080));
+		assertEquals("http://host.exedio.com:8080/test.html?param1=value1",  new SecureCop(false).getAbsoluteURL(ROOT_TOKEN_8080));
 		assertEquals("https://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", new SecureCop(true ).getAbsoluteURL(TOKEN_8080));
+		assertEquals("https://host.exedio.com:8443/test.html?param1=value1", new SecureCop(true ).getAbsoluteURL(ROOT_TOKEN_8080));
 		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1",  new SecureCop(null ).getAbsoluteURL(TOKEN_8443));
+		assertEquals("http://host.exedio.com:8080/test.html?param1=value1",  new SecureCop(null ).getAbsoluteURL(ROOT_TOKEN_8443));
 		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/test.html?param1=value1",  new SecureCop(false).getAbsoluteURL(TOKEN_8443));
+		assertEquals("http://host.exedio.com:8080/test.html?param1=value1",  new SecureCop(false).getAbsoluteURL(ROOT_TOKEN_8443));
 		assertEquals("https://host.exedio.com:8443/contextPath/servletPath/test.html?param1=value1", new SecureCop(true ).getAbsoluteURL(TOKEN_8443));
+		assertEquals("https://host.exedio.com:8443/test.html?param1=value1", new SecureCop(true ).getAbsoluteURL(ROOT_TOKEN_8443));
 
 		
 		HttpServletRequest request = new SecureRequest(false);

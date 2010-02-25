@@ -35,12 +35,16 @@ final class EnvironmentRequest
 			final int pos = e.indexOf(":8080/");
 			if(pos>0)
 				e = e.substring(0, pos) + ":8443" + e.substring(pos+5);
+			else if (e.endsWith(":8080"))
+				e = e.substring(0, (e.length()-5)) + ":8443";
 		}
 		else
 		{
 			final int pos = e.indexOf(":8443/");
 			if(pos>0)
 				e = e.substring(0, pos) + ":8080" + e.substring(pos+5);
+			else if (e.endsWith(":8443"))
+				e = e.substring(0, (e.length()-5)) + ":8080";
 		}
 		
 		return (secure ? "https://" : "http://") + e + '/' + url;
