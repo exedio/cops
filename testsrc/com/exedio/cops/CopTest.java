@@ -188,8 +188,8 @@ public class CopTest extends TestCase
 		{
 			final TestCop cop = new TestCop(0.0, "shop/hallo.html");
 			assertEquals("/contextPath/servletPath/shop/hallo.html", cop.getURL(request));
-			assertEquals("http://host.exedio.com/contextPath/servletPath/shop/hallo.html", cop.getAbsoluteURL(CopTest.TOKEN));
-			assertEquals("http://host.exedio.com/shop/hallo.html", cop.getAbsoluteURL(CopTest.ROOT_TOKEN));
+			assertEquals("http://host.exedio.com/contextPath/servletPath/shop/hallo.html", cop.getAbsoluteURL(TOKEN));
+			assertEquals("http://host.exedio.com/shop/hallo.html", cop.getAbsoluteURL(ROOT_TOKEN));
 			assertEquals("shop/hallo.html", cop.toString());
 		}
 		{
