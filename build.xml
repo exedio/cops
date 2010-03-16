@@ -2,6 +2,8 @@
 
 <project name="cops" default="build" basedir=".">
 
+	<property file="local.properties" />
+	<property file="project.properties" />
 	<property name="build.file.tag" value="unlabeled" />
 	
 	<taskdef classpath="lib/ant-contrib.jar" resource="net/sf/antcontrib/antcontrib.properties" />
@@ -194,12 +196,18 @@
 		<chmod dir="tomcat/bin" perm="ugo+x" includes="*.sh" />
 		<copy todir="tomcat/conf">
 			<fileset dir="example/conf">
-				<include name="server.xml" />
 				<include name="tomcat-users.xml" />
 				<include name="keystore" />
 			</fileset>
 		</copy>
 		<echo message="tomcat ports: shutdown=${tomcat.port.shutdown} http=${tomcat.port.http} https=${tomcat.port.https}" />
+		<copy file="example/conf/server.xml" todir="tomcat/conf" overwrite="true">
+			<filterset>
+				<filter token="PORT_SHUTDOWN" value="${tomcat.port.shutdown}" />
+				<filter token="PORT_HTTP"     value="${tomcat.port.http}"     />
+				<filter token="PORT_HTTPS"    value="${tomcat.port.https}"    />
+			</filterset>
+		</copy>
 	</target>
 	
 	<target name="example.tomcat" depends="example.web, catalina">
@@ -242,7 +250,7 @@
 						maxwait="40" maxwaitunit="second"
 						checkevery="5" checkeveryunit="second"
 						timeoutproperty="server.app.init.failed">
-					<http url="http://127.0.0.1:8080/cops" />
+					<http url="http://127.0.0.1:${tomcat.port.http}/cops" />
 				</waitfor>
 				<echo message="tomcat: ready ..." />
 				<fail if="server.app.init.failed" message="tomcat could not be started." />
@@ -257,6 +265,7 @@
 						<pathelement location="lib/junit.jar" />
 					</classpath>
 					<test name="com.exedio.cops.webtest.PackageTest" todir="build/testresults" outfile="copsweb" />
+					<sysproperty key="tomcat.port.http" value="${tomcat.port.http}" />
 					<assertions><enable/></assertions>
 				</junit>
 			</try>

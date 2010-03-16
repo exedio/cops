@@ -30,7 +30,7 @@ public class ResourceTest extends AbstractWebTest
 
 	public void testError() throws Exception
 	{
-		final String prefix = "http://localhost:8080/cops/";
+		final String prefix = "http://localhost:" + System.getProperty("tomcat.port.http") + "/cops/";
 		final URL text = new URL(prefix + "resource-test.txt");
 
 		final long textLastModified = assertURL(text);
