@@ -24,6 +24,9 @@ import java.net.URLEncoder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * @see test warning
+ */
 public abstract class Cop
 {
 	private final String pathInfo;
