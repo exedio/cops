@@ -199,6 +199,7 @@
 				<include name="keystore" />
 			</fileset>
 		</copy>
+		<echo message="tomcat ports: shutdown=${tomcat.port.shutdown} http=${tomcat.port.http} https=${tomcat.port.https}" />
 	</target>
 	
 	<target name="example.tomcat" depends="example.web, catalina">
