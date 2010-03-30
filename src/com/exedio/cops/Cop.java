@@ -40,13 +40,13 @@ public abstract class Cop
 	
 	private static final char[] FORBIDDEN_IN_PATH_INFO = new char[] {'?', '&', ';'};
 	
-	protected final void addParameter(final String key, final boolean value)
+	public final void addParameter(final String key, final boolean value)
 	{
 		if(value)
 			addParameter(key, "t");
 	}
 	
-	protected final void addParameter(final String key, final int value, final int defaultValue)
+	public final void addParameter(final String key, final int value, final int defaultValue)
 	{
 		if(value==defaultValue)
 			return;
@@ -54,7 +54,7 @@ public abstract class Cop
 		addParameter(key, String.valueOf(value));
 	}
 	
-	protected final void addParameter(final String key, final long value, final long defaultValue)
+	public final void addParameter(final String key, final long value, final long defaultValue)
 	{
 		if(value==defaultValue)
 			return;
@@ -64,7 +64,7 @@ public abstract class Cop
 	
 	private static final int COMPACT_LONG_RADIX = Character.MAX_RADIX;
 	
-	protected final void addParameterCompact(final String key, final long value, final long defaultValue)
+	public final void addParameterCompact(final String key, final long value, final long defaultValue)
 	{
 		if(value==defaultValue)
 			return;
@@ -72,7 +72,7 @@ public abstract class Cop
 		addParameter(key, Long.toString(value, COMPACT_LONG_RADIX));
 	}
 	
-	protected final void addParameter(final String key, final Cop value)
+	public final void addParameter(final String key, final Cop value)
 	{
 		if(value==null)
 			return;
@@ -83,7 +83,7 @@ public abstract class Cop
 	/**
 	 * Does nothing, if <tt>value==null</tt>.
 	 */
-	protected final void addParameter(final String key, final String value)
+	public final void addParameter(final String key, final String value)
 	{
 		if(value==null)
 			return;
