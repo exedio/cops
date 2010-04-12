@@ -241,7 +241,8 @@
 					<os family="windows" />
 				</condition>
 				<forget>
-					<exec executable="${basedir}/tomcat/bin/${catalina.executable}"
+					<exec dir="${basedir}/tomcat/bin"
+							executable="${basedir}/tomcat/bin/${catalina.executable}"
 							failonerror="true"
 							output="build/catalina-start.log">
 						<arg value="run" />
