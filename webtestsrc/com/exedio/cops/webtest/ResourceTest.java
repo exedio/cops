@@ -71,7 +71,7 @@ public class ResourceTest extends AbstractWebTest
 		assertEquals(expectNotModified ? null : contentType, conn.getContentType());
 		//System.out.println("Expires: "+new Date(textConn.getExpiration()));
 		assertWithin(new Date(date+(4*60*1000)), new Date(date+(6*60*1000)), new Date(conn.getExpiration()));
-		assertEquals(expectNotModified ? -1 : 43, conn.getContentLength());
+		assertEquals(expectNotModified ? -1 : (41 + (2*System.getProperty("line.separator").length())), conn.getContentLength());
 		
 		final BufferedReader is = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 		if(!expectNotModified)
