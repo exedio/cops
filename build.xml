@@ -237,8 +237,11 @@
 		<trycatch>
 			<try>
 				<echo message="tomcat: starting ..." />
+				<condition property="catalina.executable" value="catalina.bat" else="catalina.sh">
+					<os family="windows" />
+				</condition>
 				<forget>
-					<exec executable="${basedir}/tomcat/bin/catalina.sh"
+					<exec executable="${basedir}/tomcat/bin/${catalina.executable}"
 							failonerror="true"
 							output="build/catalina-start.log">
 						<arg value="run" />
@@ -270,7 +273,7 @@
 			</try>
 			<finally>
 				<echo message="tomcat: stoping ..." />
-				<exec executable="${basedir}/tomcat/bin/catalina.sh"
+				<exec executable="${basedir}/tomcat/bin/${catalina.executable}"
 						failonerror="true"
 						output="build/catalina-stop.log">
 					<arg value="stop" />
