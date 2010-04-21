@@ -341,15 +341,6 @@
 	<target name="build" depends="compile, catalina.compile, test, webtest, jar, example, api" />
 	<target name="all" depends="build, jar.src" />
 	<target name="tomcat" depends="example.tomcat" />
-
-	<target name="cruise" depends="clean, all">
-		<copy todir="${basedir}/cruise">
-			<fileset file="${basedir}/getlib.properties" />
-			<fileset file="${basedir}/build/exedio-cops.jar" />
-			<fileset file="${basedir}/build/exedio-cops.jar-src.zip" />
-		</copy>
-		<copy file="CHANGELOG" tofile="${basedir}/cruise/exedio-cops.jar-CHANGELOG" />
-	</target>
 	
 	<target name="hudson" depends="all">
 		<copy todir="${basedir}/build/success">
