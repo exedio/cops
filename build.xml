@@ -107,7 +107,7 @@
 	<target name="test" depends="test.run" />
 	
 	<target name="jar" depends="compile, catalina.compile">
-		<jar jarfile="build/exedio-cops.jar" basedir="build/classes" filesonly="true" duplicate="fail" level="9">
+		<jar jarfile="build/exedio-cops.jar" basedir="build/classes" filesonly="true" duplicate="fail" strict="fail" level="9">
 			<manifest>
 				<attribute name="Specification-Title" value="exedio cops"/>
 				<attribute name="Specification-Version" value="${build.tag}"/>
