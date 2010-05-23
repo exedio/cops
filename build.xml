@@ -35,8 +35,6 @@
 				optimize="off">
 			<classpath>
 				<pathelement location="lib/servlet-api.jar" />
-				<pathelement location="lib/commons-fileupload.jar" />
-				<pathelement location="lib/commons-io.jar" />
 				<pathelement location="lib/exedio-cope-util.jar" />
 			</classpath>
 			<compilerarg value="-encoding" />
@@ -115,7 +113,7 @@
 				<attribute name="Implementation-Title" value="exedio cops"/>
 				<attribute name="Implementation-Version" value="${build.tag}"/>
 				<attribute name="Implementation-Vendor" value="exedio GmbH"/>
-				<attribute name="Class-Path" value="servlet-api.jar commons-fileupload.jar" />
+				<attribute name="Class-Path" value="servlet-api.jar" />
 			</manifest>
 		</jar>
 	</target>
@@ -331,7 +329,6 @@
 			<link href="${api.link.j2ee}" packagelistLoc="package-list/j2ee" offline="true" />
 			<classpath>
 				<pathelement location="lib/servlet-api.jar" />
-				<pathelement location="lib/commons-fileupload.jar" />
 				<pathelement location="lib/exedio-cope-util.jar" />
 			</classpath>
 		</javadoc>

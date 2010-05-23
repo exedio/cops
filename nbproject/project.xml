@@ -84,7 +84,7 @@
                 <package-root>src</package-root>
                 <package-root>testsrc</package-root>
                 <package-root>webtestsrc</package-root>
-                <classpath mode="compile">lib/ant-contrib.jar:lib/catalina.jar:lib/commons-fileupload.jar:lib/commons-io.jar:lib/exedio-jspm.jar:lib/junit.jar:lib/servlet-api.jar</classpath>
+                <classpath mode="compile">lib/ant-contrib.jar:lib/catalina.jar:lib/exedio-jspm.jar:lib/junit.jar:lib/servlet-api.jar</classpath>
                 <source-level>1.5</source-level>
             </compilation-unit>
         </java-data>

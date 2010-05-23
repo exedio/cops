@@ -4,8 +4,6 @@
 	<classpathentry kind="src" path="webtestsrc"/>
 	<classpathentry kind="src" path="example/src"/>
 	<classpathentry kind="src" path="testsrc"/>
-	<classpathentry kind="lib" path="lib/commons-fileupload.jar"/>
-	<classpathentry kind="lib" path="lib/commons-io.jar"/>
 	<classpathentry kind="lib" path="lib/servlet-api.jar" sourcepath="lib/servlet-api.jar-src.zip"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/junit.jar"/>
