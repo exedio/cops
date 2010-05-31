@@ -249,11 +249,8 @@ public abstract class Cop
 		final String actualRequestURI = request.getRequestURI();
 		final String actualQueryString = request.getQueryString();
 		final String actual = actualQueryString!=null ? (actualRequestURI + '?' + actualQueryString) : actualRequestURI;
-		if(expected.equals(actual))
-		{
-			if(doesNotNeedSecureRedirect(request))
-				return false;
-		}
+		if(expected.equals(actual) && doesNotNeedSecureRedirect(request))
+			return false;
 		
 		final String location = response.encodeRedirectURL(getURL(request));
 		System.out.println("cops redirectToCanonical from --" + actual + "-- to --" + location + "--");
