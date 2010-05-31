@@ -62,6 +62,7 @@ final class Example_Jspm
 		<a href="<%=cop.setString("se;mi")%>">semi</a> |
 		<a href="<%=cop.setString("question?mark")%>">questionmark</a> |
 		<a href="<%=cop.setString("am&persand")%>">ampersand</a> |
+		<a href="<%=cop.setString("eq=ual")%>">eq=ual</a> |
 		<a href="<%=cop.setString("uml\u00fclaut")%>">umlaut</a> |
 		<a href="<%=cop.setString("garten#zaun")%>">garten#zaun</a> |
 		<a href="<%=cop.setString("spa ce")%>">spa ce</a> |
