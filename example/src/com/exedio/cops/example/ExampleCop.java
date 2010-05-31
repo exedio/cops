@@ -65,7 +65,13 @@ public class ExampleCop extends Cop implements Pageable
 		return bf.toString();
 	}
 	
-	ExampleCop(final int number, final boolean bool, final String string, final Secure secure, final Pager pager, final int dirLevel)
+	ExampleCop(
+			final int number,
+			final boolean bool,
+			final String string,
+			final Secure secure,
+			final Pager pager,
+			final int dirLevel)
 	{
 		super(dirLevel(PATH_INFO, dirLevel, string));
 		this.number = number;
