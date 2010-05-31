@@ -120,7 +120,7 @@ public final class Resource
 	{
 		if(token==null)
 			throw new NullPointerException("token");
-		return EnvironmentRequest.getURL(token, null, name);
+		return EnvironmentRequest.getURL(token, false, name);
 	}
 	
 	void init(final Class<?> resourceLoader)

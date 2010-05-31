@@ -110,15 +110,14 @@ public abstract class Cop
 	
 	/**
 	 * Specifies, whether this cop should use http or https.
-	 * Return TRUE to use https.
-	 * Return FALSE to use http.
-	 * Return null to use any of these,
+	 * Return true to use https.
+	 * Return false to use any of these,
 	 * which uses the previously used protocol.
 	 * This default implementation returns null.
 	 */
-	protected Boolean needsSecure()
+	protected boolean needsSecure()
 	{
-		return null;
+		return false;
 	}
 	
 	private static final String HOST = "Host";
@@ -173,28 +172,15 @@ public abstract class Cop
 		
 		final String fullURL = request.getContextPath() + request.getServletPath() + '/' + url;
 		
-		final Boolean needsSecure = needsSecure();
-		if(needsSecure==null)
-			return fullURL;
-		
-		final boolean isSecure = request.isSecure();
-		if(needsSecure.booleanValue()==isSecure)
+		if(!needsSecure() || request.isSecure())
 			return fullURL;
 		
 		String host = request.getHeader(HOST);
-		if(!isSecure)
-		{
-			if(host.endsWith(":8080"))
-				host = host.substring(0, host.length()-4) + "8443";
-		}
-		else
-		{
-			if(host.endsWith(":8443"))
-				host = host.substring(0, host.length()-4) + "8080";
-		}
+		if(host.endsWith(":8080"))
+			host = host.substring(0, host.length()-4) + "8443";
 		
 		return
-			(needsSecure?"https://":"http://") +
+			"https://" +
 			host +
 			fullURL;
 	}
@@ -260,12 +246,7 @@ public abstract class Cop
 		final String actual = actualQueryString!=null ? (actualRequestURI + '?' + actualQueryString) : actualRequestURI;
 		if(expected.equals(actual))
 		{
-			final Boolean needsSecure = needsSecure();
-			if(needsSecure==null)
-				return false;
-			
-			final boolean isSecure = request.isSecure();
-			if(needsSecure.booleanValue()==isSecure)
+			if(!needsSecure() || request.isSecure())
 				return false;
 		}
 		

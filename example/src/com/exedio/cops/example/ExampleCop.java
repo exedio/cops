@@ -45,13 +45,7 @@ public class ExampleCop extends Cop implements Pageable
 	private final boolean bool;
 	final String string;
 	final ExampleCop cop;
-	
-	enum Secure
-	{
-		ANY, FALSE, TRUE;
-	}
-	private final Secure secure;
-	
+	private final boolean secure;
 	final Pager pager;
 	
 	private final int dirLevel;
@@ -72,7 +66,7 @@ public class ExampleCop extends Cop implements Pageable
 			final boolean bool,
 			final String string,
 			final ExampleCop cop,
-			final Secure secure,
+			final boolean secure,
 			final Pager pager,
 			final int dirLevel)
 	{
@@ -89,21 +83,19 @@ public class ExampleCop extends Cop implements Pageable
 		addParameter(BOOL, bool);
 		addParameter(STRING, string);
 		addParameter(COP, cop);
-		if(secure!=Secure.ANY)
-			addParameter(SECURE, secure.name());
+		addParameter(SECURE, secure);
 		pager.addParameters(this);
 		addParameter(DIR_LEVEL, dirLevel, 0);
 	}
 	
 	static ExampleCop getCop(final HttpServletRequest request)
 	{
-		final String secure = request.getParameter(SECURE);
 		return new ExampleCop(
 				getIntParameter(request, NUMBER, NUMBER_DEFAULT),
 				getBooleanParameter(request, BOOL),
 				request.getParameter(STRING),
 				getCopParameterIfFound(request, COP),
-				secure!=null ? Secure.valueOf(request.getParameter(SECURE)) : Secure.ANY,
+				getBooleanParameter(request, SECURE),
 				PAGER_CONFIG.newPager(request), getIntParameter(request, DIR_LEVEL, 0));
 	}
 	
@@ -143,7 +135,7 @@ public class ExampleCop extends Cop implements Pageable
 		return new ExampleCop(number, bool, string, null, secure, pager, dirLevel);
 	}
 	
-	public ExampleCop toSecure(final Secure secure)
+	public ExampleCop toSecure(final boolean secure)
 	{
 		return new ExampleCop(number, bool, string, cop, secure, pager, dirLevel);
 	}
@@ -195,15 +187,8 @@ public class ExampleCop extends Cop implements Pageable
 	}
 	
 	@Override
-	protected Boolean needsSecure()
+	protected boolean needsSecure()
 	{
-		switch(secure)
-		{
-			case ANY:   return null;
-			case FALSE: return Boolean.FALSE;
-			case TRUE:  return Boolean.TRUE;
-			default:
-				throw new RuntimeException(secure.name());
-		}
+		return secure;
 	}
 }

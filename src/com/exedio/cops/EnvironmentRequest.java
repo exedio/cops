@@ -25,12 +25,10 @@ final class EnvironmentRequest
 		// prevent instantiation
 	}
 	
-	static String getURL(final String environment, final Boolean needsSecure, final String url)
+	static String getURL(final String environment, final boolean needsSecure, final String url)
 	{
-		final boolean secure = needsSecure!=null && needsSecure.booleanValue();
-		
 		String e = environment;
-		if(secure)
+		if(needsSecure)
 		{
 			final int pos = e.indexOf(":8080/");
 			if(pos>0)
@@ -47,7 +45,7 @@ final class EnvironmentRequest
 				e = e.substring(0, (e.length()-5)) + ":8080";
 		}
 		
-		return (secure ? "https://" : "http://") + e + '/' + url;
+		return (needsSecure ? "https://" : "http://") + e + '/' + url;
 		
 	}
 }
