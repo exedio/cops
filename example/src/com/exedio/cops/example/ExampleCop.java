@@ -33,9 +33,7 @@ public class ExampleCop extends Cop implements Pageable
 	private static final String BOOL = "b";
 	private static final String STRING = "s";
 	private static final String COP = "cop";
-	
 	private static final String NEEDS_SECURE = "sec";
-	
 	private static final String DIR_LEVEL = "dirLevel";
 	
 	private static final int NUMBER_DEFAULT = 0;
