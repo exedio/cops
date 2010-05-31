@@ -76,7 +76,7 @@ public final class ExampleServlet extends ExampleSuperServlet
 		if(requestLimiter.doRequest(request, response))
 			return;
 		
-		final NumberCop cop = NumberCop.getCop(request);
+		final ExampleCop cop = ExampleCop.getCop(request);
 		if(cop.redirectToCanonical(request, response))
 			return;
 		
