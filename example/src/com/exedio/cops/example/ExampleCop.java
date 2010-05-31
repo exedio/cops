@@ -34,7 +34,7 @@ public class ExampleCop extends Cop implements Pageable
 	private static final String STRING = "s";
 	private static final String COP = "cop";
 	
-	private static final String SECURE = "sec";
+	private static final String NEEDS_SECURE = "sec";
 	
 	private static final String DIR_LEVEL = "dirLevel";
 	
@@ -83,7 +83,7 @@ public class ExampleCop extends Cop implements Pageable
 		addParameter(BOOL, bool);
 		addParameter(STRING, string);
 		addParameter(COP, cop);
-		addParameter(SECURE, needsSecure);
+		addParameter(NEEDS_SECURE, needsSecure);
 		pager.addParameters(this);
 		addParameter(DIR_LEVEL, dirLevel, 0);
 	}
@@ -95,7 +95,7 @@ public class ExampleCop extends Cop implements Pageable
 				getBooleanParameter(request, BOOL),
 				request.getParameter(STRING),
 				getCopParameterIfFound(request, COP),
-				getBooleanParameter(request, SECURE),
+				getBooleanParameter(request, NEEDS_SECURE),
 				PAGER_CONFIG.newPager(request), getIntParameter(request, DIR_LEVEL, 0));
 	}
 	
