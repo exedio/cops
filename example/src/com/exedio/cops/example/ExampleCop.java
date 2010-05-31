@@ -32,6 +32,7 @@ public class ExampleCop extends Cop implements Pageable
 	private static final String NUMBER = "n";
 	private static final String BOOL = "b";
 	private static final String STRING = "s";
+	private static final String COP = "cop";
 	
 	private static final String SECURE = "sec";
 	
@@ -43,6 +44,7 @@ public class ExampleCop extends Cop implements Pageable
 	private final int number;
 	private final boolean bool;
 	final String string;
+	final ExampleCop cop;
 	
 	enum Secure
 	{
@@ -69,6 +71,7 @@ public class ExampleCop extends Cop implements Pageable
 			final int number,
 			final boolean bool,
 			final String string,
+			final ExampleCop cop,
 			final Secure secure,
 			final Pager pager,
 			final int dirLevel)
@@ -77,6 +80,7 @@ public class ExampleCop extends Cop implements Pageable
 		this.number = number;
 		this.bool = bool;
 		this.string = string;
+		this.cop = cop;
 		this.secure = secure;
 		this.pager = pager;
 		this.dirLevel = dirLevel;
@@ -84,6 +88,7 @@ public class ExampleCop extends Cop implements Pageable
 		addParameter(NUMBER, number, NUMBER_DEFAULT);
 		addParameter(BOOL, bool);
 		addParameter(STRING, string);
+		addParameter(COP, cop);
 		if(secure!=Secure.ANY)
 			addParameter(SECURE, secure.name());
 		pager.addParameters(this);
@@ -97,28 +102,50 @@ public class ExampleCop extends Cop implements Pageable
 				getIntParameter(request, NUMBER, NUMBER_DEFAULT),
 				getBooleanParameter(request, BOOL),
 				request.getParameter(STRING),
+				getCopParameterIfFound(request, COP),
 				secure!=null ? Secure.valueOf(request.getParameter(SECURE)) : Secure.ANY,
 				PAGER_CONFIG.newPager(request), getIntParameter(request, DIR_LEVEL, 0));
 	}
 	
+	static final ExampleCop getCopParameterIfFound(
+			final HttpServletRequest request,
+			final String name)
+	{
+		final HttpServletRequest backRequest = getCopParameter(request, name);
+		if(backRequest==null)
+			return null;
+		
+		return getCop(backRequest);
+	}
+	
 	public ExampleCop add(final int addend)
 	{
-		return new ExampleCop(number + addend, bool, string, secure, pager, dirLevel);
+		return new ExampleCop(number + addend, bool, string, cop, secure, pager, dirLevel);
 	}
 	
 	public ExampleCop toggle()
 	{
-		return new ExampleCop(number, !bool, string, secure, pager, dirLevel);
+		return new ExampleCop(number, !bool, string, cop, secure, pager, dirLevel);
 	}
 	
 	public ExampleCop setString(final String string)
 	{
-		return new ExampleCop(number, bool, string, secure, pager, dirLevel);
+		return new ExampleCop(number, bool, string, cop, secure, pager, dirLevel);
+	}
+	
+	public ExampleCop setCopSelf()
+	{
+		return new ExampleCop(number, bool, string, this, secure, pager, dirLevel);
+	}
+	
+	public ExampleCop setCopNull()
+	{
+		return new ExampleCop(number, bool, string, null, secure, pager, dirLevel);
 	}
 	
 	public ExampleCop toSecure(final Secure secure)
 	{
-		return new ExampleCop(number, bool, string, secure, pager, dirLevel);
+		return new ExampleCop(number, bool, string, cop, secure, pager, dirLevel);
 	}
 	
 	public Pager getPager()
@@ -128,12 +155,12 @@ public class ExampleCop extends Cop implements Pageable
 	
 	public ExampleCop toPage(final Pager pager)
 	{
-		return new ExampleCop(number, bool, string, secure, pager, dirLevel);
+		return new ExampleCop(number, bool, string, cop, secure, pager, dirLevel);
 	}
 	
 	public ExampleCop toDirLevel(final int dirLevel)
 	{
-		return new ExampleCop(number, bool, string, secure, pager, dirLevel);
+		return new ExampleCop(number, bool, string, cop, secure, pager, dirLevel);
 	}
 	
 	static void writePager(final Out out, final Pageable cop)

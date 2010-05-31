@@ -67,6 +67,17 @@ final class Example_Jspm
 		<a href="<%=cop.setString("spa ce")%>">spa ce</a> |
 		<a href="<%=cop.setString(null)%>">null</a> |
 		<br>
+		nested cop:
+		<a href="<%=cop.setCopSelf()%>">self</a> |
+		<a href="<%=cop.setCopNull()%>">null</a><%
+	
+	if(cop.cop!=null)
+	{
+		%>
+		<tt style="border: red solid 1px;"><%=cop.cop%></tt><%
+	}
+		%>
+		<br>
 		needsSecure:
 		<a href="<%=cop.toSecure(ExampleCop.Secure.ANY  )%>">any</a>
 		<a href="<%=cop.toSecure(ExampleCop.Secure.FALSE)%>">false</a>
