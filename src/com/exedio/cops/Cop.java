@@ -120,6 +120,11 @@ public abstract class Cop
 		return false;
 	}
 	
+	private final boolean doesNotNeedSecureRedirect(final HttpServletRequest request)
+	{
+		return !needsSecure() || request.isSecure();
+	}
+	
 	private static final String HOST = "Host";
 	
 	public final String getAbsoluteURL(final HttpServletRequest request)
@@ -172,7 +177,7 @@ public abstract class Cop
 		
 		final String fullURL = request.getContextPath() + request.getServletPath() + '/' + url;
 		
-		if(!needsSecure() || request.isSecure())
+		if(doesNotNeedSecureRedirect(request))
 			return fullURL;
 		
 		String host = request.getHeader(HOST);
@@ -246,7 +251,7 @@ public abstract class Cop
 		final String actual = actualQueryString!=null ? (actualRequestURI + '?' + actualQueryString) : actualRequestURI;
 		if(expected.equals(actual))
 		{
-			if(!needsSecure() || request.isSecure())
+			if(doesNotNeedSecureRedirect(request))
 				return false;
 		}
 		
