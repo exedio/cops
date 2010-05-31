@@ -75,6 +75,7 @@ final class Example_Jspm
 	if(cop.cop!=null)
 	{
 		%>
+		| <a href="<%=cop.cop%>">to</a>
 		<tt style="border: red solid 1px;"><%=cop.cop%></tt><%
 	}
 		%>
