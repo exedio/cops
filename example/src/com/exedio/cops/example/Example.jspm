@@ -33,7 +33,7 @@ final class Example_Jspm
 {
 	static final void write(
 			final Out out,
-			final NumberCop cop,
+			final ExampleCop cop,
 			final HttpServletRequest request,
 			final List<String> searchResult,
 			final String reportedException)
@@ -67,9 +67,9 @@ final class Example_Jspm
 		<a href="<%=cop.setString(null)%>">null</a> |
 		<br>
 		needsSecure:
-		<a href="<%=cop.toSecure(NumberCop.Secure.ANY  )%>">any</a>
-		<a href="<%=cop.toSecure(NumberCop.Secure.FALSE)%>">false</a>
-		<a href="<%=cop.toSecure(NumberCop.Secure.TRUE )%>">true</a>
+		<a href="<%=cop.toSecure(ExampleCop.Secure.ANY  )%>">any</a>
+		<a href="<%=cop.toSecure(ExampleCop.Secure.FALSE)%>">false</a>
+		<a href="<%=cop.toSecure(ExampleCop.Secure.TRUE )%>">true</a>
 		<br>
 		<a href="copsResourceStatus.html">resourceStatus</a>
 		<br>
@@ -98,7 +98,7 @@ final class Example_Jspm
 			%>
 		</form><%
 		
-		NumberCop.writePager(out, cop);
+		ExampleCop.writePager(out, cop);
 		%>
 		<ol><%
 		for(String s : searchResult)
