@@ -50,13 +50,23 @@ final class Example_Jspm
 		[<a href="<%=ExampleServlet.test%>">test</a>]
 		<img src="<%=ExampleSuperServlet.logoSmall%>">
 		<br>
-		<a href="<%=cop%>">this</a> |
-		<a href="<%=cop.toggle()%>">toggle</a> |
+		
+		this:
+		<a href="<%=cop%>">url</a> |
+		<a href="<% out.appendAbsolute(cop); %>">absolute</a>
+		<tt style="border: red solid 1px;"><%=cop%></tt>
+		<br>
+		
+		number:
 		<a href="<%=cop.add(10)%>">+10</a> |
 		<a href="<%=cop.add(-10)%>">-10</a>
 		<br>
-		<a href="<% out.appendAbsolute(cop); %>">absolute</a>
+		
+		bool:
+		<a href="<%=cop.toggle()%>">toggle</a> |
 		<br>
+		
+		string:
 		<a href="<%=cop.setString("zack")%>">zack</a> |
 		<a href="<%=cop.setString("sla/sh")%>">slash</a> |
 		<a href="<%=cop.setString("se;mi")%>">semi</a> |
@@ -75,7 +85,8 @@ final class Example_Jspm
 	}
 		%>
 		<br>
-		nested cop:
+		
+		cop:
 		<a href="<%=cop.setCopSelf()%>">self</a> |
 		<a href="<%=cop.setCopNull()%>">null</a><%
 	
@@ -87,14 +98,13 @@ final class Example_Jspm
 	}
 		%>
 		<br>
+		
 		needsSecure:
 		<a href="<%=cop.toSecure(false)%>">false<small>(any)</small></a>
 		<a href="<%=cop.toSecure(true) %>">true<small>(https)</small></a>
 		<br>
+		
 		<a href="copsResourceStatus.html">resourceStatus</a>
-		<br>
-		<tt><%=cop%></tt><%
-		%>
 		<br>
 		<a href="<%=cop.toRedirectLoop()%>">Redirect Loop</a><%
 		%>
