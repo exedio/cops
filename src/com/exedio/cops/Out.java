@@ -27,9 +27,6 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.exedio.cops.BodySender;
-import com.exedio.cops.CopsServlet;
-import com.exedio.cops.Resource;
 import com.exedio.cope.util.XMLEncoder;
 
 final class Out
@@ -51,6 +48,11 @@ final class Out
 	void write(final String s)
 	{
 		bf.append(XMLEncoder.encode(s));
+	}
+	
+	void write(final int i)
+	{
+		bf.append(i);
 	}
 	
 	void write(final Resource resource)

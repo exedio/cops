@@ -22,7 +22,11 @@
 
 package com.exedio.cops.example;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.Callable;
 
 import javax.servlet.ServletContext;
 
@@ -72,6 +76,57 @@ public final class Properties extends com.exedio.cope.util.Properties
 				return null;
 			}
 		}, null);
+	}
+	
+	@Override
+	public List<? extends Callable<?>> getTests()
+	{
+		final ArrayList<Callable<?>> result = new ArrayList<Callable<?>>();
+		
+		result.add(new Callable<Object>(){
+
+				public Object call() throws Exception
+				{
+					return null;
+				}
+				
+				@Override
+				public String toString()
+				{
+					return "Ok";
+				}
+			});
+		
+		
+		result.add(new Callable<Object>(){
+
+				public Object call() throws Exception
+				{
+					throw new NullPointerException("zack");
+				}
+				
+				@Override
+				public String toString()
+				{
+					return "Broken";
+				}
+			});
+		
+		result.add(new Callable<Object>(){
+
+				public Object call() throws Exception
+				{
+					throw new IOException(new NullPointerException("zack"));
+				}
+				
+				@Override
+				public String toString()
+				{
+					return "Broken2";
+				}
+			});
+		
+		return result;
 	}
 	
 	private static Properties instance = null;

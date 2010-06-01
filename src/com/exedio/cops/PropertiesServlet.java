@@ -50,6 +50,7 @@ public abstract class PropertiesServlet extends CopsServlet
 		final Out out = new Out(request);
 		Properties_Jspm.write(
 				out,
+				request,
 				properties);
 		out.sendBody(response);
 	}

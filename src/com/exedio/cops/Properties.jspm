@@ -23,13 +23,19 @@
 
 package com.exedio.cops;
 
+import java.util.concurrent.Callable;
+
+import javax.servlet.http.HttpServletRequest;
+
 import com.exedio.cope.util.Properties;
-import com.exedio.cops.CopsServlet;
 
 final class Properties_Jspm
 {
+	private static final String TEST = "test";
+	
 	static final void write(
 			final Out out,
+			final HttpServletRequest request,
 			final Properties properties)
 	{
 %><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -56,6 +62,45 @@ final class Properties_Jspm
 		}
 		%>
 		</table>
+		<form method="post">
+			<table>
+				<caption>Tests</caption><%
+			
+			for(final Callable<?> test : properties.getTests())
+			{
+				%>
+				<tr>
+					<th><%=test.toString()%></th><%
+					
+				if(Cop.isPost(request) && request.getParameter(TEST)!=null)
+				{
+					%>
+					<td><%
+						try
+						{
+							test.call();
+						}
+						catch(Exception e)
+						{
+							for(Throwable t = e; t!=null; t = t.getCause())
+							{
+								%><%=t.getMessage()%><ul><%
+								for(final StackTraceElement el : t.getStackTrace())
+								{
+									%><li><%=el.getClassName()%>.<%=el.getMethodName()%> (<%=el.getFileName()%>:<%=el.getLineNumber()%>)</li><%
+								} 
+								%></ul><%
+							}
+						}
+						%></td><%
+				}
+				%>
+				</tr><%
+			}
+			%>
+			</table>
+			<input type="submit" name="<%=TEST%>" value="Test"></input>
+		</form>
 	</body>
 </html><%
 	}
