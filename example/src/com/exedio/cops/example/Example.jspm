@@ -67,6 +67,13 @@ final class Example_Jspm
 		<a href="<%=cop.setString("garten#zaun")%>">garten#zaun</a> |
 		<a href="<%=cop.setString("spa ce")%>">spa ce</a> |
 		<a href="<%=cop.setString(null)%>">null</a> |
+		<%
+	if(cop.string!=null)
+	{
+		%>
+		<tt style="border: red solid 1px;"><%=cop.string%></tt><%
+	}
+		%>
 		<br>
 		nested cop:
 		<a href="<%=cop.setCopSelf()%>">self</a> |
@@ -90,13 +97,6 @@ final class Example_Jspm
 		%>
 		<br>
 		<a href="<%=cop.toRedirectLoop()%>">Redirect Loop</a><%
-		
-		if(cop.string!=null)
-		{
-		%>
-		<br>
-		<tt style="border: red solid 1px;"><%=cop.string%></tt><%
-		}
 		%>
 		<br>
 		<form action="<%=cop%>" method="POST">
