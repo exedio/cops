@@ -87,10 +87,14 @@ final class Example_Jspm
 		<a href="copsResourceStatus.html">resourceStatus</a>
 		<br>
 		<tt><%=cop%></tt><%
+		%>
+		<br>
+		<a href="<%=cop.toRedirectLoop()%>">Redirect Loop</a><%
 		
 		if(cop.string!=null)
 		{
 		%>
+		<br>
 		<tt style="border: red solid 1px;"><%=cop.string%></tt><%
 		}
 		%>
