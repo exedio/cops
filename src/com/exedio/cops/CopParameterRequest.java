@@ -23,6 +23,7 @@ import static java.util.Collections.enumeration;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -81,13 +82,25 @@ final class CopParameterRequest implements HttpServletRequest
 					list = new ArrayList<String>();
 					parameters.put(key, list);
 				}
-				list.add(newValue);
+				list.add(decode(newValue));
 				
 				if(endPos<0)
 					break;
 				
 				startPos = endPos;
 			}
+		}
+	}
+	
+	private static String decode(final String s)
+	{
+		try
+		{
+			return URLDecoder.decode(s, CopsServlet.UTF8);
+		}
+		catch(UnsupportedEncodingException e)
+		{
+			throw new RuntimeException(e);
 		}
 	}
 	

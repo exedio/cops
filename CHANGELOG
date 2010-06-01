@@ -7,6 +7,9 @@ omit bug fixes.
 The items are sorted inversely, i.e. lastest items are on top
 
 --------------------------------------------------------------------------
+* fix endless redirection loop in Cop#redirectToCanonical, if
+	addParameter(String, Cop) is used with parameters containing non-safe
+	characters.
 * change return type of Cop#needsSecure() from Boolean to boolean.
 	
 	Forcing http is no longer supported because of numerous problems.

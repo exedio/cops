@@ -98,11 +98,11 @@ public class CopParameterRequestTest extends TestCase
 		{
 			final CopParameterRequest request = new CopParameterRequest(nested, "test.html?ding=sla%2Fsh");
 			assertEquals("/test.html", request.getPathInfo());
-			assertEquals("ding=sla%2Fsh", request.getQueryString()); // TODO should be sla/sh
+			assertEquals("ding=sla%2Fsh", request.getQueryString());
 			
 			assertParameters(request);
-			assertEquals("sla%2Fsh", request.getParameter("ding")); // TODO should be sla/sh
-			assertEquals(asList("sla%2Fsh"), asList(request.getParameterValues("ding"))); // TODO should be sla/sh
+			assertEquals("sla/sh", request.getParameter("ding"));
+			assertEquals(asList("sla/sh"), asList(request.getParameterValues("ding")));
 			final Enumeration<?> names = request.getParameterNames();
 			assertEquals("ding", names.nextElement());
 			assertFalse(names.hasMoreElements());
