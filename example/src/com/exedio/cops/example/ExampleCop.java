@@ -140,9 +140,9 @@ public class ExampleCop extends Cop implements Pageable
 		return new ExampleCop(number, bool, string, null, needsSecure, redirectLoop, pager, dirLevel);
 	}
 	
-	public ExampleCop toSecure(final boolean secure)
+	public ExampleCop toSecure(final boolean needsSecure)
 	{
-		return new ExampleCop(number, bool, string, cop, secure, redirectLoop, pager, dirLevel);
+		return new ExampleCop(number, bool, string, cop, needsSecure, redirectLoop, pager, dirLevel);
 	}
 	
 	public ExampleCop toRedirectLoop()
