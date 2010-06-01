@@ -54,6 +54,11 @@ final class Out
 		bf.append(s);
 	}
 	
+	void append(final boolean b)
+	{
+		bf.append(b);
+	}
+	
 	void append(final int i)
 	{
 		bf.append(i);

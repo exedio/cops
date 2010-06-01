@@ -61,10 +61,12 @@ final class Example_Jspm
 		<a href="<%=cop.set(0)%>">0</a> |
 		<a href="<%=cop.add(10)%>">+10</a> |
 		<a href="<%=cop.add(-10)%>">-10</a>
+		<span style="border: solid 1px;"><%=cop.number%></span>
 		<br>
 		
 		bool:
 		<a href="<%=cop.toggle()%>">toggle</a>
+		<span style="border: solid 1px;"><%=cop.bool%></span>
 		<br>
 		
 		string:
@@ -103,6 +105,7 @@ final class Example_Jspm
 		needsSecure:
 		<a href="<%=cop.toSecure(false)%>">false<small>(any)</small></a>
 		<a href="<%=cop.toSecure(true) %>">true<small>(https)</small></a>
+		<span style="border: solid 1px;"><%=cop.needsSecure()%></span>
 		<br>
 		
 		<a href="<%=cop.toRedirectLoop()%>">Redirect Loop</a><%

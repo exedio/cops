@@ -42,8 +42,8 @@ public class ExampleCop extends Cop implements Pageable
 	private static final int REDIRECT_LOOP_DEFAULT = 0;
 	private static final Pager.Config PAGER_CONFIG = new Pager.Config(10, 20, 23, 100, 500);
 	
-	private final int number;
-	private final boolean bool;
+	final int number;
+	final boolean bool;
 	final String string;
 	final ExampleCop cop;
 	private final boolean needsSecure;
