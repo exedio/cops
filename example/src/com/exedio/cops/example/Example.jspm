@@ -58,6 +58,7 @@ final class Example_Jspm
 		<br>
 		
 		number:
+		<a href="<%=cop.set(0)%>">0</a> |
 		<a href="<%=cop.add(10)%>">+10</a> |
 		<a href="<%=cop.add(-10)%>">-10</a>
 		<br>

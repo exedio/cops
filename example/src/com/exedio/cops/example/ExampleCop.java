@@ -115,6 +115,11 @@ public class ExampleCop extends Cop implements Pageable
 		return getCop(backRequest);
 	}
 	
+	public ExampleCop set(final int number)
+	{
+		return new ExampleCop(number, bool, string, cop, needsSecure, redirectLoop, pager, dirLevel);
+	}
+	
 	public ExampleCop add(final int addend)
 	{
 		return new ExampleCop(number + addend, bool, string, cop, needsSecure, redirectLoop, pager, dirLevel);
