@@ -64,10 +64,11 @@ final class Example_Jspm
 		<br>
 		
 		bool:
-		<a href="<%=cop.toggle()%>">toggle</a> |
+		<a href="<%=cop.toggle()%>">toggle</a>
 		<br>
 		
 		string:
+		<a href="<%=cop.setString(null)%>">null</a> |
 		<a href="<%=cop.setString("zack")%>">zack</a> |
 		<a href="<%=cop.setString("sla/sh")%>">slash</a> |
 		<a href="<%=cop.setString("se;mi")%>">semi</a> |
@@ -77,7 +78,6 @@ final class Example_Jspm
 		<a href="<%=cop.setString("uml\u00fclaut")%>">umlaut</a> |
 		<a href="<%=cop.setString("garten#zaun")%>">garten#zaun</a> |
 		<a href="<%=cop.setString("spa ce")%>">spa ce</a> |
-		<a href="<%=cop.setString(null)%>">null</a> |
 		<%
 	if(cop.string!=null)
 	{
@@ -88,8 +88,8 @@ final class Example_Jspm
 		<br>
 		
 		cop:
-		<a href="<%=cop.setCopSelf()%>">self</a> |
-		<a href="<%=cop.setCopNull()%>">null</a><%
+		<a href="<%=cop.setCopNull()%>">null</a> |
+		<a href="<%=cop.setCopSelf()%>">self</a><%
 	
 	if(cop.cop!=null)
 	{
