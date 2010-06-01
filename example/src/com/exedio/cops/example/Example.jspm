@@ -88,8 +88,8 @@ final class Example_Jspm
 		%>
 		<br>
 		needsSecure:
-		<a href="<%=cop.toSecure(false)%>">false(any)</a>
-		<a href="<%=cop.toSecure(true) %>">true(https)</a>
+		<a href="<%=cop.toSecure(false)%>">false<small>(any)</small></a>
+		<a href="<%=cop.toSecure(true) %>">true<small>(https)</small></a>
 		<br>
 		<a href="copsResourceStatus.html">resourceStatus</a>
 		<br>
