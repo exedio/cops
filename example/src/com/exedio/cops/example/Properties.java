@@ -22,7 +22,6 @@
 
 package com.exedio.cops.example;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -116,7 +115,7 @@ public final class Properties extends com.exedio.cope.util.Properties
 
 				public Object call() throws Exception
 				{
-					throw new IOException(new NullPointerException("zack"));
+					throw new RuntimeException(new NullPointerException("zack"));
 				}
 				
 				@Override
