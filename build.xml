@@ -334,10 +334,37 @@
 		</javadoc>
 	</target>
 	
+	<target name="findbugs" depends="compile">
+		<untar
+				compression="gzip"
+				src="${basedir}/lib/findbugs-1.3.9.tar.gz"
+				dest="${basedir}/build/findbugs-home" />
+		<taskdef
+				resource="edu/umd/cs/findbugs/anttask/tasks.properties"
+				classpath="build/findbugs-home/findbugs-1.3.9/lib/findbugs-ant.jar" />
+		<findbugs
+					home="${basedir}/build/findbugs-home/findbugs-1.3.9"
+					jvmargs="-Xmx250M"
+					failOnError="true"
+					warningsProperty="findbugs.warnings"
+					output="html"
+					outputFile="${basedir}/build/findbugs.html"
+					excludeFilter="findbugs-exclude.xml"
+					effort="max"
+					reportlevel="low">
+			<class location="${basedir}/build/classes" />
+			<auxclasspath>
+				<pathelement location="${basedir}/lib/exedio-cope-util.jar" />
+				<pathelement location="${basedir}/lib/servlet-api.jar" />
+			</auxclasspath>
+		</findbugs>
+		<fail if="findbugs.warnings" message="findbugs warnings" />
+	</target>
+	
 	<target name="jspm" depends="runtime.jspm, example.jspm" />
 	<target name="src" depends="jspm" description="creates all sources, so the IDE does not complain" />
 	<target name="build" depends="compile, catalina.compile, test, webtest, jar, example, api" />
-	<target name="all" depends="build, jar.src" />
+	<target name="all" depends="build, jar.src, findbugs" />
 	<target name="tomcat" depends="example.tomcat" />
 	
 	<target name="hudson" depends="all">

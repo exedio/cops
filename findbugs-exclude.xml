@@ -1,0 +1,24 @@
+<FindBugsFilter>
+	<Match>
+		<!-- Method invoked that should be only be invoked inside a doPrivileged block -->
+		<Bug pattern="DP_DO_INSIDE_DO_PRIVILEGED" />
+		<Or>
+			<Class name="com.exedio.cops.CopsServlet" />
+		</Or>
+	</Match>
+	<Match>
+		<!-- Consider returning a zero length array rather than null -->
+		<Bug pattern="PZLA_PREFER_ZERO_LENGTH_ARRAYS" />
+		<Or>
+			<Class name="com.exedio.cops.Base64" />
+			<Class name="com.exedio.cops.BasicAuthorization" />
+		</Or>
+	</Match>
+	<Match>
+		<!-- Exception is caught when Exception is not thrown -->
+		<Bug pattern="REC_CATCH_EXCEPTION" />
+		<Or>
+			<Class name="com.exedio.cops.Base64" />
+		</Or>
+	</Match>
+</FindBugsFilter>
