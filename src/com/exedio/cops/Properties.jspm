@@ -76,15 +76,22 @@ final class Properties_Jspm
 				{
 					%>
 					<td><%
+						final Object result;
 						try
 						{
-							test.call();
+							result = test.call();
+							%>OK<%
+							if(result!=null)
+							{
+								%>: <%=result.toString()%><%
+							}
 						}
 						catch(Exception e)
 						{
+							%><span style="color:red">failed:</span> <%
 							for(Throwable t = e; t!=null; t = t.getCause())
 							{
-								%><%=t.getMessage()%><ul><%
+								%><%=t.getClass().getName()%>: <%=t.getMessage()%><ul><%
 								for(final StackTraceElement el : t.getStackTrace())
 								{
 									%><li><%=el.getClassName()%>.<%=el.getMethodName()%> (<%=el.getFileName()%>:<%=el.getLineNumber()%>)</li><%

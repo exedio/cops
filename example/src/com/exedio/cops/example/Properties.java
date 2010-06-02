@@ -96,6 +96,20 @@ public final class Properties extends com.exedio.cope.util.Properties
 				}
 			});
 		
+		result.add(new Callable<Object>(){
+
+			public Object call() throws Exception
+			{
+				return "Result";
+			}
+			
+			@Override
+			public String toString()
+			{
+				return "Ok Result";
+			}
+		});
+	
 		
 		result.add(new Callable<Object>(){
 
@@ -121,7 +135,7 @@ public final class Properties extends com.exedio.cope.util.Properties
 				@Override
 				public String toString()
 				{
-					return "Broken2";
+					return "Broken Nested";
 				}
 			});
 		
