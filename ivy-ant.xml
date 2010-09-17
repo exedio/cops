@@ -5,6 +5,7 @@
 		default="resolve">
 	<ivy:settings file="ivysettings.xml" />
 	<target name="resolve">
+		<delete dir="build/ivy" />
 		<mkdir dir="build/ivy" />
 		<ivy:retrieve pattern="build/ivy/[artifact]-[revision]-[type].[ext]" />
 		<copy overwrite="true" tofile="lib/servlet-api.jar"         file="build/ivy/servlet-api-2.4-jar.jar" />
