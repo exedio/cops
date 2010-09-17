@@ -8,7 +8,5 @@
 		<delete dir="build/ivy" />
 		<mkdir dir="build/ivy" />
 		<ivy:retrieve pattern="build/ivy/[artifact]-[revision]-[type].[ext]" />
-		<copy overwrite="true" tofile="lib/servlet-api.jar"         file="build/ivy/servlet-api-2.4-jar.jar" />
-		<copy overwrite="true" tofile="lib/servlet-api.jar-src.zip" file="build/ivy/servlet-api-2.4-source.jar" />
 	</target>
 </project>
