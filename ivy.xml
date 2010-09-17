@@ -1,0 +1,10 @@
+<ivy-module version="2.0">
+	<info organisation="com.exedio" module="exedio-cops"/>
+	<publications>
+		<artifact name="exedio-cops.jar" />
+		<artifact name="exedio-cope.jar-src.zip" type="source" ext="zip" />
+	</publications>
+	<dependencies>
+		<dependency org="javax.servlet" name="servlet-api" rev="2.4" />
+	</dependencies>
+</ivy-module>
