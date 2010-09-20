@@ -2,10 +2,10 @@
 	<info
 			organisation="com.exedio"
 			module="exedio-cops">
-		<licence
+		<license
 				name="GNU Lesser General Public License, Version 2.1"
 				url="http://opensource.org/licenses/lgpl-license.html" />
-	<info>
+	</info>
 	<publications>
 		<artifact name="exedio-cops.jar" />
 		<artifact name="exedio-cope.jar-src.zip" type="source" ext="zip" />
@@ -15,6 +15,6 @@
 		<dependency org="junit" name="junit" rev="3.8" />
 		<dependency org="commons-fileupload" name="commons-fileupload" rev="1.1"/>
 		<dependency org="commons-io" name="commons-io" rev="1.2"/>
-		<dependency org="com.exedio" name="exedio-cope-util" rev="42" />
+		<dependency org="com.exedio" name="exedio-cope-util" rev="44" />
 	</dependencies>
 </ivy-module>
