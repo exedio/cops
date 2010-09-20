@@ -13,8 +13,8 @@
 	<dependencies>
 		<dependency org="javax.servlet" name="servlet-api" rev="2.4" />
 		<dependency org="junit" name="junit" rev="3.8" />
-		<dependency org="commons-fileupload" name="commons-fileupload" rev="1.1"/>
-		<dependency org="commons-io" name="commons-io" rev="1.2"/>
-		<dependency org="com.exedio" name="copeutil" rev="45" />
+		<dependency org="commons-fileupload" name="commons-fileupload" rev="1.1" />
+		<dependency org="commons-io" name="commons-io" rev="1.2" />
+		<dependency org="com.exedio" name="copeutil" rev="47" />
 	</dependencies>
 </ivy-module>
