@@ -1,5 +1,11 @@
 <ivy-module version="2.0">
-	<info organisation="com.exedio" module="exedio-cops"/>
+	<info
+			organisation="com.exedio"
+			module="exedio-cops">
+		<licence
+				name="GNU Lesser General Public License, Version 2.1"
+				url="http://opensource.org/licenses/lgpl-license.html" />
+	<info>
 	<publications>
 		<artifact name="exedio-cops.jar" />
 		<artifact name="exedio-cope.jar-src.zip" type="source" ext="zip" />
