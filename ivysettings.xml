@@ -4,7 +4,7 @@
 		<ibiblio name="public" m2compatible="true"/>
 		<url name="shared">
 			<ivy      pattern="http://hudson.exedio.com/hudson/job/[module]-ivy/[revision]/artifact/main/build/ivy.xml" />
-			<artifact pattern="http://hudson.exedio.com/hudson/job/[module]-ivy/[revision]/artifact/main/build/success/exedio-cope-util.jar"/>
+			<artifact pattern="http://hudson.exedio.com/hudson/job/[module]-ivy/[revision]/artifact/main/build/success/[artifact].[ext]"/>
 		</url>
 		<chain name="main" dual="true">
 			<resolver ref="shared"/>
