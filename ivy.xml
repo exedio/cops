@@ -15,6 +15,6 @@
 		<dependency org="junit" name="junit" rev="3.8" />
 		<dependency org="commons-fileupload" name="commons-fileupload" rev="1.1" />
 		<dependency org="commons-io" name="commons-io" rev="1.2" />
-		<dependency org="com.exedio" name="copeutil" rev="55" />
+		<dependency org="com.exedio" name="copeutil" rev="56" />
 	</dependencies>
 </ivy-module>
