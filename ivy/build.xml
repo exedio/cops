@@ -10,5 +10,6 @@
 		<ivy:retrieve file="../ivy.xml" pattern="artifacts/[artifact]-[revision]-[type].[ext]" />
 	</target>
 	<target name="copy" depends="resolve">
+		<copy file="artifacts/junit-4.4-jar.jar" tofile="../lib/junit.jar" overwrite="true" />
 	</target>
 </project>
