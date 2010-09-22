@@ -1,7 +1,8 @@
 <ivy-module version="2.0">
 	<info
 			organisation="com.exedio"
-			module="cops">
+			module="cops"
+			revision="@BUILD_REVISION@">
 		<license
 				name="GNU Lesser General Public License, Version 2.1"
 				url="http://opensource.org/licenses/lgpl-license.html" />
