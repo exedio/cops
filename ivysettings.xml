@@ -1,6 +1,8 @@
 <ivysettings>
 	<settings defaultResolver="default"/>
-	<property name="shared.root" value="http://hudson.exedio.com/hudson/job/[module]-ivy/[revision]/artifact/main/build/success" />
+	<property
+			name="shared.root"
+			value="http://hudson.exedio.com/hudson/job/[module]-ivy/[revision]/artifact/main/build/success" />
 	<resolvers>
 		<ibiblio name="public" m2compatible="true"/>
 		<url name="shared">
