@@ -1,12 +1,12 @@
 <ivysettings>
 	<settings defaultResolver="default"/>
-	<property name="shared.root" value="http://hudson.exedio.com/hudson/job/[module]-ivy/[revision]/artifact/main" />
+	<property name="shared.root" value="http://hudson.exedio.com/hudson/job/[module]-ivy/[revision]/artifact/main/build/success" />
 	<resolvers>
 		<ibiblio name="public" m2compatible="true"/>
 		<url name="shared">
-			<ivy      pattern="${shared.root}/build/success/ivy.xml" />
-			<artifact pattern="${shared.root}/build/success/[artifact].[ext]"/>
-			<artifact pattern="${shared.root}/build/success/[artifact]-[type].[ext]"/>
+			<ivy      pattern="${shared.root}/ivy.xml" />
+			<artifact pattern="${shared.root}/[artifact].[ext]"/>
+			<artifact pattern="${shared.root}/[artifact]-[type].[ext]"/>
 		</url>
 		<chain name="main" dual="true">
 			<resolver ref="shared"/>
