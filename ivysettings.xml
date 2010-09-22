@@ -4,7 +4,7 @@
 	<resolvers>
 		<ibiblio name="public" m2compatible="true"/>
 		<url name="shared">
-			<ivy      pattern="${shared.root}/build/ivy.xml" />
+			<ivy      pattern="${shared.root}/build/success/ivy.xml" />
 			<artifact pattern="${shared.root}/build/success/[artifact].[ext]"/>
 			<artifact pattern="${shared.root}/build/success/[artifact]-[type].[ext]"/>
 		</url>
