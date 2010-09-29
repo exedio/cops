@@ -17,6 +17,6 @@
 		<copy overwrite="true" file="artifacts/exedio-jspm-89-log.txt" tofile="../lib/exedio-jspm.jar-CHANGELOG" />
 		<copy overwrite="true" file="artifacts/servlet-api-2.4-jar.jar" tofile="../lib/servlet-api.jar" />
 		<copy overwrite="true" file="artifacts/servlet-api-2.4-source.jar" tofile="../lib/../lib/servlet-api.jar-src.zip" />
-		<copy file="artifacts/junit-4.4-jar.jar" tofile="../lib/junit.jar" overwrite="true" />
+		<copy overwrite="true" file="artifacts/junit-4.4-jar.jar" tofile="../lib/junit.jar" />
 	</target>
 </project>
