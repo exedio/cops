@@ -153,7 +153,7 @@ public class ResourceTest extends TestCase
 		assertEquals("ResourceTest.class", r1.toString());
 
 		assertEquals("/contextPath/servletPath/ResourceTest.class", r1.getURL(request()));
-		assertEquals("scheme://host.exedio.com/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(request("scheme", "host.exedio.com")));
+		assertEquals("schemeX://hostX/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(request("schemeX", "hostX")));
 		assertEquals("http://host.exedio.com/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(CopTest.TOKEN));
 		// port adjustments
 		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(CopTest.TOKEN_8080));
