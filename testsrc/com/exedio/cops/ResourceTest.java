@@ -148,7 +148,7 @@ public class ResourceTest extends TestCase
 			@Override public String getScheme(){return "scheme";}
 			@Override public String getContextPath(){return "/contextPath";}
 			@Override public String getServletPath(){return "/servletPath";}
-			@Override public String getHeader(String name)
+			@Override public String getHeader(final String name)
 			{
 				if("Host".equals(name))
 					return "host.exedio.com";

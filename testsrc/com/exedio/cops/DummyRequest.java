@@ -49,12 +49,12 @@ public class DummyRequest implements HttpServletRequest
 		throw new RuntimeException();
 	}
 
-	public long getDateHeader(String arg0)
+	public long getDateHeader(final String arg0)
 	{
 		throw new RuntimeException();
 	}
 
-	public String getHeader(String arg0)
+	public String getHeader(final String arg0)
 	{
 		throw new RuntimeException();
 	}
@@ -64,12 +64,12 @@ public class DummyRequest implements HttpServletRequest
 		throw new RuntimeException();
 	}
 
-	public Enumeration<?> getHeaders(String arg0)
+	public Enumeration<?> getHeaders(final String arg0)
 	{
 		throw new RuntimeException();
 	}
 
-	public int getIntHeader(String arg0)
+	public int getIntHeader(final String arg0)
 	{
 		throw new RuntimeException();
 	}
@@ -124,7 +124,7 @@ public class DummyRequest implements HttpServletRequest
 		throw new RuntimeException();
 	}
 
-	public HttpSession getSession(boolean arg0)
+	public HttpSession getSession(final boolean arg0)
 	{
 		throw new RuntimeException();
 	}
@@ -155,12 +155,12 @@ public class DummyRequest implements HttpServletRequest
 		throw new RuntimeException();
 	}
 
-	public boolean isUserInRole(String arg0)
+	public boolean isUserInRole(final String arg0)
 	{
 		throw new RuntimeException();
 	}
 
-	public Object getAttribute(String arg0)
+	public Object getAttribute(final String arg0)
 	{
 		throw new RuntimeException();
 	}
@@ -215,7 +215,7 @@ public class DummyRequest implements HttpServletRequest
 		throw new RuntimeException();
 	}
 
-	public String getParameter(String arg0)
+	public String getParameter(final String arg0)
 	{
 		throw new RuntimeException();
 	}
@@ -230,7 +230,7 @@ public class DummyRequest implements HttpServletRequest
 		throw new RuntimeException();
 	}
 
-	public String[] getParameterValues(String arg0)
+	public String[] getParameterValues(final String arg0)
 	{
 		throw new RuntimeException();
 	}
@@ -246,7 +246,7 @@ public class DummyRequest implements HttpServletRequest
 	}
 
 	@Deprecated
-	public String getRealPath(String arg0)
+	public String getRealPath(final String arg0)
 	{
 		throw new RuntimeException();
 	}
@@ -266,7 +266,7 @@ public class DummyRequest implements HttpServletRequest
 		throw new RuntimeException();
 	}
 
-	public RequestDispatcher getRequestDispatcher(String arg0)
+	public RequestDispatcher getRequestDispatcher(final String arg0)
 	{
 		throw new RuntimeException();
 	}
@@ -291,17 +291,17 @@ public class DummyRequest implements HttpServletRequest
 		throw new RuntimeException();
 	}
 
-	public void removeAttribute(String arg0)
+	public void removeAttribute(final String arg0)
 	{
 		throw new RuntimeException();
 	}
 
-	public void setAttribute(String arg0, Object arg1)
+	public void setAttribute(final String arg0, final Object arg1)
 	{
 		throw new RuntimeException();
 	}
 
-	public void setCharacterEncoding(String arg0)
+	public void setCharacterEncoding(final String arg0)
 			throws UnsupportedEncodingException
 	{
 		throw new UnsupportedEncodingException();

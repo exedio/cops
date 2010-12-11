@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
 
 public class DummySession implements HttpSession
 {
-	public Object getAttribute(String s)
+	public Object getAttribute(final String s)
 	{
 		throw new RuntimeException();
 	}
@@ -70,7 +70,7 @@ public class DummySession implements HttpSession
 	}
 
 	@Deprecated
-	public Object getValue(String s)
+	public Object getValue(final String s)
 	{
 		throw new RuntimeException();
 	}
@@ -92,28 +92,28 @@ public class DummySession implements HttpSession
 	}
 
 	@Deprecated
-	public void putValue(String s, Object obj)
+	public void putValue(final String s, final Object obj)
 	{
 		throw new RuntimeException();
 	}
 
-	public void removeAttribute(String s)
+	public void removeAttribute(final String s)
 	{
 		throw new RuntimeException();
 	}
 
 	@Deprecated
-	public void removeValue(String s)
+	public void removeValue(final String s)
 	{
 		throw new RuntimeException();
 	}
 
-	public void setAttribute(String s, Object obj)
+	public void setAttribute(final String s, final Object obj)
 	{
 		throw new RuntimeException();
 	}
 
-	public void setMaxInactiveInterval(int i)
+	public void setMaxInactiveInterval(final int i)
 	{
 		throw new RuntimeException();
 	}

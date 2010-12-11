@@ -27,90 +27,90 @@ import javax.servlet.http.HttpServletResponse;
 
 public class DummyResponse implements HttpServletResponse
 {
-	public String encodeURL(String url)
+	public String encodeURL(final String url)
 	{
 		throw new RuntimeException();
 	}
 
-	public void addCookie(Cookie arg0)
+	public void addCookie(final Cookie arg0)
 	{
 		throw new RuntimeException();
 	}
 
-	public void addDateHeader(String arg0, long arg1)
+	public void addDateHeader(final String arg0, final long arg1)
 	{
 		throw new RuntimeException();
 	}
 
-	public void addHeader(String arg0, String arg1)
+	public void addHeader(final String arg0, final String arg1)
 	{
 		throw new RuntimeException();
 	}
 
-	public void addIntHeader(String arg0, int arg1)
+	public void addIntHeader(final String arg0, final int arg1)
 	{
 		throw new RuntimeException();
 	}
 
-	public boolean containsHeader(String arg0)
+	public boolean containsHeader(final String arg0)
 	{
 		throw new RuntimeException();
 	}
 
-	public String encodeRedirectURL(String arg0)
-	{
-		throw new RuntimeException();
-	}
-
-	@Deprecated
-	public String encodeRedirectUrl(String arg0)
+	public String encodeRedirectURL(final String arg0)
 	{
 		throw new RuntimeException();
 	}
 
 	@Deprecated
-	public String encodeUrl(String arg0)
-	{
-		throw new RuntimeException();
-	}
-
-	public void sendError(int arg0)
-	{
-		throw new RuntimeException();
-	}
-
-	public void sendError(int arg0, String arg1)
-	{
-		throw new RuntimeException();
-	}
-
-	public void sendRedirect(String arg0)
-	{
-		throw new RuntimeException();
-	}
-
-	public void setDateHeader(String arg0, long arg1)
-	{
-		throw new RuntimeException();
-	}
-
-	public void setHeader(String arg0, String arg1)
-	{
-		throw new RuntimeException();
-	}
-
-	public void setIntHeader(String arg0, int arg1)
-	{
-		throw new RuntimeException();
-	}
-
-	public void setStatus(int arg0)
+	public String encodeRedirectUrl(final String arg0)
 	{
 		throw new RuntimeException();
 	}
 
 	@Deprecated
-	public void setStatus(int arg0, String arg1)
+	public String encodeUrl(final String arg0)
+	{
+		throw new RuntimeException();
+	}
+
+	public void sendError(final int arg0)
+	{
+		throw new RuntimeException();
+	}
+
+	public void sendError(final int arg0, final String arg1)
+	{
+		throw new RuntimeException();
+	}
+
+	public void sendRedirect(final String arg0)
+	{
+		throw new RuntimeException();
+	}
+
+	public void setDateHeader(final String arg0, final long arg1)
+	{
+		throw new RuntimeException();
+	}
+
+	public void setHeader(final String arg0, final String arg1)
+	{
+		throw new RuntimeException();
+	}
+
+	public void setIntHeader(final String arg0, final int arg1)
+	{
+		throw new RuntimeException();
+	}
+
+	public void setStatus(final int arg0)
+	{
+		throw new RuntimeException();
+	}
+
+	@Deprecated
+	public void setStatus(final int arg0, final String arg1)
 	{
 		throw new RuntimeException();
 	}
@@ -165,27 +165,27 @@ public class DummyResponse implements HttpServletResponse
 		throw new RuntimeException();
 	}
 
-	public void setBufferSize(int arg0)
+	public void setBufferSize(final int arg0)
 	{
 		throw new RuntimeException();
 	}
 
-	public void setCharacterEncoding(String arg0)
+	public void setCharacterEncoding(final String arg0)
 	{
 		throw new RuntimeException();
 	}
 
-	public void setContentLength(int arg0)
+	public void setContentLength(final int arg0)
 	{
 		throw new RuntimeException();
 	}
 
-	public void setContentType(String arg0)
+	public void setContentType(final String arg0)
 	{
 		throw new RuntimeException();
 	}
 
-	public void setLocale(Locale arg0)
+	public void setLocale(final Locale arg0)
 	{
 		throw new RuntimeException();
 	}

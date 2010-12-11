@@ -176,12 +176,12 @@ final class CopParameterRequest implements HttpServletRequest
 		return nested.getCookies();
 	}
 
-	public long getDateHeader(String arg0)
+	public long getDateHeader(final String arg0)
 	{
 		return nested.getDateHeader(arg0);
 	}
 
-	public String getHeader(String arg0)
+	public String getHeader(final String arg0)
 	{
 		return nested.getHeader(arg0);
 	}
@@ -191,12 +191,12 @@ final class CopParameterRequest implements HttpServletRequest
 		return nested.getHeaderNames();
 	}
 
-	public Enumeration<?> getHeaders(String arg0)
+	public Enumeration<?> getHeaders(final String arg0)
 	{
 		return nested.getHeaders(arg0);
 	}
 
-	public int getIntHeader(String arg0)
+	public int getIntHeader(final String arg0)
 	{
 		return nested.getIntHeader(arg0);
 	}
@@ -241,7 +241,7 @@ final class CopParameterRequest implements HttpServletRequest
 		return nested.getSession();
 	}
 
-	public HttpSession getSession(boolean arg0)
+	public HttpSession getSession(final boolean arg0)
 	{
 		return nested.getSession(arg0);
 	}
@@ -272,12 +272,12 @@ final class CopParameterRequest implements HttpServletRequest
 		return nested.isRequestedSessionIdValid();
 	}
 
-	public boolean isUserInRole(String arg0)
+	public boolean isUserInRole(final String arg0)
 	{
 		return nested.isUserInRole(arg0);
 	}
 
-	public Object getAttribute(String arg0)
+	public Object getAttribute(final String arg0)
 	{
 		return nested.getAttribute(arg0);
 	}
@@ -343,7 +343,7 @@ final class CopParameterRequest implements HttpServletRequest
 	}
 
 	@Deprecated
-	public String getRealPath(String arg0)
+	public String getRealPath(final String arg0)
 	{
 		return nested.getRealPath(arg0);
 	}
@@ -363,7 +363,7 @@ final class CopParameterRequest implements HttpServletRequest
 		return nested.getRemotePort();
 	}
 
-	public RequestDispatcher getRequestDispatcher(String arg0)
+	public RequestDispatcher getRequestDispatcher(final String arg0)
 	{
 		return nested.getRequestDispatcher(arg0);
 	}
@@ -388,17 +388,17 @@ final class CopParameterRequest implements HttpServletRequest
 		return nested.isSecure();
 	}
 
-	public void removeAttribute(String arg0)
+	public void removeAttribute(final String arg0)
 	{
 		nested.removeAttribute(arg0);
 	}
 
-	public void setAttribute(String arg0, Object arg1)
+	public void setAttribute(final String arg0, final Object arg1)
 	{
 		nested.setAttribute(arg0, arg1);
 	}
 
-	public void setCharacterEncoding(String arg0)
+	public void setCharacterEncoding(final String arg0)
 			throws UnsupportedEncodingException
 	{
 		nested.setCharacterEncoding(arg0);

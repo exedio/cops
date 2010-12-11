@@ -148,7 +148,7 @@ final class Base64
      * @return the number of decoded bytes converted
      * @since 1.3
      */
-    private static int decode4to3( byte[] source, int srcOffset, byte[] destination, int destOffset )
+    private static int decode4to3( final byte[] source, final int srcOffset, final byte[] destination, final int destOffset )
     {
         // Example: Dk==
         if( source[ srcOffset + 2] == EQUALS_SIGN )
@@ -223,7 +223,7 @@ final class Base64
      * @return decoded data
      * @since 1.3
      */
-    private static byte[] decode( byte[] source, int off, int len )
+    private static byte[] decode( final byte[] source, final int off, final int len )
     {
         int    len34   = len * 3 / 4;
         byte[] outBuff = new byte[ len34 ]; // Upper limit on size of output
@@ -280,7 +280,7 @@ final class Base64
      * @return the decoded data
      * @since 1.4
      */
-    public static byte[] decode( String s )
+    public static byte[] decode( final String s )
     {
         byte[] bytes;
         try
