@@ -144,32 +144,20 @@ public class ResourceTest extends TestCase
 		}
 
 
-		final HttpServletRequest request = new DummyRequest(){
-			@Override public String getScheme(){return "scheme";}
-			@Override public String getContextPath(){return "/contextPath";}
-			@Override public String getServletPath(){return "/servletPath";}
-			@Override public String getHeader(final String name)
-			{
-				if("Host".equals(name))
-					return "host.exedio.com";
-				else
-					throw new RuntimeException(name);
-			}
-		};
 		assertEquals("ResourceTest.class", r1.getName());
 		assertEquals("major/minor", r1.getContentType());
 		assertEquals(lastModified, r1.getLastModified());
 		assertEquals(contentLength, r1.getContentLength());
 		assertEquals(0, r1.getResponse200Count());
 		assertEquals(0, r1.getResponse304Count());
-		assertEquals("/contextPath/servletPath/ResourceTest.class", r1.getURL(request));
-		assertEquals("scheme://host.exedio.com/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(request));
+		assertEquals("/contextPath/servletPath/ResourceTest.class", r1.getURL(request()));
+		assertEquals("scheme://host.exedio.com/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(request()));
 		assertEquals("http://host.exedio.com/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(CopTest.TOKEN));
 		// port adjustments
 		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(CopTest.TOKEN_8080));
 		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(CopTest.TOKEN_8443));
 		assertEquals("ResourceTest.class", r1.toString());
-		assertEquals(CopTest.TOKEN, Cop.getToken(request));
+		assertEquals(CopTest.TOKEN, Cop.getToken(request()));
 	}
 
 	private static final String DATE_FORMAT_FULL = "dd.MM.yyyy HH:mm:ss.SSS";
@@ -184,5 +172,21 @@ public class ResourceTest extends TestCase
 
 		assertTrue(message, !expectedBefore.after(actual));
 		assertTrue(message, !expectedAfter.before(actual));
+	}
+
+	private static final HttpServletRequest request()
+	{
+		return new DummyRequest(){
+			@Override public String getScheme(){return "scheme";}
+			@Override public String getContextPath(){return "/contextPath";}
+			@Override public String getServletPath(){return "/servletPath";}
+			@Override public String getHeader(final String name)
+			{
+				if("Host".equals(name))
+					return "host.exedio.com";
+				else
+					throw new RuntimeException(name);
+			}
+		};
 	}
 }
