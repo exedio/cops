@@ -144,7 +144,7 @@ public final class Resource
 				content = out.toByteArray();
 				out.close();
 			}
-			catch(IOException e)
+			catch(final IOException e)
 			{
 				throw new RuntimeException(e);
 			}
@@ -156,7 +156,7 @@ public final class Resource
 					{
 						in.close();
 					}
-					catch(IOException e)
+					catch(final IOException e)
 					{
 						throw new RuntimeException(e);
 					}

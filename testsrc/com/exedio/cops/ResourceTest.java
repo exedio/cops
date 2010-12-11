@@ -33,7 +33,7 @@ public class ResourceTest extends TestCase
 		{
 			new Resource(null, null);
 		}
-		catch(NullPointerException e)
+		catch(final NullPointerException e)
 		{
 			assertEquals("name", e.getMessage());
 		}
@@ -41,7 +41,7 @@ public class ResourceTest extends TestCase
 		{
 			new Resource("ResourceTest.class", null);
 		}
-		catch(NullPointerException e)
+		catch(final NullPointerException e)
 		{
 			assertEquals("contentType", e.getMessage());
 		}
@@ -62,7 +62,7 @@ public class ResourceTest extends TestCase
 			r1.getURL(null);
 			fail();
 		}
-		catch(NullPointerException e)
+		catch(final NullPointerException e)
 		{
 			assertEquals("request", e.getMessage());
 		}
@@ -71,7 +71,7 @@ public class ResourceTest extends TestCase
 			r1.getAbsoluteURL((HttpServletRequest)null);
 			fail();
 		}
-		catch(NullPointerException e)
+		catch(final NullPointerException e)
 		{
 			assertEquals("request", e.getMessage());
 		}
@@ -91,7 +91,7 @@ public class ResourceTest extends TestCase
 			r1.getURL(null);
 			fail();
 		}
-		catch(NullPointerException e)
+		catch(final NullPointerException e)
 		{
 			assertEquals("request", e.getMessage());
 		}
@@ -100,7 +100,7 @@ public class ResourceTest extends TestCase
 			r1.getAbsoluteURL((HttpServletRequest)null);
 			fail();
 		}
-		catch(NullPointerException e)
+		catch(final NullPointerException e)
 		{
 			assertEquals("request", e.getMessage());
 		}
@@ -109,7 +109,7 @@ public class ResourceTest extends TestCase
 			r1.getAbsoluteURL((String)null);
 			fail();
 		}
-		catch(NullPointerException e)
+		catch(final NullPointerException e)
 		{
 			assertEquals("token", e.getMessage());
 		}
@@ -129,7 +129,7 @@ public class ResourceTest extends TestCase
 			r1.getURL(null);
 			fail();
 		}
-		catch(NullPointerException e)
+		catch(final NullPointerException e)
 		{
 			assertEquals("request", e.getMessage());
 		}
@@ -138,7 +138,7 @@ public class ResourceTest extends TestCase
 			r1.getAbsoluteURL((HttpServletRequest)null);
 			fail();
 		}
-		catch(NullPointerException e)
+		catch(final NullPointerException e)
 		{
 			assertEquals("request", e.getMessage());
 		}

@@ -156,7 +156,7 @@ final class Base64
             // Two ways to do the same thing. Don't know which way I like best.
             //int outBuff =   ( ( DECODABET[ source[ srcOffset    ] ] << 24 ) >>>  6 )
             //              | ( ( DECODABET[ source[ srcOffset + 1] ] << 24 ) >>> 12 );
-            int outBuff =   ( ( DECODABET[ source[ srcOffset    ] ] & 0xFF ) << 18 )
+            final int outBuff =   ( ( DECODABET[ source[ srcOffset    ] ] & 0xFF ) << 18 )
                           | ( ( DECODABET[ source[ srcOffset + 1] ] & 0xFF ) << 12 );
 
             destination[ destOffset ] = (byte)( outBuff >>> 16 );
@@ -170,7 +170,7 @@ final class Base64
             //int outBuff =   ( ( DECODABET[ source[ srcOffset     ] ] << 24 ) >>>  6 )
             //              | ( ( DECODABET[ source[ srcOffset + 1 ] ] << 24 ) >>> 12 )
             //              | ( ( DECODABET[ source[ srcOffset + 2 ] ] << 24 ) >>> 18 );
-            int outBuff =   ( ( DECODABET[ source[ srcOffset     ] ] & 0xFF ) << 18 )
+            final int outBuff =   ( ( DECODABET[ source[ srcOffset     ] ] & 0xFF ) << 18 )
                           | ( ( DECODABET[ source[ srcOffset + 1 ] ] & 0xFF ) << 12 )
                           | ( ( DECODABET[ source[ srcOffset + 2 ] ] & 0xFF ) <<  6 );
 
@@ -188,7 +188,7 @@ final class Base64
             //              | ( ( DECODABET[ source[ srcOffset + 1 ] ] << 24 ) >>> 12 )
             //              | ( ( DECODABET[ source[ srcOffset + 2 ] ] << 24 ) >>> 18 )
             //              | ( ( DECODABET[ source[ srcOffset + 3 ] ] << 24 ) >>> 24 );
-            int outBuff =   ( ( DECODABET[ source[ srcOffset     ] ] & 0xFF ) << 18 )
+            final int outBuff =   ( ( DECODABET[ source[ srcOffset     ] ] & 0xFF ) << 18 )
                           | ( ( DECODABET[ source[ srcOffset + 1 ] ] & 0xFF ) << 12 )
                           | ( ( DECODABET[ source[ srcOffset + 2 ] ] & 0xFF ) <<  6)
                           | ( ( DECODABET[ source[ srcOffset + 3 ] ] & 0xFF )      );
@@ -199,7 +199,7 @@ final class Base64
             destination[ destOffset + 2 ] = (byte)( outBuff       );
 
             return 3;
-            }catch( Exception e){
+            }catch( final Exception e){
                 System.out.println(""+source[srcOffset]+ ": " + ( DECODABET[ source[ srcOffset     ] ]  ) );
                 System.out.println(""+source[srcOffset+1]+  ": " + ( DECODABET[ source[ srcOffset + 1 ] ]  ) );
                 System.out.println(""+source[srcOffset+2]+  ": " + ( DECODABET[ source[ srcOffset + 2 ] ]  ) );
@@ -225,11 +225,11 @@ final class Base64
      */
     private static byte[] decode( final byte[] source, final int off, final int len )
     {
-        int    len34   = len * 3 / 4;
-        byte[] outBuff = new byte[ len34 ]; // Upper limit on size of output
+        final int    len34   = len * 3 / 4;
+        final byte[] outBuff = new byte[ len34 ]; // Upper limit on size of output
         int    outBuffPosn = 0;
 
-        byte[] b4        = new byte[4];
+        final byte[] b4        = new byte[4];
         int    b4Posn    = 0;
         int    i         = 0;
         byte   sbiCrop   = 0;
@@ -264,7 +264,7 @@ final class Base64
             }   // end else:
         }   // each input character
 
-        byte[] out = new byte[ outBuffPosn ];
+        final byte[] out = new byte[ outBuffPosn ];
         System.arraycopy( outBuff, 0, out, 0, outBuffPosn );
         return out;
     }   // end decode
@@ -287,7 +287,7 @@ final class Base64
         {
             bytes = s.getBytes( PREFERRED_ENCODING );
         }   // end try
-        catch( java.io.UnsupportedEncodingException uee )
+        catch( final java.io.UnsupportedEncodingException uee )
         {
             bytes = s.getBytes();
         }   // end catch

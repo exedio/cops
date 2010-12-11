@@ -90,7 +90,7 @@ public class RequestLimiterTest extends TestCase
 			new RequestLimiter(0, 0, null);
 			fail();
 		}
-		catch(IllegalArgumentException e)
+		catch(final IllegalArgumentException e)
 		{
 			assertEquals("threshold must be greater than zero, but was 0", e.getMessage());
 		}
@@ -99,7 +99,7 @@ public class RequestLimiterTest extends TestCase
 			new RequestLimiter(1, 0, null);
 			fail();
 		}
-		catch(IllegalArgumentException e)
+		catch(final IllegalArgumentException e)
 		{
 			assertEquals("interval must be greater than zero, but was 0", e.getMessage());
 		}

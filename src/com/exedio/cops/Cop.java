@@ -102,7 +102,7 @@ public abstract class Cop
 		{
 			url.append(URLEncoder.encode(value, CopsServlet.UTF8));
 		}
-		catch(UnsupportedEncodingException e)
+		catch(final UnsupportedEncodingException e)
 		{
 			throw new RuntimeException(e);
 		}

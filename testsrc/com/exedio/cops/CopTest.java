@@ -100,7 +100,7 @@ public class CopTest extends TestCase
 			new TestCop(0.0, "shop?hallo.html");
 			fail();
 		}
-		catch(IllegalArgumentException e)
+		catch(final IllegalArgumentException e)
 		{
 			assertEquals("cop pathInfo \"shop?hallo.html\" must not contain character ?", e.getMessage());
 		}
@@ -109,7 +109,7 @@ public class CopTest extends TestCase
 			new TestCop(0.0, "shop&hallo.html");
 			fail();
 		}
-		catch(IllegalArgumentException e)
+		catch(final IllegalArgumentException e)
 		{
 			assertEquals("cop pathInfo \"shop&hallo.html\" must not contain character &", e.getMessage());
 		}
@@ -118,7 +118,7 @@ public class CopTest extends TestCase
 			new TestCop(0.0, "shop;hallo.html");
 			fail();
 		}
-		catch(IllegalArgumentException e)
+		catch(final IllegalArgumentException e)
 		{
 			assertEquals("cop pathInfo \"shop;hallo.html\" must not contain character ;", e.getMessage());
 		}
@@ -128,7 +128,7 @@ public class CopTest extends TestCase
 			new TestCop().getURL(null);
 			fail();
 		}
-		catch(NullPointerException e)
+		catch(final NullPointerException e)
 		{
 			assertEquals("request", e.getMessage());
 		}
@@ -137,7 +137,7 @@ public class CopTest extends TestCase
 			new TestCop().getAbsoluteURL((HttpServletRequest)null);
 			fail();
 		}
-		catch(NullPointerException e)
+		catch(final NullPointerException e)
 		{
 			assertEquals("request", e.getMessage());
 		}
@@ -146,7 +146,7 @@ public class CopTest extends TestCase
 			new TestCop().getAbsoluteURL((String)null);
 			fail();
 		}
-		catch(NullPointerException e)
+		catch(final NullPointerException e)
 		{
 			assertEquals("token", e.getMessage());
 		}
@@ -155,7 +155,7 @@ public class CopTest extends TestCase
 			Cop.getToken(null);
 			fail();
 		}
-		catch(NullPointerException e)
+		catch(final NullPointerException e)
 		{
 			assertEquals("request", e.getMessage());
 		}

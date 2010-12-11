@@ -73,7 +73,7 @@ public final class RequestLimiter
 			{
 				this.denyBody = denyBody.getBytes(CopsServlet.UTF8);
 			}
-			catch(UnsupportedEncodingException e)
+			catch(final UnsupportedEncodingException e)
 			{
 				throw new RuntimeException(e);
 			}

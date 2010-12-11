@@ -119,7 +119,7 @@ public class CopParameterRequestTest extends TestCase
 			request.getParameter(null);
 			fail();
 		}
-		catch(NullPointerException e)
+		catch(final NullPointerException e)
 		{
 			assertEquals("name", e.getMessage());
 		}
@@ -128,7 +128,7 @@ public class CopParameterRequestTest extends TestCase
 			request.getParameterValues(null);
 			fail();
 		}
-		catch(NullPointerException e)
+		catch(final NullPointerException e)
 		{
 			assertEquals("name", e.getMessage());
 		}
@@ -137,7 +137,7 @@ public class CopParameterRequestTest extends TestCase
 			request.getParameterMap();
 			fail();
 		}
-		catch(RuntimeException e)
+		catch(final RuntimeException e)
 		{
 			assertEquals("not yet implemented", e.getMessage());
 		}

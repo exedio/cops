@@ -70,7 +70,7 @@ final class CopParameterRequest implements HttpServletRequest
 			int startPos = queryPos;
 			while(true)
 			{
-				int equalPos = value.indexOf('=' , startPos + 1);
+				final int equalPos = value.indexOf('=' , startPos + 1);
 				if(equalPos<0)
 					throw new IllegalArgumentException(value);
 				final String key = value.substring(startPos + 1, equalPos);
@@ -98,7 +98,7 @@ final class CopParameterRequest implements HttpServletRequest
 		{
 			return URLDecoder.decode(s, CopsServlet.UTF8);
 		}
-		catch(UnsupportedEncodingException e)
+		catch(final UnsupportedEncodingException e)
 		{
 			throw new RuntimeException(e);
 		}

@@ -73,7 +73,7 @@ public abstract class CopsServlet extends HttpServlet
 			}
 			this.resources = resources.isEmpty() ? null : resources;
 		}
-		catch(IllegalAccessException e)
+		catch(final IllegalAccessException e)
 		{
 			throw new RuntimeException(e);
 		}

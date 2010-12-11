@@ -98,7 +98,7 @@ public class PagerTest extends TestCase
 			new Pager.Config(null);
 			fail();
 		}
-		catch(NullPointerException e)
+		catch(final NullPointerException e)
 		{
 			assertEquals("limits", e.getMessage());
 		}
@@ -107,7 +107,7 @@ public class PagerTest extends TestCase
 			new Pager.Config(new int[]{});
 			fail();
 		}
-		catch(IllegalArgumentException e)
+		catch(final IllegalArgumentException e)
 		{
 			assertEquals("limits must not be empty", e.getMessage());
 		}
@@ -116,7 +116,7 @@ public class PagerTest extends TestCase
 			new Pager.Config(-10);
 			fail();
 		}
-		catch(IllegalArgumentException e)
+		catch(final IllegalArgumentException e)
 		{
 			assertEquals("limits must be greater zero, but was -10 at index 0", e.getMessage());
 		}
@@ -125,7 +125,7 @@ public class PagerTest extends TestCase
 			new Pager.Config(1, 0);
 			fail();
 		}
-		catch(IllegalArgumentException e)
+		catch(final IllegalArgumentException e)
 		{
 			assertEquals("limits must be greater zero, but was 0 at index 1", e.getMessage());
 		}
@@ -134,7 +134,7 @@ public class PagerTest extends TestCase
 			new Pager.Config(10, 5);
 			fail();
 		}
-		catch(IllegalArgumentException e)
+		catch(final IllegalArgumentException e)
 		{
 			assertEquals("limits must be monotonously increasing, but was 10>=5 at index 1", e.getMessage());
 		}
@@ -143,7 +143,7 @@ public class PagerTest extends TestCase
 			new Pager.Config(10, 20, 20);
 			fail();
 		}
-		catch(IllegalArgumentException e)
+		catch(final IllegalArgumentException e)
 		{
 			assertEquals("limits must be monotonously increasing, but was 20>=20 at index 2", e.getMessage());
 		}
