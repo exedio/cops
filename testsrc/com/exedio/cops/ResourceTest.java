@@ -152,8 +152,19 @@ public class ResourceTest extends TestCase
 		assertEquals(0, r1.getResponse304Count());
 		assertEquals("ResourceTest.class", r1.toString());
 
+		assertEquals(null, r1.getHostOverride());
 		assertEquals("/contextPath/servletPath/ResourceTest.class", r1.getURL(request()));
 		assertEquals("schemeX://hostX/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(request("schemeX", "hostX")));
+		assertEquals("http://host.exedio.com/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(CopTest.TOKEN));
+		// port adjustments
+		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(CopTest.TOKEN_8080));
+		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(CopTest.TOKEN_8443));
+		assertEquals(CopTest.TOKEN, Cop.getToken(request(null, "host.exedio.com")));
+
+		r1.setHostOverride("hostO");
+		assertEquals("hostO", r1.getHostOverride());
+		assertEquals("schemeX://hostO/contextPath/servletPath/ResourceTest.class", r1.getURL(request("schemeX", null)));
+		assertEquals("schemeX://hostO/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(request("schemeX", null)));
 		assertEquals("http://host.exedio.com/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(CopTest.TOKEN));
 		// port adjustments
 		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(CopTest.TOKEN_8080));

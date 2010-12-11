@@ -39,6 +39,8 @@ public final class Resource
 	private final Object contentLock = new Object();
 	private byte[] content;
 
+	private volatile String hostOverride = null;
+
 	private volatile long response200Count = 0;
 	private volatile long response304Count = 0;
 
@@ -100,6 +102,15 @@ public final class Resource
 		if(request==null)
 			throw new NullPointerException("request");
 
+		final String hostExtra = this.hostOverride;
+		if(hostExtra!=null)
+			return
+				request.getScheme() + "://" +
+				hostExtra +
+				request.getContextPath() +
+				request.getServletPath() +
+				'/' + name;
+
 		return request.getContextPath() + request.getServletPath() + '/' + name;
 	}
 
@@ -108,9 +119,10 @@ public final class Resource
 		if(request==null)
 			throw new NullPointerException("request");
 
+		final String hostExtra = this.hostOverride;
 		return
 			request.getScheme() + "://" +
-			request.getHeader("Host") +
+			(hostExtra==null ? request.getHeader("Host") : hostExtra) +
 			request.getContextPath() +
 			request.getServletPath() +
 			'/' + name;
@@ -163,6 +175,16 @@ public final class Resource
 				}
 			}
 		}
+	}
+
+	String getHostOverride()
+	{
+		return hostOverride;
+	}
+
+	void setHostOverride(final String hostOverride)
+	{
+		this.hostOverride = hostOverride;
 	}
 
 	/**
