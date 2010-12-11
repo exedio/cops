@@ -19,6 +19,7 @@
 package com.exedio.cops;
 
 import static java.util.Arrays.asList;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;

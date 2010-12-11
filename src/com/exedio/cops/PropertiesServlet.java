@@ -28,8 +28,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.exedio.cope.util.Properties;
-import com.exedio.cops.CopsServlet;
-import com.exedio.cops.Resource;
 
 public abstract class PropertiesServlet extends CopsServlet
 {
