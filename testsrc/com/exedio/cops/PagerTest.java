@@ -28,25 +28,25 @@ public class PagerTest extends TestCase
 	{
 		final Pager first = i(p(10), 10, 45);
 		assertIt(first, 0, 10, 1, 10, 45, 1, 5, true, false, true, false);
-		
+
 		assertIt(i(first.previous(), 10, 45), 0, 10, 1, 10, 45, 1, 5, true, true, true, false);
 		assertIt(i(first.first()   , 10, 45), 0, 10, 1, 10, 45, 1, 5, true, true, true, false);
 
 		final Pager page2 = i(first.next(), 10, 45);
 		assertIt(page2, 10, 10, 11, 20, 45, 2, 5, true, false, false, false);
-		
+
 		final Pager first2 = i(page2.previous(), 10, 45);
 		assertIt(first2, 0, 10, 1, 10, 45, 1, 5, true, false, true, false);
-		
+
 		final Pager last = i(first.last(), 5, 45);
 		assertIt(last, 40, 10, 41, 45, 45, 5, 5, true, false, false, true);
-		
+
 		assertIt(i(last.next(), 5, 45), 40, 10, 41, 45, 45, 5, 5, true, true, false, true);
 		assertIt(i(last.last(), 5, 45), 40, 10, 41, 45, 45, 5, 5, true, true, false, true);
-		
+
 		final Pager first3 = i(last.first(), 10, 45);
 		assertIt(first3, 0, 10, 1, 10, 45, 1, 5, true, false, true, false);
-		
+
 		final Pager page2l20 = i(page2.switchLimit(20), 20, 45);
 		assertIt(page2l20, 10, 20, 11, 30, 45, 1, 3, true, false, false, false);
 		assertIt(i(page2.switchLimit(10), 10, 45), 10, 10, 11, 20, 45, 2, 5, true, true, false, false);
@@ -56,7 +56,7 @@ public class PagerTest extends TestCase
 		assertIt(i(page2l20.next(),     15, 45), 30, 20, 31, 45, 45, 2, 3, true, false, false, true);
 		assertIt(i(page2l20.last(),      5, 45), 40, 20, 41, 45, 45, 3, 3, true, false, false, true);
 	}
-	
+
 	public void testNotNeeded()
 	{
 		final Pager p = i(p(10), 10, 10);
@@ -65,7 +65,7 @@ public class PagerTest extends TestCase
 		final Pager pn = i(p(10), 10, 11);
 		assertIt(pn, 0, 10, 1, 10, 11, 1, 2, true, false, true, false);
 	}
-	
+
 	public void testNewLimit()
 	{
 		final Pager p = i(p(10), 10, 500);
@@ -78,19 +78,19 @@ public class PagerTest extends TestCase
 		assertIt(i(i.next(), 500, 500), 0, 500, 1, 500, 500, 1,  1, true, false, true, true);
 		assertFalse(i.hasNext());
 	}
-	
+
 	public void testFullLastPage()
 	{
 		final Pager first = i(p(10), 10, 20);
 		assertIt(first, 0, 10, 1, 10, 20, 1, 2, true, false, true, false);
-		
+
 		final Pager second = i(first.next(), 10, 20);
 		assertIt(second, 10, 10, 11, 20, 20, 2, 2, true, false, false, true);
-		
+
 		assertIt(i(second.next(), 10, 20), 10, 10, 11, 20, 20, 2, 2, true, true, false, true);
 		assertIt(i(second.last(), 10, 20), 10, 10, 11, 20, 20, 2, 2, true, true, false, true);
 	}
-	
+
 	public void testConfig()
 	{
 		try
@@ -148,19 +148,19 @@ public class PagerTest extends TestCase
 			assertEquals("limits must be monotonously increasing, but was 20>=20 at index 2", e.getMessage());
 		}
 	}
-	
+
 	private static final Pager p(final int limit)
 	{
 		assertEquals(10, limit);
 		return new Pager.Config(10, 20, 50, 100, 200, 500).newPager();
 	}
-	
+
 	private static final Pager i(final Pager pager, final int page, final int total)
 	{
 		pager.init(page, total);
 		return pager;
 	}
-	
+
 	private static final void assertIt(
 			final Pager pager,
 			final int offset, final int limit,

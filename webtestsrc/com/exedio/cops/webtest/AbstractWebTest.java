@@ -26,7 +26,7 @@ import junit.framework.TestCase;
 public class AbstractWebTest extends TestCase
 {
 	// ----------------------------------- adapted from CopeAssert
-	
+
 	private static final String DATE_FORMAT_FULL = "dd.MM.yyyy HH:mm:ss.SSS";
 
 	public final static void assertWithinHttpDate(final Date expectedBefore, final Date expectedAfter, final Date actual)

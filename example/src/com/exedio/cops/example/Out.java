@@ -34,36 +34,36 @@ final class Out
 	private StringBuilder bf = new StringBuilder();
 	private final HttpServletRequest request;
 	private final HttpServletResponse response;
-	
+
 	Out(final HttpServletRequest request, final HttpServletResponse response)
 	{
 		assert request !=null;
 		assert response!=null;
-		
+
 		this.request  = request;
 		this.response = response;
 	}
-	
+
 	void append(final char c)
 	{
 		bf.append(c);
 	}
-	
+
 	void append(final String s)
 	{
 		bf.append(s);
 	}
-	
+
 	void append(final boolean b)
 	{
 		bf.append(b);
 	}
-	
+
 	void append(final int i)
 	{
 		bf.append(i);
 	}
-	
+
 	void append(final Resource resource)
 	{
 		bf.append(resource.getURL(request));
@@ -73,7 +73,7 @@ final class Out
 	{
 		bf.append(resource.getAbsoluteURL(request));
 	}
-	
+
 	void append(final Cop cop)
 	{
 		bf.append(XMLEncoder.encode(response.encodeURL(cop.getURL(request))));
@@ -83,14 +83,14 @@ final class Out
 	{
 		bf.append(XMLEncoder.encode(response.encodeURL(cop.getAbsoluteURL(request))));
 	}
-	
+
 	void writeBody() throws IOException
 	{
 		final StringBuilder bf = this.bf;
 		if(bf==null)
 			throw new IllegalStateException();
 		this.bf = null; // prevent this instance to be used anymore
-		
+
 		BodySender.send(response, bf, CopsServlet.UTF8);
 	}
 }

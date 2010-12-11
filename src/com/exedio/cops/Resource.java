@@ -30,7 +30,7 @@ public final class Resource
 {
 	final String name;
 	private final String contentType;
-	
+
 	/**
 	 * rounded to full seconds
 	 */
@@ -38,7 +38,7 @@ public final class Resource
 
 	private final Object contentLock = new Object();
 	private byte[] content;
-	
+
 	private volatile long response200Count = 0;
 	private volatile long response304Count = 0;
 
@@ -58,7 +58,7 @@ public final class Resource
 		this.contentType = contentType;
 		this.lastModified = ((System.currentTimeMillis()/1000)+1)*1000;
 	}
-	
+
 	public String getName()
 	{
 		return name;
@@ -94,20 +94,20 @@ public final class Resource
 	{
 		return name;
 	}
-	
+
 	public String getURL(final HttpServletRequest request)
 	{
 		if(request==null)
 			throw new NullPointerException("request");
-		
+
 		return request.getContextPath() + request.getServletPath() + '/' + name;
 	}
-	
+
 	public String getAbsoluteURL(final HttpServletRequest request)
 	{
 		if(request==null)
 			throw new NullPointerException("request");
-		
+
 		return
 			request.getScheme() + "://" +
 			request.getHeader("Host") +
@@ -115,14 +115,14 @@ public final class Resource
 			request.getServletPath() +
 			'/' + name;
 	}
-	
+
 	public final String getAbsoluteURL(final String token)
 	{
 		if(token==null)
 			throw new NullPointerException("token");
 		return EnvironmentRequest.getURL(token, false, name);
 	}
-	
+
 	void init(final Class<?> resourceLoader)
 	{
 		synchronized(contentLock)
@@ -164,7 +164,7 @@ public final class Resource
 			}
 		}
 	}
-	
+
 	/**
 	 * Sets the offset, the Expires http header is set into the future.
 	 * Together with a http reverse proxy this ensures,
@@ -186,14 +186,14 @@ public final class Resource
 	{
 		if(content==null)
 			throw new RuntimeException("not initialized: "+name);
-		
+
 		response.setContentType(contentType);
 		response.setDateHeader(RESPONSE_LAST_MODIFIED, lastModified);
 		final long now = System.currentTimeMillis();
 		response.setDateHeader(RESPONSE_EXPIRES, now+EXPIRES_OFFSET);
 
 		final long ifModifiedSince = request.getDateHeader(REQUEST_IF_MODIFIED_SINCE);
-		
+
 		if(ifModifiedSince>=0 && ifModifiedSince>=lastModified)
 		{
 			response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
@@ -205,7 +205,7 @@ public final class Resource
 			response200Count++; // may loose a few counts due to concurrency, but this is ok
 		}
 	}
-	
+
 	private static String getContentTypeFromName(final String name)
 	{
 		if(name.endsWith(".css"))

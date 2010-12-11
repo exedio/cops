@@ -44,16 +44,16 @@ final class CopParameterRequest implements HttpServletRequest
 	private final String pathInfo;
 	private final String queryString;
 	private final LinkedHashMap<String, ArrayList<String>> parameters;
-	
+
 	CopParameterRequest(final HttpServletRequest nested, final String value)
 	{
 		if(nested==null)
 			throw new NullPointerException("nested");
 		if(value==null)
 			throw new NullPointerException("value");
-		
+
 		this.nested = nested;
-		
+
 		final int queryPos = value.indexOf('?');
 		if(queryPos<0)
 		{
@@ -66,7 +66,7 @@ final class CopParameterRequest implements HttpServletRequest
 			pathInfo = '/' + value.substring(0, queryPos);
 			queryString = value.substring(queryPos + 1);
 			parameters = new LinkedHashMap<String, ArrayList<String>>();
-			
+
 			int startPos = queryPos;
 			while(true)
 			{
@@ -83,15 +83,15 @@ final class CopParameterRequest implements HttpServletRequest
 					parameters.put(key, list);
 				}
 				list.add(decode(newValue));
-				
+
 				if(endPos<0)
 					break;
-				
+
 				startPos = endPos;
 			}
 		}
 	}
-	
+
 	private static String decode(final String s)
 	{
 		try
@@ -103,62 +103,62 @@ final class CopParameterRequest implements HttpServletRequest
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	public String getPathInfo()
 	{
 		return pathInfo;
 	}
-	
+
 	public String getQueryString()
 	{
 		return queryString;
 	}
-	
+
 	public String getParameter(final String name)
 	{
 		if(name==null)
 			throw new NullPointerException("name");
 		if(parameters==null)
 			return null;
-		
+
 		final ArrayList<String> list = parameters.get(name);
 		if(list==null)
 			return null;
-		
+
 		return list.get(0);
 	}
-	
+
 	private static final String[] EMPTY_ARRAY = new String[]{};
-	
+
 	public String[] getParameterValues(final String name)
 	{
 		if(name==null)
 			throw new NullPointerException("name");
 		if(parameters==null)
 			return EMPTY_ARRAY;
-		
+
 		final ArrayList<String> list = parameters.get(name);
 		if(list==null)
 			return EMPTY_ARRAY;
-		
+
 		return list.toArray(new String[list.size()]);
 	}
-	
+
 	private static final Enumeration<?> EMPTY_ENUMERATION = enumeration(Collections.<String>emptyList());
-	
+
 	public Enumeration<?> getParameterNames()
 	{
 		if(parameters==null)
 			return EMPTY_ENUMERATION;
-		
+
 		return enumeration(parameters.keySet());
 	}
-	
+
 	public Map<?,?> getParameterMap()
 	{
 		throw new RuntimeException("not yet implemented");
 	}
-	
+
 	// ---- delegated methods ------
 
 	public String getAuthType()

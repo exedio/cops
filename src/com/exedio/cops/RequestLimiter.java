@@ -32,12 +32,12 @@ public final class RequestLimiter
 	private static final String STATUS_PATH_INFO = "/copsRequestLimiterStatus.html";
 	static final String THRESHOLD = "copsRequestLimiter.threshold";
 	static final String INTERVAL  = "copsRequestLimiter.interval";
-	
+
 	private volatile int threshold;
 	private volatile int interval;
 	private final String denyMessage;
 	private final byte[] denyBody;
-	
+
 	/**
 	 * @param threshold
 	 *        the number of request allowed in one interval,
@@ -49,7 +49,7 @@ public final class RequestLimiter
 	{
 		this(threshold, interval, denyMessage, null);
 	}
-	
+
 	/**
 	 * @param threshold
 	 *        the number of request allowed in one interval,
@@ -63,7 +63,7 @@ public final class RequestLimiter
 			throw new IllegalArgumentException("threshold must be greater than zero, but was " + threshold);
 		if(interval<=0)
 			throw new IllegalArgumentException("interval must be greater than zero, but was " + interval);
-		
+
 		this.threshold = threshold;
 		this.interval = interval;
 		this.denyMessage = denyMessage;
@@ -83,14 +83,14 @@ public final class RequestLimiter
 			this.denyBody = null;
 		}
 	}
-	
+
 	public void init(final ServletConfig config)
 	{
 		setParameters(
 				config.getInitParameter(THRESHOLD),
 				config.getInitParameter(INTERVAL));
 	}
-	
+
 	private void setParameters(final String threshold, final String interval)
 	{
 		if(threshold!=null)
@@ -101,7 +101,7 @@ public final class RequestLimiter
 			this.lastInterval = Long.MIN_VALUE;
 		}
 	}
-	
+
 	private static int getIntParameter(final String s, final String name)
 	{
 		final int i = Integer.parseInt(s);
@@ -109,17 +109,17 @@ public final class RequestLimiter
 			throw new IllegalArgumentException(name + " must be greater than zero, but was " + i);
 		return i;
 	}
-	
+
 	private volatile long lastInterval = Long.MIN_VALUE;
 	private volatile int requestsInInterval = 1;
 	private volatile long deniedRequests = 0;
-	
+
 	@SuppressWarnings("deprecation")
 	private static final void setStatus503WithBody(final HttpServletResponse response, final String denyMessage)
 	{
 		response.setStatus(HttpServletResponse.SC_SERVICE_UNAVAILABLE, denyMessage);
 	}
-	
+
 	/**
 	 * @return whether this call has handled the request.
 	 *         Do the following at the beginning of processing the request:
@@ -138,7 +138,7 @@ public final class RequestLimiter
 		else
 		{
 			final long nowInterval = System.currentTimeMillis() / interval;
-			
+
 			if(nowInterval<=lastInterval)
 			{
 				if(requestsInInterval>=threshold && request.getSession(false)==null)
@@ -172,7 +172,7 @@ public final class RequestLimiter
 			}
 		}
 	}
-	
+
 	private void doStatus(
 			final HttpServletRequest request,
 			final HttpServletResponse response)
@@ -183,9 +183,9 @@ public final class RequestLimiter
 			BasicAuthorization.reject(response, "Cops Request Limiter");
 			return;
 		}
-		
+
 		final String path = request.getContextPath() + STATUS_PATH_INFO;
-		
+
 		if(Cop.isPost(request))
 		{
 			setParameters(

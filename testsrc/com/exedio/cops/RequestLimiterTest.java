@@ -29,7 +29,7 @@ public class RequestLimiterTest extends TestCase
 	static class Request extends DummyRequest
 	{
 		final HttpSession session;
-		
+
 		Request(final boolean session)
 		{
 			this.session = session ? new DummySession() : null;
@@ -47,11 +47,11 @@ public class RequestLimiterTest extends TestCase
 			return session;
 		}
 	}
-	
+
 	public void testSession() throws IOException
 	{
 		final RequestLimiter rl = new RequestLimiter(3, 1000, "Deny Message");
-		
+
 		final Request requestSession = new Request(true);
 		final DummyResponse response = new DummyResponse();
 		assertFalse(rl.doRequest(requestSession, response));
@@ -60,17 +60,17 @@ public class RequestLimiterTest extends TestCase
 		assertFalse(rl.doRequest(requestSession, response));
 		assertFalse(rl.doRequest(requestSession, response));
 	}
-	
+
 	public void testNoSession() throws IOException
 	{
 		final RequestLimiter rl = new RequestLimiter(3, 1000, "Deny Message");
-		
+
 		final Request request = new Request(false);
 		final DummyResponse responseOk = new DummyResponse();
 		assertFalse(rl.doRequest(request, responseOk));
 		assertFalse(rl.doRequest(request, responseOk));
 		assertFalse(rl.doRequest(request, responseOk));
-		
+
 		final DummyResponse responseDeny = new DummyResponse(){
 			@Override
 			public void sendError(final int status, final String message)
@@ -82,7 +82,7 @@ public class RequestLimiterTest extends TestCase
 		assertTrue(rl.doRequest(request, responseDeny));
 		assertTrue(rl.doRequest(request, responseDeny));
 	}
-		
+
 	public void testError()
 	{
 		try

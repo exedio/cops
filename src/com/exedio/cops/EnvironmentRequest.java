@@ -24,7 +24,7 @@ final class EnvironmentRequest
 	{
 		// prevent instantiation
 	}
-	
+
 	static String getURL(final String environment, final boolean needsSecure, final String url)
 	{
 		String e = environment;
@@ -44,8 +44,8 @@ final class EnvironmentRequest
 			else if (e.endsWith(":8443"))
 				e = e.substring(0, (e.length()-5)) + ":8080";
 		}
-		
+
 		return (needsSecure ? "https://" : "http://") + e + '/' + url;
-		
+
 	}
 }

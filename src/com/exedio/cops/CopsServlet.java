@@ -43,11 +43,11 @@ import javax.servlet.http.HttpServletResponse;
 public abstract class CopsServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1l;
-	
+
 	public static final String UTF8 = "utf-8";
-	
+
 	private final LinkedHashMap<String, Resource> resources;
-	
+
 	protected CopsServlet()
 	{
 		try
@@ -61,12 +61,12 @@ public abstract class CopsServlet extends HttpServlet
 						continue;
 					if(!Resource.class.isAssignableFrom(field.getType()))
 						continue;
-	
+
 					field.setAccessible(true);
 					final Resource resource = (Resource)field.get(null); // always static
 					if(resource==null)
 						continue;
-					
+
 					resource.init(clazz);
 					resources.put('/'+resource.name, resource);
 				}
@@ -94,7 +94,7 @@ public abstract class CopsServlet extends HttpServlet
 			response.sendRedirect(request.getContextPath() + request.getServletPath() + '/');
 			return;
 		}
-		
+
 		if(resources!=null)
 		{
 			if("/copsResourceStatus.html".equals(pathInfo))
@@ -104,7 +104,7 @@ public abstract class CopsServlet extends HttpServlet
 					BasicAuthorization.reject(response, "Cops Resource Status");
 					return;
 				}
-				
+
 				response.setContentType("text/html; charset="+UTF8);
 				final DecimalFormatSymbols nfs = new DecimalFormatSymbols();
 				nfs.setDecimalSeparator(',');
@@ -141,7 +141,7 @@ public abstract class CopsServlet extends HttpServlet
 				return;
 			}
 		}
-		
+
 		doRequestPrivate(request, response);
 	}
 
@@ -153,7 +153,7 @@ public abstract class CopsServlet extends HttpServlet
 	{
 		doRequestPrivate(request, response);
 	}
-	
+
 	private final void doRequestPrivate(final HttpServletRequest request, final HttpServletResponse response)
 		throws ServletException, IOException
 	{
@@ -166,7 +166,7 @@ public abstract class CopsServlet extends HttpServlet
 		response.addHeader("Cache-Control", "must-revalidate");
 		response.setHeader("Pragma", "no-cache");
 		response.setDateHeader("Expires", System.currentTimeMillis());
-		
+
 		doRequest(request, response);
 	}
 
@@ -199,7 +199,7 @@ public abstract class CopsServlet extends HttpServlet
 		}
 		out.flush();
 	}
-	
+
 	private static final void printStackTrace(final Throwable exception, final StringBuilder out)
 	{
 		final StringWriter sw = new StringWriter();
@@ -208,7 +208,7 @@ public abstract class CopsServlet extends HttpServlet
 		pw.flush();
 		out.append(sw.getBuffer());
 	}
-	
+
 	public final void printException(final StringBuilder out, final Exception exception)
 	{
 		printStackTrace(exception, out);
@@ -227,9 +227,9 @@ public abstract class CopsServlet extends HttpServlet
 			}
 		}
 	}
-	
+
 	private final Random random = new Random();
-	
+
 	/**
 	 * Returns the id under with the exception has been reported in the log.
 	 */
@@ -249,11 +249,11 @@ public abstract class CopsServlet extends HttpServlet
 		System.out.println("-------/"+id+"-----");
 		return id;
 	}
-	
+
 	public static final String report(final HttpServletRequest request)
 	{
 		final StringBuilder bf = new StringBuilder();
-		
+
 		bf.append("remoteAddr: >").append(request.getRemoteAddr()).append("<\n");
 		bf.append("protocol: >").append(request.getProtocol()).append("<\n");
 		bf.append("method: >").append(request.getMethod()).append("<\n");
@@ -266,26 +266,26 @@ public abstract class CopsServlet extends HttpServlet
 		bf.append("scheme: >").append(request.getScheme()).append("<\n");
 		bf.append("secure: >").append(request.isSecure()).append("<\n");
 		bf.append("userPrincipal: >").append(request.getUserPrincipal()).append("<\n");
-		
+
 		for(final Enumeration<?> e = request.getHeaderNames(); e.hasMoreElements(); )
 		{
 			final String name = (String)e.nextElement();
 			for(final Enumeration<?> ev = request.getHeaders(name); ev.hasMoreElements(); )
 				bf.append("header >").append(name).append("<: >").append(((String)ev.nextElement())).append("<\n");
 		}
-		
+
 		for(final Enumeration<?> e = request.getParameterNames(); e.hasMoreElements(); )
 		{
 			final String name = (String)e.nextElement();
 			for(final String value : request.getParameterValues(name))
 				bf.append("parameter >").append(name).append("<: >").append(value + "<\n");
 		}
-		
+
 		return bf.toString();
 	}
-	
+
 	// ------------------- deprecated stuff -------------------
-	
+
 	/**
 	 * @deprecated Use {@link #reportException(HttpServletRequest, Exception)} instead.
 	 */
@@ -294,7 +294,7 @@ public abstract class CopsServlet extends HttpServlet
 	{
 		return reportException(null, exception);
 	}
-	
+
 	/**
 	 * @deprecated Use {@link #UTF8} instead
 	 */

@@ -47,7 +47,7 @@ public class NaturalLanguageEncodeTest extends TestCase
 		assertEquals("-abcdef", e(".abcdef"));
 		assertEquals("abcdef", e("abcdef."));
 	}
-	
+
 	private static final String e(final String s)
 	{
 		return Cop.encodeNaturalLanguageSegment(s);

@@ -28,7 +28,7 @@ public abstract class Cop
 {
 	private final String pathInfo;
 	private StringBuilder url = null;
-	
+
 	public Cop(final String pathInfo)
 	{
 		for(final char c : FORBIDDEN_IN_PATH_INFO)
@@ -37,49 +37,49 @@ public abstract class Cop
 
 		this.pathInfo = pathInfo;
 	}
-	
+
 	private static final char[] FORBIDDEN_IN_PATH_INFO = new char[] {'?', '&', ';'};
-	
+
 	public final void addParameter(final String key, final boolean value)
 	{
 		if(value)
 			addParameter(key, "t");
 	}
-	
+
 	public final void addParameter(final String key, final int value, final int defaultValue)
 	{
 		if(value==defaultValue)
 			return;
-		
+
 		addParameter(key, String.valueOf(value));
 	}
-	
+
 	public final void addParameter(final String key, final long value, final long defaultValue)
 	{
 		if(value==defaultValue)
 			return;
-		
+
 		addParameter(key, String.valueOf(value));
 	}
-	
+
 	private static final int COMPACT_LONG_RADIX = Character.MAX_RADIX;
-	
+
 	public final void addParameterCompact(final String key, final long value, final long defaultValue)
 	{
 		if(value==defaultValue)
 			return;
-		
+
 		addParameter(key, Long.toString(value, COMPACT_LONG_RADIX));
 	}
-	
+
 	public final void addParameter(final String key, final Cop value)
 	{
 		if(value==null)
 			return;
-		
+
 		addParameter(key, value.toString());
 	}
-	
+
 	/**
 	 * Does nothing, if <tt>value==null</tt>.
 	 */
@@ -87,7 +87,7 @@ public abstract class Cop
 	{
 		if(value==null)
 			return;
-		
+
 		if(url==null)
 		{
 			url = new StringBuilder(pathInfo);
@@ -95,7 +95,7 @@ public abstract class Cop
 		}
 		else
 			url.append('&');
-			
+
 		url.append(key);
 		url.append('=');
 		try
@@ -107,7 +107,7 @@ public abstract class Cop
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	/**
 	 * Specifies, whether this cop should use http or https.
 	 * Return true to use https.
@@ -119,21 +119,21 @@ public abstract class Cop
 	{
 		return false;
 	}
-	
+
 	private final boolean doesNotNeedSecureRedirect(final HttpServletRequest request)
 	{
 		return !needsSecure() || request.isSecure();
 	}
-	
+
 	private static final String HOST = "Host";
-	
+
 	public final String getAbsoluteURL(final HttpServletRequest request)
 	{
 		final String url = this.url!=null ? this.url.toString() : pathInfo;
-		
+
 		if(request==null)
 			throw new NullPointerException("request");
-		
+
 		return
 			request.getScheme() + "://" +
 			request.getHeader(HOST) +
@@ -141,7 +141,7 @@ public abstract class Cop
 			request.getServletPath() +
 			'/' + url;
 	}
-	
+
 	/**
 	 * @see #getAbsoluteURL(String)
 	 */
@@ -149,60 +149,60 @@ public abstract class Cop
 	{
 		if(request==null)
 			throw new NullPointerException("request");
-		
+
 		return
 			request.getHeader(HOST) +
 			request.getContextPath() +
 			request.getServletPath();
 	}
-	
+
 	/**
 	 * @see #getToken(HttpServletRequest)
 	 */
 	public final String getAbsoluteURL(final String token)
 	{
 		final String url = this.url!=null ? this.url.toString() : pathInfo;
-		
+
 		if(token==null)
 			throw new NullPointerException("token");
 		return EnvironmentRequest.getURL(token, needsSecure(), url);
 	}
-	
+
 	public final String getURL(final HttpServletRequest request)
 	{
 		final String url = this.url!=null ? this.url.toString() : pathInfo;
-		
+
 		if(request==null)
 			throw new NullPointerException("request");
-		
+
 		final String fullURL = request.getContextPath() + request.getServletPath() + '/' + url;
-		
+
 		if(doesNotNeedSecureRedirect(request))
 			return fullURL;
-		
+
 		String host = request.getHeader(HOST);
 		if(host.endsWith(":8080"))
 			host = host.substring(0, host.length()-4) + "8443";
-		
+
 		return
 			"https://" +
 			host +
 			fullURL;
 	}
-	
+
 	@Override
 	public final String toString()
 	{
 		return url!=null ? url.toString() : pathInfo;
 	}
-	
+
 	private static final char NATURAL_PLACE_HOLDER = '-';
-	
+
 	public static final String encodeNaturalLanguageSegment(final String s)
 	{
 		if(s==null)
 			return null;
-		
+
 		final int l = s.length();
 		for(int i = 0; i<l; i++)
 		{
@@ -237,44 +237,44 @@ public abstract class Cop
 		}
 		return s;
 	}
-	
+
 	public final boolean redirectToCanonical(final HttpServletRequest request, final HttpServletResponse response)
 	{
 		if(request==null)
 			throw new NullPointerException();
 		if(!"GET".equals(request.getMethod()))
 			return false;
-		
+
 		final String expected = request.getContextPath() + request.getServletPath() + '/' + (this.url!=null ? this.url.toString() : pathInfo);
 		final String actualRequestURI = request.getRequestURI();
 		final String actualQueryString = request.getQueryString();
 		final String actual = actualQueryString!=null ? (actualRequestURI + '?' + actualQueryString) : actualRequestURI;
 		if(expected.equals(actual) && doesNotNeedSecureRedirect(request))
 			return false;
-		
+
 		final String location = response.encodeRedirectURL(getURL(request));
 		System.out.println("cops redirectToCanonical from --" + actual + "-- to --" + location + "--");
-		
+
 		response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 		response.setHeader("Location", location);
-		
+
 		return true;
 	}
-	
+
 	// ------------------- static helpers -------------------
-	
+
 	public static final boolean isPost(final HttpServletRequest request)
 	{
 		return "POST".equals(request.getMethod());
 	}
-	
+
 	public static final boolean getBooleanParameter(
 			final HttpServletRequest request,
 			final String name)
 	{
 		return request.getParameter(name)!=null;
 	}
-	
+
 	public static final int getIntParameter(
 			final HttpServletRequest request,
 			final String name,
@@ -283,7 +283,7 @@ public abstract class Cop
 		final String value = request.getParameter(name);
 		return (value==null) ? defaultValue : Integer.parseInt(value);
 	}
-	
+
 	public static final long getLongParameter(
 			final HttpServletRequest request,
 			final String name,
@@ -292,7 +292,7 @@ public abstract class Cop
 		final String value = request.getParameter(name);
 		return (value==null) ? defaultValue : Long.parseLong(value);
 	}
-	
+
 	public static final long getLongParameterCompact(
 			final HttpServletRequest request,
 			final String name,
@@ -301,7 +301,7 @@ public abstract class Cop
 		final String value = request.getParameter(name);
 		return (value==null) ? defaultValue : Long.parseLong(value, COMPACT_LONG_RADIX);
 	}
-	
+
 	public static final HttpServletRequest getCopParameter(
 			final HttpServletRequest request,
 			final String name)
@@ -309,9 +309,9 @@ public abstract class Cop
 		final String value = request.getParameter(name);
 		return (value==null) ? null : new CopParameterRequest(request, value);
 	}
-	
+
 	// ------------------- deprecated stuff -------------------
-	
+
 	/**
 	 * @deprecated Use {@link XMLEncoder#encode(String)} instead
 	 */
@@ -320,7 +320,7 @@ public abstract class Cop
 	{
 		return XMLEncoder.encode(st);
 	}
-	
+
 	/**
 	 * @deprecated Use {@link XMLEncoder#encode(String)} instead
 	 */
@@ -329,7 +329,7 @@ public abstract class Cop
 	{
 		return XMLEncoder.encode(st);
 	}
-	
+
 	/**
 	 * @deprecated Use {@link BasicAuthorization#getUserAndPassword(HttpServletRequest)} instead
 	 */
@@ -338,7 +338,7 @@ public abstract class Cop
 	{
 		return BasicAuthorization.getUserAndPassword(request);
 	}
-	
+
 	/**
 	 * @deprecated Use {@link BasicAuthorization#reject(HttpServletResponse, String)} instead
 	 */

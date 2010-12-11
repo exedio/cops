@@ -33,14 +33,14 @@ public class BodySender
 	{
 		send(response, body.toString().getBytes(encoding));
 	}
-	
+
 	public static final void send(
 			final HttpServletResponse response,
 			final byte[] body)
 	throws IOException
 	{
 		response.setContentLength(body.length); // avoid chunked transfer
-		
+
 		ServletOutputStream stream = null;
 		try
 		{

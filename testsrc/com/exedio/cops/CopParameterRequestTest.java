@@ -36,7 +36,7 @@ public class CopParameterRequestTest extends TestCase
 			final CopParameterRequest request = new CopParameterRequest(nested, "test.html");
 			assertEquals("/test.html", request.getPathInfo());
 			assertEquals(null, request.getQueryString());
-			
+
 			assertParameters(request);
 			final Enumeration<?> names = request.getParameterNames();
 			assertFalse(names.hasMoreElements());
@@ -45,7 +45,7 @@ public class CopParameterRequestTest extends TestCase
 			final CopParameterRequest request = new CopParameterRequest(nested, "test.html?ding=zack");
 			assertEquals("/test.html", request.getPathInfo());
 			assertEquals("ding=zack", request.getQueryString());
-			
+
 			assertParameters(request);
 			assertEquals("zack", request.getParameter("ding"));
 			assertEquals(asList("zack"), asList(request.getParameterValues("ding")));
@@ -57,7 +57,7 @@ public class CopParameterRequestTest extends TestCase
 			final CopParameterRequest request = new CopParameterRequest(nested, "test.html?ding=zack&dong=zock");
 			assertEquals("/test.html", request.getPathInfo());
 			assertEquals("ding=zack&dong=zock", request.getQueryString());
-			
+
 			assertParameters(request);
 			assertEquals("zack", request.getParameter("ding"));
 			assertEquals("zock", request.getParameter("dong"));
@@ -72,7 +72,7 @@ public class CopParameterRequestTest extends TestCase
 			final CopParameterRequest request = new CopParameterRequest(nested, "test.html?ding=zack&ding=zock");
 			assertEquals("/test.html", request.getPathInfo());
 			assertEquals("ding=zack&ding=zock", request.getQueryString());
-			
+
 			assertParameters(request);
 			assertEquals("zack", request.getParameter("ding"));
 			assertEquals(asList("zack", "zock"), asList(request.getParameterValues("ding")));
@@ -84,7 +84,7 @@ public class CopParameterRequestTest extends TestCase
 			final CopParameterRequest request = new CopParameterRequest(nested, "test.html?ding=zack&dong=zick&ding=zock");
 			assertEquals("/test.html", request.getPathInfo());
 			assertEquals("ding=zack&dong=zick&ding=zock", request.getQueryString());
-			
+
 			assertParameters(request);
 			assertEquals("zack", request.getParameter("ding"));
 			assertEquals("zick", request.getParameter("dong"));
@@ -99,7 +99,7 @@ public class CopParameterRequestTest extends TestCase
 			final CopParameterRequest request = new CopParameterRequest(nested, "test.html?ding=sla%2Fsh");
 			assertEquals("/test.html", request.getPathInfo());
 			assertEquals("ding=sla%2Fsh", request.getQueryString());
-			
+
 			assertParameters(request);
 			assertEquals("sla/sh", request.getParameter("ding"));
 			assertEquals(asList("sla/sh"), asList(request.getParameterValues("ding")));
@@ -108,12 +108,12 @@ public class CopParameterRequestTest extends TestCase
 			assertFalse(names.hasMoreElements());
 		}
 	}
-	
+
 	static final void assertParameters(final CopParameterRequest request)
 	{
 		assertEquals(null, request.getParameter("xxx"));
 		assertEquals(Collections.EMPTY_LIST, Arrays.asList(request.getParameterValues("xxx")));
-		
+
 		try
 		{
 			request.getParameter(null);

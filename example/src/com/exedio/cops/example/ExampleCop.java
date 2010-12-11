@@ -29,7 +29,7 @@ import com.exedio.cops.Pager;
 public class ExampleCop extends Cop implements Pageable
 {
 	private static final String PATH_INFO = "number.html";
-	
+
 	private static final String NUMBER = "n";
 	private static final String BOOL = "b";
 	private static final String STRING = "s";
@@ -37,11 +37,11 @@ public class ExampleCop extends Cop implements Pageable
 	private static final String NEEDS_SECURE = "sec";
 	private static final String REDIRECT_LOOP = "rl";
 	private static final String DIR_LEVEL = "dirLevel";
-	
+
 	private static final int NUMBER_DEFAULT = 0;
 	private static final int REDIRECT_LOOP_DEFAULT = 0;
 	private static final Pager.Config PAGER_CONFIG = new Pager.Config(10, 20, 23, 100, 500);
-	
+
 	final int number;
 	final boolean bool;
 	final String string;
@@ -50,7 +50,7 @@ public class ExampleCop extends Cop implements Pageable
 	private final int redirectLoop;
 	final Pager pager;
 	private final int dirLevel;
-	
+
 	private static final String dirLevel(final String pathInfo, final int dirLevel, final String string)
 	{
 		if(dirLevel<=0||string==null)
@@ -61,7 +61,7 @@ public class ExampleCop extends Cop implements Pageable
 		bf.append(pathInfo);
 		return bf.toString();
 	}
-	
+
 	ExampleCop(
 			final int number,
 			final boolean bool,
@@ -81,7 +81,7 @@ public class ExampleCop extends Cop implements Pageable
 		this.redirectLoop = redirectLoop;
 		this.pager = pager;
 		this.dirLevel = dirLevel;
-		
+
 		addParameter(NUMBER, number, NUMBER_DEFAULT);
 		addParameter(BOOL, bool);
 		addParameter(STRING, string);
@@ -91,7 +91,7 @@ public class ExampleCop extends Cop implements Pageable
 		pager.addParameters(this);
 		addParameter(DIR_LEVEL, dirLevel, 0);
 	}
-	
+
 	static ExampleCop getCop(final HttpServletRequest request)
 	{
 		return new ExampleCop(
@@ -103,7 +103,7 @@ public class ExampleCop extends Cop implements Pageable
 				getIntParameter(request, REDIRECT_LOOP, REDIRECT_LOOP_DEFAULT),
 				PAGER_CONFIG.newPager(request), getIntParameter(request, DIR_LEVEL, 0));
 	}
-	
+
 	static final ExampleCop getCopParameterIfFound(
 			final HttpServletRequest request,
 			final String name)
@@ -111,65 +111,65 @@ public class ExampleCop extends Cop implements Pageable
 		final HttpServletRequest backRequest = getCopParameter(request, name);
 		if(backRequest==null)
 			return null;
-		
+
 		return getCop(backRequest);
 	}
-	
+
 	public ExampleCop set(final int number)
 	{
 		return new ExampleCop(number, bool, string, cop, needsSecure, redirectLoop, pager, dirLevel);
 	}
-	
+
 	public ExampleCop add(final int addend)
 	{
 		return new ExampleCop(number + addend, bool, string, cop, needsSecure, redirectLoop, pager, dirLevel);
 	}
-	
+
 	public ExampleCop toggle()
 	{
 		return new ExampleCop(number, !bool, string, cop, needsSecure, redirectLoop, pager, dirLevel);
 	}
-	
+
 	public ExampleCop setString(final String string)
 	{
 		return new ExampleCop(number, bool, string, cop, needsSecure, redirectLoop, pager, dirLevel);
 	}
-	
+
 	public ExampleCop setCopSelf()
 	{
 		return new ExampleCop(number, bool, string, this, needsSecure, redirectLoop, pager, dirLevel);
 	}
-	
+
 	public ExampleCop setCopNull()
 	{
 		return new ExampleCop(number, bool, string, null, needsSecure, redirectLoop, pager, dirLevel);
 	}
-	
+
 	public ExampleCop toSecure(final boolean needsSecure)
 	{
 		return new ExampleCop(number, bool, string, cop, needsSecure, redirectLoop, pager, dirLevel);
 	}
-	
+
 	public ExampleCop toRedirectLoop()
 	{
 		return new ExampleCop(number, bool, string, cop, needsSecure, 1, pager, dirLevel);
 	}
-	
+
 	public Pager getPager()
 	{
 		return pager;
 	}
-	
+
 	public ExampleCop toPage(final Pager pager)
 	{
 		return new ExampleCop(number, bool, string, cop, needsSecure, redirectLoop, pager, dirLevel);
 	}
-	
+
 	public ExampleCop toDirLevel(final int dirLevel)
 	{
 		return new ExampleCop(number, bool, string, cop, needsSecure, redirectLoop, pager, dirLevel);
 	}
-	
+
 	static void writePager(final Out out, final Pageable cop)
 	{
 		final Pager pager = cop.getPager();
@@ -200,7 +200,7 @@ public class ExampleCop extends Cop implements Pageable
 				out.append(" ...");
 		}
 	}
-	
+
 	@Override
 	protected boolean needsSecure()
 	{

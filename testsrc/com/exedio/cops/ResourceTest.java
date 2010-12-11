@@ -45,7 +45,7 @@ public class ResourceTest extends TestCase
 		{
 			assertEquals("contentType", e.getMessage());
 		}
-		
+
 		final Date before = new Date();
 		final Resource r1 = new Resource("ResourceTest.class", "major/minor");
 		final Date after = new Date();
@@ -75,8 +75,8 @@ public class ResourceTest extends TestCase
 		{
 			assertEquals("request", e.getMessage());
 		}
-		
-		
+
+
 		r1.init(ResourceTest.class);
 		assertEquals("ResourceTest.class", r1.getName());
 		assertEquals("major/minor", r1.getContentType());
@@ -113,8 +113,8 @@ public class ResourceTest extends TestCase
 		{
 			assertEquals("token", e.getMessage());
 		}
-		
-		
+
+
 		// test idempotence of init
 		r1.init(ResourceTest.class);
 		assertEquals("ResourceTest.class", r1.getName());
@@ -142,8 +142,8 @@ public class ResourceTest extends TestCase
 		{
 			assertEquals("request", e.getMessage());
 		}
-		
-		
+
+
 		final HttpServletRequest request = new DummyRequest(){
 			@Override public String getScheme(){return "scheme";}
 			@Override public String getContextPath(){return "/contextPath";}
@@ -171,9 +171,9 @@ public class ResourceTest extends TestCase
 		assertEquals("ResourceTest.class", r1.toString());
 		assertEquals(CopTest.TOKEN, Cop.getToken(request));
 	}
-	
+
 	private static final String DATE_FORMAT_FULL = "dd.MM.yyyy HH:mm:ss.SSS";
-	
+
 	public static final void assertWithin(final Date expectedBefore, final Date expectedAfter, final Date actual)
 	{
 		final SimpleDateFormat df = new SimpleDateFormat(DATE_FORMAT_FULL);

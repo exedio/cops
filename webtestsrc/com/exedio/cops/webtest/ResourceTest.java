@@ -38,12 +38,12 @@ public class ResourceTest extends AbstractWebTest
 		assertEquals(textLastModified, assertURL(text, textLastModified, true));
 		assertEquals(textLastModified, assertURL(text, textLastModified+5000, true));
 	}
-	
+
 	private long assertURL(final URL url) throws IOException
 	{
 		return assertURL(url, -1, false);
 	}
-	
+
 	private long assertURL(final URL url, final long ifModifiedSince, final boolean expectNotModified) throws IOException
 	{
 		return assertURL(url, "text/plain", ifModifiedSince, expectNotModified);
@@ -70,7 +70,7 @@ public class ResourceTest extends AbstractWebTest
 		//System.out.println("Expires: "+new Date(conn.getExpiration()));
 		assertWithin(new Date(date+(4*60*1000)), new Date(date+(6*60*1000)), new Date(conn.getExpiration()));
 		assertEquals(expectNotModified ? -1 : (41 + (2*System.getProperty("line.separator").length())), conn.getContentLength());
-		
+
 		final BufferedReader is = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 		if(!expectNotModified)
 		{
@@ -79,7 +79,7 @@ public class ResourceTest extends AbstractWebTest
 			assertEquals(null, is.readLine());
 		}
 		is.close();
-		
+
 		return lastModified;
 	}
 }

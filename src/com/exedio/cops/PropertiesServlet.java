@@ -37,7 +37,7 @@ public abstract class PropertiesServlet extends CopsServlet
 
 	static final Resource stylesheet = new Resource("properties.css");
 	static final Resource logo = new Resource("logo.png");
-	
+
 	@Override
 	protected final void doRequest(
 			final HttpServletRequest request,
@@ -46,7 +46,7 @@ public abstract class PropertiesServlet extends CopsServlet
 	{
 		//System.out.println("request ---" + request.getMethod() + "---" + request.getContextPath() + "---" + request.getServletPath() + "---" + request.getPathInfo() + "---" + request.getQueryString() + "---");
 		final Properties properties = getProperties();
-		
+
 		final Out out = new Out(request);
 		Properties_Jspm.write(
 				out,
@@ -54,6 +54,6 @@ public abstract class PropertiesServlet extends CopsServlet
 				properties);
 		out.sendBody(response);
 	}
-	
+
 	protected abstract Properties getProperties();
 }

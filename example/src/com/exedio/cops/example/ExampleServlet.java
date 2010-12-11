@@ -37,16 +37,16 @@ public final class ExampleServlet extends ExampleSuperServlet
 
 	static final Resource logo = new Resource("logo.png");
 	static final Resource someClass = new Resource("ExampleServlet.class", "application/octet-steam");
-	
+
 	// For ResourceTest.
 	static final Resource test = new Resource("resource-test.txt");
-	
+
 	static final String START_SESSION = "startsession";
 	static final String REPORT_EXCEPTION = "reportexception";
-	
+
 	private final ArrayList<String> searchSet = new ArrayList<String>();
 	private final RequestLimiter requestLimiter = new RequestLimiter(200, 1000, "Sorry, please try again later.", "<html><body>Request Limiter limited request.</body></html>");
-	
+
 	public ExampleServlet()
 	{
 		for(int i = 1; i<=84; i++)
@@ -64,7 +64,7 @@ public final class ExampleServlet extends ExampleSuperServlet
 		final int size = list.size();
 		return list.subList(fromIndex, (toIndex>size) ? size : toIndex);
 	}
-	
+
 	@Override
 	protected void doRequest(
 			final HttpServletRequest request,
@@ -72,18 +72,18 @@ public final class ExampleServlet extends ExampleSuperServlet
 		throws IOException
 	{
 		//System.out.println("request ---" + request.getMethod() + "---" + request.getContextPath() + "---" + request.getServletPath() + "---" + request.getPathInfo() + "---" + request.getQueryString() + "---");
-		
+
 		if(requestLimiter.doRequest(request, response))
 			return;
-		
+
 		final ExampleCop cop = ExampleCop.getCop(request);
 		if(cop.redirectToCanonical(request, response))
 			return;
-		
+
 		final Pager pager = cop.pager;
 		final List<String> searchResult = subList(searchSet, pager.getOffset(), pager.getOffset()+pager.getLimit());
 		pager.init(searchResult.size(), searchSet.size());
-		
+
 		String reportedException = null;
 		if(Cop.isPost(request))
 		{

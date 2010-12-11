@@ -30,7 +30,7 @@ public final class Pager
 		final int[] limits;
 		final int limitDefault;
 		final int limitCeiling;
-		
+
 		public Config(final int... limits)
 		{
 			if(limits==null)
@@ -47,7 +47,7 @@ public final class Pager
 					throw new IllegalArgumentException("limits must be monotonously increasing, but was " + n + ">=" + limit + " at index " + i);
 				n = limit;
 			}
-			
+
 			this.limits = limits;
 			this.limitDefault = limits[0];
 			this.limitCeiling = limits[limits.length-1];
@@ -57,7 +57,7 @@ public final class Pager
 		{
 			return new Pager(this, OFFSET_MIN, limitDefault, false);
 		}
-		
+
 		public Pager newPager(final HttpServletRequest request)
 		{
 			return new Pager(
@@ -67,7 +67,7 @@ public final class Pager
 					false);
 		}
 	}
-	
+
 	private static final String OFFSET = "off";
 	private static final String LIMIT  = "lim";
 
@@ -77,7 +77,7 @@ public final class Pager
 	private final int offset;
 	private final int limit;
 	private final boolean neutral;
-	
+
 	Pager(final Config config, final int offset, int limit, final boolean neutral)
 	{
 		if(limit>config.limitCeiling)
@@ -88,42 +88,42 @@ public final class Pager
 		this.limit = limit;
 		this.neutral = neutral;
 	}
-	
+
 	public void addParameters(final Cop cop)
 	{
 		cop.addParameter(OFFSET, offset, OFFSET_MIN);
 		cop.addParameter(LIMIT, limit, config.limitDefault);
 	}
-	
+
 	public int getOffset()
 	{
 		return offset;
 	}
-	
+
 	public int getLimit()
 	{
 		return limit;
 	}
-	
+
 	private int pageIfInitialized = -1;
 	private int totalIfInitialized = -1;
-	
+
 	private int page()
 	{
 		if(pageIfInitialized<0)
 			throw new IllegalStateException("must call init before");
-		
+
 		return pageIfInitialized;
 	}
-	
+
 	private int total()
 	{
 		if(totalIfInitialized<0)
 			throw new IllegalStateException("must call init before");
-		
+
 		return totalIfInitialized;
 	}
-	
+
 	public void init(final int page, final int total)
 	{
 		if(page<0)
@@ -134,32 +134,32 @@ public final class Pager
 			throw new IllegalStateException("must not call init more than once");
 		if(totalIfInitialized>=0)
 			throw new IllegalStateException("must not call init more than once");
-		
+
 		this.pageIfInitialized  = page;
 		this.totalIfInitialized = total;
 	}
-	
+
 	public boolean isFirst()
 	{
 		return offset == OFFSET_MIN;
 	}
-	
+
 	public boolean isLast()
 	{
 		return (offset+limit)>=total();
 	}
-	
+
 	public Pager first()
 	{
 		return new Pager(config, OFFSET_MIN, limit, offset==OFFSET_MIN);
 	}
-	
+
 	public Pager last()
 	{
 		final int newOffset = ((total()-1)/limit)*limit;
 		return new Pager(config, newOffset, limit, offset==newOffset);
 	}
-	
+
 	public Pager previous()
 	{
 		int newOffset = offset - limit;
@@ -167,7 +167,7 @@ public final class Pager
 			newOffset = OFFSET_MIN;
 		return new Pager(config, newOffset, limit, offset==newOffset);
 	}
-	
+
 	public Pager next()
 	{
 		final int newOffset = offset + limit;
@@ -175,12 +175,12 @@ public final class Pager
 			return last();
 		return new Pager(config, newOffset, limit, offset==newOffset);
 	}
-	
+
 	public Pager switchLimit(final int newLimit)
 	{
 		return new Pager(config, offset, newLimit, limit==newLimit);
 	}
-	
+
 	public List<Pager> newLimits()
 	{
 		final ArrayList<Pager> result = new ArrayList<Pager>();
@@ -193,23 +193,23 @@ public final class Pager
 		}
 		return result;
 	}
-	
+
 	private static final int PAGE_CONTEXT = 3;
 	private static final int PAGE_CONTEXT_SPAN = 2*PAGE_CONTEXT;
-	
+
 	public boolean hasBeforeNewPages()
 	{
 		final int page = offset / limit;
 		return (page-PAGE_CONTEXT)>0;
 	}
-	
+
 	public boolean hasAfterNewPages()
 	{
 		final int page = offset / limit;
 		final int fromPage = Math.max(page-PAGE_CONTEXT, 0);
 		return (fromPage+PAGE_CONTEXT_SPAN) < ((total()-1) / limit);
 	}
-	
+
 	public List<Pager> newPages()
 	{
 		final int page = offset / limit;
@@ -223,17 +223,17 @@ public final class Pager
 		}
 		return result;
 	}
-	
+
 	public int getFrom()
 	{
 		return offset + 1;
 	}
-	
+
 	public int getTo()
 	{
 		return offset + page();
 	}
-	
+
 	public int getTotal()
 	{
 		return total();
@@ -243,17 +243,17 @@ public final class Pager
 	{
 		return total()==0;
 	}
-	
+
 	public int getPage()
 	{
 		return (offset / limit) + 1;
 	}
-	
+
 	public int getTotalPages()
 	{
 		return ((total()-1) / limit) + 1;
 	}
-	
+
 	public boolean isNeeded()
 	{
 		return total()>config.limitDefault;

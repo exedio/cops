@@ -33,40 +33,40 @@ final class Out
 {
 	private StringBuilder bf = new StringBuilder();
 	private final HttpServletRequest request;
-	
+
 	Out(final HttpServletRequest request)
 	{
 		assert request !=null;
 		this.request = request;
 	}
-	
+
 	void writeStatic(final String s)
 	{
 		bf.append(s);
 	}
-	
+
 	void write(final String s)
 	{
 		bf.append(XMLEncoder.encode(s));
 	}
-	
+
 	void write(final int i)
 	{
 		bf.append(i);
 	}
-	
+
 	void write(final Resource resource)
 	{
 		bf.append(resource.getURL(request));
 	}
-	
+
 	void sendBody(final HttpServletResponse response) throws IOException
 	{
 		final StringBuilder bf = this.bf;
 		if(bf==null)
 			throw new IllegalStateException();
 		this.bf = null; // prevent this instance to be used anymore
-		
+
 		BodySender.send(response, bf, CopsServlet.UTF8);
 	}
 }

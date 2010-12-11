@@ -25,7 +25,7 @@ package com.exedio.cops.example;
 public final class PropertiesServlet extends com.exedio.cops.PropertiesServlet
 {
 	private static final long serialVersionUID = 1l;
-	
+
 	@Override
 	protected Properties getProperties()
 	{
