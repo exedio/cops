@@ -151,13 +151,13 @@ public class ResourceTest extends TestCase
 		assertEquals(0, r1.getResponse200Count());
 		assertEquals(0, r1.getResponse304Count());
 		assertEquals("/contextPath/servletPath/ResourceTest.class", r1.getURL(request()));
-		assertEquals("scheme://host.exedio.com/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(request()));
+		assertEquals("scheme://host.exedio.com/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(request("host.exedio.com")));
 		assertEquals("http://host.exedio.com/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(CopTest.TOKEN));
 		// port adjustments
 		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(CopTest.TOKEN_8080));
 		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(CopTest.TOKEN_8443));
 		assertEquals("ResourceTest.class", r1.toString());
-		assertEquals(CopTest.TOKEN, Cop.getToken(request()));
+		assertEquals(CopTest.TOKEN, Cop.getToken(request("host.exedio.com")));
 	}
 
 	private static final String DATE_FORMAT_FULL = "dd.MM.yyyy HH:mm:ss.SSS";
@@ -176,6 +176,11 @@ public class ResourceTest extends TestCase
 
 	private static final HttpServletRequest request()
 	{
+		return request(null);
+	}
+
+	private static final HttpServletRequest request(final String host)
+	{
 		return new DummyRequest(){
 			@Override public String getScheme(){return "scheme";}
 			@Override public String getContextPath(){return "/contextPath";}
@@ -183,7 +188,11 @@ public class ResourceTest extends TestCase
 			@Override public String getHeader(final String name)
 			{
 				if("Host".equals(name))
-					return "host.exedio.com";
+				{
+					if(host==null)
+						throw new NullPointerException("host");
+					return host;
+				}
 				else
 					throw new RuntimeException(name);
 			}
