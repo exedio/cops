@@ -110,8 +110,11 @@ public final class Resource
 				request.getContextPath() +
 				request.getServletPath() +
 				'/' + name;
-
-		return request.getContextPath() + request.getServletPath() + '/' + name;
+		else
+			return
+				request.getContextPath() +
+				request.getServletPath() +
+				'/' + name;
 	}
 
 	public String getAbsoluteURL(final HttpServletRequest request)
