@@ -122,10 +122,10 @@ public final class Resource
 		if(request==null)
 			throw new NullPointerException("request");
 
-		final String hostExtra = this.hostOverride;
+		final String hostOverride = this.hostOverride;
 		return
 			request.getScheme() + "://" +
-			(hostExtra==null ? request.getHeader("Host") : hostExtra) +
+			(hostOverride==null ? request.getHeader("Host") : hostOverride) +
 			request.getContextPath() +
 			request.getServletPath() +
 			'/' + name;
