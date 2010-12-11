@@ -27,7 +27,6 @@ import java.util.Date;
 
 public class ResourceTest extends AbstractWebTest
 {
-
 	public void testError() throws Exception
 	{
 		final String prefix = "http://localhost:" + System.getProperty("tomcat.port.http") + "/cops/";
@@ -38,7 +37,6 @@ public class ResourceTest extends AbstractWebTest
 		assertEquals(textLastModified, assertURL(text, textLastModified-1, false));
 		assertEquals(textLastModified, assertURL(text, textLastModified, true));
 		assertEquals(textLastModified, assertURL(text, textLastModified+5000, true));
-
 	}
 	
 	private long assertURL(final URL url) throws IOException
@@ -69,7 +67,7 @@ public class ResourceTest extends AbstractWebTest
 		//System.out.println("LastModified: "+new Date(lastModified));
 		assertTrue("This sometimes fails because the request takes too long or so.", (date+1000)>=lastModified); // TODO
 		assertEquals(expectNotModified ? null : contentType, conn.getContentType());
-		//System.out.println("Expires: "+new Date(textConn.getExpiration()));
+		//System.out.println("Expires: "+new Date(conn.getExpiration()));
 		assertWithin(new Date(date+(4*60*1000)), new Date(date+(6*60*1000)), new Date(conn.getExpiration()));
 		assertEquals(expectNotModified ? -1 : (41 + (2*System.getProperty("line.separator").length())), conn.getContentLength());
 		
@@ -84,5 +82,4 @@ public class ResourceTest extends AbstractWebTest
 		
 		return lastModified;
 	}
-
 }
