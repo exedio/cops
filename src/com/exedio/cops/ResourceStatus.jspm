@@ -21,7 +21,6 @@ package com.exedio.cops;
 
 import java.text.DecimalFormat;
 import java.util.Collection;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -110,6 +109,11 @@ final class ResourceStatus_Jspm
 			{
 				font-size:70%;
 			}
+			
+			small
+			{
+				font-size:70%;
+			}
 		</style>
 	</head>
 	<body>
@@ -189,7 +193,7 @@ final class ResourceStatus_Jspm
 		<div class="footer">
 			<%=thePackage.getSpecificationTitle()%>
 			<%=thePackage.getSpecificationVersion()%>
-			<%=new Date()%>
+			<% out.writeNow(); %>
 		</div>
 	</body>
 </html>

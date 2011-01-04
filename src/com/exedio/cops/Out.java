@@ -35,7 +35,11 @@ final class Out
 {
 	private StringBuilder bf = new StringBuilder();
 	private final HttpServletRequest request;
-	private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd'&nbsp;'HH:mm:ss'<small>'.S'</small>'");
+
+	private final long now = System.currentTimeMillis();
+	private final SimpleDateFormat dateFormatFull  = new SimpleDateFormat("yyyy/MM/dd'&nbsp;'HH:mm:ss'<small>'.SSS'</small>'");
+	private final SimpleDateFormat dateFormatYear  = new SimpleDateFormat(     "MM/dd'&nbsp;'HH:mm:ss'<small>'.SSS'</small>'");
+	private final SimpleDateFormat dateFormatToday = new SimpleDateFormat(                  "HH:mm:ss'<small>'.SSS'</small>'");
 
 	Out(final HttpServletRequest request)
 	{
@@ -61,10 +65,31 @@ final class Out
 		bf.append(i);
 	}
 
+	void writeNow()
+	{
+		bf.append(dateFormatFull.format(new Date(now)));
+	}
+
 	void write(final Date d)
 	{
-		bf.append(dateFormat.format(d));
+		if(d==null)
+			return;
+
+		final long millis = d.getTime();
+		final SimpleDateFormat df;
+		if( (now-deltaToday) < millis && millis < (now+deltaToday) )
+			df = dateFormatToday;
+		else if( (now-deltaYear) < millis && millis < (now+deltaYear) )
+			df = dateFormatYear;
+		else
+			df = dateFormatFull;
+
+		bf.append(df.format(d));
 	}
+
+	private static final long deltaYear  = 1000l * 60 * 60 * 24 * 90; // 90 days
+	private static final long deltaToday = 1000l * 60 * 60 * 6; // 6 hours
+
 
 	void write(final Resource resource)
 	{
