@@ -18,22 +18,31 @@
 
 package com.exedio.cops;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import junit.framework.TestCase;
 
-public class PackageTest
+public class ResourceExpiresTest extends TestCase
 {
-	public static Test suite()
+	public void testURL()
 	{
-		final TestSuite suite = new TestSuite();
-		suite.addTestSuite(NaturalLanguageEncodeTest.class);
-		suite.addTestSuite(CopTest.class);
-		suite.addTestSuite(CopParameterRequestTest.class);
-		suite.addTestSuite(ResourceExpiresTest.class);
-		suite.addTestSuite(ResourceTest.class);
-		suite.addTestSuite(EncodeTest.class);
-		suite.addTestSuite(PagerTest.class);
-		suite.addTestSuite(RequestLimiterTest.class);
-		return suite;
+		final Resource r1 = new Resource("ResourceTest.class", "major/minor");
+
+		assertEquals(5*60, r1.getExpiresSeconds());
+
+		r1.setExpiresSeconds(20);
+		assertEquals(20, r1.getExpiresSeconds());
+
+		r1.setExpiresSeconds(0);
+		assertEquals(0, r1.getExpiresSeconds());
+
+		try
+		{
+			r1.setExpiresSeconds(-1);
+			fail();
+		}
+		catch(final IllegalArgumentException e)
+		{
+			assertEquals("expiresSeconds must not be negative, but was -1", e.getMessage());
+		}
+		assertEquals(0, r1.getExpiresSeconds());
 	}
 }

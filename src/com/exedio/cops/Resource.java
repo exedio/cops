@@ -190,15 +190,26 @@ public final class Resource
 		this.hostOverride = hostOverride;
 	}
 
+	long getExpiresSeconds()
+	{
+		return expiresOffset/1000;
+	}
+
+	void setExpiresSeconds(final long expiresSeconds)
+	{
+		if(expiresSeconds<0)
+			throw new IllegalArgumentException("expiresSeconds must not be negative, but was " + expiresSeconds);
+
+		this.expiresOffset = expiresSeconds*1000;
+	}
+
 	/**
 	 * Sets the offset, the Expires http header is set into the future.
 	 * Together with a http reverse proxy this ensures,
 	 * that for that time no request for that data will reach the servlet.
 	 * This may reduce the load on the server.
-	 *
-	 * TODO: make this configurable, at best per resource.
 	 */
-	private static final long EXPIRES_OFFSET = 1000 * 60 * 5; // 5 minutes
+	private volatile long expiresOffset = 1000 * 60 * 5; // 5 minutes
 
 	private static final String REQUEST_IF_MODIFIED_SINCE = "If-Modified-Since";
 	private static final String RESPONSE_EXPIRES = "Expires";
@@ -215,7 +226,7 @@ public final class Resource
 		response.setContentType(contentType);
 		response.setDateHeader(RESPONSE_LAST_MODIFIED, lastModified);
 		final long now = System.currentTimeMillis();
-		response.setDateHeader(RESPONSE_EXPIRES, now+EXPIRES_OFFSET);
+		response.setDateHeader(RESPONSE_EXPIRES, now+expiresOffset);
 
 		final long ifModifiedSince = request.getDateHeader(REQUEST_IF_MODIFIED_SINCE);
 
