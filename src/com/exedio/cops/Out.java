@@ -96,6 +96,11 @@ final class Out
 		bf.append(resource.getURL(request));
 	}
 
+	void write(final Cop cop)
+	{
+		bf.append(cop.getURL(request));
+	}
+
 	void sendBody(final HttpServletResponse response) throws IOException
 	{
 		final StringBuilder bf = this.bf;

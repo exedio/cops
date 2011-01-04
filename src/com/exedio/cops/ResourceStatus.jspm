@@ -26,10 +26,10 @@ final class ResourceStatus_Jspm
 {
 	public static final void write(
 				final Out out,
+				final ResourceStatusCop cop,
 				final String servletName,
 				final Collection<Resource> resources,
 				final String authentication,
-				final boolean inline,
 				final DecimalFormat nf,
 				final Package thePackage)
 	{
@@ -134,9 +134,8 @@ final class ResourceStatus_Jspm
 				<th>Length</th>
 				<th>304l</th>
 				<th>200l</th>
-				<th><a href="copsResourceStatus.html<%
-						if(!inline){ %>?<%=CopsServlet.INLINE%>=t<% } %>"><%
-						if(inline){ %>Image<% }else{ %>i<% }
+				<th><a href="<%=cop.toggleShowImage()%>"><%=
+						cop.showImage?"Image":"i"
 					%></a></th>
 				<th>Name</th>
 				<th>Content Type</th>
@@ -157,7 +156,7 @@ final class ResourceStatus_Jspm
 				final long response304Length = response304Count * contentLength;
 				final long response200Length = response200Count * contentLength;
 				final String contentType = resource.getContentType();
-				final boolean inlineThis = inline && contentType.startsWith("image/");
+				final boolean showImageThis = cop.showImage && contentType.startsWith("image/");
 			%>
 			<tr>
 				<td><%=nf.format(response304Count)%></td>
@@ -165,7 +164,7 @@ final class ResourceStatus_Jspm
 				<td><%=nf.format(contentLength)%></td>
 				<td><%=nf.format(response304Length)%></td>
 				<td><%=nf.format(response200Length)%></td>
-				<td class="text"><% if(inlineThis){%><img src="<%=resource%>"><%} %></td>
+				<td class="text"><% if(showImageThis){%><img src="<%=resource%>"><%} %></td>
 				<td class="text"><a href="<%=resource%>"><%=resource.getName()%></a></td>
 				<td class="text"><%=contentType%></td>
 				<td class="text"><%=resource.getLastModified()%></td>

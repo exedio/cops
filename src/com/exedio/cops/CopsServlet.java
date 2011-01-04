@@ -115,10 +115,10 @@ public abstract class CopsServlet extends HttpServlet
 				final ServletConfig config = getServletConfig();
 				ResourceStatus_Jspm.write(
 						out,
+						ResourceStatusCop.getCop(request),
 						config!=null ? config.getServletName() : null, // TODO why can config be null?
 						resources.values(),
 						getAuthentication(request),
-						request.getParameter(INLINE)!=null,
 						nf,
 						CopsServlet.class.getPackage());
 				out.sendBody(response);
