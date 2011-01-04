@@ -23,6 +23,7 @@ import static com.exedio.cops.ResourceStatusCop.SELECT;
 import static com.exedio.cops.ResourceStatusCop.SELECT_ALL;
 import static com.exedio.cops.ResourceStatusCop.INBOX;
 import static com.exedio.cops.ResourceStatusCop.OVERRIDE_HOST;
+import static com.exedio.cops.ResourceStatusCop.TOUCH;
 import static com.exedio.cops.ResourceStatusCop.EXPIRE;
 
 import java.text.DecimalFormat;
@@ -224,6 +225,7 @@ final class ResourceStatus_Jspm
 		</table>
 		<input name="<%=INBOX%>"></input>
 		<input type="submit" name="<%=OVERRIDE_HOST%>" value="Override Host"></input>
+		<input type="submit" name="<%=TOUCH%>" value="Touch"></input>
 		<input type="submit" name="<%=EXPIRE%>" value="Expire"></input>
 	</form>
 		<div class="footer">

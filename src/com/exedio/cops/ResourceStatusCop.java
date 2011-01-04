@@ -77,6 +77,7 @@ final class ResourceStatusCop extends Cop
 	static final String SELECT_ALL = "selectAll";
 	static final String INBOX = "inbox";
 	static final String OVERRIDE_HOST = "overrideHost";
+	static final String TOUCH = "touchLastModified";
 	static final String EXPIRE = "expire";
 
 	void post(final HttpServletRequest request, final Collection<Resource> resources)
@@ -86,6 +87,12 @@ final class ResourceStatusCop extends Cop
 			final String hostOverride = trim(request.getParameter(INBOX));
 			for(final Resource resource : filter(request, resources))
 				resource.setHostOverride(hostOverride);
+		}
+		else if(request.getParameter(TOUCH)!=null)
+		{
+			final long now = System.currentTimeMillis();
+			for(final Resource resource : filter(request, resources))
+				resource.setLastModified(now);
 		}
 		else if(request.getParameter(EXPIRE)!=null)
 		{

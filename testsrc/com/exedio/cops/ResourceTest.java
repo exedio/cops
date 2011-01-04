@@ -18,9 +18,6 @@
 
 package com.exedio.cops;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.servlet.http.HttpServletRequest;
 
 import junit.framework.TestCase;
@@ -46,13 +43,9 @@ public class ResourceTest extends TestCase
 			assertEquals("contentType", e.getMessage());
 		}
 
-		final Date before = new Date();
 		final Resource r1 = new Resource("ResourceTest.class", "major/minor");
-		final Date after = new Date();
 		assertEquals("ResourceTest.class", r1.getName());
 		assertEquals("major/minor", r1.getContentType());
-		final Date lastModified = r1.getLastModified();
-		assertWithin(new Date((before.getTime()/1000)*1000), new Date(((after.getTime()/1000)+1)*1000), lastModified);
 		assertEquals(-1, r1.getContentLength());
 		assertEquals(0, r1.getResponse200Count());
 		assertEquals(0, r1.getResponse304Count());
@@ -80,7 +73,6 @@ public class ResourceTest extends TestCase
 		r1.init(ResourceTest.class);
 		assertEquals("ResourceTest.class", r1.getName());
 		assertEquals("major/minor", r1.getContentType());
-		assertEquals(lastModified, r1.getLastModified());
 		final int contentLength = r1.getContentLength();
 		assertTrue(String.valueOf(contentLength), contentLength>5);
 		assertEquals(0, r1.getResponse200Count());
@@ -119,7 +111,6 @@ public class ResourceTest extends TestCase
 		r1.init(ResourceTest.class);
 		assertEquals("ResourceTest.class", r1.getName());
 		assertEquals("major/minor", r1.getContentType());
-		assertEquals(lastModified, r1.getLastModified());
 		assertEquals(contentLength, r1.getContentLength());
 		assertEquals(0, r1.getResponse200Count());
 		assertEquals(0, r1.getResponse304Count());
@@ -146,7 +137,6 @@ public class ResourceTest extends TestCase
 
 		assertEquals("ResourceTest.class", r1.getName());
 		assertEquals("major/minor", r1.getContentType());
-		assertEquals(lastModified, r1.getLastModified());
 		assertEquals(contentLength, r1.getContentLength());
 		assertEquals(0, r1.getResponse200Count());
 		assertEquals(0, r1.getResponse304Count());
@@ -170,20 +160,6 @@ public class ResourceTest extends TestCase
 		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(CopTest.TOKEN_8080));
 		assertEquals("http://host.exedio.com:8080/contextPath/servletPath/ResourceTest.class", r1.getAbsoluteURL(CopTest.TOKEN_8443));
 		assertEquals(CopTest.TOKEN, Cop.getToken(request(null, "host.exedio.com")));
-	}
-
-	private static final String DATE_FORMAT_FULL = "dd.MM.yyyy HH:mm:ss.SSS";
-
-	public static final void assertWithin(final Date expectedBefore, final Date expectedAfter, final Date actual)
-	{
-		final SimpleDateFormat df = new SimpleDateFormat(DATE_FORMAT_FULL);
-		final String message =
-			"expected date within " + df.format(expectedBefore) +
-			" and " + df.format(expectedAfter) +
-			", but was " + df.format(actual);
-
-		assertTrue(message, !expectedBefore.after(actual));
-		assertTrue(message, !expectedAfter.before(actual));
 	}
 
 	private static final HttpServletRequest request()

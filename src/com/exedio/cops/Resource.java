@@ -34,7 +34,7 @@ public final class Resource
 	/**
 	 * rounded to full seconds
 	 */
-	private final long lastModified;
+	private volatile long lastModified;
 
 	private final Object contentLock = new Object();
 	private byte[] content;
@@ -74,6 +74,14 @@ public final class Resource
 	public Date getLastModified()
 	{
 		return new Date(lastModified);
+	}
+
+	void setLastModified(final long lastModified)
+	{
+		if(lastModified<0)
+			throw new IllegalArgumentException("lastModified must not be negative, but was " + lastModified);
+
+		this.lastModified = ((lastModified/1000)+1)*1000;
 	}
 
 	public int getContentLength()
