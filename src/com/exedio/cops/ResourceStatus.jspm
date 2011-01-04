@@ -127,7 +127,7 @@ final class ResourceStatus_Jspm
 			}
 		%></div>
 		<table>
-			<caption>Resource Status</caption>
+			<caption>Resource Status <small>(<a href="<%=cop.toggleShowUrl()%>">url</a>)</small></caption>
 			<tr>
 				<th>304</th>
 				<th>200</th>
@@ -138,8 +138,20 @@ final class ResourceStatus_Jspm
 						cop.showImage?"Image":"i"
 					%></a></th>
 				<th>Name</th>
+				<%
+			if(cop.showUrl)
+			{
+				%>
+				<th>URL</th><%
+			}
+			else
+			{
+				%>
 				<th>Content Type</th>
 				<th>Last Modified</th>
+				<%
+			}
+			%>
 			</tr><%
 			
 			long response304CountTotal = 0;
@@ -166,8 +178,20 @@ final class ResourceStatus_Jspm
 				<td><%=nf.format(response200Length)%></td>
 				<td class="text"><% if(showImageThis){%><img src="<%=resource%>"><%} %></td>
 				<td class="text"><a href="<%=resource%>"><%=resource.getName()%></a></td>
+				<%
+			if(cop.showUrl)
+			{
+				%>
+				<td class="text"><%=resource%></td><%
+			}
+			else
+			{
+				%>
 				<td class="text"><%=contentType%></td>
 				<td class="text"><%=resource.getLastModified()%></td>
+				<%
+			}
+			%>
 			</tr><%
 			
 				response304CountTotal += response304Count;
@@ -183,7 +207,7 @@ final class ResourceStatus_Jspm
 				<td><%=nf.format(contentLengthTotal)%></td>
 				<td><%=nf.format(response304LengthTotal)%></td>
 				<td><%=nf.format(response200LengthTotal)%></td>
-				<th colspan="4">Total</th>
+				<th colspan="0">Total</th>
 			</tr>
 		</table>
 		<div class="footer">

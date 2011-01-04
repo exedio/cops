@@ -23,25 +23,37 @@ import javax.servlet.http.HttpServletRequest;
 final class ResourceStatusCop extends Cop
 {
 	private static final String SHOW_IMAGE = "si";
+	private static final String SHOW_URL = "su";
 
 	final boolean showImage;
+	final boolean showUrl;
 
-	ResourceStatusCop(final boolean showImage)
+	ResourceStatusCop(
+			final boolean showImage,
+			final boolean showUrl)
 	{
 		super("copsResourceStatus.html");
 		this.showImage = showImage;
+		this.showUrl = showUrl;
 
 		addParameter(SHOW_IMAGE, showImage);
+		addParameter(SHOW_URL, showUrl);
 	}
 
 	static final ResourceStatusCop getCop(final HttpServletRequest request)
 	{
 		return new ResourceStatusCop(
-				getBooleanParameter(request, SHOW_IMAGE));
+				getBooleanParameter(request, SHOW_IMAGE),
+				getBooleanParameter(request, SHOW_URL));
 	}
 
 	ResourceStatusCop toggleShowImage()
 	{
-		return new ResourceStatusCop(!showImage);
+		return new ResourceStatusCop(!showImage, showUrl);
+	}
+
+	ResourceStatusCop toggleShowUrl()
+	{
+		return new ResourceStatusCop(showImage, !showUrl);
 	}
 }
