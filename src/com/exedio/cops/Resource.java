@@ -41,6 +41,14 @@ public final class Resource
 
 	private volatile String hostOverride = null;
 
+	/**
+	 * Sets the offset, the Expires http header is set into the future.
+	 * Together with a http reverse proxy this ensures,
+	 * that for that time no request for that data will reach the servlet.
+	 * This may reduce the load on the server.
+	 */
+	private volatile long expiresOffset = 1000 * 60 * 5; // 5 minutes
+
 	private volatile long response200Count = 0;
 	private volatile long response304Count = 0;
 
@@ -210,14 +218,6 @@ public final class Resource
 
 		this.expiresOffset = expiresSeconds*1000;
 	}
-
-	/**
-	 * Sets the offset, the Expires http header is set into the future.
-	 * Together with a http reverse proxy this ensures,
-	 * that for that time no request for that data will reach the servlet.
-	 * This may reduce the load on the server.
-	 */
-	private volatile long expiresOffset = 1000 * 60 * 5; // 5 minutes
 
 	private static final String REQUEST_IF_MODIFIED_SINCE = "If-Modified-Since";
 	private static final String RESPONSE_EXPIRES = "Expires";
