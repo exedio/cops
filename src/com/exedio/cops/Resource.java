@@ -94,7 +94,8 @@ public final class Resource
 
 	private static long roundLastModified(final long lastModified)
 	{
-		return ((lastModified+999)/1000)*1000;
+		final long remainder = lastModified%1000;
+		return (remainder==0) ? lastModified : (lastModified-remainder+1000);
 	}
 
 	public int getContentLength()
