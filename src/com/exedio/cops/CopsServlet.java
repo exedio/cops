@@ -111,11 +111,13 @@ public abstract class CopsServlet extends HttpServlet
 				nfs.setGroupingSeparator('\'');
 				final DecimalFormat nf = new DecimalFormat("", nfs);
 
+				final ResourceStatusCop cop = ResourceStatusCop.getCop(request);
 				final Out out = new Out(request);
+				out.absoluteUrl = cop.absoluteUrl;
 				final ServletConfig config = getServletConfig();
 				ResourceStatus_Jspm.write(
 						out,
-						ResourceStatusCop.getCop(request),
+						cop,
 						config!=null ? config.getServletName() : null, // TODO why can config be null?
 						resources.values(),
 						getAuthentication(request),

@@ -127,7 +127,7 @@ final class ResourceStatus_Jspm
 			}
 		%></div>
 		<table>
-			<caption>Resource Status <small>(<a href="<%=cop.toggleShowUrl()%>">url</a>)</small></caption>
+			<caption>Resource Status <small>(<a href="<%=cop.toggleShowUrl()%>">url</a>,<a href="<%=cop.toggleAbsoluteUrl()%>">absolute</a>)</small></caption>
 			<tr>
 				<th>304</th>
 				<th>200</th>
@@ -142,7 +142,7 @@ final class ResourceStatus_Jspm
 			if(cop.showUrl)
 			{
 				%>
-				<th>URL</th><%
+				<th>URL<% if(cop.absoluteUrl){%> (absolute)<%} %></th><%
 			}
 			else
 			{

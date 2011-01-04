@@ -35,6 +35,7 @@ final class Out
 {
 	private StringBuilder bf = new StringBuilder();
 	private final HttpServletRequest request;
+	boolean absoluteUrl = false;
 
 	private final long now = System.currentTimeMillis();
 	private final SimpleDateFormat dateFormatFull  = new SimpleDateFormat("yyyy/MM/dd'&nbsp;'HH:mm:ss'<small>'.SSS'</small>'");
@@ -93,7 +94,7 @@ final class Out
 
 	void write(final Resource resource)
 	{
-		bf.append(resource.getURL(request));
+		bf.append(absoluteUrl ? resource.getAbsoluteURL(request) : resource.getURL(request));
 	}
 
 	void write(final Cop cop)

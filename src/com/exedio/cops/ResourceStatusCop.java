@@ -24,36 +24,47 @@ final class ResourceStatusCop extends Cop
 {
 	private static final String SHOW_IMAGE = "si";
 	private static final String SHOW_URL = "su";
+	private static final String ABSOLUTE_URL = "au";
 
 	final boolean showImage;
 	final boolean showUrl;
+	final boolean absoluteUrl;
 
 	ResourceStatusCop(
 			final boolean showImage,
-			final boolean showUrl)
+			final boolean showUrl,
+			final boolean absoluteUrl)
 	{
 		super("copsResourceStatus.html");
 		this.showImage = showImage;
 		this.showUrl = showUrl;
+		this.absoluteUrl = absoluteUrl;
 
 		addParameter(SHOW_IMAGE, showImage);
 		addParameter(SHOW_URL, showUrl);
+		addParameter(ABSOLUTE_URL, absoluteUrl);
 	}
 
 	static final ResourceStatusCop getCop(final HttpServletRequest request)
 	{
 		return new ResourceStatusCop(
 				getBooleanParameter(request, SHOW_IMAGE),
-				getBooleanParameter(request, SHOW_URL));
+				getBooleanParameter(request, SHOW_URL),
+				getBooleanParameter(request, ABSOLUTE_URL));
 	}
 
 	ResourceStatusCop toggleShowImage()
 	{
-		return new ResourceStatusCop(!showImage, showUrl);
+		return new ResourceStatusCop(!showImage, showUrl, absoluteUrl);
 	}
 
 	ResourceStatusCop toggleShowUrl()
 	{
-		return new ResourceStatusCop(showImage, !showUrl);
+		return new ResourceStatusCop(showImage, !showUrl, absoluteUrl);
+	}
+
+	ResourceStatusCop toggleAbsoluteUrl()
+	{
+		return new ResourceStatusCop(showImage, showUrl, !absoluteUrl);
 	}
 }
