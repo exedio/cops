@@ -79,6 +79,8 @@ final class ResourceStatusCop extends Cop
 	static final String OVERRIDE_HOST = "overrideHost";
 	static final String TOUCH = "touchLastModified";
 	static final String EXPIRE = "expire";
+	static final String ACTIVATE_LOG = "activateLog";
+	static final String DEACTIVATE_LOG = "deactivateLog";
 
 	void post(final HttpServletRequest request, final Collection<Resource> resources)
 	{
@@ -99,6 +101,16 @@ final class ResourceStatusCop extends Cop
 			final int expire = Integer.parseInt(request.getParameter(INBOX));
 			for(final Resource resource : filter(request, resources))
 				resource.setExpiresSeconds(expire);
+		}
+		else if(request.getParameter(ACTIVATE_LOG)!=null)
+		{
+			for(final Resource resource : filter(request, resources))
+				resource.setLog(true);
+		}
+		else if(request.getParameter(DEACTIVATE_LOG)!=null)
+		{
+			for(final Resource resource : filter(request, resources))
+				resource.setLog(false);
 		}
 	}
 

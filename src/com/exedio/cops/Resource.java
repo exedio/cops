@@ -49,6 +49,8 @@ public final class Resource
 	 */
 	private volatile long expiresOffset = 1000 * 60 * 5; // 5 minutes
 
+	private volatile boolean log = false;
+
 	private volatile long response200Count = 0;
 	private volatile long response304Count = 0;
 
@@ -225,6 +227,16 @@ public final class Resource
 		this.expiresOffset = expiresSeconds*1000;
 	}
 
+	boolean getLog()
+	{
+		return log;
+	}
+
+	void setLog(final boolean log)
+	{
+		this.log = log;
+	}
+
 	private static final String REQUEST_IF_MODIFIED_SINCE = "If-Modified-Since";
 	private static final String RESPONSE_EXPIRES = "Expires";
 	private static final String RESPONSE_LAST_MODIFIED = "Last-Modified";
@@ -248,12 +260,25 @@ public final class Resource
 		{
 			response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
 			response304Count++; // may loose a few counts due to concurrency, but this is ok
+			if(log)
+				log(request, "Not Modified");
 		}
 		else
 		{
 			BodySender.send(response, content);
 			response200Count++; // may loose a few counts due to concurrency, but this is ok
+			if(log)
+				log(request, "Delivered");
 		}
+	}
+
+	private static void log(final HttpServletRequest request, final String action)
+	{
+		final StringBuilder bf = new StringBuilder();
+		bf.append("-----------------" + action + "\n");
+		bf.append(CopsServlet.report(request));
+		bf.append("-----------------\n");
+		System.out.print(bf);
 	}
 
 	private static String getContentTypeFromName(final String name)
