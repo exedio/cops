@@ -66,7 +66,7 @@ public final class Resource
 
 		this.name = name;
 		this.contentType = contentType;
-		this.lastModified = ((System.currentTimeMillis()/1000)+1)*1000;
+		this.lastModified = ((System.currentTimeMillis()+999)/1000)*1000;
 	}
 
 	public String getName()
@@ -89,7 +89,7 @@ public final class Resource
 		if(lastModified<0)
 			throw new IllegalArgumentException("lastModified must not be negative, but was " + lastModified);
 
-		this.lastModified = ((lastModified/1000)+1)*1000;
+		this.lastModified = ((lastModified+999)/1000)*1000;
 	}
 
 	public int getContentLength()

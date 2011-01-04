@@ -41,7 +41,7 @@ public class ResourceLastModifiedTest extends TestCase
 		assertEquals(lastModified, r1.getLastModified());
 
 		r1.setLastModified(12000);
-		assertEquals(13000, r1.getLastModified().getTime());
+		assertEquals(12000, r1.getLastModified().getTime());
 
 		r1.setLastModified(11999);
 		assertEquals(12000, r1.getLastModified().getTime());
@@ -50,7 +50,7 @@ public class ResourceLastModifiedTest extends TestCase
 		assertEquals(13000, r1.getLastModified().getTime());
 
 		r1.setLastModified(0);
-		assertEquals(1000, r1.getLastModified().getTime());
+		assertEquals(0, r1.getLastModified().getTime());
 
 		try
 		{
@@ -61,7 +61,7 @@ public class ResourceLastModifiedTest extends TestCase
 		{
 			assertEquals("lastModified must not be negative, but was -1", e.getMessage());
 		}
-		assertEquals(1000, r1.getLastModified().getTime());
+		assertEquals(0, r1.getLastModified().getTime());
 	}
 
 	private static final String DATE_FORMAT_FULL = "dd.MM.yyyy HH:mm:ss.SSS";
