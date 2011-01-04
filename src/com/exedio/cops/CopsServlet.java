@@ -143,6 +143,19 @@ public abstract class CopsServlet extends HttpServlet
 			final HttpServletResponse response)
 		throws ServletException, IOException
 	{
+		if(resources!=null && "/copsResourceStatus.html".equals(request.getPathInfo()))
+		{
+			if(!request.isUserInRole("manager"))
+			{
+				BasicAuthorization.reject(response, "Cops Resource Status");
+				return;
+			}
+
+			final ResourceStatusCop cop = ResourceStatusCop.getCop(request);
+			cop.post(request, resources.values());
+			response.sendRedirect(cop.getURL(request));
+		}
+
 		doRequestPrivate(request, response);
 	}
 

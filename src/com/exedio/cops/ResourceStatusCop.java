@@ -18,6 +18,11 @@
 
 package com.exedio.cops;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+
 import javax.servlet.http.HttpServletRequest;
 
 final class ResourceStatusCop extends Cop
@@ -66,5 +71,49 @@ final class ResourceStatusCop extends Cop
 	ResourceStatusCop toggleAbsoluteUrl()
 	{
 		return new ResourceStatusCop(showImage, showUrl, !absoluteUrl);
+	}
+
+	static final String SELECT = "select";
+	static final String SELECT_ALL = "selectAll";
+	static final String INBOX = "inbox";
+	static final String OVERRIDE_HOST = "overrideHost";
+
+	void post(final HttpServletRequest request, final Collection<Resource> resources)
+	{
+		if(request.getParameter(OVERRIDE_HOST)!=null)
+		{
+			final String hostOverride = trim(request.getParameter(INBOX));
+			for(final Resource resource : filter(request, resources))
+				resource.setHostOverride(hostOverride);
+		}
+	}
+
+	private static Collection<Resource> filter(final HttpServletRequest request, final Collection<Resource> resources)
+	{
+		if(request.getParameter(SELECT_ALL)!=null)
+			return resources;
+
+		final String[] selectList = request.getParameterValues(SELECT);
+		if(selectList==null)
+			return Collections.<Resource>emptyList();
+
+		final HashSet<String> selects = new HashSet<String>();
+		for(final String select : selectList)
+			selects.add(select);
+		final ArrayList<Resource> result = new ArrayList<Resource>();
+		for(final Resource resource : resources)
+			if(selects.contains(resource.getName()))
+				result.add(resource);
+		return result;
+	}
+
+	private static String trim(String s)
+	{
+		if(s==null)
+			return null;
+		s = s.trim();
+		if(s.length()==0)
+			return null;
+		return s;
 	}
 }

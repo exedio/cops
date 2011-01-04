@@ -19,6 +19,11 @@
 
 package com.exedio.cops;
 
+import static com.exedio.cops.ResourceStatusCop.SELECT;
+import static com.exedio.cops.ResourceStatusCop.SELECT_ALL;
+import static com.exedio.cops.ResourceStatusCop.INBOX;
+import static com.exedio.cops.ResourceStatusCop.OVERRIDE_HOST;
+
 import java.text.DecimalFormat;
 import java.util.Collection;
 
@@ -126,9 +131,11 @@ final class ResourceStatus_Jspm
 				%>not authenticated<%
 			}
 		%></div>
+	<form action="<%=cop%>" method="post">
 		<table>
 			<caption>Resource Status <small>(<a href="<%=cop.toggleShowUrl()%>">url</a>,<a href="<%=cop.toggleAbsoluteUrl()%>">absolute</a>)</small></caption>
 			<tr>
+				<th></th>
 				<th>304</th>
 				<th>200</th>
 				<th>Length</th>
@@ -171,6 +178,7 @@ final class ResourceStatus_Jspm
 				final boolean showImageThis = cop.showImage && contentType.startsWith("image/");
 			%>
 			<tr>
+				<td><input type="checkbox" name="<%=SELECT%>" value="<%=resource.getName()%>"></input></td>
 				<td><%=nf.format(response304Count)%></td>
 				<td><%=nf.format(response200Count)%></td>
 				<td><%=nf.format(contentLength)%></td>
@@ -202,6 +210,7 @@ final class ResourceStatus_Jspm
 			}
 		%>
 			<tr>
+				<th><input type="checkbox" name="<%=SELECT_ALL%>" value="true"></input></th>
 				<td><%=nf.format(response304CountTotal)%></td>
 				<td><%=nf.format(response200CountTotal)%></td>
 				<td><%=nf.format(contentLengthTotal)%></td>
@@ -210,6 +219,9 @@ final class ResourceStatus_Jspm
 				<th colspan="0">Total</th>
 			</tr>
 		</table>
+		<input name="<%=INBOX%>"></input>
+		<input type="submit" name="<%=OVERRIDE_HOST%>" value="Override Host"></input>
+	</form>
 		<div class="footer">
 			<%=thePackage.getSpecificationTitle()%>
 			<%=thePackage.getSpecificationVersion()%>
