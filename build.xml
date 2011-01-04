@@ -15,11 +15,13 @@
 		<jspm method="print">
 			<fileset dir="src">
 				<include name="**/*.jspm" />
+				<exclude name="com/exedio/cops/ResourceStatus.jspm" />
 				<exclude name="com/exedio/cops/Properties.jspm" />
 			</fileset>
 		</jspm>
 		<jspm>
 			<fileset dir="src">
+				<include name="com/exedio/cops/ResourceStatus.jspm" />
 				<include name="com/exedio/cops/Properties.jspm" />
 			</fileset>
 		</jspm>

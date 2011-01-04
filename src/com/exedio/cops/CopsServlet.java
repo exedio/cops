@@ -110,28 +110,19 @@ public abstract class CopsServlet extends HttpServlet
 				nfs.setDecimalSeparator(',');
 				nfs.setGroupingSeparator('\'');
 				final DecimalFormat nf = new DecimalFormat("", nfs);
-				PrintStream out = null;
-				try
-				{
-					out = new PrintStream(response.getOutputStream(), false, UTF8);
-					final ServletConfig config = getServletConfig();
-					ResourceStatus_Jspm.write(
-							out,
-							request,
-							config!=null ? config.getServletName() : null, // TODO why can config be null?
-							resources.values(),
-							getAuthentication(request),
-							request.getParameter(INLINE)!=null,
-							nf,
-							new SimpleDateFormat("yyyy/MM/dd'&nbsp;'HH:mm:ss'<small>'.S'</small>'"),
-							new SimpleDateFormat("yyyy/MM/dd'&nbsp;'HH:mm:ss.SSS Z (z)"),
-							CopsServlet.class.getPackage());
-				}
-				finally
-				{
-					if(out!=null)
-						out.close();
-				}
+
+				final Out out = new Out(request);
+				final ServletConfig config = getServletConfig();
+				ResourceStatus_Jspm.write(
+						out,
+						request,
+						config!=null ? config.getServletName() : null, // TODO why can config be null?
+						resources.values(),
+						getAuthentication(request),
+						request.getParameter(INLINE)!=null,
+						nf,
+						CopsServlet.class.getPackage());
+				out.sendBody(response);
 				return;
 			}
 			final Resource resource = resources.get(pathInfo);

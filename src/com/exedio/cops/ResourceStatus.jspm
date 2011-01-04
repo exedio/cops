@@ -19,11 +19,7 @@
 
 package com.exedio.cops;
 
-import static com.exedio.cope.util.XMLEncoder.encode;
-
-import java.io.PrintStream;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 
@@ -32,15 +28,13 @@ import javax.servlet.http.HttpServletRequest;
 final class ResourceStatus_Jspm
 {
 	public static final void write(
-				final PrintStream out,
+				final Out out,
 				final HttpServletRequest request,
 				final String servletName,
 				final Collection<Resource> resources,
 				final String authentication,
 				final boolean inline,
 				final DecimalFormat nf,
-				final SimpleDateFormat dateFormat,
-				final SimpleDateFormat footerDateFormat,
 				final Package thePackage)
 	{
 %><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  "http://www.w3.org/TR/html4/loose.dtd">
@@ -124,7 +118,7 @@ final class ResourceStatus_Jspm
 		<div class="<% if(authentication==null){%>not<%} %>authenticated"><%
 			if(authentication!=null)
 			{
-				%>authenticated as <%=encode(authentication)%><%
+				%>authenticated as <%=authentication%><%
 			}
 			else
 			{
@@ -171,9 +165,9 @@ final class ResourceStatus_Jspm
 				<td><%=nf.format(response304Length)%></td>
 				<td><%=nf.format(response200Length)%></td>
 				<td class="text"><% if(inlineThis){%><img src="<%=resource.getURL(request)%>"><%} %></td>
-				<td class="text"><a href="<%=resource.getURL(request)%>"><%=encode(resource.getName())%></a></td>
-				<td class="text"><%=encode(contentType)%></td>
-				<td class="text"><%=dateFormat.format(resource.getLastModified())%></td>
+				<td class="text"><a href="<%=resource.getURL(request)%>"><%=resource.getName()%></a></td>
+				<td class="text"><%=contentType%></td>
+				<td class="text"><%=resource.getLastModified()%></td>
 			</tr><%
 			
 				response304CountTotal += response304Count;
@@ -193,9 +187,9 @@ final class ResourceStatus_Jspm
 			</tr>
 		</table>
 		<div class="footer">
-			<%=encode(thePackage.getSpecificationTitle())%>
-			<%=encode(thePackage.getSpecificationVersion())%>
-			<%=footerDateFormat.format(new Date())%>
+			<%=thePackage.getSpecificationTitle()%>
+			<%=thePackage.getSpecificationVersion()%>
+			<%=new Date()%>
 		</div>
 	</body>
 </html>

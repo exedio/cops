@@ -23,6 +23,8 @@
 package com.exedio.cops;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,6 +35,7 @@ final class Out
 {
 	private StringBuilder bf = new StringBuilder();
 	private final HttpServletRequest request;
+	private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd'&nbsp;'HH:mm:ss'<small>'.S'</small>'");
 
 	Out(final HttpServletRequest request)
 	{
@@ -47,12 +50,20 @@ final class Out
 
 	void write(final String s)
 	{
-		bf.append(XMLEncoder.encode(s));
+		if(s==null)
+			bf.append("null");
+		else
+			XMLEncoder.append(bf, s);
 	}
 
 	void write(final int i)
 	{
 		bf.append(i);
+	}
+
+	void write(final Date d)
+	{
+		bf.append(dateFormat.format(d));
 	}
 
 	void write(final Resource resource)
