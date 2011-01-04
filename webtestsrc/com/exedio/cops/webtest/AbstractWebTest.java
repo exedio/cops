@@ -51,7 +51,8 @@ public class AbstractWebTest extends TestCase
 		final SimpleDateFormat df = new SimpleDateFormat(DATE_FORMAT_FULL);
 		assertEquals(
 				"expected " + df.format(new Date(expected)) +
-				", but was " + df.format(new Date(actual)),
+				", but was " + df.format(new Date(actual)) +
+				", difference of " + (actual-expected),
 				expected, actual);
 	}
 }
