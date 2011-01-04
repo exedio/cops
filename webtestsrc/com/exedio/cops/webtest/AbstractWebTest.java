@@ -46,15 +46,12 @@ public class AbstractWebTest extends TestCase
 		assertTrue(message, !expectedAfterCeil.before(actual));
 	}
 
-	public final static void assertWithin(final Date expectedBefore, final Date expectedAfter, final Date actual)
+	public final static void assertEqualsDate(final long expected, final long actual)
 	{
 		final SimpleDateFormat df = new SimpleDateFormat(DATE_FORMAT_FULL);
-		final String message =
-			"expected date within " + df.format(expectedBefore) +
-			" and " + df.format(expectedAfter) +
-			", but was " + df.format(actual);
-
-		assertTrue(message, !expectedBefore.after(actual));
-		assertTrue(message, !expectedAfter.before(actual));
+		assertEquals(
+				"expected " + df.format(new Date(expected)) +
+				", but was " + df.format(new Date(actual)),
+				expected, actual);
 	}
 }
