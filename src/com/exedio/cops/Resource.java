@@ -169,13 +169,11 @@ public final class Resource
 			if(content!=null)
 				return;
 
-			InputStream in = null;
+			final InputStream in = resourceLoader.getResourceAsStream(name);
+			if(in==null)
+				throw new RuntimeException("no resource for "+name);
 			try
 			{
-				in = resourceLoader.getResourceAsStream(name);
-				if(in==null)
-					throw new RuntimeException("no resource for "+name);
-
 				final ByteArrayOutputStream out = new ByteArrayOutputStream();
 				final byte[] buf = new byte[20*1024];
 				for(int len = in.read(buf); len>=0; len = in.read(buf))
@@ -189,16 +187,13 @@ public final class Resource
 			}
 			finally
 			{
-				if(in!=null)
+				try
 				{
-					try
-					{
-						in.close();
-					}
-					catch(final IOException e)
-					{
-						throw new RuntimeException(e);
-					}
+					in.close();
+				}
+				catch(final IOException e)
+				{
+					throw new RuntimeException(e);
 				}
 			}
 		}
