@@ -63,23 +63,23 @@ final class Properties_Jspm
 			if(field.hasHiddenValue())
 				continue;
 			%>
-			<tr>
-			<%
+			<tr><%
+			
 			if(overridable)
 			{
 				%>
-				<th><input type="checkbox" name="<%=FIELD_SELECT%>" value="<%=field.getKey()%>"></input></th>
-			<%}
+				<th><input type="checkbox" name="<%=FIELD_SELECT%>" value="<%=field.getKey()%>"></input></th><%
+			}
 				%>
 				<th><%=field.getKey()%></th>
-				<td><%=field.getValue().toString()%><% if(field.isSpecified()) {%> <small>(<%=field.getDefaultValue().toString()%>)</small><%} %></td>
-			<%
+				<td><%=field.getValue().toString()%><% if(field.isSpecified()) {%> <small>(<%=field.getDefaultValue().toString()%>)</small><%} %></td><%
+			
 			if(overridable)
 			{
 				%>
-				<td style="padding:0;"><input name="<%=FIELD_VALUE_PREFIX%><%=field.getKey()%>"></input></td>
-			<%}
-				%>
+				<td style="padding:0;"><input name="<%=FIELD_VALUE_PREFIX%><%=field.getKey()%>"></input></td><%
+			}
+			%>
 			</tr><%
 		}
 		%>
@@ -154,13 +154,13 @@ final class Properties_Jspm
 			}
 			%>
 			</table>
-			<input type="submit" name="<%=TEST%>" value="Test"></input>
-		<%
+			<input type="submit" name="<%=TEST%>" value="Test"></input><%
+		
 		if(overridable)
 		{
 			%>
-			<input type="submit" name="<%=SET %>" value="Set"></input>
-		<%}
+			<input type="submit" name="<%=SET %>" value="Set"></input><%
+		}
 		%>
 		</form>
 	</body>
