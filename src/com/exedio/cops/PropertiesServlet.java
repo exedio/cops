@@ -56,7 +56,7 @@ public abstract class PropertiesServlet extends CopsServlet
 
 		if(Cop.isPost(request) && request.getParameter(SET)!=null)
 		{
-			if(this instanceof Overridable)
+			if(this instanceof Overridable<?>)
 			{
 				final HashMap<String, String> sourceMap = new HashMap<String, String>();
 				{
@@ -144,9 +144,9 @@ public abstract class PropertiesServlet extends CopsServlet
 
 	protected abstract Properties getProperties();
 
-	public interface Overridable
+	public interface Overridable<P extends Properties>
 	{
-		Properties newProperties(Properties.Source overrideSource);
-		void override(Properties properties);
+		P newProperties(Properties.Source overrideSource);
+		void override(P properties);
 	}
 }
