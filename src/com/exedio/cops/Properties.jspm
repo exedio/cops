@@ -42,6 +42,7 @@ final class Properties_Jspm
 	static final void write(
 			final Out out,
 			final HttpServletRequest request,
+			final boolean overridable,
 			final Properties properties)
 	{
 %><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -63,10 +64,22 @@ final class Properties_Jspm
 				continue;
 			%>
 			<tr>
+			<%
+			if(overridable)
+			{
+				%>
 				<th><input type="checkbox" name="<%=FIELD_SELECT%>" value="<%=field.getKey()%>"></input></th>
+			<%}
+				%>
 				<th><%=field.getKey()%></th>
 				<td><%=field.getValue().toString()%><% if(field.isSpecified()) {%> <small>(<%=field.getDefaultValue().toString()%>)</small><%} %></td>
+			<%
+			if(overridable)
+			{
+				%>
 				<td style="padding:0;"><input name="<%=FIELD_VALUE_PREFIX%><%=field.getKey()%>"></input></td>
+			<%}
+				%>
 			</tr><%
 		}
 		%>
@@ -142,7 +155,13 @@ final class Properties_Jspm
 			%>
 			</table>
 			<input type="submit" name="<%=TEST%>" value="Test"></input>
+		<%
+		if(overridable)
+		{
+			%>
 			<input type="submit" name="<%=SET %>" value="Set"></input>
+		<%}
+		%>
 		</form>
 	</body>
 </html><%

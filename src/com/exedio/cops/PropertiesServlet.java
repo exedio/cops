@@ -104,6 +104,7 @@ public abstract class PropertiesServlet extends CopsServlet
 		Properties_Jspm.write(
 				out,
 				request,
+				this instanceof Overridable,
 				properties);
 		out.sendBody(response);
 	}
