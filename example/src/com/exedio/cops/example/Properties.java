@@ -77,6 +77,11 @@ public final class Properties extends com.exedio.cope.util.Properties
 		}, null);
 	}
 
+	Properties(final Properties.Source source)
+	{
+		super(source, null);
+	}
+
 	@Override
 	public List<? extends Callable<?>> getTests()
 	{
@@ -151,5 +156,10 @@ public final class Properties extends com.exedio.cope.util.Properties
 
 		instance = new Properties(context);
 		return instance;
+	}
+
+	static final void setInstance(final Properties instance)
+	{
+		Properties.instance = instance;
 	}
 }

@@ -23,6 +23,11 @@
 
 package com.exedio.cops;
 
+import static com.exedio.cops.PropertiesServlet.SET;
+import static com.exedio.cops.PropertiesServlet.FIELD_SELECT;
+import static com.exedio.cops.PropertiesServlet.FIELD_VALUE_PREFIX;
+import static com.exedio.cops.PropertiesServlet.TEST_NUMBER;
+
 import java.util.HashSet;
 import java.util.concurrent.Callable;
 
@@ -33,7 +38,6 @@ import com.exedio.cope.util.Properties;
 final class Properties_Jspm
 {
 	private static final String TEST = "test";
-	private static final String TEST_NUMBER = "testNum";
 	
 	static final void write(
 			final Out out,
@@ -51,6 +55,7 @@ final class Properties_Jspm
 		<a href="http://cope.sourceforge.net/" target="_blank"><img src="<%=PropertiesServlet.logo%>" alt="Exedio Logo" class="logo"></img></a>
 		<h1>Application Properties</h1>
 		<div class="footer"><%=properties.getSource()%></div>
+		<form method="post">
 		<table><%
 		for(final Properties.Field field : properties.getFields())
 		{
@@ -58,13 +63,14 @@ final class Properties_Jspm
 				continue;
 			%>
 			<tr>
+				<th><input type="checkbox" name="<%=FIELD_SELECT%>" value="<%=field.getKey()%>"></input></th>
 				<th><%=field.getKey()%></th>
 				<td><%=field.getValue().toString()%><% if(field.isSpecified()) {%> <small>(<%=field.getDefaultValue().toString()%>)</small><%} %></td>
+				<td style="padding:0;"><input name="<%=FIELD_VALUE_PREFIX%><%=field.getKey()%>"></input></td>
 			</tr><%
 		}
 		%>
 		</table>
-		<form method="post">
 			<table>
 				<caption>Tests</caption><%
 			
@@ -136,6 +142,7 @@ final class Properties_Jspm
 			%>
 			</table>
 			<input type="submit" name="<%=TEST%>" value="Test"></input>
+			<input type="submit" name="<%=SET %>" value="Set"></input>
 		</form>
 	</body>
 </html><%
