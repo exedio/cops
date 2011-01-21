@@ -67,33 +67,17 @@ public abstract class PropertiesServlet extends CopsServlet
 				}
 				if(!sourceMap.isEmpty())
 				{
-					final Overridable overridable =(Overridable<?>)this;
-					final Properties properties = overridable.newProperties(
-							new OverrideSource(getProperties().getSourceObject(), sourceMap));
-
-					int testNumber = -1;
 					final HashSet<Integer> doTestNumbers = new HashSet<Integer>();
 					final String[] doTestNumberStrings = request.getParameterValues(TEST_NUMBER);
 					if(doTestNumberStrings!=null)
 						for(final String doTestNumberString : doTestNumberStrings)
 							doTestNumbers.add(Integer.valueOf(Integer.parseInt(doTestNumberString)));
-					for(final Callable<?> test : properties.getTests())
-					{
-						testNumber++;
 
-						if(doTestNumbers.contains(Integer.valueOf(testNumber)))
-						{
-							try
-							{
-								test.call();
-							}
-							catch(final Exception e)
-							{
-								throw new RuntimeException(e);
-							}
-						}
-					}
-					overridable.override(properties);
+					override(
+							(Overridable<?>)this,
+							getProperties().getSourceObject(),
+							sourceMap,
+							doTestNumbers);
 				}
 			}
 		}
@@ -107,6 +91,38 @@ public abstract class PropertiesServlet extends CopsServlet
 				this instanceof Overridable<?>,
 				properties);
 		out.sendBody(response);
+	}
+
+	/**
+	 * Helper method for using generics safely without warnings.
+	 */
+	private static <P extends Properties> void override(
+			final Overridable<P> overridable,
+			final Properties.Source source,
+			final HashMap<String, String> sourceMap,
+			final HashSet<Integer> doTestNumbers)
+	{
+		final P properties = overridable.newProperties(
+				new OverrideSource(source, sourceMap));
+
+		int testNumber = -1;
+		for(final Callable<?> test : properties.getTests())
+		{
+			testNumber++;
+
+			if(doTestNumbers.contains(Integer.valueOf(testNumber)))
+			{
+				try
+				{
+					test.call();
+				}
+				catch(final Exception e)
+				{
+					throw new RuntimeException(e);
+				}
+			}
+		}
+		overridable.override(properties);
 	}
 
 	private static final class OverrideSource implements Properties.Source
