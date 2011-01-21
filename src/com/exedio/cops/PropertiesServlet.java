@@ -67,7 +67,7 @@ public abstract class PropertiesServlet extends CopsServlet
 				}
 				if(!sourceMap.isEmpty())
 				{
-					final Overridable overridable =(Overridable)this;
+					final Overridable overridable =(Overridable<?>)this;
 					final Properties properties = overridable.newProperties(
 							new OverrideSource(getProperties().getSourceObject(), sourceMap));
 
@@ -104,7 +104,7 @@ public abstract class PropertiesServlet extends CopsServlet
 		Properties_Jspm.write(
 				out,
 				request,
-				this instanceof Overridable,
+				this instanceof Overridable<?>,
 				properties);
 		out.sendBody(response);
 	}
