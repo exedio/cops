@@ -39,6 +39,7 @@
 				<pathelement location="lib/servlet-api.jar" />
 				<pathelement location="lib/exedio-cope-util.jar" />
 			</classpath>
+			<compilerarg value="-Xlint" />
 			<compilerarg value="-encoding" />
 			<compilerarg value="ascii" />
 		</javac>
@@ -62,6 +63,7 @@
 				<pathelement location="lib/servlet-api.jar" />
 				<pathelement location="lib/catalina.jar" />
 			</classpath>
+			<compilerarg value="-Xlint" />
 			<compilerarg value="-encoding" />
 			<compilerarg value="ascii" />
 		</javac>
