@@ -57,18 +57,11 @@ final class Properties_Jspm
 		<a href="http://cope.sourceforge.net/" target="_blank"><img src="<%=PropertiesServlet.logo%>" alt="Exedio Logo" class="logo"></img></a>
 		<h1>Application Properties</h1>
 		<div class="footer"><%=properties.getSource()%></div>
-		<div class="footer">
-			hidden:
-			<a href="<%=cop.toShowHidden(true)%>">show</a>
-			<a href="<%=cop.toShowHidden(false)%>">hide</a>
-		</div>
 		<form method="post">
 		<table><%
 		final boolean hideHidden = !cop.showHidden;
 		for(final Properties.Field field : properties.getFields())
 		{
-			if(hideHidden && field.hasHiddenValue())
-				continue;
 			%>
 			<tr><%
 			
@@ -79,6 +72,15 @@ final class Properties_Jspm
 			}
 				%>
 				<th><%=field.getKey()%></th>
+				<%
+		if(hideHidden && field.hasHiddenValue())
+		{
+				%>
+				<td class="notavailable" colspan="2">hidden (<a href="<%=cop.toShowHidden(true)%>">show</a>)</td><%
+		}
+		else
+		{
+				%>
 				<td><%=field.getValue().toString()%><%
 					if(field.isSpecified())
 					{
@@ -101,6 +103,7 @@ final class Properties_Jspm
 				%>
 				<td style="padding:0;"><input name="<%=FIELD_VALUE_PREFIX%><%=field.getKey()%>"></input></td><%
 			}
+		}
 			%>
 			</tr><%
 		}
