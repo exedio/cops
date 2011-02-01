@@ -87,6 +87,7 @@ public abstract class PropertiesServlet extends CopsServlet
 		final Out out = new Out(request);
 		Properties_Jspm.write(
 				out,
+				PropertiesCop.getCop(request),
 				request,
 				this instanceof Overridable<?>,
 				properties);

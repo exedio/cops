@@ -41,6 +41,7 @@ final class Properties_Jspm
 	
 	static final void write(
 			final Out out,
+			final PropertiesCop cop,
 			final HttpServletRequest request,
 			final boolean overridable,
 			final Properties properties)
@@ -56,11 +57,17 @@ final class Properties_Jspm
 		<a href="http://cope.sourceforge.net/" target="_blank"><img src="<%=PropertiesServlet.logo%>" alt="Exedio Logo" class="logo"></img></a>
 		<h1>Application Properties</h1>
 		<div class="footer"><%=properties.getSource()%></div>
+		<div class="footer">
+			hidden:
+			<a href="<%=cop.toShowHidden(true)%>">show</a>
+			<a href="<%=cop.toShowHidden(false)%>">hide</a>
+		</div>
 		<form method="post">
 		<table><%
+		final boolean hideHidden = !cop.showHidden;
 		for(final Properties.Field field : properties.getFields())
 		{
-			if(field.hasHiddenValue())
+			if(hideHidden && field.hasHiddenValue())
 				continue;
 			%>
 			<tr><%
