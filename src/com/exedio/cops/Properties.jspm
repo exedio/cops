@@ -72,7 +72,12 @@ final class Properties_Jspm
 			}
 				%>
 				<th><%=field.getKey()%></th>
-				<td><%=field.getValue().toString()%><% if(field.isSpecified()) {%> <small>(<%=field.getDefaultValue().toString()%>)</small><%} %></td><%
+				<td><%=field.getValue().toString()%><%
+					if(field.isSpecified())
+					{
+						%> <small>(<%=field.getDefaultValue().toString()%>)</small><%
+					}
+					%></td><%
 			
 			if(overridable)
 			{
