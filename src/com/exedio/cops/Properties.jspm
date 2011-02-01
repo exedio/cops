@@ -71,8 +71,8 @@ final class Properties_Jspm
 				<th><input type="checkbox" name="<%=FIELD_SELECT%>" value="<%=field.getKey()%>"></input></th><%
 			}
 				%>
-				<th><%=field.getKey()%></th>
-				<%
+				<th><%=field.getKey()%></th><%
+		
 		if(hideHidden && field.hasHiddenValue())
 		{
 				%>
