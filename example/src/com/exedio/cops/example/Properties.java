@@ -56,6 +56,11 @@ public final class Properties extends com.exedio.cope.util.Properties
 	private final StringField copaibaAdminLogin    =  new StringField("copaiba.admin.login",    "admin");
 	private final StringField copaibaAdminPassword =  new StringField("copaiba.admin.password", "nimda");
 
+	private final StringField stringDefault    = new StringField("string.default", "default of string.default");
+	private final StringField stringSet        = new StringField("string.set");
+	private final StringField stringDefaultSet = new StringField("string.default.set", "default of string.default.set");
+	private final StringField stringHidden     = new StringField("string.hidden", true);
+
 	private Properties(final ServletContext context)
 	{
 		super(new Source(){

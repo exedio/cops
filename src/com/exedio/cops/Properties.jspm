@@ -75,7 +75,17 @@ final class Properties_Jspm
 				<td><%=field.getValue().toString()%><%
 					if(field.isSpecified())
 					{
-						%> <small>(<%=field.getDefaultValue().toString()%>)</small><%
+						final Object fieldDefault = field.getDefaultValue();
+						%> <small><%
+						if(fieldDefault!=null)
+						{
+							%>(<%=fieldDefault.toString()%>)<%
+						}
+						else
+						{
+							%><i>(no default)</i><%
+						}
+						%></small><%
 					}
 					%></td><%
 			
