@@ -126,19 +126,18 @@ public final class Resource
 		if(request==null)
 			throw new NullPointerException("request");
 
+		final StringBuilder bf = new StringBuilder();
+
 		final String hostOverride = this.hostOverride;
 		if(hostOverride!=null)
-			return
-				request.getScheme() + "://" +
-				hostOverride +
-				request.getContextPath() +
-				request.getServletPath() +
-				'/' + name;
-		else
-			return
-				request.getContextPath() +
-				request.getServletPath() +
-				'/' + name;
+			bf.append(request.getScheme()).append("://").
+				append(hostOverride);
+
+		bf.append(request.getContextPath()).
+			append(request.getServletPath()).
+			append('/').append(name);
+
+		return bf.toString();
 	}
 
 	public String getAbsoluteURL(final HttpServletRequest request)
