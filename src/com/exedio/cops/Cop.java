@@ -62,6 +62,14 @@ public abstract class Cop
 		addParameter(key, String.valueOf(value));
 	}
 
+	public final void addParameter(final String key, final String value, final String defaultValue)
+	{
+		if(value.equals(defaultValue))
+			return;
+
+		addParameter(key, String.valueOf(value));
+	}
+
 	private static final int COMPACT_LONG_RADIX = Character.MAX_RADIX;
 
 	public final void addParameterCompact(final String key, final long value, final long defaultValue)
