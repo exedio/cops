@@ -62,6 +62,30 @@ public abstract class Cop
 		addParameter(key, String.valueOf(value));
 	}
 
+	public final <E extends Enum<E>> void addParameter(final String key, final E value, final E defaultValue)
+	{
+		if(value!=defaultValue)
+			addParameter(key, value.name());
+	}
+
+	public static <E extends Enum<E>> E getEnumParameter(
+			final HttpServletRequest request,
+			final String name,
+			final E defaultValue)
+	{
+		final String value = request.getParameter(name);
+		if(value!=null)
+		{
+			for(final E e : defaultValue.getDeclaringClass().getEnumConstants())
+				if(e.name().equals(value))
+					return e;
+
+			throw new RuntimeException(value);
+		}
+		else
+			return defaultValue;
+	}
+
 	private static final int COMPACT_LONG_RADIX = Character.MAX_RADIX;
 
 	public final void addParameterCompact(final String key, final long value, final long defaultValue)
