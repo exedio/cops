@@ -64,6 +64,11 @@ table td.notavailable
 	font-size:7pt;
 }
 
+input.propertyValue
+{
+	display:none;
+}
+
 div.footer
 {
 	font-size:70%;

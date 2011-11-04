@@ -46,6 +46,7 @@
 		<copy todir="build/classes">
 			<fileset dir="src">
 				<include name="**/*.css" />
+				<include name="**/*.js" />
 				<include name="**/*.png" />
 			</fileset>
 		</copy>

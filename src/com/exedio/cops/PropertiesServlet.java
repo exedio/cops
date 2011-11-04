@@ -39,6 +39,7 @@ public abstract class PropertiesServlet extends CopsServlet
 	private static final long serialVersionUID = 1l;
 
 	static final Resource stylesheet = new Resource("properties.css");
+	static final Resource script = new Resource("properties.js");
 	static final Resource logo = new Resource("logo.png");
 
 	static final String SET = "set";
