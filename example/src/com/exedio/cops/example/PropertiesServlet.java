@@ -35,6 +35,12 @@ implements Overridable<Properties>
 		return Properties.instance(getServletContext());
 	}
 
+	@Override
+	protected String getDisplayCaption()
+	{
+		return "Display Caption";
+	}
+
 	public Properties newProperties(final Properties.Source overrideSource)
 	{
 		return new Properties(overrideSource);

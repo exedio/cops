@@ -90,6 +90,7 @@ public abstract class PropertiesServlet extends CopsServlet
 				out,
 				PropertiesCop.getCop(request),
 				request,
+				getDisplayCaption(),
 				this instanceof Overridable<?>,
 				properties);
 		out.sendBody(response);
@@ -161,6 +162,11 @@ public abstract class PropertiesServlet extends CopsServlet
 	}
 
 	protected abstract Properties getProperties();
+
+	protected String getDisplayCaption()
+	{
+		return "Properties";
+	}
 
 	public interface Overridable<P extends Properties>
 	{

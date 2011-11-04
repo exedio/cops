@@ -43,6 +43,7 @@ final class Properties_Jspm
 			final Out out,
 			final PropertiesCop cop,
 			final HttpServletRequest request,
+			final String caption,
 			final boolean overridable,
 			final Properties properties)
 	{
@@ -50,13 +51,13 @@ final class Properties_Jspm
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=<%=CopsServlet.UTF8%>"></meta>
-		<title>Application Properties</title>
+		<title><%=caption%></title>
 		<link rel="STYLESHEET" type="text/css" href="<%=PropertiesServlet.stylesheet%>"></link>
 		<script src="<%=PropertiesServlet.script%>" type="text/javascript"></script>
 	</head>
 	<body>
 		<a href="http://cope.sourceforge.net/" target="_blank"><img src="<%=PropertiesServlet.logo%>" alt="Exedio Logo" class="logo"></img></a>
-		<h1>Application Properties</h1>
+		<h1><%=caption%></h1>
 		<div class="footer"><%=properties.getSource()%></div>
 		<form method="post">
 		<table><%
