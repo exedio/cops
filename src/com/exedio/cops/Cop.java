@@ -18,6 +18,8 @@
 
 package com.exedio.cops;
 
+import static com.exedio.cops.CopsServlet.UTF8;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
@@ -124,7 +126,7 @@ public abstract class Cop
 		url.append('=');
 		try
 		{
-			url.append(URLEncoder.encode(value, CopsServlet.UTF8));
+			url.append(URLEncoder.encode(value, UTF8));
 		}
 		catch(final UnsupportedEncodingException e)
 		{

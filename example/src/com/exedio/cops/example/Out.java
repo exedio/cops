@@ -18,6 +18,8 @@
 
 package com.exedio.cops.example;
 
+import static com.exedio.cops.CopsServlet.UTF8;
+
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +28,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.exedio.cope.util.XMLEncoder;
 import com.exedio.cops.BodySender;
 import com.exedio.cops.Cop;
-import com.exedio.cops.CopsServlet;
 import com.exedio.cops.Resource;
 
 final class Out
@@ -91,6 +92,6 @@ final class Out
 			throw new IllegalStateException();
 		this.bf = null; // prevent this instance to be used anymore
 
-		BodySender.send(response, bf, CopsServlet.UTF8);
+		BodySender.send(response, bf, UTF8);
 	}
 }

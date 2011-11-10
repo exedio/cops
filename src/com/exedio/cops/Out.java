@@ -22,6 +22,8 @@
 
 package com.exedio.cops;
 
+import static com.exedio.cops.CopsServlet.UTF8;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -109,6 +111,6 @@ final class Out
 			throw new IllegalStateException();
 		this.bf = null; // prevent this instance to be used anymore
 
-		BodySender.send(response, bf, CopsServlet.UTF8);
+		BodySender.send(response, bf, UTF8);
 	}
 }

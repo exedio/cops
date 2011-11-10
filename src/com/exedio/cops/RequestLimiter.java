@@ -18,6 +18,8 @@
 
 package com.exedio.cops;
 
+import static com.exedio.cops.CopsServlet.UTF8;
+
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
@@ -71,7 +73,7 @@ public final class RequestLimiter
 		{
 			try
 			{
-				this.denyBody = denyBody.getBytes(CopsServlet.UTF8);
+				this.denyBody = denyBody.getBytes(UTF8);
 			}
 			catch(final UnsupportedEncodingException e)
 			{
@@ -200,7 +202,7 @@ public final class RequestLimiter
 			try
 			{
 				outStream = response.getOutputStream();
-				out = new PrintStream(outStream, false, CopsServlet.UTF8);
+				out = new PrintStream(outStream, false, UTF8);
 				RequestLimiter_Jspm.write(out, path, threshold, interval, deniedRequests);
 			}
 			finally

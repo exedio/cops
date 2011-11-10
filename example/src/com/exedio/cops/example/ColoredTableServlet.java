@@ -18,14 +18,14 @@
 
 package com.exedio.cops.example;
 
+import static com.exedio.cops.CopsServlet.UTF8;
+
 import java.io.IOException;
 import java.io.PrintStream;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.exedio.cops.CopsServlet;
 
 public final class ColoredTableServlet extends HttpServlet
 {
@@ -37,7 +37,7 @@ public final class ColoredTableServlet extends HttpServlet
 			final HttpServletResponse response)
 		throws IOException
 	{
-			final PrintStream out = new PrintStream(response.getOutputStream(), false, CopsServlet.UTF8);
+			final PrintStream out = new PrintStream(response.getOutputStream(), false, UTF8);
 			ColoredTableServlet_Jspm.write(out);
 			out.close();
 	}

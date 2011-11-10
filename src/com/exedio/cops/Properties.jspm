@@ -27,6 +27,7 @@ import static com.exedio.cops.PropertiesServlet.SET;
 import static com.exedio.cops.PropertiesServlet.FIELD_SELECT;
 import static com.exedio.cops.PropertiesServlet.FIELD_VALUE_PREFIX;
 import static com.exedio.cops.PropertiesServlet.TEST_NUMBER;
+import static com.exedio.cops.CopsServlet.UTF8;
 
 import java.util.HashSet;
 import java.util.concurrent.Callable;
@@ -50,7 +51,7 @@ final class Properties_Jspm
 %><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<meta http-equiv="content-type" content="text/html; charset=<%=CopsServlet.UTF8%>"></meta>
+		<meta http-equiv="content-type" content="text/html; charset=<%=UTF8%>"></meta>
 		<title><%=caption%></title>
 		<link rel="STYLESHEET" type="text/css" href="<%=PropertiesServlet.stylesheet%>"></link>
 		<script src="<%=PropertiesServlet.script%>" type="text/javascript"></script>

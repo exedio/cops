@@ -18,6 +18,7 @@
 
 package com.exedio.cops;
 
+import static com.exedio.cops.CopsServlet.UTF8;
 import static java.util.Collections.enumeration;
 
 import java.io.BufferedReader;
@@ -96,7 +97,7 @@ final class CopParameterRequest implements HttpServletRequest
 	{
 		try
 		{
-			return URLDecoder.decode(s, CopsServlet.UTF8);
+			return URLDecoder.decode(s, UTF8);
 		}
 		catch(final UnsupportedEncodingException e)
 		{
