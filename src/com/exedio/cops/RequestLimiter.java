@@ -18,7 +18,7 @@
 
 package com.exedio.cops;
 
-import static com.exedio.cops.CopsServlet.UTF8;
+import static com.exedio.cope.util.CharsetName.UTF8;
 
 import java.io.IOException;
 import java.io.PrintStream;

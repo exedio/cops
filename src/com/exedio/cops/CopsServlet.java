@@ -40,11 +40,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.exedio.cope.util.CharsetName;
+
 public abstract class CopsServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1l;
-
-	public static final String UTF8 = "utf-8";
 
 	private final LinkedHashMap<String, Resource> resources;
 
@@ -301,8 +301,14 @@ public abstract class CopsServlet extends HttpServlet
 	}
 
 	/**
-	 * @deprecated Use {@link #UTF8} instead
+	 * @deprecated Use {@link CharsetName#UTF8} instead
 	 */
 	@Deprecated
-	public static final String ENCODING = UTF8;
+	public static final String ENCODING = CharsetName.UTF8;
+
+	/**
+	 * @deprecated Use {@link CharsetName#UTF8} instead
+	 */
+	@Deprecated
+	public static final String UTF8 = CharsetName.UTF8;
 }

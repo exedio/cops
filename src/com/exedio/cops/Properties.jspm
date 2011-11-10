@@ -27,7 +27,7 @@ import static com.exedio.cops.PropertiesServlet.SET;
 import static com.exedio.cops.PropertiesServlet.FIELD_SELECT;
 import static com.exedio.cops.PropertiesServlet.FIELD_VALUE_PREFIX;
 import static com.exedio.cops.PropertiesServlet.TEST_NUMBER;
-import static com.exedio.cops.CopsServlet.UTF8;
+import static com.exedio.cope.util.CharsetName.UTF8;
 
 import java.util.HashSet;
 import java.util.concurrent.Callable;

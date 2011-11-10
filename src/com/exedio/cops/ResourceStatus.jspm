@@ -19,7 +19,7 @@
 
 package com.exedio.cops;
 
-import static com.exedio.cops.CopsServlet.UTF8;
+import static com.exedio.cope.util.CharsetName.UTF8;
 import static com.exedio.cops.ResourceStatusCop.SELECT;
 import static com.exedio.cops.ResourceStatusCop.SELECT_ALL;
 import static com.exedio.cops.ResourceStatusCop.INBOX;
