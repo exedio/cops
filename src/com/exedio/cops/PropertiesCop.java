@@ -26,8 +26,6 @@ import javax.servlet.http.HttpServletRequest;
 
 final class PropertiesCop extends Cop
 {
-	private static final long serialVersionUID = 1l;
-
 	static final String SHOW_HIDDEN = "sh";
 
 	final boolean showHidden;
