@@ -24,6 +24,7 @@ package com.exedio.cops.example;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -77,7 +78,10 @@ public final class Properties extends com.exedio.cope.util.Properties
 
 			public Collection<String> keySet()
 			{
-				return null;
+				final ArrayList<String> result = new ArrayList<String>();
+				for(final Enumeration<?> e = context.getInitParameterNames(); e.hasMoreElements(); )
+					result.add((String)e.nextElement());
+				return result;
 			}
 		}, null);
 	}

@@ -45,6 +45,7 @@ final class Properties_Jspm
 			final PropertiesCop cop,
 			final HttpServletRequest request,
 			final String caption,
+			final HashSet<String> orphaned,
 			final boolean overridable,
 			final Properties properties)
 	{
@@ -60,6 +61,25 @@ final class Properties_Jspm
 		<a href="http://cope.sourceforge.net/" target="_blank"><img src="<%=PropertiesServlet.logo%>" alt="Exedio Logo" class="logo"></img></a>
 		<h1><%=caption%></h1>
 		<div class="footer"><%=properties.getSource()%></div>
+		<div class="footer">
+		<%
+			if(orphaned==null)
+			{
+			%>
+			Detection of orphaned source keys not possible, since Source.keySet() returns null.<%
+			}
+			else if(orphaned.isEmpty())
+			{
+			%>
+			No orphaned source keys.<%
+			}
+			else
+			{
+			%>
+			Orphaned source keys: <%=orphaned%><%
+			}
+		%>
+		</div>
 		<form method="post">
 		<table><%
 		final boolean hideHidden = !cop.showHidden;

@@ -27,6 +27,7 @@ import static com.exedio.cope.util.CharsetName.UTF8;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -66,6 +67,11 @@ final class Out
 	void write(final int i)
 	{
 		bf.append(i);
+	}
+
+	void write(final HashSet<String> set)
+	{
+		XMLEncoder.append(bf, set.toString());
 	}
 
 	void writeNow()

@@ -91,6 +91,7 @@ public abstract class PropertiesServlet extends CopsServlet
 				PropertiesCop.getCop(request),
 				request,
 				getDisplayCaption(),
+				orphaned(properties),
 				this instanceof Overridable<?>,
 				properties);
 		out.sendBody(response);
@@ -172,5 +173,18 @@ public abstract class PropertiesServlet extends CopsServlet
 	{
 		P newProperties(Properties.Source overrideSource);
 		void override(P properties);
+	}
+
+	// TODO replace by method in class Properties
+	private static final HashSet<String> orphaned(final Properties properties)
+	{
+		final Collection<String> sourceKeySet = properties.getSourceObject().keySet();
+		if(sourceKeySet==null)
+			return null;
+
+		final HashSet<String> result = new HashSet<String>(sourceKeySet);
+		for(final Properties.Field field : properties.getFields())
+			result.remove(field.getKey());
+		return result;
 	}
 }
