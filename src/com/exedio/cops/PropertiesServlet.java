@@ -155,10 +155,11 @@ public abstract class PropertiesServlet extends CopsServlet
 		{
 			final StringBuilder bf = new StringBuilder();
 			bf.append(template.getDescription());
-			bf.append(" Edited ");
+			bf.append(" (Edited ");
 			bf.append(new Date(timestamp));
 			bf.append(' ');
 			bf.append(override.toString());
+			bf.append(')');
 			return bf.toString();
 		}
 
