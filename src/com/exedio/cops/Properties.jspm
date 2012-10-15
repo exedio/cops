@@ -45,6 +45,7 @@ final class Properties_Jspm
 			final PropertiesCop cop,
 			final HttpServletRequest request,
 			final String caption,
+			final String footerDate,
 			final HashSet<String> orphaned,
 			final boolean overridable,
 			final Properties properties)
@@ -211,6 +212,8 @@ final class Properties_Jspm
 		}
 		%>
 		</form>
+		<hr>
+		<div class="footer"><%=footerDate%></div>
 	</body>
 </html><%
 	}

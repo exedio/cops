@@ -23,6 +23,7 @@
 package com.exedio.cops;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -91,6 +92,7 @@ public abstract class PropertiesServlet extends CopsServlet
 				PropertiesCop.getCop(request),
 				request,
 				getDisplayCaption(),
+				new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS Z (z)").format(new Date()),
 				orphaned(properties),
 				this instanceof Overridable<?>,
 				properties);
@@ -156,7 +158,7 @@ public abstract class PropertiesServlet extends CopsServlet
 			final StringBuilder bf = new StringBuilder();
 			bf.append(template.getDescription());
 			bf.append(" (Edited ");
-			bf.append(new Date(timestamp));
+			bf.append(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS").format(new Date(timestamp)));
 			bf.append(' ');
 			bf.append(override.toString());
 			bf.append(')');
