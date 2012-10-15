@@ -59,6 +59,10 @@
 		<servlet-name>properties</servlet-name>
 		<url-pattern>/properties/*</url-pattern>
 	</servlet-mapping>
+	<!--security-constraint>
+		<web-resource-collection><url-pattern>/properties/*</url-pattern></web-resource-collection>
+		<auth-constraint><role-name>manager</role-name></auth-constraint>
+	</security-constraint-->
 
 	<!-- don't know, why this is needed here,
 		  requestLimiter.html protects itself -->
