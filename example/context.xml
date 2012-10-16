@@ -7,5 +7,7 @@
 	<Parameter name="string.set"         value="value of string.set" />
 	<Parameter name="string.default.set" value="value of string.default.set" />
 	<Parameter name="string.hidden"      value="value of string.hidden" />
+	<Parameter name="string.hidden2"     value="value of string.hidden2" />
+	<Parameter name="string.hidden3"     value="value of string.hidden3" />
 	<Parameter name="orphaned"           value="value of orphaned" />
 </Context>

@@ -61,6 +61,8 @@ public final class Properties extends com.exedio.cope.util.Properties
 	private final StringField stringSet        = new StringField("string.set");
 	private final StringField stringDefaultSet = new StringField("string.default.set", "default of string.default.set");
 	private final StringField stringHidden     = new StringField("string.hidden", true);
+	private final StringField stringHidden2    = new StringField("string.hidden2", true);
+	private final StringField stringHidden3    = new StringField("string.hidden3", true);
 
 	private Properties(final ServletContext context)
 	{
