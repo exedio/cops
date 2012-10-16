@@ -105,7 +105,7 @@ public abstract class PropertiesServlet extends CopsServlet
 		final Out out = new Out(request);
 		Properties_Jspm.write(
 				out,
-				PropertiesCop.getCop(request),
+				PropertiesCop.getCop(properties, request),
 				request,
 				getDisplayCaption(),
 				new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS Z (z)").format(new Date()),

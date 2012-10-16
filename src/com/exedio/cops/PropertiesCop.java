@@ -22,30 +22,66 @@
 
 package com.exedio.cops;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 import javax.servlet.http.HttpServletRequest;
+
+import com.exedio.cope.util.Properties;
+import com.exedio.cope.util.Properties.Field;
 
 final class PropertiesCop extends Cop
 {
 	static final String SHOW_HIDDEN = "sh";
 
-	final boolean showHidden;
+	private final Properties properties;
+	private final HashSet<String> showHidden;
 
-	PropertiesCop(final boolean showHidden)
+	PropertiesCop(final Properties properties, final HashSet<String> showHidden)
 	{
 		super("");
+		this.properties = properties;
 		this.showHidden = showHidden;
 
-		addParameter(SHOW_HIDDEN, showHidden);
+		if(showHidden!=null)
+			for(final Field field : properties.getFields())
+				if(showHidden.contains(field.getKey()))
+					addParameter(SHOW_HIDDEN, field.getKey());
 	}
 
-	static PropertiesCop getCop(final HttpServletRequest request)
+	static PropertiesCop getCop(final Properties properties, final HttpServletRequest request)
 	{
+		final String[] showHiddenKeys = request.getParameterValues(SHOW_HIDDEN);
+		final HashSet<String> showHidden =
+				(showHiddenKeys!=null)
+				? new HashSet<String>(Arrays.asList(showHiddenKeys))
+				: null;
 		return new PropertiesCop(
-				getBooleanParameter(request, SHOW_HIDDEN));
+				properties, showHidden);
 	}
 
-	PropertiesCop toShowHidden(final boolean showHidden)
+	PropertiesCop addShowHidden(final Field field)
 	{
-		return new PropertiesCop(showHidden);
+		final HashSet<String> showHidden =
+				(this.showHidden!=null)
+				? new HashSet<String>(this.showHidden)
+				: new HashSet<String>();
+		showHidden.add(field.getKey());
+		return new PropertiesCop(properties, showHidden);
+	}
+
+	PropertiesCop clearShowHidden()
+	{
+		return new PropertiesCop(properties, null);
+	}
+
+	boolean isShowHidden(final Field field)
+	{
+		return showHidden!=null && showHidden.contains(field.getKey());
+	}
+
+	boolean hasShowHidden()
+	{
+		return showHidden!=null && !showHidden.isEmpty();
 	}
 }
