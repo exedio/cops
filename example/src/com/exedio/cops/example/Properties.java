@@ -22,6 +22,7 @@
 
 package com.exedio.cops.example;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -64,28 +65,9 @@ public final class Properties extends com.exedio.cope.util.Properties
 	private final StringField stringHidden2    = new StringField("string.hidden2", true);
 	private final StringField stringHidden3    = new StringField("string.hidden3", true);
 
-	private Properties(final ServletContext context)
+	private Properties(final File source)
 	{
-		super(new Source(){
-
-			public String get(final String key)
-			{
-				return context.getInitParameter(key);
-			}
-
-			public String getDescription()
-			{
-				return context.getServletContextName();
-			}
-
-			public Collection<String> keySet()
-			{
-				final ArrayList<String> result = new ArrayList<String>();
-				for(final Enumeration<?> e = context.getInitParameterNames(); e.hasMoreElements(); )
-					result.add((String)e.nextElement());
-				return result;
-			}
-		}, null);
+		super(getSource(source), null);
 	}
 
 	Properties(final Properties.Source source)
@@ -160,12 +142,12 @@ public final class Properties extends com.exedio.cope.util.Properties
 
 	private static Properties instance = null;
 
-	public static final Properties instance(final ServletContext context)
+	public static final Properties instance(final File source)
 	{
 		if(instance!=null)
 			return instance;
 
-		instance = new Properties(context);
+		instance = new Properties(source);
 		return instance;
 	}
 

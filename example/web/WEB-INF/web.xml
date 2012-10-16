@@ -54,6 +54,10 @@
 	<servlet>
 		<servlet-name>properties</servlet-name>
 		<servlet-class>com.exedio.cops.example.PropertiesServlet</servlet-class>
+		<init-param>
+			<param-name>source</param-name>
+			<param-value>normal.properties</param-value>
+		</init-param>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>properties</servlet-name>

@@ -22,6 +22,8 @@
 
 package com.exedio.cops.example;
 
+import java.io.File;
+
 import com.exedio.cops.PropertiesServlet.Overridable;
 
 public final class PropertiesServlet extends com.exedio.cops.PropertiesServlet
@@ -29,10 +31,24 @@ implements Overridable<Properties>
 {
 	private static final long serialVersionUID = 1l;
 
+	private File source;
+
+	@Override
+	public void init()
+	{
+		source = new File(getServletContext().getRealPath("WEB-INF/" + getInitParameter("source")));
+	}
+
+	@Override
+	public void destroy()
+	{
+		source = null;
+	}
+
 	@Override
 	protected Properties getProperties()
 	{
-		return Properties.instance(getServletContext());
+		return Properties.instance(source);
 	}
 
 	@Override
