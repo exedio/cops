@@ -64,6 +64,21 @@ table td.notavailable
 	font-size:7pt;
 }
 
+table tr.unspecified
+{
+	display:none;
+}
+
+table tr.unspecified th
+{
+	background:#CCB;
+}
+
+table tr.unspecified td
+{
+	background:#FFE;
+}
+
 input.propertyValue
 {
 	display:none;

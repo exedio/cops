@@ -88,14 +88,16 @@ final class Properties_Jspm
 		<div class="footer"><a href="<%=cop.clearShowHidden()%>">hide hidden fields</a></div><%
 		}
 		%>
+		<div><img class="check" onClick="toggleUnspecified(this)" src="<%=PropertiesServlet.checkFalse%>"> show unspecified</div>
 		<form method="post">
 		<table><%
 		int idNum = 0;
 		for(final Properties.Field field : properties.getFields())
 		{
+			final boolean fieldSpecified = field.isSpecified();
 			idNum++;
 			%>
-			<tr><%
+			<tr<% if(!fieldSpecified){ %> class="unspecified"<% } %>><%
 			
 			if(overridable)
 			{
@@ -114,7 +116,7 @@ final class Properties_Jspm
 		{
 				%>
 				<td><%=field.getValue().toString()%><%
-					if(field.isSpecified())
+					if(fieldSpecified)
 					{
 						final Object fieldDefault = field.getDefaultValue();
 						%> <small><%
