@@ -271,10 +271,10 @@ public abstract class Cop
 		if(!"GET".equals(request.getMethod()))
 			return false;
 
-		final String expected = request.getContextPath() + request.getServletPath() + '/' + (this.url!=null ? this.url.toString() : pathInfo);
-		final String actualRequestURI = request.getRequestURI();
+		final String expected = '/' + (this.url!=null ? this.url.toString() : pathInfo);
+		final String actualPathInfo = request.getPathInfo();
 		final String actualQueryString = request.getQueryString();
-		final String actual = actualQueryString!=null ? (actualRequestURI + '?' + actualQueryString) : actualRequestURI;
+		final String actual = actualQueryString!=null ? (actualPathInfo + '?' + actualQueryString) : actualPathInfo;
 		if(expected.equals(actual) && doesNotNeedSecureRedirect(request))
 			return false;
 

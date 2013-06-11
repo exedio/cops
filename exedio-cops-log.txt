@@ -7,6 +7,9 @@ omit bug fixes.
 The items are sorted inversely, i.e. latest items are on top
 
 --------------------------------------------------------------------------
+* bugfix: Cop#redirectToCanonical uses HttpServletRequest#getPathInfo()
+	instead of getRequestURI(), fixes infinite redirect loop with
+	jsessionid in url
 * PropertiesServlet adds method getDisplayCaption() for override.
 * PropertiesServlet.Overridable
 * PropertiesServlet supports getTests
