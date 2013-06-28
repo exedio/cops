@@ -216,6 +216,29 @@ public abstract class Cop
 			fullURL;
 	}
 
+	public final String getSecureURL(final HttpServletRequest request)
+	{
+		// TODO deduplicate code
+		final String url = this.url!=null ? this.url.toString() : pathInfo;
+
+		if(request==null)
+			throw new NullPointerException("request");
+
+		final String fullURL = request.getContextPath() + request.getServletPath() + '/' + url;
+
+		if(request.isSecure())
+			return fullURL;
+
+		String host = request.getHeader(HOST);
+		if(host.endsWith(":8080"))
+			host = host.substring(0, host.length()-4) + "8443";
+
+		return
+			"https://" +
+			host +
+			fullURL;
+	}
+
 	@Override
 	public final String toString()
 	{
