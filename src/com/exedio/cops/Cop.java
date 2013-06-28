@@ -196,29 +196,18 @@ public abstract class Cop
 
 	public final String getURL(final HttpServletRequest request)
 	{
-		final String url = this.url!=null ? this.url.toString() : pathInfo;
-
-		if(request==null)
-			throw new NullPointerException("request");
-
-		final String fullURL = request.getContextPath() + request.getServletPath() + '/' + url;
-
-		if(doesNotNeedSecureRedirect(request))
-			return fullURL;
-
-		String host = request.getHeader(HOST);
-		if(host.endsWith(":8080"))
-			host = host.substring(0, host.length()-4) + "8443";
-
-		return
-			"https://" +
-			host +
-			fullURL;
+		return getURL(request, needsSecure());
 	}
 
 	public final String getSecureURL(final HttpServletRequest request)
 	{
-		// TODO deduplicate code
+		return getURL(request, true);
+	}
+
+	private final String getURL(
+			final HttpServletRequest request,
+			final boolean needsSecure)
+	{
 		final String url = this.url!=null ? this.url.toString() : pathInfo;
 
 		if(request==null)
@@ -226,7 +215,7 @@ public abstract class Cop
 
 		final String fullURL = request.getContextPath() + request.getServletPath() + '/' + url;
 
-		if(request.isSecure())
+		if(!needsSecure || request.isSecure())
 			return fullURL;
 
 		String host = request.getHeader(HOST);
