@@ -74,6 +74,7 @@
 		<mkdir dir="build/testclasses" />
 		<javac srcdir="testsrc"
 				destdir="build/testclasses"
+				includeAntRuntime="false"
 				deprecation="on"
 				debug="on"
 				optimize="off">
