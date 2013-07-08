@@ -114,7 +114,7 @@ public final class RequestLimiter
 
 	private volatile long lastInterval = Long.MIN_VALUE;
 	private volatile int requestsInInterval = 1;
-	private volatile long deniedRequests = 0;
+	private final VolatileLong deniedRequests = new VolatileLong();
 
 	@SuppressWarnings("deprecation")
 	private static final void setStatus503WithBody(final HttpServletResponse response, final String denyMessage)
@@ -154,7 +154,7 @@ public final class RequestLimiter
 					{
 						response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE, denyMessage);
 					}
-					deniedRequests++;
+					deniedRequests.inc();
 					//System.out.println("copsRequestLimiter denied " + deniedRequests);
 					return true;
 				}
@@ -203,7 +203,7 @@ public final class RequestLimiter
 			{
 				outStream = response.getOutputStream();
 				out = new PrintStream(outStream, false, UTF8);
-				RequestLimiter_Jspm.write(out, path, threshold, interval, deniedRequests);
+				RequestLimiter_Jspm.write(out, path, threshold, interval, deniedRequests.get());
 			}
 			finally
 			{
