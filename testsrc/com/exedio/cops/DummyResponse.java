@@ -27,164 +27,196 @@ import javax.servlet.http.HttpServletResponse;
 
 public class DummyResponse implements HttpServletResponse
 {
+	@Override
 	public String encodeURL(final String url)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public void addCookie(final Cookie arg0)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public void addDateHeader(final String arg0, final long arg1)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public void addHeader(final String arg0, final String arg1)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public void addIntHeader(final String arg0, final int arg1)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public boolean containsHeader(final String arg0)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public String encodeRedirectURL(final String arg0)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	@Deprecated
 	public String encodeRedirectUrl(final String arg0)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	@Deprecated
 	public String encodeUrl(final String arg0)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public void sendError(final int arg0)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public void sendError(final int arg0, final String arg1)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public void sendRedirect(final String arg0)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public void setDateHeader(final String arg0, final long arg1)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public void setHeader(final String arg0, final String arg1)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public void setIntHeader(final String arg0, final int arg1)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public void setStatus(final int arg0)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	@Deprecated
 	public void setStatus(final int arg0, final String arg1)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public void flushBuffer()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public int getBufferSize()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public String getCharacterEncoding()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public String getContentType()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public Locale getLocale()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public ServletOutputStream getOutputStream()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public PrintWriter getWriter()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public boolean isCommitted()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public void reset()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public void resetBuffer()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public void setBufferSize(final int arg0)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public void setCharacterEncoding(final String arg0)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public void setContentLength(final int arg0)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public void setContentType(final String arg0)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public void setLocale(final Locale arg0)
 	{
 		throw new RuntimeException();

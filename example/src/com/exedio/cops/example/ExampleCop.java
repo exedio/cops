@@ -155,11 +155,13 @@ public class ExampleCop extends Cop implements Pageable
 		return new ExampleCop(number, bool, string, cop, needsSecure, 1, pager, dirLevel);
 	}
 
+	@Override
 	public Pager getPager()
 	{
 		return pager;
 	}
 
+	@Override
 	public ExampleCop toPage(final Pager pager)
 	{
 		return new ExampleCop(number, bool, string, cop, needsSecure, redirectLoop, pager, dirLevel);

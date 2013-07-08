@@ -34,273 +34,327 @@ import javax.servlet.http.HttpSession;
 
 public class DummyRequest implements HttpServletRequest
 {
+	@Override
 	public String getAuthType()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public String getContextPath()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public Cookie[] getCookies()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public long getDateHeader(final String arg0)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public String getHeader(final String arg0)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public Enumeration<?> getHeaderNames()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public Enumeration<?> getHeaders(final String arg0)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public int getIntHeader(final String arg0)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public String getMethod()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public String getPathInfo()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public String getPathTranslated()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public String getQueryString()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public String getRemoteUser()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public String getRequestURI()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public StringBuffer getRequestURL()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public String getRequestedSessionId()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public String getServletPath()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public HttpSession getSession()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public HttpSession getSession(final boolean arg0)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public Principal getUserPrincipal()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public boolean isRequestedSessionIdFromCookie()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public boolean isRequestedSessionIdFromURL()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	@Deprecated
 	public boolean isRequestedSessionIdFromUrl()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public boolean isRequestedSessionIdValid()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public boolean isUserInRole(final String arg0)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public Object getAttribute(final String arg0)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public Enumeration<?> getAttributeNames()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public String getCharacterEncoding()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public int getContentLength()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public String getContentType()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public ServletInputStream getInputStream() throws IOException
 	{
 		throw new IOException();
 	}
 
+	@Override
 	public String getLocalAddr()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public String getLocalName()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public int getLocalPort()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public Locale getLocale()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public Enumeration<?> getLocales()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public String getParameter(final String arg0)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public Map<?,?> getParameterMap()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public Enumeration<?> getParameterNames()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public String[] getParameterValues(final String arg0)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public String getProtocol()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public BufferedReader getReader() throws IOException
 	{
 		throw new IOException();
 	}
 
+	@Override
 	@Deprecated
 	public String getRealPath(final String arg0)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public String getRemoteAddr()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public String getRemoteHost()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public int getRemotePort()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public RequestDispatcher getRequestDispatcher(final String arg0)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public String getScheme()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public String getServerName()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public int getServerPort()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public boolean isSecure()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public void removeAttribute(final String arg0)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public void setAttribute(final String arg0, final Object arg1)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public void setCharacterEncoding(final String arg0)
 			throws UnsupportedEncodingException
 	{

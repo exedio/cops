@@ -25,36 +25,43 @@ import javax.servlet.http.HttpSession;
 
 public class DummySession implements HttpSession
 {
+	@Override
 	public Object getAttribute(final String s)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public Enumeration<?> getAttributeNames()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public long getCreationTime()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public String getId()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public long getLastAccessedTime()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public int getMaxInactiveInterval()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public ServletContext getServletContext()
 	{
 		throw new RuntimeException();
@@ -63,56 +70,66 @@ public class DummySession implements HttpSession
 	/**
 	 * @deprecated otherwise javac prints a warning
 	 */
+	@Override
 	@Deprecated
 	public javax.servlet.http.HttpSessionContext getSessionContext()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	@Deprecated
 	public Object getValue(final String s)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	@Deprecated
 	public String[] getValueNames()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public void invalidate()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public boolean isNew()
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	@Deprecated
 	public void putValue(final String s, final Object obj)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public void removeAttribute(final String s)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	@Deprecated
 	public void removeValue(final String s)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public void setAttribute(final String s, final Object obj)
 	{
 		throw new RuntimeException();
 	}
 
+	@Override
 	public void setMaxInactiveInterval(final int i)
 	{
 		throw new RuntimeException();

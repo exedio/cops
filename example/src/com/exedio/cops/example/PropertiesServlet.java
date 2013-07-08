@@ -57,11 +57,13 @@ implements Overridable<Properties>
 		return "Display Caption";
 	}
 
+	@Override
 	public Properties newProperties(final Properties.Source overrideSource)
 	{
 		return new Properties(overrideSource);
 	}
 
+	@Override
 	public void override(final Properties properties)
 	{
 		Properties.setInstance(properties);

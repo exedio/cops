@@ -171,6 +171,7 @@ public abstract class PropertiesServlet extends CopsServlet
 			this.override = sourceMap;
 		}
 
+		@Override
 		public String get(final String key)
 		{
 			return
@@ -179,6 +180,7 @@ public abstract class PropertiesServlet extends CopsServlet
 				: template.get(key);
 		}
 
+		@Override
 		public String getDescription()
 		{
 			final StringBuilder bf = new StringBuilder();
@@ -195,6 +197,7 @@ public abstract class PropertiesServlet extends CopsServlet
 			return bf.toString();
 		}
 
+		@Override
 		public Collection<String> keySet()
 		{
 			return null;

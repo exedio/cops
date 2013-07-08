@@ -82,6 +82,7 @@ public final class Properties extends com.exedio.cope.util.Properties
 
 		result.add(new Callable<Object>(){
 
+				@Override
 				public Object call() throws Exception
 				{
 					return null;
@@ -96,6 +97,7 @@ public final class Properties extends com.exedio.cope.util.Properties
 
 		result.add(new Callable<Object>(){
 
+			@Override
 			public Object call() throws Exception
 			{
 				return "Result";
@@ -111,6 +113,7 @@ public final class Properties extends com.exedio.cope.util.Properties
 
 		result.add(new Callable<Object>(){
 
+				@Override
 				public Object call() throws Exception
 				{
 					throw new NullPointerException("zack");
@@ -125,6 +128,7 @@ public final class Properties extends com.exedio.cope.util.Properties
 
 		result.add(new Callable<Object>(){
 
+				@Override
 				public Object call() throws Exception
 				{
 					throw new RuntimeException(new NullPointerException("zack"));
