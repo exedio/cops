@@ -289,7 +289,7 @@ final class Base64
         }   // end try
         catch( final java.io.UnsupportedEncodingException uee )
         {
-            bytes = s.getBytes();
+            throw new RuntimeException(uee); // removed defensiveness, Ralf Wiebicke 2013 July 8
         }   // end catch
 		//</change>
 
