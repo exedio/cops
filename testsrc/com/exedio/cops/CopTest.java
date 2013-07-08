@@ -93,6 +93,7 @@ public class CopTest extends TestCase
 		}
 	}
 
+	@SuppressWarnings("unused")
 	public void testURL()
 	{
 		try

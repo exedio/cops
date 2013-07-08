@@ -83,6 +83,7 @@ public class RequestLimiterTest extends TestCase
 		assertTrue(rl.doRequest(request, responseDeny));
 	}
 
+	@SuppressWarnings("unused")
 	public void testError()
 	{
 		try

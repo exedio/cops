@@ -91,6 +91,7 @@ public class PagerTest extends TestCase
 		assertIt(i(second.last(), 10, 20), 10, 10, 11, 20, 20, 2, 2, true, true, false, true);
 	}
 
+	@SuppressWarnings("unused")
 	public void testConfig()
 	{
 		try

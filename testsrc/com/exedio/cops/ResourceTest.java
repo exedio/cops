@@ -24,6 +24,7 @@ import junit.framework.TestCase;
 
 public class ResourceTest extends TestCase
 {
+	@SuppressWarnings("unused")
 	public void testURL()
 	{
 		try
