@@ -29,6 +29,8 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 public final class RequestLimiter
 {
 	private static final String STATUS_PATH_INFO = "/copsRequestLimiterStatus.html";
@@ -113,6 +115,7 @@ public final class RequestLimiter
 	}
 
 	private volatile long lastInterval = Long.MIN_VALUE;
+	@SuppressFBWarnings("VO_VOLATILE_INCREMENT") // TODO use AtomicInteger
 	private volatile int requestsInInterval = 1;
 	private final VolatileLong deniedRequests = new VolatileLong();
 
@@ -139,7 +142,7 @@ public final class RequestLimiter
 		}
 		else
 		{
-			final long nowInterval = System.currentTimeMillis() / interval;
+			final long nowInterval = System.currentTimeMillis() / interval; // TODO use nanoTime
 
 			if(nowInterval<=lastInterval)
 			{
