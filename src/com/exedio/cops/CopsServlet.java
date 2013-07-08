@@ -243,7 +243,7 @@ public abstract class CopsServlet extends HttpServlet
 		final long idLong;
 		synchronized(random)
 		{
-			idLong = random.nextLong();
+			idLong = NonNegativeRandom.nextLong(random);
 		}
 		final String id = String.valueOf(Math.abs(idLong));
 		System.out.println("--------"+id+"-----");
