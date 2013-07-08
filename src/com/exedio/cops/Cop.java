@@ -26,8 +26,13 @@ import java.net.URLEncoder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public abstract class Cop
 {
+	private static final Logger logger = LoggerFactory.getLogger(Cop.class);
+
 	private final String pathInfo;
 	private StringBuilder url = null;
 
@@ -291,7 +296,7 @@ public abstract class Cop
 			return false;
 
 		final String location = response.encodeRedirectURL(getURL(request));
-		System.out.println("cops redirectToCanonical from --" + actual + "-- to --" + location + "--");
+		logger.info("redirectToCanonical from --{}-- to --{}--", actual, location);
 
 		response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 		response.setHeader("Location", location);
