@@ -15,5 +15,6 @@
 		<copy overwrite="true" file="artifacts/slf4j-log4j12-jar.jar" tofile="../lib/slf4j-log4j12.jar" />
 		<copy overwrite="true" file="artifacts/log4j-bundle.jar" todir="../lib" />
 		<copy overwrite="true" file="artifacts/findbugs-dist.tar.gz" tofile="../lib/findbugs.tar.gz" />
+		<copy overwrite="true" file="artifacts/findbugs-annotations-jar.jar" tofile="../lib/findbugs-annotations.jar" />
 	</target>
 </project>

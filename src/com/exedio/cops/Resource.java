@@ -51,8 +51,8 @@ public final class Resource
 
 	private volatile boolean log = false;
 
-	private volatile long response200Count = 0;
-	private volatile long response304Count = 0;
+	private final VolatileLong response200Count = new VolatileLong();
+	private final VolatileLong response304Count = new VolatileLong();
 
 	public Resource(final String name)
 	{
@@ -107,12 +107,12 @@ public final class Resource
 
 	public long getResponse200Count()
 	{
-		return response200Count;
+		return response200Count.get();
 	}
 
 	public long getResponse304Count()
 	{
-		return response304Count;
+		return response304Count.get();
 	}
 
 	@Override
@@ -253,14 +253,14 @@ public final class Resource
 		if(ifModifiedSince>=0 && ifModifiedSince>=lastModified)
 		{
 			response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
-			response304Count++; // may loose a few counts due to concurrency, but this is ok
+			response304Count.inc();
 			if(log)
 				log(request, "Not Modified");
 		}
 		else
 		{
 			BodySender.send(response, content);
-			response200Count++; // may loose a few counts due to concurrency, but this is ok
+			response200Count.inc();
 			if(log)
 				log(request, "Delivered");
 		}
