@@ -18,7 +18,11 @@
 
 package com.exedio.cops;
 
+import static java.util.Arrays.asList;
+import static java.util.Collections.unmodifiableList;
+
 import java.util.Iterator;
+import java.util.List;
 
 import junit.framework.TestCase;
 
@@ -89,6 +93,52 @@ public class PagerTest extends TestCase
 
 		assertIt(i(second.next(), 10, 20), 10, 10, 11, 20, 20, 2, 2, true, true, false, true);
 		assertIt(i(second.last(), 10, 20), 10, 10, 11, 20, 20, 2, 2, true, true, false, true);
+	}
+
+	public void testList()
+	{
+		final List<String> list = unmodifiableList(asList("one", "two", "three", "four", "five"));
+
+		final Pager first = new Pager.Config(3).newPager();
+		assertEquals(asList("one", "two", "three"), first.init(list));
+		assertIt(first,  0, 3, 1, 3, 5, 1, 2, true, false, true, false);
+
+		final Pager second = first.next();
+		assertEquals(asList("four", "five"), second.init(list));
+		assertIt(second, 3, 3, 4, 5, 5, 2, 2, true, false, false, true);
+
+		final Pager secondNeutral = second.next();
+		assertEquals(asList("four", "five"), secondNeutral.init(list));
+		assertIt(secondNeutral, 3, 3, 4, 5, 5, 2, 2, true, true, false, true);
+	}
+
+	public void testListInconsistent()
+	{
+		final List<String> list = unmodifiableList(asList("one", "two", "three", "four", "five"));
+
+		final Pager first = new Pager.Config(3).newPager();
+		assertEquals(asList("one", "two", "three"), first.init(list));
+		assertIt(first,  0, 3, 1, 3, 5, 1, 2, true, false, true, false);
+		{
+			final Pager inconsistent = first.next();
+			assertEquals(asList("four"), inconsistent.init(unmodifiableList(asList("one", "two", "three", "four"))));
+			assertIt(inconsistent, 3, 3, 4, 4, 4, 2, 2, true, false, false, true);
+		}
+		{
+			final Pager inconsistent = first.next();
+			assertEquals(asList(), inconsistent.init(unmodifiableList(asList("one", "two", "three"))));
+			assertIt(inconsistent, 3, 3, 4, 3, 3, 2, 1, false, false, false, true);
+		}
+		{
+			final Pager inconsistent = first.next();
+			assertEquals(asList(), inconsistent.init(unmodifiableList(asList("one", "two"))));
+			assertIt(inconsistent, 3, 3, 4, 3, 2, 2, 1, false, false, false, true);
+		}
+		{
+			final Pager inconsistent = first.next();
+			assertEquals(asList(), inconsistent.init(unmodifiableList(asList())));
+			assertIt(inconsistent, 3, 3, 4, 3, 0, 2, 1, false, false, false, true);
+		}
 	}
 
 	@SuppressWarnings("unused")

@@ -20,14 +20,12 @@ package com.exedio.cops.example;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.exedio.cops.Cop;
-import com.exedio.cops.Pager;
 import com.exedio.cops.RequestLimiter;
 import com.exedio.cops.Resource;
 
@@ -59,12 +57,6 @@ public final class ExampleServlet extends ExampleSuperServlet
 		requestLimiter.init(config);
 	}
 
-	private static final <E> List<E> subList(final List<E> list, final int fromIndex, final int toIndex)
-	{
-		final int size = list.size();
-		return list.subList(fromIndex, (toIndex>size) ? size : toIndex);
-	}
-
 	@Override
 	protected void doRequest(
 			final HttpServletRequest request,
@@ -79,10 +71,6 @@ public final class ExampleServlet extends ExampleSuperServlet
 		final ExampleCop cop = ExampleCop.getCop(request);
 		if(cop.redirectToCanonical(request, response))
 			return;
-
-		final Pager pager = cop.pager;
-		final List<String> searchResult = subList(searchSet, pager.getOffset(), pager.getOffset()+pager.getLimit());
-		pager.init(searchResult.size(), searchSet.size());
 
 		String reportedException = null;
 		if(Cop.isPost(request))
@@ -100,7 +88,7 @@ public final class ExampleServlet extends ExampleSuperServlet
 		}
 
 		final Out out = new Out(request, response);
-		Example_Jspm.write(out, cop, request, searchResult, reportedException);
+		Example_Jspm.write(out, cop, request, cop.pager.init(searchSet), reportedException);
 		out.writeBody();
 	}
 }

@@ -19,6 +19,7 @@
 package com.exedio.cops;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -137,6 +138,21 @@ public final class Pager
 
 		this.pageIfInitialized  = page;
 		this.totalIfInitialized = total;
+	}
+
+	/**
+	 * @return a subList of <tt>all</tt> corresponding the the current page of the pager.
+	 */
+	public <E> List<E> init(final List<E> all)
+	{
+		final int allSize = all.size();
+		final int toIndex = Math.min(offset + limit, allSize);
+		final List<E> page =
+				(toIndex>offset)
+				? all.subList(offset, toIndex)
+				: Collections.<E>emptyList();
+		init(page.size(), allSize);
+		return page;
 	}
 
 	public boolean isFirst()
