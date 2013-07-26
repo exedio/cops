@@ -22,6 +22,7 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.EMPTY_LIST;
 import static java.util.Collections.unmodifiableList;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -137,7 +138,7 @@ public class PagerTest extends TestCase
 		}
 		{
 			final Pager inconsistent = first.next();
-			assertEquals(EMPTY_LIST, inconsistent.init(unmodifiableList(asList())));
+			assertEquals(EMPTY_LIST, inconsistent.init(Collections.<String>emptyList()));
 			assertIt(inconsistent, 3, 3, 4, 3, 0, 2, 1, false, false, false, true);
 		}
 	}
