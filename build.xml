@@ -368,6 +368,7 @@
 			<auxclasspath>
 				<pathelement location="${basedir}/lib/exedio-cope-util.jar" />
 				<pathelement location="${basedir}/lib/servlet-api.jar" />
+				<pathelement location="${basedir}/lib/slf4j-api.jar" />
 			</auxclasspath>
 		</findbugs>
 	</target>
