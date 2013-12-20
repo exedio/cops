@@ -142,7 +142,11 @@ final class Properties_Jspm
 		%>
 		</table>
 			<table>
-				<caption>Tests</caption><%
+				<caption>Tests</caption>
+				<tr>
+					<th><input type="checkbox" onclick="checkAll(this)" checked></input></th>
+					<th><i>(un)check all tests</i></th>
+				</tr><%
 			
 			int testNumber = -1;
 			final HashSet<Integer> doTestNumbers;
@@ -166,7 +170,7 @@ final class Properties_Jspm
 				testNumber++;
 				%>
 				<tr>
-					<th><input type="checkbox" name="<%=TEST_NUMBER%>" value="<%=testNumber%>" checked="true"></input></th>
+					<th><input class="testcheck" type="checkbox" name="<%=TEST_NUMBER%>" value="<%=testNumber%>" checked="true"></input></th>
 					<th><%=test.toString()%></th><%
 					
 				if(doTestNumbers!=null && doTestNumbers.contains(Integer.valueOf(testNumber)))
