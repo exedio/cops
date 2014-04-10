@@ -67,12 +67,12 @@ public final class Properties extends com.exedio.cope.util.Properties
 
 	private Properties(final File source)
 	{
-		super(getSource(source), null);
+		super(getSource(source));
 	}
 
 	Properties(final Properties.Source source)
 	{
-		super(source, null);
+		super(source);
 	}
 
 	@Override
