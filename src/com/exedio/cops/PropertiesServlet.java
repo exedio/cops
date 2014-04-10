@@ -128,7 +128,7 @@ public abstract class PropertiesServlet extends CopsServlet
 			final HashSet<Integer> doTestNumbers)
 	{
 		final P properties = overridable.newProperties(Sources.cascade(
-				new OverrideSource(authentication, hostname, sourceMap), source));
+				new EditedSource(authentication, hostname, sourceMap), source));
 
 		int testNumber = -1;
 		for(final Callable<?> test : properties.getTests())
@@ -150,14 +150,14 @@ public abstract class PropertiesServlet extends CopsServlet
 		overridable.override(properties);
 	}
 
-	private static final class OverrideSource implements Properties.Source
+	private static final class EditedSource implements Properties.Source
 	{
 		private final String authentication;
 		private final String hostname;
 		private final HashMap<String, String> content;
 		private final long timestamp = System.currentTimeMillis();
 
-		OverrideSource(
+		EditedSource(
 				final String authentication,
 				final String hostname,
 				final HashMap<String, String> content)
