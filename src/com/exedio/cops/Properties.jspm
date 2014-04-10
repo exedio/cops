@@ -122,7 +122,14 @@ final class Properties_Jspm
 						%> <small><%
 						if(fieldDefault!=null)
 						{
-							%>(<%=fieldDefault.toString()%>)<%
+							if(fieldDefault.equals(field.getValue()))
+							{
+								%><i>(<u>set to default</u>)</i><%
+							}
+							else
+							{
+								%>(<%=fieldDefault.toString()%>)<%
+							}
 						}
 						else
 						{
