@@ -20,16 +20,14 @@ package com.exedio.cops;
 
 import static com.exedio.cope.util.CharsetName.UTF8;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 public final class RequestLimiter
 {

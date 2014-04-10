@@ -20,15 +20,13 @@ package com.exedio.cops.example;
 
 import static com.exedio.cope.util.CharsetName.UTF8;
 
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.exedio.cope.util.XMLEncoder;
 import com.exedio.cops.BodySender;
 import com.exedio.cops.Cop;
 import com.exedio.cops.Resource;
+import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 final class Out
 {

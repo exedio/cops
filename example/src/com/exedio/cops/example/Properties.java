@@ -24,12 +24,8 @@ package com.exedio.cops.example;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.concurrent.Callable;
-
-import javax.servlet.ServletContext;
 
 @SuppressWarnings("unused")
 public final class Properties extends com.exedio.cope.util.Properties

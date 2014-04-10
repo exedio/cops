@@ -22,10 +22,8 @@ import static com.exedio.cope.util.CharsetName.UTF8;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

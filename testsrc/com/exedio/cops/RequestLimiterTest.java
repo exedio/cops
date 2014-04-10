@@ -19,9 +19,7 @@
 package com.exedio.cops;
 
 import java.io.IOException;
-
 import javax.servlet.http.HttpSession;
-
 import junit.framework.TestCase;
 
 public class RequestLimiterTest extends TestCase

@@ -23,9 +23,7 @@ import static java.util.Arrays.asList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;
-
 import javax.servlet.http.HttpServletRequest;
-
 import junit.framework.TestCase;
 
 public class CopParameterRequestTest extends TestCase

@@ -18,12 +18,10 @@
 
 package com.exedio.cops;
 
+import com.exedio.cope.util.CharsetName;
 import java.io.UnsupportedEncodingException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.exedio.cope.util.CharsetName;
 
 public class BasicAuthorization
 {

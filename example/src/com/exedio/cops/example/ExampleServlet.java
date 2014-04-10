@@ -18,16 +18,14 @@
 
 package com.exedio.cops.example;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.ServletConfig;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.exedio.cops.Cop;
 import com.exedio.cops.RequestLimiter;
 import com.exedio.cops.Resource;
+import java.io.IOException;
+import java.util.ArrayList;
+import javax.servlet.ServletConfig;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public final class ExampleServlet extends ExampleSuperServlet
 {

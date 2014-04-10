@@ -21,6 +21,7 @@ package com.exedio.cops;
 import static java.lang.reflect.Modifier.FINAL;
 import static java.lang.reflect.Modifier.STATIC;
 
+import com.exedio.cope.util.CharsetName;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -33,14 +34,11 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.LinkedHashMap;
 import java.util.Random;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.exedio.cope.util.CharsetName;
 
 public abstract class CopsServlet extends HttpServlet
 {

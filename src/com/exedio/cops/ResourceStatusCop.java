@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-
 import javax.servlet.http.HttpServletRequest;
 
 final class ResourceStatusCop extends Cop

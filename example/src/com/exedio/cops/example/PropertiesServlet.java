@@ -22,9 +22,8 @@
 
 package com.exedio.cops.example;
 
-import java.io.File;
-
 import com.exedio.cops.PropertiesServlet.Overridable;
+import java.io.File;
 
 public final class PropertiesServlet extends com.exedio.cops.PropertiesServlet
 implements Overridable<Properties>

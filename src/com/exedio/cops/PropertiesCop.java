@@ -22,13 +22,11 @@
 
 package com.exedio.cops;
 
-import java.util.Arrays;
-import java.util.HashSet;
-
-import javax.servlet.http.HttpServletRequest;
-
 import com.exedio.cope.util.Properties;
 import com.exedio.cope.util.Properties.Field;
+import java.util.Arrays;
+import java.util.HashSet;
+import javax.servlet.http.HttpServletRequest;
 
 final class PropertiesCop extends Cop
 {

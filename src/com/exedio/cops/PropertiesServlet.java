@@ -22,6 +22,8 @@
 
 package com.exedio.cops;
 
+import com.exedio.cope.util.Properties;
+import com.exedio.cope.util.Sources;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -32,12 +34,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.concurrent.Callable;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.exedio.cope.util.Properties;
-import com.exedio.cope.util.Sources;
 
 public abstract class PropertiesServlet extends CopsServlet
 {

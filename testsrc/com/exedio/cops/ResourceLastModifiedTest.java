@@ -20,7 +20,6 @@ package com.exedio.cops;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import junit.framework.TestCase;
 
 public class ResourceLastModifiedTest extends TestCase

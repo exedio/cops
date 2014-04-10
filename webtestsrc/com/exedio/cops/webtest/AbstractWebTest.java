@@ -20,7 +20,6 @@ package com.exedio.cops.webtest;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import junit.framework.TestCase;
 
 public class AbstractWebTest extends TestCase

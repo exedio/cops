@@ -20,11 +20,10 @@ package com.exedio.cops.example;
 
 import static com.exedio.cops.example.Example_Jspm.writePagerButton;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.exedio.cops.Cop;
 import com.exedio.cops.Pageable;
 import com.exedio.cops.Pager;
+import javax.servlet.http.HttpServletRequest;
 
 public class ExampleCop extends Cop implements Pageable
 {

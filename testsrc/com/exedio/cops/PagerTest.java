@@ -25,7 +25,6 @@ import static java.util.Collections.unmodifiableList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-
 import junit.framework.TestCase;
 
 public class PagerTest extends TestCase

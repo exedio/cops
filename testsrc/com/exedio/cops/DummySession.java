@@ -19,7 +19,6 @@
 package com.exedio.cops;
 
 import java.util.Enumeration;
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 

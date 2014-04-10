@@ -19,7 +19,6 @@
 package com.exedio.cops;
 
 import java.io.IOException;
-
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
