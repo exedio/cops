@@ -30,40 +30,40 @@ import java.util.concurrent.Callable;
 @SuppressWarnings("unused")
 public final class Properties extends com.exedio.cope.util.Properties
 {
-	private final StringField mailFrom    = new StringField("mail.from",    "copedemo@mailgrab.exedio.com");
-	private final StringField mailBcc     = new StringField("mail.bcc",     "copedemo@mailgrab.exedio.com");
-	private final StringField errorMailTo = new StringField("errorMail.to", "copedemo@mailgrab.exedio.com");
+	private final String mailFrom    = value("mail.from",    "copedemo@mailgrab.exedio.com");
+	private final String mailBcc     = value("mail.bcc",     "copedemo@mailgrab.exedio.com");
+	private final String errorMailTo = value("errorMail.to", "copedemo@mailgrab.exedio.com");
 
-	private final  StringField smtpHost           = new  StringField("smtp.host",  "mailgrab.exedio.com");
-	private final BooleanField smtpDebug          = new BooleanField("smtp.debug", false);
-	private final     IntField smtpConnectTimeout = new     IntField("smtp.connectTimeout", 5000, 1000);
-	private final     IntField smtpReadTimeout    = new     IntField("smtp.readTimeout",    5000, 1000);
+	private final  String smtpHost           = value("smtp.host",  "mailgrab.exedio.com");
+	private final boolean smtpDebug          = value("smtp.debug", false);
+	private final     int smtpConnectTimeout = value("smtp.connectTimeout", 5000, 1000);
+	private final     int smtpReadTimeout    = value("smtp.readTimeout",    5000, 1000);
 
-	private final  StringField ldapServerType     = new  StringField("ldap.server.type", "OpenLDAP");
-	private final  StringField ldapServerURL      = new  StringField("ldap.server.url", "ldap://ldap.copedemo.exedio.com:389");
-	private final  StringField ldapRootDN         = new  StringField("ldap.root.dn", "dc=exedio,dc=com");
-	private final  StringField ldapCredentials    = new  StringField("ldap.credentials", "");
-	private final  StringField ldapPrincipal      = new  StringField("ldap.principal", "");
-	private final BooleanField ldapEnabledTracing = new BooleanField("ldap.connection.enable.tracing", true);
-	private final BooleanField ldapEnabledPooling = new BooleanField("ldap.connection.enable.pooling", true);
-	private final     IntField ldapConnectTimeout = new     IntField("ldap.connectTimeout", 5000, 1000);
-	private final     IntField ldapReadTimeout    = new     IntField("ldap.readTimeout",    5000, 1000);
+	private final  String ldapServerType     = value("ldap.server.type", "OpenLDAP");
+	private final  String ldapServerURL      = value("ldap.server.url", "ldap://ldap.copedemo.exedio.com:389");
+	private final  String ldapRootDN         = value("ldap.root.dn", "dc=exedio,dc=com");
+	private final  String ldapCredentials    = value("ldap.credentials", "");
+	private final  String ldapPrincipal      = value("ldap.principal", "");
+	private final boolean ldapEnabledTracing = value("ldap.connection.enable.tracing", true);
+	private final boolean ldapEnabledPooling = value("ldap.connection.enable.pooling", true);
+	private final     int ldapConnectTimeout = value("ldap.connectTimeout", 5000, 1000);
+	private final     int ldapReadTimeout    = value("ldap.readTimeout",    5000, 1000);
 
-	private final IntField cartCookieMaxAgeHours = new IntField("cartCookieMaxAgeHours", 24*30, 0); // 30 days
+	private final int cartCookieMaxAgeHours = value("cartCookieMaxAgeHours", 24*30, 0); // 30 days
 
-	private final StringField copaibaAdminLogin    =  new StringField("copaiba.admin.login",    "admin");
-	private final StringField copaibaAdminPassword =  new StringField("copaiba.admin.password", "nimda");
+	private final String copaibaAdminLogin    =  value("copaiba.admin.login",    "admin");
+	private final String copaibaAdminPassword =  value("copaiba.admin.password", "nimda");
 
-	private final StringField stringDefault    = new StringField("string.default", "default of string.default");
-	private final StringField stringSet        = new StringField("string.set");
-	private final StringField stringDefaultSet = new StringField("string.default.set", "default of string.default.set");
-	private final StringField stringHidden     = new StringField("string.hidden", true);
-	private final StringField stringHidden2    = new StringField("string.hidden2", true);
-	private final StringField stringHidden3    = new StringField("string.hidden3", true);
+	private final String stringDefault    = value("string.default", "default of string.default");
+	private final String stringSet        = value("string.set", (String)null);
+	private final String stringDefaultSet = value("string.default.set", "default of string.default.set");
+	private final String stringHidden     = valueHidden("string.hidden",  (String)null);
+	private final String stringHidden2    = valueHidden("string.hidden2", (String)null);
+	private final String stringHidden3    = valueHidden("string.hidden3", (String)null);
 
-	private final StringField  setToDefaultString  = new  StringField("setToDefault.string" , "value of setToDefault.string");
-	private final IntField     setToDefaultInt     = new     IntField("setToDefault.int"    , 1234, 5);
-	private final BooleanField setToDefaultBoolean = new BooleanField("setToDefault.boolean", true);
+	private final String  setToDefaultString  = value("setToDefault.string" , "value of setToDefault.string");
+	private final int     setToDefaultInt     = value("setToDefault.int"    , 1234, 5);
+	private final boolean setToDefaultBoolean = value("setToDefault.boolean", true);
 
 	private Properties(final File source)
 	{
