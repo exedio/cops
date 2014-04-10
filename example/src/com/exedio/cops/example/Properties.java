@@ -58,9 +58,9 @@ public final class Properties extends com.exedio.cope.util.Properties
 	private final String stringSet        = value("string.set", (String)null);
 	private final String stringDefaultSet = value("string.default.set", "default of string.default.set");
 
-	private final String stringHidden     = valueHidden("string.hidden",  (String)null);
-	private final String stringHidden2    = valueHidden("string.hidden2", (String)null);
-	private final String stringHidden3    = valueHidden("string.hidden3", (String)null);
+	private final String hidden1 = valueHidden("hidden.1", "default of hidden.1");
+	private final String hidden2 = valueHidden("hidden.2", (String)null);
+	private final String hidden3 = valueHidden("hidden.3", (String)null);
 
 	private final String  setToDefaultString  = value("setToDefault.string" , "value of setToDefault.string");
 	private final int     setToDefaultInt     = value("setToDefault.int"    , 1234, 5);
