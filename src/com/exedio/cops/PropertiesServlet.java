@@ -154,23 +154,23 @@ public abstract class PropertiesServlet extends CopsServlet
 	{
 		private final String authentication;
 		private final String hostname;
-		private final HashMap<String, String> override; // TODO rename
+		private final HashMap<String, String> content;
 		private final long timestamp = System.currentTimeMillis();
 
 		OverrideSource(
 				final String authentication,
 				final String hostname,
-				final HashMap<String, String> sourceMap)
+				final HashMap<String, String> content)
 		{
 			this.authentication = authentication;
 			this.hostname = hostname;
-			this.override = sourceMap;
+			this.content = content;
 		}
 
 		@Override
 		public String get(final String key)
 		{
-			return override.get(key);
+			return content.get(key);
 		}
 
 		@Override
@@ -184,7 +184,7 @@ public abstract class PropertiesServlet extends CopsServlet
 			if(hostname!=null)
 				bf.append(" on ").append(hostname);
 			bf.append(' ');
-			bf.append(override.toString());
+			bf.append(content.toString());
 			bf.append(')');
 			return bf.toString();
 		}
@@ -192,7 +192,7 @@ public abstract class PropertiesServlet extends CopsServlet
 		@Override
 		public Collection<String> keySet()
 		{
-			return override.keySet();
+			return content.keySet();
 		}
 	}
 
