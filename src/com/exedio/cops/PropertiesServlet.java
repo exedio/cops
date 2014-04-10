@@ -37,6 +37,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.exedio.cope.util.Properties;
+import com.exedio.cope.util.Sources;
 
 public abstract class PropertiesServlet extends CopsServlet
 {
@@ -128,8 +129,8 @@ public abstract class PropertiesServlet extends CopsServlet
 			final HashMap<String, String> sourceMap,
 			final HashSet<Integer> doTestNumbers)
 	{
-		final P properties = overridable.newProperties(
-				new OverrideSource(source, authentication, hostname, sourceMap));
+		final P properties = overridable.newProperties(Sources.cascade(
+				new OverrideSource(authentication, hostname, sourceMap), source));
 
 		int testNumber = -1;
 		for(final Callable<?> test : properties.getTests())
@@ -153,19 +154,16 @@ public abstract class PropertiesServlet extends CopsServlet
 
 	private static final class OverrideSource implements Properties.Source
 	{
-		private final Properties.Source template;
 		private final String authentication;
 		private final String hostname;
-		private final HashMap<String, String> override;
+		private final HashMap<String, String> override; // TODO rename
 		private final long timestamp = System.currentTimeMillis();
 
 		OverrideSource(
-				final Properties.Source sourceBefore,
 				final String authentication,
 				final String hostname,
 				final HashMap<String, String> sourceMap)
 		{
-			this.template = sourceBefore;
 			this.authentication = authentication;
 			this.hostname = hostname;
 			this.override = sourceMap;
@@ -174,18 +172,14 @@ public abstract class PropertiesServlet extends CopsServlet
 		@Override
 		public String get(final String key)
 		{
-			return
-				override.containsKey(key)
-				? override.get(key)
-				: template.get(key);
+			return override.get(key);
 		}
 
 		@Override
 		public String getDescription()
 		{
 			final StringBuilder bf = new StringBuilder();
-			bf.append(template.getDescription());
-			bf.append(" (Edited ");
+			bf.append("(Edited ");
 			bf.append(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS").format(new Date(timestamp)));
 			if(authentication!=null)
 				bf.append(" by ").append(authentication);
@@ -200,7 +194,7 @@ public abstract class PropertiesServlet extends CopsServlet
 		@Override
 		public Collection<String> keySet()
 		{
-			return null;
+			return override.keySet();
 		}
 	}
 
