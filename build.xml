@@ -162,6 +162,7 @@
 				<pathelement location="build/classes" />
 				<pathelement location="lib/servlet-api.jar" />
 				<pathelement location="lib/exedio-cope-util.jar" />
+				<pathelement location="lib/findbugs-annotations.jar" />
 			</classpath>
 			<compilerarg value="-Xlint" />
 			<compilerarg value="-encoding" />
