@@ -23,6 +23,9 @@ import static java.util.Arrays.asList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import junit.framework.TestCase;
 
@@ -39,6 +42,7 @@ public class CopParameterRequestTest extends TestCase
 			assertParameters(request);
 			final Enumeration<?> names = request.getParameterNames();
 			assertFalse(names.hasMoreElements());
+			assertEqualsParameterMap(request);
 		}
 		{
 			final CopParameterRequest request = new CopParameterRequest(nested, "test.html?ding=zack");
@@ -51,6 +55,7 @@ public class CopParameterRequestTest extends TestCase
 			final Enumeration<?> names = request.getParameterNames();
 			assertEquals("ding", names.nextElement());
 			assertFalse(names.hasMoreElements());
+			assertEqualsParameterMap("ding", asList("zack"), request);
 		}
 		{
 			final CopParameterRequest request = new CopParameterRequest(nested, "test.html?ding=zack&dong=zock");
@@ -66,6 +71,7 @@ public class CopParameterRequestTest extends TestCase
 			assertEquals("ding", names.nextElement());
 			assertEquals("dong", names.nextElement());
 			assertFalse(names.hasMoreElements());
+			assertEqualsParameterMap("ding", asList("zack"), "dong", asList("zock"), request);
 		}
 		{
 			final CopParameterRequest request = new CopParameterRequest(nested, "test.html?ding=zack&ding=zock");
@@ -78,6 +84,7 @@ public class CopParameterRequestTest extends TestCase
 			final Enumeration<?> names = request.getParameterNames();
 			assertEquals("ding", names.nextElement());
 			assertFalse(names.hasMoreElements());
+			assertEqualsParameterMap("ding", asList("zack", "zock"), request);
 		}
 		{
 			final CopParameterRequest request = new CopParameterRequest(nested, "test.html?ding=zack&dong=zick&ding=zock");
@@ -93,6 +100,7 @@ public class CopParameterRequestTest extends TestCase
 			assertEquals("ding", names.nextElement());
 			assertEquals("dong", names.nextElement());
 			assertFalse(names.hasMoreElements());
+			assertEqualsParameterMap("ding", asList("zack", "zock"), "dong", asList("zick"), request);
 		}
 		{
 			final CopParameterRequest request = new CopParameterRequest(nested, "test.html?ding=sla%2Fsh");
@@ -105,6 +113,7 @@ public class CopParameterRequestTest extends TestCase
 			final Enumeration<?> names = request.getParameterNames();
 			assertEquals("ding", names.nextElement());
 			assertFalse(names.hasMoreElements());
+			assertEqualsParameterMap("ding", asList("sla/sh"), request);
 		}
 	}
 
@@ -131,14 +140,41 @@ public class CopParameterRequestTest extends TestCase
 		{
 			assertEquals("name", e.getMessage());
 		}
-		try
-		{
-			request.getParameterMap();
-			fail();
-		}
-		catch(final RuntimeException e)
-		{
-			assertEquals("not yet implemented", e.getMessage());
-		}
+	}
+
+	private static final void assertEqualsParameterMap(
+			final CopParameterRequest request)
+	{
+		assertEquals(Collections.emptyMap(), convertParameterMap(request));
+	}
+
+	private static final void assertEqualsParameterMap(
+			final String key1,
+			final List<String> value1,
+			final CopParameterRequest request)
+	{
+		assertEquals(Collections.singletonMap(key1, value1), convertParameterMap(request));
+	}
+
+	private static final void assertEqualsParameterMap(
+			final String key1,
+			final List<String> value1,
+			final String key2,
+			final List<String> value2,
+			final CopParameterRequest request)
+	{
+		final LinkedHashMap<String, List<String>> expected = new LinkedHashMap<String, List<String>>();
+		expected.put(key1, value1);
+		expected.put(key2, value2);
+		assertEquals(expected, convertParameterMap(request));
+	}
+
+	private static final Map<String, List<String>> convertParameterMap(final CopParameterRequest request)
+	{
+		final Map<?,?> parameters = request.getParameterMap();
+		final LinkedHashMap<String, List<String>> result = new LinkedHashMap<String, List<String>>();
+		for(final Map.Entry<?,?> e : parameters.entrySet())
+			result.put((String)e.getKey(), Arrays.asList((String[])e.getValue()));
+		return Collections.unmodifiableMap(result);
 	}
 }

@@ -162,7 +162,13 @@ final class CopParameterRequest implements HttpServletRequest
 	@Override
 	public Map<?,?> getParameterMap()
 	{
-		throw new RuntimeException("not yet implemented");
+		if(parameters==null)
+			return Collections.EMPTY_MAP;
+
+		final LinkedHashMap<String, String[]> result = new LinkedHashMap<String, String[]>();
+		for(final Map.Entry<String, ArrayList<String>> e : parameters.entrySet())
+			result.put(e.getKey(), e.getValue().toArray(new String[e.getValue().size()]));
+		return Collections.unmodifiableMap(result);
 	}
 
 	// ---- delegated methods ------
