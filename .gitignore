@@ -1,0 +1,6 @@
+/api
+/build
+/.eclipse-output
+/tomcat
+/getlib-local.properties
+/local.properties
