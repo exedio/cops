@@ -65,7 +65,7 @@ final class CopParameterRequest implements HttpServletRequest
 		{
 			pathInfo = '/' + value.substring(0, queryPos);
 			queryString = value.substring(queryPos + 1);
-			parameters = new LinkedHashMap<String, ArrayList<String>>();
+			parameters = new LinkedHashMap<>();
 
 			int startPos = queryPos;
 			while(true)
@@ -79,7 +79,7 @@ final class CopParameterRequest implements HttpServletRequest
 				ArrayList<String> list = parameters.get(key);
 				if(list==null)
 				{
-					list = new ArrayList<String>();
+					list = new ArrayList<>();
 					parameters.put(key, list);
 				}
 				list.add(decode(newValue));
@@ -165,7 +165,7 @@ final class CopParameterRequest implements HttpServletRequest
 		if(parameters==null)
 			return Collections.EMPTY_MAP;
 
-		final LinkedHashMap<String, String[]> result = new LinkedHashMap<String, String[]>();
+		final LinkedHashMap<String, String[]> result = new LinkedHashMap<>();
 		for(final Map.Entry<String, ArrayList<String>> e : parameters.entrySet())
 			result.put(e.getKey(), e.getValue().toArray(new String[e.getValue().size()]));
 		return Collections.unmodifiableMap(result);

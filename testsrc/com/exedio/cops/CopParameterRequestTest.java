@@ -163,7 +163,7 @@ public class CopParameterRequestTest extends TestCase
 			final List<String> value2,
 			final CopParameterRequest request)
 	{
-		final LinkedHashMap<String, List<String>> expected = new LinkedHashMap<String, List<String>>();
+		final LinkedHashMap<String, List<String>> expected = new LinkedHashMap<>();
 		expected.put(key1, value1);
 		expected.put(key2, value2);
 		assertEquals(expected, convertParameterMap(request));
@@ -172,7 +172,7 @@ public class CopParameterRequestTest extends TestCase
 	private static final Map<String, List<String>> convertParameterMap(final CopParameterRequest request)
 	{
 		final Map<?,?> parameters = request.getParameterMap();
-		final LinkedHashMap<String, List<String>> result = new LinkedHashMap<String, List<String>>();
+		final LinkedHashMap<String, List<String>> result = new LinkedHashMap<>();
 		for(final Map.Entry<?,?> e : parameters.entrySet())
 			result.put((String)e.getKey(), Arrays.asList((String[])e.getValue()));
 		return Collections.unmodifiableMap(result);

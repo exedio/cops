@@ -67,7 +67,7 @@ public abstract class PropertiesServlet extends CopsServlet
 		{
 			if(this instanceof Overridable<?>)
 			{
-				final HashMap<String, String> sourceMap = new HashMap<String, String>();
+				final HashMap<String, String> sourceMap = new HashMap<>();
 				{
 					final String[] selects = request.getParameterValues(FIELD_SELECT);
 					if(selects!=null)
@@ -91,7 +91,7 @@ public abstract class PropertiesServlet extends CopsServlet
 				}
 				if(!sourceMap.isEmpty())
 				{
-					final HashSet<Integer> doTestNumbers = new HashSet<Integer>();
+					final HashSet<Integer> doTestNumbers = new HashSet<>();
 					final String[] doTestNumberStrings = request.getParameterValues(TEST_NUMBER);
 					if(doTestNumberStrings!=null)
 						for(final String doTestNumberString : doTestNumberStrings)
@@ -234,7 +234,7 @@ public abstract class PropertiesServlet extends CopsServlet
 		if(sourceKeySet==null)
 			return null;
 
-		final HashSet<String> result = new HashSet<String>(sourceKeySet);
+		final HashSet<String> result = new HashSet<>(sourceKeySet);
 		for(final Properties.Field field : properties.getFields())
 			result.remove(field.getKey());
 		return result;

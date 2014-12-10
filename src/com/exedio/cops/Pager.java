@@ -198,7 +198,7 @@ public final class Pager
 
 	public List<Pager> newLimits()
 	{
-		final ArrayList<Pager> result = new ArrayList<Pager>();
+		final ArrayList<Pager> result = new ArrayList<>();
 		final int max = Math.min(total(), config.limitCeiling);
 		for(final int limit : config.limits)
 		{
@@ -230,7 +230,7 @@ public final class Pager
 		final int page = offset / limit;
 		final int fromPage = Math.max(page-PAGE_CONTEXT, 0);
 		final int toPage   = Math.min(fromPage+PAGE_CONTEXT_SPAN, ((total()-1) / limit));
-		final ArrayList<Pager> result = new ArrayList<Pager>();
+		final ArrayList<Pager> result = new ArrayList<>();
 		for(int newPage = fromPage; newPage<=toPage; newPage++)
 		{
 			final int pageOffset = newPage*limit; // TODO replace multiply by add

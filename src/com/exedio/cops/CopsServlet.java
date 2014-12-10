@@ -50,7 +50,7 @@ public abstract class CopsServlet extends HttpServlet
 	{
 		try
 		{
-			final LinkedHashMap<String, Resource> resources = new LinkedHashMap<String, Resource>();
+			final LinkedHashMap<String, Resource> resources = new LinkedHashMap<>();
 			for(Class<?> clazz = getClass(); clazz!=CopsServlet.class; clazz = clazz.getSuperclass())
 			{
 				for(final java.lang.reflect.Field field : clazz.getDeclaredFields())

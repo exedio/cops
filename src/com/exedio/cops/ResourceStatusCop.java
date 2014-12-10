@@ -122,10 +122,10 @@ final class ResourceStatusCop extends Cop
 		if(selectList==null)
 			return Collections.<Resource>emptyList();
 
-		final HashSet<String> selects = new HashSet<String>();
+		final HashSet<String> selects = new HashSet<>();
 		for(final String select : selectList)
 			selects.add(select);
-		final ArrayList<Resource> result = new ArrayList<Resource>();
+		final ArrayList<Resource> result = new ArrayList<>();
 		for(final Resource resource : resources)
 			if(selects.contains(resource.getName()))
 				result.add(resource);

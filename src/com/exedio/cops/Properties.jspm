@@ -170,7 +170,7 @@ final class Properties_Jspm
 			final HashSet<Integer> doTestNumbers;
 			if(Cop.isPost(request) && request.getParameter(TEST)!=null)
 			{
-				doTestNumbers = new HashSet<Integer>();
+				doTestNumbers = new HashSet<>();
 				final String[] doTestNumberStrings = request.getParameterValues(TEST_NUMBER);
 				if(doTestNumberStrings!=null)
 				{

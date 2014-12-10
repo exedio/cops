@@ -52,7 +52,7 @@ final class PropertiesCop extends Cop
 		final String[] showHiddenKeys = request.getParameterValues(SHOW_HIDDEN);
 		final HashSet<String> showHidden =
 				(showHiddenKeys!=null)
-				? new HashSet<String>(Arrays.asList(showHiddenKeys))
+				? new HashSet<>(Arrays.asList(showHiddenKeys))
 				: null;
 		return new PropertiesCop(
 				properties, showHidden);
@@ -62,7 +62,7 @@ final class PropertiesCop extends Cop
 	{
 		final HashSet<String> showHidden =
 				(this.showHidden!=null)
-				? new HashSet<String>(this.showHidden)
+				? new HashSet<>(this.showHidden)
 				: new HashSet<String>();
 		showHidden.add(field.getKey());
 		return new PropertiesCop(properties, showHidden);
