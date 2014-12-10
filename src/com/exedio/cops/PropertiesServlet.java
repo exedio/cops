@@ -25,6 +25,7 @@ package com.exedio.cops;
 import com.exedio.cope.util.Properties;
 import com.exedio.cope.util.Sources;
 import java.io.IOException;
+import java.io.StringReader;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.security.Principal;
@@ -33,6 +34,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.concurrent.Callable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,6 +52,7 @@ public abstract class PropertiesServlet extends CopsServlet
 	static final String SET = "set";
 	static final String FIELD_SELECT = "fieldSelect";
 	static final String FIELD_VALUE_PREFIX = "fieldVal_";
+	static final String FIELDS_RAW = "fieldsRaw";
 	static final String TEST_NUMBER = "testNum";
 
 	@Override
@@ -70,6 +73,21 @@ public abstract class PropertiesServlet extends CopsServlet
 					if(selects!=null)
 						for(final String select : selects)
 							sourceMap.put(select, request.getParameter(FIELD_VALUE_PREFIX + select));
+				}
+				{
+					final String string = request.getParameter(FIELDS_RAW);
+					final java.util.Properties properties = new java.util.Properties();
+					final StringReader stream = new StringReader(string);
+					try
+					{
+						properties.load(stream);
+					}
+					finally
+					{
+						stream.close();
+					}
+					for(final Map.Entry<Object,Object> e : properties.entrySet())
+						sourceMap.put((String)e.getKey(), (String)e.getValue());
 				}
 				if(!sourceMap.isEmpty())
 				{

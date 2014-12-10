@@ -26,6 +26,7 @@ package com.exedio.cops;
 import static com.exedio.cops.PropertiesServlet.SET;
 import static com.exedio.cops.PropertiesServlet.FIELD_SELECT;
 import static com.exedio.cops.PropertiesServlet.FIELD_VALUE_PREFIX;
+import static com.exedio.cops.PropertiesServlet.FIELDS_RAW;
 import static com.exedio.cops.PropertiesServlet.TEST_NUMBER;
 import static com.exedio.cope.util.CharsetName.UTF8;
 
@@ -147,7 +148,17 @@ final class Properties_Jspm
 			</tr><%
 		}
 		%>
-		</table>
+		</table><%
+
+		if(overridable)
+		{
+			%>
+<textarea name="<%=FIELDS_RAW%>" cols="100" rows="3" wrap="off">
+# Here you can enter any key-value pairs in the syntax of java.util.Properties#load
+#
+</textarea><%
+		}
+		%>
 			<table>
 				<caption>Tests</caption>
 				<tr>
