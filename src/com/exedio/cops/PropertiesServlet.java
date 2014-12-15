@@ -46,6 +46,7 @@ public abstract class PropertiesServlet extends CopsServlet
 	static final Resource stylesheet = new Resource("properties.css");
 	static final Resource script = new Resource("properties.js");
 	static final Resource logo = new Resource("logo.png");
+	static final Resource shortcutIcon = new Resource("shortcutIcon.png");
 	static final Resource checkFalse = new Resource("checkfalse.png");
 	static final Resource checkTrue  = new Resource("checktrue.png");
 

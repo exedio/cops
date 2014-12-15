@@ -56,6 +56,7 @@ final class Properties_Jspm
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=<%=UTF8%>"></meta>
 		<title><%=caption%></title>
+		<link rel="shortcut icon" href="<%=PropertiesServlet.shortcutIcon%>" type="image/png"></link>
 		<link rel="STYLESHEET" type="text/css" href="<%=PropertiesServlet.stylesheet%>"></link>
 		<script src="<%=PropertiesServlet.script%>" type="text/javascript"></script>
 	</head>
