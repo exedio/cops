@@ -54,14 +54,14 @@ final class Properties_Jspm
 %><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<meta http-equiv="content-type" content="text/html; charset=<%=UTF8%>"></meta>
+		<meta http-equiv="content-type" content="text/html; charset=<%=UTF8%>">
 		<title><%=caption%></title>
-		<link rel="shortcut icon" href="<%=PropertiesServlet.shortcutIcon%>" type="image/png"></link>
-		<link rel="STYLESHEET" type="text/css" href="<%=PropertiesServlet.stylesheet%>"></link>
+		<link rel="shortcut icon" href="<%=PropertiesServlet.shortcutIcon%>" type="image/png">
+		<link rel="STYLESHEET" type="text/css" href="<%=PropertiesServlet.stylesheet%>">
 		<script src="<%=PropertiesServlet.script%>" type="text/javascript"></script>
 	</head>
 	<body>
-		<a href="http://cope.sourceforge.net/" target="_blank"><img src="<%=PropertiesServlet.logo%>" alt="Exedio Logo" class="logo"></img></a>
+		<a href="http://cope.sourceforge.net/" target="_blank"><img src="<%=PropertiesServlet.logo%>" alt="Exedio Logo" class="logo"></a>
 		<h1><%=caption%></h1>
 		<div class="footer"><%=properties.getSource()%></div>
 		<div class="footer">
@@ -104,7 +104,7 @@ final class Properties_Jspm
 			if(overridable)
 			{
 				%>
-				<th><input type="checkbox" name="<%=FIELD_SELECT%>" value="<%=field.getKey()%>" onClick="onCheckbox(this,'fid<%=idNum%>')"></input></th><%
+				<th><input type="checkbox" name="<%=FIELD_SELECT%>" value="<%=field.getKey()%>" onClick="onCheckbox(this,'fid<%=idNum%>')"></th><%
 			}
 				%>
 				<th><%=field.getKey()%></th><%
@@ -141,7 +141,7 @@ final class Properties_Jspm
 					}
 					if(overridable)
 					{
-						%><br><input id="fid<%=idNum%>" class="propertyValue" name="<%=FIELD_VALUE_PREFIX%><%=field.getKey()%>"></input><%
+						%><br><input id="fid<%=idNum%>" class="propertyValue" name="<%=FIELD_VALUE_PREFIX%><%=field.getKey()%>"><%
 					}
 					%></td><%
 		}
@@ -163,7 +163,7 @@ final class Properties_Jspm
 			<table>
 				<caption>Tests</caption>
 				<tr>
-					<th><input type="checkbox" onclick="checkAll(this)" checked></input></th>
+					<th><input type="checkbox" onclick="checkAll(this)" checked></th>
 					<th><i>(un)check all tests</i></th>
 				</tr><%
 			
@@ -189,7 +189,7 @@ final class Properties_Jspm
 				testNumber++;
 				%>
 				<tr>
-					<th><input class="testcheck" type="checkbox" name="<%=TEST_NUMBER%>" value="<%=testNumber%>" checked="true"></input></th>
+					<th><input class="testcheck" type="checkbox" name="<%=TEST_NUMBER%>" value="<%=testNumber%>" checked="true"></th>
 					<th><%=test.toString()%></th><%
 					
 				if(doTestNumbers!=null && doTestNumbers.contains(Integer.valueOf(testNumber)))
@@ -234,12 +234,12 @@ final class Properties_Jspm
 			}
 			%>
 			</table>
-			<input type="submit" name="<%=TEST%>" value="Test"></input><%
+			<input type="submit" name="<%=TEST%>" value="Test"><%
 		
 		if(overridable)
 		{
 			%>
-			<input type="submit" name="<%=SET %>" value="Set"></input><%
+			<input type="submit" name="<%=SET %>" value="Set"><%
 		}
 		%>
 		</form>
