@@ -30,7 +30,6 @@ public class PackageTest
 		suite.addTestSuite(CopTest.class);
 		suite.addTestSuite(CopParameterRequestTest.class);
 		suite.addTestSuite(ResourceLastModifiedTest.class);
-		suite.addTestSuite(ResourceExpiresTest.class);
 		suite.addTestSuite(ResourceTest.class);
 		suite.addTestSuite(EncodeTest.class);
 		suite.addTestSuite(PagerTest.class);

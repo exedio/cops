@@ -68,7 +68,7 @@ public class ResourceTest extends AbstractWebTest
 		assertTrue("This sometimes fails because the request takes too long or so.", (date+1000)>=lastModified); // TODO
 		assertEquals(expectNotModified ? null : contentType, conn.getContentType());
 		//System.out.println("Expires: "+new Date(conn.getExpiration()));
-		assertWithin(new Date(date+(4*60*1000)), new Date(date+(6*60*1000)), new Date(conn.getExpiration()));
+		assertWithin(new Date(date+(1000l*60*60*24*362)), new Date(date+(1000l*60*60*24*364)), new Date(conn.getExpiration()));
 		assertEquals(expectNotModified ? -1 : (41 + (2*System.getProperty("line.separator").length())), conn.getContentLength());
 
 		final BufferedReader is = new BufferedReader(new InputStreamReader(conn.getInputStream()));

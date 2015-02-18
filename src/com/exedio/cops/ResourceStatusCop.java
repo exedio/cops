@@ -77,7 +77,6 @@ final class ResourceStatusCop extends Cop
 	static final String INBOX = "inbox";
 	static final String OVERRIDE_HOST = "overrideHost";
 	static final String TOUCH = "touchLastModified";
-	static final String EXPIRE = "expire";
 	static final String ACTIVATE_LOG = "activateLog";
 	static final String DEACTIVATE_LOG = "deactivateLog";
 
@@ -94,12 +93,6 @@ final class ResourceStatusCop extends Cop
 			final long now = System.currentTimeMillis();
 			for(final Resource resource : filter(request, resources))
 				resource.setLastModified(now);
-		}
-		else if(request.getParameter(EXPIRE)!=null)
-		{
-			final int expire = Integer.parseInt(request.getParameter(INBOX));
-			for(final Resource resource : filter(request, resources))
-				resource.setExpiresSeconds(expire);
 		}
 		else if(request.getParameter(ACTIVATE_LOG)!=null)
 		{

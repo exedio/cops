@@ -40,14 +40,6 @@ public final class Resource
 
 	private volatile String hostOverride = null;
 
-	/**
-	 * Sets the offset, the Expires http header is set into the future.
-	 * Together with a http reverse proxy this ensures,
-	 * that for that time no request for that data will reach the servlet.
-	 * This may reduce the load on the server.
-	 */
-	private volatile long expiresOffset = 1000 * 60 * 5; // 5 minutes
-
 	private volatile boolean log = false;
 
 	private final VolatileLong response200Count = new VolatileLong();
@@ -207,19 +199,6 @@ public final class Resource
 		this.hostOverride = hostOverride;
 	}
 
-	long getExpiresSeconds()
-	{
-		return expiresOffset/1000;
-	}
-
-	void setExpiresSeconds(final long expiresSeconds)
-	{
-		if(expiresSeconds<0)
-			throw new IllegalArgumentException("expiresSeconds must not be negative, but was " + expiresSeconds);
-
-		this.expiresOffset = expiresSeconds*1000;
-	}
-
 	boolean getLog()
 	{
 		return log;
@@ -245,7 +224,12 @@ public final class Resource
 		response.setContentType(contentType);
 		response.setDateHeader(RESPONSE_LAST_MODIFIED, lastModified);
 		final long now = System.currentTimeMillis();
-		response.setDateHeader(RESPONSE_EXPIRES, now+expiresOffset);
+		// RFC 2616:
+		// To mark a response as "never expires," an origin server sends an
+		// Expires date approximately one year from the time the response is
+		// sent. HTTP/1.1 servers SHOULD NOT send Expires dates more than one
+		// year in the future.
+		response.setDateHeader(RESPONSE_EXPIRES, now + 1000l*60*60*24*363); // 363 days
 
 		final long ifModifiedSince = request.getDateHeader(REQUEST_IF_MODIFIED_SINCE);
 

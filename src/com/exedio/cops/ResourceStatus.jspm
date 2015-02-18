@@ -25,7 +25,6 @@ import static com.exedio.cops.ResourceStatusCop.SELECT_ALL;
 import static com.exedio.cops.ResourceStatusCop.INBOX;
 import static com.exedio.cops.ResourceStatusCop.OVERRIDE_HOST;
 import static com.exedio.cops.ResourceStatusCop.TOUCH;
-import static com.exedio.cops.ResourceStatusCop.EXPIRE;
 import static com.exedio.cops.ResourceStatusCop.ACTIVATE_LOG;
 import static com.exedio.cops.ResourceStatusCop.DEACTIVATE_LOG;
 
@@ -160,7 +159,6 @@ final class ResourceStatus_Jspm
 			{
 				%>
 				<th>Content Type</th>
-				<th>Expires<small>/s</small></th>
 				<th>Last Modified</th>
 				<%
 			}
@@ -202,7 +200,6 @@ final class ResourceStatus_Jspm
 			{
 				%>
 				<td class="text"><%=contentType%></td>
-				<td><%=nf.format(resource.getExpiresSeconds())%></td>
 				<td class="text"><%=resource.getLastModified()%></td>
 				<%
 			}
@@ -229,7 +226,6 @@ final class ResourceStatus_Jspm
 		<input name="<%=INBOX%>"></input>
 		<input type="submit" name="<%=OVERRIDE_HOST%>" value="Override Host"></input>
 		<input type="submit" name="<%=TOUCH%>" value="Touch"></input>
-		<input type="submit" name="<%=EXPIRE%>" value="Expire"></input>
 		<input type="submit" name="<%=ACTIVATE_LOG%>" value="Activate Log"></input>
 		<input type="submit" name="<%=DEACTIVATE_LOG%>" value="Deactivate Log"></input>
 	</form>
