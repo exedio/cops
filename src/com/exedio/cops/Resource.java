@@ -18,9 +18,12 @@
 
 package com.exedio.cops;
 
+import com.exedio.cope.util.Hex;
+import com.exedio.cope.util.MessageDigestUtil;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.MessageDigest;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,6 +40,7 @@ public final class Resource
 
 	private final Object contentLock = new Object();
 	private byte[] content;
+	private String contentFingerprint;
 
 	private volatile String hostOverride = null;
 
@@ -116,6 +120,8 @@ public final class Resource
 	{
 		if(request==null)
 			throw new NullPointerException("request");
+		if(contentFingerprint==null)
+			throw new RuntimeException("not initialized: "+name);
 
 		final StringBuilder bf = new StringBuilder();
 
@@ -126,6 +132,7 @@ public final class Resource
 
 		bf.append(request.getContextPath()).
 			append(request.getServletPath()).
+			append('/').append(contentFingerprint).
 			append('/').append(name);
 
 		return bf.toString();
@@ -135,6 +142,8 @@ public final class Resource
 	{
 		if(request==null)
 			throw new NullPointerException("request");
+		if(contentFingerprint==null)
+			throw new RuntimeException("not initialized: "+name);
 
 		final String hostOverride = this.hostOverride;
 		return
@@ -142,6 +151,7 @@ public final class Resource
 			(hostOverride==null ? request.getHeader("Host") : hostOverride) +
 			request.getContextPath() +
 			request.getServletPath() +
+			'/' + contentFingerprint +
 			'/' + name;
 	}
 
@@ -149,7 +159,7 @@ public final class Resource
 	{
 		if(token==null)
 			throw new NullPointerException("token");
-		return EnvironmentRequest.getURL(token, false, name);
+		return EnvironmentRequest.getURL(token, false, name); // TODO fingerprint
 	}
 
 	void init(final Class<?> resourceLoader)
@@ -169,6 +179,7 @@ public final class Resource
 				for(int len = in.read(buf); len>=0; len = in.read(buf))
 					out.write(buf, 0, len);
 				content = out.toByteArray();
+				contentFingerprint = makeFingerprint(content);
 				out.close();
 			}
 			catch(final IOException e)
@@ -187,6 +198,13 @@ public final class Resource
 				}
 			}
 		}
+	}
+
+	private static String makeFingerprint(final byte[] content)
+	{
+		final MessageDigest digester = MessageDigestUtil.getInstance("MD5");
+		digester.update(content);
+		return Hex.encodeLower(digester.digest());
 	}
 
 	String getHostOverride()
