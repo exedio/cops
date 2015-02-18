@@ -92,6 +92,11 @@
 			<compilerarg value="-encoding" />
 			<compilerarg value="ascii" />
 		</javac>
+		<copy todir="build/testclasses">
+			<fileset dir="testsrc">
+				<include name="**/*.bin" />
+			</fileset>
+		</copy>
 	</target>
 	
 	<target name="test.run" depends="test.compile">
