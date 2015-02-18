@@ -41,6 +41,7 @@ public final class Resource
 	private final Object contentLock = new Object();
 	private byte[] content;
 	private String contentFingerprint;
+	private static final String RESOURCE_PATH = "resources";
 
 	private volatile String hostOverride = null;
 
@@ -132,6 +133,7 @@ public final class Resource
 
 		bf.append(request.getContextPath()).
 			append(request.getServletPath()).
+			append('/').append(RESOURCE_PATH).
 			append('/').append(contentFingerprint).
 			append('/').append(name);
 
@@ -151,6 +153,7 @@ public final class Resource
 			(hostOverride==null ? request.getHeader("Host") : hostOverride) +
 			request.getContextPath() +
 			request.getServletPath() +
+			'/' + RESOURCE_PATH +
 			'/' + contentFingerprint +
 			'/' + name;
 	}
@@ -162,7 +165,7 @@ public final class Resource
 		if(contentFingerprint==null)
 			throw new RuntimeException("not initialized: "+name);
 
-		return EnvironmentRequest.getURL(token, false, contentFingerprint + '/' + name);
+		return EnvironmentRequest.getURL(token, false, RESOURCE_PATH + '/' + contentFingerprint + '/' + name);
 	}
 
 	void init(final Class<?> resourceLoader)
