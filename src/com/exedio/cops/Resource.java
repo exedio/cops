@@ -159,7 +159,10 @@ public final class Resource
 	{
 		if(token==null)
 			throw new NullPointerException("token");
-		return EnvironmentRequest.getURL(token, false, name); // TODO fingerprint
+		if(contentFingerprint==null)
+			throw new RuntimeException("not initialized: "+name);
+
+		return EnvironmentRequest.getURL(token, false, contentFingerprint + '/' + name);
 	}
 
 	void init(final Class<?> resourceLoader)
