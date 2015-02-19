@@ -42,9 +42,9 @@ public class ResourceTest extends AbstractWebTest
 		assertEquals(textLastModified, assertURL(text, textLastModified+5000, true));
 
 		assertMoved   (prefix + "resources/X/resource-test.txt", text.toString());
-		assertMoved   (prefix + "resources//resource-test.txt", text.toString());
-		assertMoved   (prefix + "resources/resource-test.txt", text.toString());
-		assertMoved   (prefix + "resource-test.txt", text.toString());
+		assertMoved   (prefix + "resources//resource-test.txt" , text.toString());
+		assertMoved   (prefix + "resources/resource-test.txt"  , text.toString());
+		assertMoved   (prefix + "resource-test.txt"            , text.toString());
 		assertNotFound(prefix + "resources/X/Xresource-test.txt");
 	}
 
