@@ -117,11 +117,11 @@ public final class Resource
 	}
 
 
-	private String contentFingerprintIfInitialized;
+	private String pathIfInitialized;
 
-	private String contentFingerprint()
+	private String path()
 	{
-		final String result = contentFingerprintIfInitialized;
+		final String result = pathIfInitialized;
 		if(result==null)
 			throw new RuntimeException("not initialized: "+name);
 		return result;
@@ -141,9 +141,7 @@ public final class Resource
 
 		bf.append(request.getContextPath()).
 			append(request.getServletPath()).
-			append('/').append(RESOURCE_PATH).
-			append('/').append(contentFingerprint()).
-			append('/').append(name);
+			append('/').append(path());
 
 		return bf.toString();
 	}
@@ -159,9 +157,7 @@ public final class Resource
 			(hostOverride==null ? request.getHeader("Host") : hostOverride) +
 			request.getContextPath() +
 			request.getServletPath() +
-			'/' + RESOURCE_PATH +
-			'/' + contentFingerprint() +
-			'/' + name;
+			'/' + path();
 	}
 
 	public final String getAbsoluteURL(final String token)
@@ -169,7 +165,7 @@ public final class Resource
 		if(token==null)
 			throw new NullPointerException("token");
 
-		return EnvironmentRequest.getURL(token, false, RESOURCE_PATH + '/' + contentFingerprint() + '/' + name);
+		return EnvironmentRequest.getURL(token, false, path());
 	}
 
 	void init(final Class<?> resourceLoader)
@@ -189,7 +185,7 @@ public final class Resource
 				for(int len = in.read(buf); len>=0; len = in.read(buf))
 					out.write(buf, 0, len);
 				content = out.toByteArray();
-				contentFingerprintIfInitialized = makeFingerprint(content);
+				pathIfInitialized = RESOURCE_PATH + '/' + makeFingerprint(content) + '/' + name;
 				out.close();
 			}
 			catch(final IOException e)
