@@ -47,6 +47,7 @@ public abstract class CopsServlet extends HttpServlet
 
 	private final LinkedHashMap<String, Resource> resources;
 	private final LinkedHashMap<String, Resource> resourcesByName;
+	private final VolatileLong resources404Count = new VolatileLong();
 
 	protected CopsServlet()
 	{
@@ -123,6 +124,7 @@ public abstract class CopsServlet extends HttpServlet
 						cop,
 						config!=null ? config.getServletName() : null, // TODO why can config be null?
 						resources.values(),
+						resources404Count.get(),
 						getAuthentication(request),
 						nf,
 						CopsServlet.class.getPackage());
@@ -150,6 +152,7 @@ public abstract class CopsServlet extends HttpServlet
 					}
 				}
 				response.setStatus(SC_NOT_FOUND);
+				resources404Count.inc();
 				return;
 			}
 			{

@@ -114,6 +114,16 @@ public final class Resource
 		return response304Count.get();
 	}
 
+	public long getResponse301ByNameCount()
+	{
+		return response301ByNameCount.get();
+	}
+
+	public long getResponse301ByFingerprintCount()
+	{
+		return response301ByFingerprintCount.get();
+	}
+
 	@Override
 	public String toString()
 	{
