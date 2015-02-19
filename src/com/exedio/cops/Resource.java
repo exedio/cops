@@ -40,7 +40,7 @@ public final class Resource
 
 	private final Object contentLock = new Object();
 	private byte[] content;
-	private static final String RESOURCE_PATH = "resources";
+	private static final String PATH = "resources";
 
 	private volatile String hostOverride = null;
 
@@ -185,7 +185,7 @@ public final class Resource
 				for(int len = in.read(buf); len>=0; len = in.read(buf))
 					out.write(buf, 0, len);
 				content = out.toByteArray();
-				pathIfInitialized = RESOURCE_PATH + '/' + makeFingerprint(content) + '/' + name;
+				pathIfInitialized = PATH + '/' + makeFingerprint(content) + '/' + name;
 				out.close();
 			}
 			catch(final IOException e)
