@@ -131,7 +131,7 @@ public abstract class CopsServlet extends HttpServlet
 				out.sendBody(response);
 				return;
 			}
-			if(pathInfo.startsWith('/' + Resource.PATH))
+			if(pathInfo.startsWith('/' + Resource.PATH + '/'))
 			{
 				{
 					final Resource resource = resources.get(pathInfo);
