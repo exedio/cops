@@ -18,6 +18,8 @@
 
 package com.exedio.cops;
 
+import static javax.servlet.http.HttpServletResponse.SC_MOVED_PERMANENTLY;
+
 import com.exedio.cope.util.Hex;
 import com.exedio.cope.util.MessageDigestUtil;
 import java.io.ByteArrayOutputStream;
@@ -40,7 +42,7 @@ public final class Resource
 
 	private final Object contentLock = new Object();
 	private byte[] content;
-	private static final String PATH = "resources";
+	static final String PATH = "resources";
 
 	private volatile String hostOverride = null;
 
@@ -48,6 +50,8 @@ public final class Resource
 
 	private final VolatileLong response200Count = new VolatileLong();
 	private final VolatileLong response304Count = new VolatileLong();
+	private final VolatileLong response301ByNameCount = new VolatileLong();
+	private final VolatileLong response301ByFingerprintCount = new VolatileLong();
 
 	public Resource(final String name)
 	{
@@ -119,7 +123,7 @@ public final class Resource
 
 	private String pathIfInitialized;
 
-	private String path()
+	String path()
 	{
 		final String result = pathIfInitialized;
 		if(result==null)
@@ -271,6 +275,19 @@ public final class Resource
 			if(log)
 				log(request, "Delivered");
 		}
+	}
+
+	void doRedirect(
+			final HttpServletRequest request,
+			final HttpServletResponse response,
+			final boolean byName)
+	{
+		response.setStatus(SC_MOVED_PERMANENTLY);
+		response.setHeader("Location", getAbsoluteURL(request));
+
+		(byName ? response301ByNameCount : response301ByFingerprintCount).inc();
+		if(log)
+			log(request, byName ? "Redirect by name" : "Redirect by fingerprint");
 	}
 
 	private static void log(final HttpServletRequest request, final String action)

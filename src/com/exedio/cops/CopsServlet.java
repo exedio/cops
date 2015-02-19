@@ -20,6 +20,7 @@ package com.exedio.cops;
 
 import static java.lang.reflect.Modifier.FINAL;
 import static java.lang.reflect.Modifier.STATIC;
+import static javax.servlet.http.HttpServletResponse.SC_NOT_FOUND;
 
 import com.exedio.cope.util.CharsetName;
 import java.io.IOException;
@@ -45,12 +46,14 @@ public abstract class CopsServlet extends HttpServlet
 	private static final long serialVersionUID = 1l;
 
 	private final LinkedHashMap<String, Resource> resources;
+	private final LinkedHashMap<String, Resource> resourcesByName;
 
 	protected CopsServlet()
 	{
 		try
 		{
-			final LinkedHashMap<String, Resource> resources = new LinkedHashMap<>();
+			final LinkedHashMap<String, Resource> resources       = new LinkedHashMap<>();
+			final LinkedHashMap<String, Resource> resourcesByName = new LinkedHashMap<>();
 			for(Class<?> clazz = getClass(); clazz!=CopsServlet.class; clazz = clazz.getSuperclass())
 			{
 				for(final java.lang.reflect.Field field : clazz.getDeclaredFields())
@@ -66,10 +69,12 @@ public abstract class CopsServlet extends HttpServlet
 						continue;
 
 					resource.init(clazz);
-					resources.put('/'+resource.name, resource);
+					resourcesByName.put('/'+resource.name,   resource);
+					resources      .put('/'+resource.path(), resource);
 				}
 			}
-			this.resources = resources.isEmpty() ? null : resources;
+			this.resources       = resources      .isEmpty() ? null : resources;
+			this.resourcesByName = resourcesByName.isEmpty() ? null : resourcesByName;
 		}
 		catch(final IllegalAccessException e)
 		{
@@ -124,11 +129,36 @@ public abstract class CopsServlet extends HttpServlet
 				out.sendBody(response);
 				return;
 			}
-			final Resource resource = resources.get(pathInfo);
-			if(resource!=null)
+			if(pathInfo.startsWith('/' + Resource.PATH))
 			{
-				resource.doGet(request, response);
+				{
+					final Resource resource = resources.get(pathInfo);
+					if(resource!=null)
+					{
+						resource.doGet(request, response);
+						return;
+					}
+				}
+				final int lastSlash = pathInfo.lastIndexOf('/');
+				if(lastSlash>=0)
+				{
+					final Resource resource = resourcesByName.get(pathInfo.substring(lastSlash));
+					if(resource!=null)
+					{
+						resource.doRedirect(request, response, false);
+						return;
+					}
+				}
+				response.setStatus(SC_NOT_FOUND);
 				return;
+			}
+			{
+				final Resource resource = resourcesByName.get(pathInfo);
+				if(resource!=null)
+				{
+					resource.doRedirect(request, response, true);
+					return;
+				}
 			}
 		}
 
