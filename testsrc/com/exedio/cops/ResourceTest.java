@@ -55,6 +55,15 @@ public class ResourceTest extends TestCase
 		assertEquals("ResourceTest.bin", r1.toString());
 		try
 		{
+			r1.getPath();
+			fail();
+		}
+		catch(final IllegalStateException e)
+		{
+			assertEquals("not yet initialized: ResourceTest.bin", e.getMessage());
+		}
+		try
+		{
 			r1.getURL(null);
 			fail();
 		}
@@ -70,6 +79,33 @@ public class ResourceTest extends TestCase
 		catch(final NullPointerException e)
 		{
 			assertEquals("request", e.getMessage());
+		}
+		try
+		{
+			r1.getURL(request());
+			fail();
+		}
+		catch(final IllegalStateException e)
+		{
+			assertEquals("not yet initialized: ResourceTest.bin", e.getMessage());
+		}
+		try
+		{
+			r1.getAbsoluteURL(request("schemeX", "hostX"));
+			fail();
+		}
+		catch(final IllegalStateException e)
+		{
+			assertEquals("not yet initialized: ResourceTest.bin", e.getMessage());
+		}
+		try
+		{
+			r1.getAbsoluteURL(CopTest.TOKEN);
+			fail();
+		}
+		catch(final IllegalStateException e)
+		{
+			assertEquals("not yet initialized: ResourceTest.bin", e.getMessage());
 		}
 
 
@@ -145,6 +181,7 @@ public class ResourceTest extends TestCase
 		assertEquals("ResourceTest.bin", r1.toString());
 
 		assertEquals(null, r1.getHostOverride());
+		assertEquals(                                            "resources/"+fp+"/ResourceTest.bin", r1.getPath());
 		assertEquals(                   "/contextPath/servletPath/resources/"+fp+"/ResourceTest.bin", r1.getURL(request()));
 		assertEquals("schemeX://hostX"+ "/contextPath/servletPath/resources/"+fp+"/ResourceTest.bin", r1.getAbsoluteURL(request("schemeX", "hostX")));
 		assertEquals("http://host.invalid/contextPath/servletPath/resources/"+fp+"/ResourceTest.bin", r1.getAbsoluteURL(CopTest.TOKEN));

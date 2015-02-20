@@ -70,8 +70,8 @@ public abstract class CopsServlet extends HttpServlet
 						continue;
 
 					resource.init(clazz);
-					resourcesByName.put('/'+resource.name,   resource);
-					resources      .put('/'+resource.path(), resource);
+					resourcesByName.put('/'+resource.name     , resource);
+					resources      .put('/'+resource.getPath(), resource);
 				}
 			}
 			this.resources       = resources      .isEmpty() ? null : resources;

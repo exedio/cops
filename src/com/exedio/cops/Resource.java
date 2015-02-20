@@ -133,11 +133,11 @@ public final class Resource
 
 	private String pathIfInitialized;
 
-	String path()
+	public String getPath()
 	{
 		final String result = pathIfInitialized;
 		if(result==null)
-			throw new RuntimeException("not initialized: "+name);
+			throw new IllegalStateException("not yet initialized: " + name);
 		return result;
 	}
 
@@ -155,7 +155,7 @@ public final class Resource
 
 		bf.append(request.getContextPath()).
 			append(request.getServletPath()).
-			append('/').append(path());
+			append('/').append(getPath());
 
 		return bf.toString();
 	}
@@ -171,7 +171,7 @@ public final class Resource
 			(hostOverride==null ? request.getHeader("Host") : hostOverride) +
 			request.getContextPath() +
 			request.getServletPath() +
-			'/' + path();
+			'/' + getPath();
 	}
 
 	public final String getAbsoluteURL(final String token)
@@ -179,7 +179,7 @@ public final class Resource
 		if(token==null)
 			throw new NullPointerException("token");
 
-		return EnvironmentRequest.getURL(token, false, path());
+		return EnvironmentRequest.getURL(token, false, getPath());
 	}
 
 	void init(final Class<?> resourceLoader)
