@@ -47,12 +47,18 @@ public abstract class CopsServlet extends HttpServlet
 
 	private final LinkedHashMap<String, Resource> resources;
 	private final LinkedHashMap<String, Resource> resourcesByName;
+	private final String resourcesRootPathSegment;
 	private final VolatileLong resources404Count = new VolatileLong();
 
 	protected CopsServlet()
 	{
 		try
 		{
+			final String resourcesRootPath = getResourcesRootPath();
+			if(resourcesRootPath==null)
+				throw new NullPointerException("getResourcesRootPath must not return null");
+			this.resourcesRootPathSegment = '/' + resourcesRootPath + '/';
+
 			final LinkedHashMap<String, Resource> resources       = new LinkedHashMap<>();
 			final LinkedHashMap<String, Resource> resourcesByName = new LinkedHashMap<>();
 			for(Class<?> clazz = getClass(); clazz!=CopsServlet.class; clazz = clazz.getSuperclass())
@@ -69,7 +75,7 @@ public abstract class CopsServlet extends HttpServlet
 					if(resource==null)
 						continue;
 
-					resource.init(clazz);
+					resource.init(clazz, resourcesRootPath);
 					resourcesByName.put('/'+resource.name     , resource);
 					resources      .put('/'+resource.getPath(), resource);
 				}
@@ -81,6 +87,15 @@ public abstract class CopsServlet extends HttpServlet
 		{
 			throw new RuntimeException(e);
 		}
+	}
+
+	/**
+	 * Returns the path all resources are available under.
+	 * The default implementation returns "resources";
+	 */
+	protected String getResourcesRootPath()
+	{
+		return "resources";
 	}
 
 	static final String INLINE = "inline";
@@ -131,7 +146,7 @@ public abstract class CopsServlet extends HttpServlet
 				out.sendBody(response);
 				return;
 			}
-			if(pathInfo.startsWith('/' + Resource.PATH + '/'))
+			if(pathInfo.startsWith(resourcesRootPathSegment))
 			{
 				{
 					final Resource resource = resources.get(pathInfo);

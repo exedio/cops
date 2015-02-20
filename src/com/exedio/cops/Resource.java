@@ -42,7 +42,6 @@ public final class Resource
 
 	private final Object contentLock = new Object();
 	private byte[] content;
-	static final String PATH = "resources";
 
 	private volatile String hostOverride = null;
 
@@ -182,7 +181,7 @@ public final class Resource
 		return EnvironmentRequest.getURL(token, false, getPath());
 	}
 
-	void init(final Class<?> resourceLoader)
+	void init(final Class<?> resourceLoader, final String rootPath)
 	{
 		synchronized(contentLock)
 		{
@@ -199,7 +198,7 @@ public final class Resource
 				for(int len = in.read(buf); len>=0; len = in.read(buf))
 					out.write(buf, 0, len);
 				content = out.toByteArray();
-				pathIfInitialized = PATH + '/' + makeFingerprint(content) + '/' + name;
+				pathIfInitialized = rootPath + '/' + makeFingerprint(content) + '/' + name;
 				out.close();
 			}
 			catch(final IOException e)

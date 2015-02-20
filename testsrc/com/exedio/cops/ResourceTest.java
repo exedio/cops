@@ -109,7 +109,7 @@ public class ResourceTest extends TestCase
 		}
 
 
-		r1.init(ResourceTest.class);
+		r1.init(ResourceTest.class, "resources");
 		assertEquals("ResourceTest.bin", r1.getName());
 		assertEquals("major/minor", r1.getContentType());
 		assertEquals(23, r1.getContentLength());
@@ -146,7 +146,7 @@ public class ResourceTest extends TestCase
 
 
 		// test idempotence of init
-		r1.init(ResourceTest.class);
+		r1.init(ResourceTest.class, null);
 		assertEquals("ResourceTest.bin", r1.getName());
 		assertEquals("major/minor", r1.getContentType());
 		assertEquals(23, r1.getContentLength());
