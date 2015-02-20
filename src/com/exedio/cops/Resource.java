@@ -177,7 +177,6 @@ public final class Resource
 	{
 		if(token==null)
 			throw new NullPointerException("token");
-
 		return EnvironmentRequest.getURL(token, false, getPath());
 	}
 
