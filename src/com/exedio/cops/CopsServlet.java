@@ -93,7 +93,8 @@ public abstract class CopsServlet extends HttpServlet
 
 	/**
 	 * Returns the path all resources are available under.
-	 * The default implementation returns "resources";
+	 * The default implementation returns "resources".
+	 * Must not return null or empty string.
 	 */
 	protected String getResourcesRootPath()
 	{
