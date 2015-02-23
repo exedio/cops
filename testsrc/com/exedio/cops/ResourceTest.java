@@ -192,6 +192,7 @@ public class ResourceTest extends TestCase
 
 		r1.setHostOverride("hostO.invalid");
 		assertEquals("hostO.invalid", r1.getHostOverride());
+		assertEquals(                                                "resources/"+fp+"/ResourceTest.bin", r1.getPath());
 		assertEquals("schemeX://hostO.invalid/contextPath/servletPath/resources/"+fp+"/ResourceTest.bin", r1.getURL(request("schemeX", null)));
 		assertEquals("schemeX://hostO.invalid/contextPath/servletPath/resources/"+fp+"/ResourceTest.bin", r1.getAbsoluteURL(request("schemeX", null)));
 		assertEquals("http://host.invalid"+ "/contextPath/servletPath/resources/"+fp+"/ResourceTest.bin", r1.getAbsoluteURL(CopTest.TOKEN));
