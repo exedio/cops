@@ -20,6 +20,7 @@ package com.exedio.cops;
 
 import static java.lang.reflect.Modifier.FINAL;
 import static java.lang.reflect.Modifier.STATIC;
+import static javax.servlet.http.HttpServletResponse.SC_NOT_FOUND;
 
 import com.exedio.cope.util.CharsetName;
 import java.io.IOException;
@@ -45,12 +46,25 @@ public abstract class CopsServlet extends HttpServlet
 	private static final long serialVersionUID = 1l;
 
 	private final LinkedHashMap<String, Resource> resources;
+	private final LinkedHashMap<String, Resource> resourcesByName;
+	private final String resourcesRootPathSegment;
+	private final VolatileLong resources404Count = new VolatileLong();
 
 	protected CopsServlet()
 	{
 		try
 		{
-			final LinkedHashMap<String, Resource> resources = new LinkedHashMap<>();
+			final String resourcesRootPath = getResourcesRootPath();
+			if(resourcesRootPath==null)
+				throw new NullPointerException    ("getResourcesRootPath must not return null");
+			if(resourcesRootPath.isEmpty())
+				throw new IllegalArgumentException("getResourcesRootPath must not return empty string");
+			if(resourcesRootPath.indexOf('/')>=0)
+				throw new IllegalArgumentException("getResourcesRootPath must not return string containing /, but was " + resourcesRootPath);
+			this.resourcesRootPathSegment = '/' + resourcesRootPath + '/';
+
+			final LinkedHashMap<String, Resource> resources       = new LinkedHashMap<>();
+			final LinkedHashMap<String, Resource> resourcesByName = new LinkedHashMap<>();
 			for(Class<?> clazz = getClass(); clazz!=CopsServlet.class; clazz = clazz.getSuperclass())
 			{
 				for(final java.lang.reflect.Field field : clazz.getDeclaredFields())
@@ -65,16 +79,28 @@ public abstract class CopsServlet extends HttpServlet
 					if(resource==null)
 						continue;
 
-					resource.init(clazz);
-					resources.put('/'+resource.name, resource);
+					resource.init(clazz, resourcesRootPath);
+					resourcesByName.put('/'+resource.name     , resource);
+					resources      .put('/'+resource.getPath(), resource);
 				}
 			}
-			this.resources = resources.isEmpty() ? null : resources;
+			this.resources       = resources      .isEmpty() ? null : resources;
+			this.resourcesByName = resourcesByName.isEmpty() ? null : resourcesByName;
 		}
 		catch(final IllegalAccessException e)
 		{
 			throw new RuntimeException(e);
 		}
+	}
+
+	/**
+	 * Returns the path all resources are available under.
+	 * The default implementation returns "resources".
+	 * Must not return null or empty string.
+	 */
+	protected String getResourcesRootPath()
+	{
+		return "resources";
 	}
 
 	static final String INLINE = "inline";
@@ -118,17 +144,44 @@ public abstract class CopsServlet extends HttpServlet
 						cop,
 						config!=null ? config.getServletName() : null, // TODO why can config be null?
 						resources.values(),
+						resources404Count.get(),
 						getAuthentication(request),
 						nf,
 						CopsServlet.class.getPackage());
 				out.sendBody(response);
 				return;
 			}
-			final Resource resource = resources.get(pathInfo);
-			if(resource!=null)
+			if(pathInfo.startsWith(resourcesRootPathSegment))
 			{
-				resource.doGet(request, response);
+				{
+					final Resource resource = resources.get(pathInfo);
+					if(resource!=null)
+					{
+						resource.doGet(request, response);
+						return;
+					}
+				}
+				final int lastSlash = pathInfo.lastIndexOf('/');
+				if(lastSlash>=0)
+				{
+					final Resource resource = resourcesByName.get(pathInfo.substring(lastSlash));
+					if(resource!=null)
+					{
+						resource.doRedirect(request, response, false);
+						return;
+					}
+				}
+				response.setStatus(SC_NOT_FOUND);
+				resources404Count.inc();
 				return;
+			}
+			{
+				final Resource resource = resourcesByName.get(pathInfo);
+				if(resource!=null)
+				{
+					resource.doRedirect(request, response, true);
+					return;
+				}
 			}
 		}
 

@@ -33,10 +33,10 @@ public class ResourceLastModifiedTest extends TestCase
 		final Date lastModified = r1.getLastModified();
 		assertWithin(new Date((before.getTime()/1000)*1000), new Date(((after.getTime()/1000)+1)*1000), lastModified);
 
-		r1.init(ResourceTest.class);
+		r1.init(ResourceTest.class, "x");
 		assertEquals(lastModified, r1.getLastModified());
 
-		r1.init(ResourceTest.class);
+		r1.init(ResourceTest.class, "x");
 		assertEquals(lastModified, r1.getLastModified());
 
 		r1.setLastModified(12000);

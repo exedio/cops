@@ -44,12 +44,24 @@ public class ResourceTest extends TestCase
 		}
 
 		final Resource r1 = new Resource("ResourceTest.bin", "major/minor");
+		final String fp = "dc20e98c25ae2db4ebf870d21d3dc5e2"; // fingerprint
 		assertEquals("ResourceTest.bin", r1.getName());
 		assertEquals("major/minor", r1.getContentType());
 		assertEquals(-1, r1.getContentLength());
 		assertEquals(0, r1.getResponse200Count());
 		assertEquals(0, r1.getResponse304Count());
+		assertEquals(0, r1.getResponse301ByNameCount());
+		assertEquals(0, r1.getResponse301ByFingerprintCount());
 		assertEquals("ResourceTest.bin", r1.toString());
+		try
+		{
+			r1.getPath();
+			fail();
+		}
+		catch(final IllegalStateException e)
+		{
+			assertEquals("not yet initialized: ResourceTest.bin", e.getMessage());
+		}
 		try
 		{
 			r1.getURL(null);
@@ -68,9 +80,36 @@ public class ResourceTest extends TestCase
 		{
 			assertEquals("request", e.getMessage());
 		}
+		try
+		{
+			r1.getURL(request());
+			fail();
+		}
+		catch(final IllegalStateException e)
+		{
+			assertEquals("not yet initialized: ResourceTest.bin", e.getMessage());
+		}
+		try
+		{
+			r1.getAbsoluteURL(request("schemeX", "hostX"));
+			fail();
+		}
+		catch(final IllegalStateException e)
+		{
+			assertEquals("not yet initialized: ResourceTest.bin", e.getMessage());
+		}
+		try
+		{
+			r1.getAbsoluteURL(CopTest.TOKEN);
+			fail();
+		}
+		catch(final IllegalStateException e)
+		{
+			assertEquals("not yet initialized: ResourceTest.bin", e.getMessage());
+		}
 
 
-		r1.init(ResourceTest.class);
+		r1.init(ResourceTest.class, "resources");
 		assertEquals("ResourceTest.bin", r1.getName());
 		assertEquals("major/minor", r1.getContentType());
 		assertEquals(23, r1.getContentLength());
@@ -107,7 +146,7 @@ public class ResourceTest extends TestCase
 
 
 		// test idempotence of init
-		r1.init(ResourceTest.class);
+		r1.init(ResourceTest.class, null);
 		assertEquals("ResourceTest.bin", r1.getName());
 		assertEquals("major/minor", r1.getContentType());
 		assertEquals(23, r1.getContentLength());
@@ -142,22 +181,24 @@ public class ResourceTest extends TestCase
 		assertEquals("ResourceTest.bin", r1.toString());
 
 		assertEquals(null, r1.getHostOverride());
-		assertEquals(                   "/contextPath/servletPath/ResourceTest.bin", r1.getURL(request()));
-		assertEquals("schemeX://hostX"+ "/contextPath/servletPath/ResourceTest.bin", r1.getAbsoluteURL(request("schemeX", "hostX")));
-		assertEquals("http://host.invalid/contextPath/servletPath/ResourceTest.bin", r1.getAbsoluteURL(CopTest.TOKEN));
+		assertEquals(                                            "resources/"+fp+"/ResourceTest.bin", r1.getPath());
+		assertEquals(                   "/contextPath/servletPath/resources/"+fp+"/ResourceTest.bin", r1.getURL(request()));
+		assertEquals("schemeX://hostX"+ "/contextPath/servletPath/resources/"+fp+"/ResourceTest.bin", r1.getAbsoluteURL(request("schemeX", "hostX")));
+		assertEquals("http://host.invalid/contextPath/servletPath/resources/"+fp+"/ResourceTest.bin", r1.getAbsoluteURL(CopTest.TOKEN));
 		// port adjustments
-		assertEquals("http://host.invalid:8080/contextPath/servletPath/ResourceTest.bin", r1.getAbsoluteURL(CopTest.TOKEN_8080));
-		assertEquals("http://host.invalid:8080/contextPath/servletPath/ResourceTest.bin", r1.getAbsoluteURL(CopTest.TOKEN_8443));
+		assertEquals("http://host.invalid:8080/contextPath/servletPath/resources/"+fp+"/ResourceTest.bin", r1.getAbsoluteURL(CopTest.TOKEN_8080));
+		assertEquals("http://host.invalid:8080/contextPath/servletPath/resources/"+fp+"/ResourceTest.bin", r1.getAbsoluteURL(CopTest.TOKEN_8443));
 		assertEquals(CopTest.TOKEN, Cop.getToken(request(null, "host.invalid")));
 
 		r1.setHostOverride("hostO.invalid");
 		assertEquals("hostO.invalid", r1.getHostOverride());
-		assertEquals("schemeX://hostO.invalid/contextPath/servletPath/ResourceTest.bin", r1.getURL(request("schemeX", null)));
-		assertEquals("schemeX://hostO.invalid/contextPath/servletPath/ResourceTest.bin", r1.getAbsoluteURL(request("schemeX", null)));
-		assertEquals("http://host.invalid"+ "/contextPath/servletPath/ResourceTest.bin", r1.getAbsoluteURL(CopTest.TOKEN));
+		assertEquals(                                                "resources/"+fp+"/ResourceTest.bin", r1.getPath());
+		assertEquals("schemeX://hostO.invalid/contextPath/servletPath/resources/"+fp+"/ResourceTest.bin", r1.getURL(request("schemeX", null)));
+		assertEquals("schemeX://hostO.invalid/contextPath/servletPath/resources/"+fp+"/ResourceTest.bin", r1.getAbsoluteURL(request("schemeX", null)));
+		assertEquals("http://host.invalid"+ "/contextPath/servletPath/resources/"+fp+"/ResourceTest.bin", r1.getAbsoluteURL(CopTest.TOKEN));
 		// port adjustments
-		assertEquals("http://host.invalid:8080/contextPath/servletPath/ResourceTest.bin", r1.getAbsoluteURL(CopTest.TOKEN_8080));
-		assertEquals("http://host.invalid:8080/contextPath/servletPath/ResourceTest.bin", r1.getAbsoluteURL(CopTest.TOKEN_8443));
+		assertEquals("http://host.invalid:8080/contextPath/servletPath/resources/"+fp+"/ResourceTest.bin", r1.getAbsoluteURL(CopTest.TOKEN_8080));
+		assertEquals("http://host.invalid:8080/contextPath/servletPath/resources/"+fp+"/ResourceTest.bin", r1.getAbsoluteURL(CopTest.TOKEN_8443));
 		assertEquals(CopTest.TOKEN, Cop.getToken(request(null, "host.invalid")));
 	}
 

@@ -18,6 +18,9 @@
 
 package com.exedio.cops.webtest;
 
+import static java.net.HttpURLConnection.HTTP_MOVED_PERM;
+import static java.net.HttpURLConnection.HTTP_NOT_FOUND;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -30,13 +33,19 @@ public class ResourceTest extends AbstractWebTest
 	public void testError() throws Exception
 	{
 		final String prefix = "http://localhost:" + System.getProperty("tomcat.port.http") + "/cops/";
-		final URL text = new URL(prefix + "resource-test.txt");
+		final URL text = new URL(prefix + "resources/9e4cd71daa5a10b9dde41b944e0f185c/resource-test.txt");
 
 		final long textLastModified = assertURL(text);
 		assertEquals(textLastModified, assertURL(text));
 		assertEquals(textLastModified, assertURL(text, textLastModified-1, false));
 		assertEquals(textLastModified, assertURL(text, textLastModified, true));
 		assertEquals(textLastModified, assertURL(text, textLastModified+5000, true));
+
+		assertMoved   (prefix + "resources/X/resource-test.txt", text.toString());
+		assertMoved   (prefix + "resources//resource-test.txt" , text.toString());
+		assertMoved   (prefix + "resources/resource-test.txt"  , text.toString());
+		assertMoved   (prefix + "resource-test.txt"            , text.toString());
+		assertNotFound(prefix + "resources/X/Xresource-test.txt");
 	}
 
 	private long assertURL(final URL url) throws IOException
@@ -68,7 +77,7 @@ public class ResourceTest extends AbstractWebTest
 		assertTrue("This sometimes fails because the request takes too long or so.", (date+1000)>=lastModified); // TODO
 		assertEquals(expectNotModified ? null : contentType, conn.getContentType());
 		//System.out.println("Expires: "+new Date(conn.getExpiration()));
-		assertWithin(new Date(date+(4*60*1000)), new Date(date+(6*60*1000)), new Date(conn.getExpiration()));
+		assertWithin(new Date(date+(1000l*60*60*24*362)), new Date(date+(1000l*60*60*24*364)), new Date(conn.getExpiration()));
 		assertEquals(expectNotModified ? -1 : (41 + (2*System.getProperty("line.separator").length())), conn.getContentLength());
 
 		final BufferedReader is = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -81,5 +90,26 @@ public class ResourceTest extends AbstractWebTest
 		is.close();
 
 		return lastModified;
+	}
+
+	private static void assertMoved(final String url, final String target) throws IOException
+	{
+		final HttpURLConnection conn = (HttpURLConnection)new URL(url).openConnection();
+		HttpURLConnection.setFollowRedirects(false);
+		conn.connect();
+		assertEquals(HTTP_MOVED_PERM, conn.getResponseCode());
+		assertEquals("Moved Permanently", conn.getResponseMessage());
+		assertEquals(target, conn.getHeaderField("Location"));
+		assertEquals(null, conn.getContentType());
+		assertEquals(0, conn.getContentLength());
+	}
+
+	private static void assertNotFound(final String url) throws IOException
+	{
+		final HttpURLConnection conn = (HttpURLConnection)new URL(url).openConnection();
+		HttpURLConnection.setFollowRedirects(false);
+		conn.connect();
+		assertEquals(HTTP_NOT_FOUND, conn.getResponseCode());
+		assertEquals("Not Found", conn.getResponseMessage());
 	}
 }

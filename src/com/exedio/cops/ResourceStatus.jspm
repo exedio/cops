@@ -25,7 +25,6 @@ import static com.exedio.cops.ResourceStatusCop.SELECT_ALL;
 import static com.exedio.cops.ResourceStatusCop.INBOX;
 import static com.exedio.cops.ResourceStatusCop.OVERRIDE_HOST;
 import static com.exedio.cops.ResourceStatusCop.TOUCH;
-import static com.exedio.cops.ResourceStatusCop.EXPIRE;
 import static com.exedio.cops.ResourceStatusCop.ACTIVATE_LOG;
 import static com.exedio.cops.ResourceStatusCop.DEACTIVATE_LOG;
 
@@ -39,6 +38,7 @@ final class ResourceStatus_Jspm
 				final ResourceStatusCop cop,
 				final String servletName,
 				final Collection<Resource> resources,
+				final long count404,
 				final String authentication,
 				final DecimalFormat nf,
 				final Package thePackage)
@@ -146,6 +146,8 @@ final class ResourceStatus_Jspm
 				<th>Length</th>
 				<th>304l</th>
 				<th>200l</th>
+				<th title="Redirect by Name">301n</th>
+				<th title="Redirect by Fingerprint">301f</th>
 				<th><a href="<%=cop.toggleShowImage()%>"><%=
 						cop.showImage?"Image":"i"
 					%></a></th>
@@ -160,7 +162,6 @@ final class ResourceStatus_Jspm
 			{
 				%>
 				<th>Content Type</th>
-				<th>Expires<small>/s</small></th>
 				<th>Last Modified</th>
 				<%
 			}
@@ -172,6 +173,8 @@ final class ResourceStatus_Jspm
 			long contentLengthTotal = 0;
 			long response304LengthTotal = 0;
 			long response200LengthTotal = 0;
+			long response301NameCountTotal        = 0;
+			long response301FingerprintCountTotal = 0;
 			
 			for(final Resource resource : resources)
 			{
@@ -180,6 +183,8 @@ final class ResourceStatus_Jspm
 				final int contentLength = resource.getContentLength();
 				final long response304Length = response304Count * contentLength;
 				final long response200Length = response200Count * contentLength;
+				final long response301NameCount        = resource.getResponse301ByNameCount();
+				final long response301FingerprintCount = resource.getResponse301ByFingerprintCount();
 				final String contentType = resource.getContentType();
 				final boolean showImageThis = cop.showImage && contentType.startsWith("image/");
 			%>
@@ -190,6 +195,8 @@ final class ResourceStatus_Jspm
 				<td><%=nf.format(contentLength)%></td>
 				<td><%=nf.format(response304Length)%></td>
 				<td><%=nf.format(response200Length)%></td>
+				<td><%=nf.format(response301NameCount       )%></td>
+				<td><%=nf.format(response301FingerprintCount)%></td>
 				<td class="text"><% if(showImageThis){%><img src="<%=resource%>"><%} %></td>
 				<td class="text"><a href="<%=resource%>"><%=resource.getName()%></a><% if(resource.getLog()){%> <small>(logged)</small><%} %></td>
 				<%
@@ -202,7 +209,6 @@ final class ResourceStatus_Jspm
 			{
 				%>
 				<td class="text"><%=contentType%></td>
-				<td><%=nf.format(resource.getExpiresSeconds())%></td>
 				<td class="text"><%=resource.getLastModified()%></td>
 				<%
 			}
@@ -214,6 +220,8 @@ final class ResourceStatus_Jspm
 				contentLengthTotal += contentLength;
 				response304LengthTotal += response304Length;
 				response200LengthTotal += response200Length;
+				response301NameCountTotal        += response301NameCount;
+				response301FingerprintCountTotal += response301FingerprintCount;
 			}
 		%>
 			<tr>
@@ -223,13 +231,14 @@ final class ResourceStatus_Jspm
 				<td><%=nf.format(contentLengthTotal)%></td>
 				<td><%=nf.format(response304LengthTotal)%></td>
 				<td><%=nf.format(response200LengthTotal)%></td>
-				<th colspan="0">Total</th>
+				<td><%=nf.format(response301NameCountTotal       )%></td>
+				<td><%=nf.format(response301FingerprintCountTotal)%></td>
+				<th colspan="0">Total (Not Found <%=nf.format(count404)%>)</th>
 			</tr>
 		</table>
 		<input name="<%=INBOX%>"></input>
 		<input type="submit" name="<%=OVERRIDE_HOST%>" value="Override Host"></input>
 		<input type="submit" name="<%=TOUCH%>" value="Touch"></input>
-		<input type="submit" name="<%=EXPIRE%>" value="Expire"></input>
 		<input type="submit" name="<%=ACTIVATE_LOG%>" value="Activate Log"></input>
 		<input type="submit" name="<%=DEACTIVATE_LOG%>" value="Deactivate Log"></input>
 	</form>

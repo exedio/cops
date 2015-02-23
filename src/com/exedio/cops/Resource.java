@@ -18,9 +18,14 @@
 
 package com.exedio.cops;
 
+import static javax.servlet.http.HttpServletResponse.SC_MOVED_PERMANENTLY;
+
+import com.exedio.cope.util.Hex;
+import com.exedio.cope.util.MessageDigestUtil;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.MessageDigest;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,18 +45,12 @@ public final class Resource
 
 	private volatile String hostOverride = null;
 
-	/**
-	 * Sets the offset, the Expires http header is set into the future.
-	 * Together with a http reverse proxy this ensures,
-	 * that for that time no request for that data will reach the servlet.
-	 * This may reduce the load on the server.
-	 */
-	private volatile long expiresOffset = 1000 * 60 * 5; // 5 minutes
-
 	private volatile boolean log = false;
 
 	private final VolatileLong response200Count = new VolatileLong();
 	private final VolatileLong response304Count = new VolatileLong();
+	private final VolatileLong response301ByNameCount = new VolatileLong();
+	private final VolatileLong response301ByFingerprintCount = new VolatileLong();
 
 	public Resource(final String name)
 	{
@@ -114,10 +113,31 @@ public final class Resource
 		return response304Count.get();
 	}
 
+	public long getResponse301ByNameCount()
+	{
+		return response301ByNameCount.get();
+	}
+
+	public long getResponse301ByFingerprintCount()
+	{
+		return response301ByFingerprintCount.get();
+	}
+
 	@Override
 	public String toString()
 	{
 		return name;
+	}
+
+
+	private String pathIfInitialized;
+
+	public String getPath()
+	{
+		final String result = pathIfInitialized;
+		if(result==null)
+			throw new IllegalStateException("not yet initialized: " + name);
+		return result;
 	}
 
 	public String getURL(final HttpServletRequest request)
@@ -134,7 +154,7 @@ public final class Resource
 
 		bf.append(request.getContextPath()).
 			append(request.getServletPath()).
-			append('/').append(name);
+			append('/').append(getPath());
 
 		return bf.toString();
 	}
@@ -150,17 +170,17 @@ public final class Resource
 			(hostOverride==null ? request.getHeader("Host") : hostOverride) +
 			request.getContextPath() +
 			request.getServletPath() +
-			'/' + name;
+			'/' + getPath();
 	}
 
 	public final String getAbsoluteURL(final String token)
 	{
 		if(token==null)
 			throw new NullPointerException("token");
-		return EnvironmentRequest.getURL(token, false, name);
+		return EnvironmentRequest.getURL(token, false, getPath());
 	}
 
-	void init(final Class<?> resourceLoader)
+	void init(final Class<?> resourceLoader, final String rootPath)
 	{
 		synchronized(contentLock)
 		{
@@ -177,6 +197,7 @@ public final class Resource
 				for(int len = in.read(buf); len>=0; len = in.read(buf))
 					out.write(buf, 0, len);
 				content = out.toByteArray();
+				pathIfInitialized = rootPath + '/' + makeFingerprint(content) + '/' + name;
 				out.close();
 			}
 			catch(final IOException e)
@@ -197,6 +218,13 @@ public final class Resource
 		}
 	}
 
+	private static String makeFingerprint(final byte[] content)
+	{
+		final MessageDigest digester = MessageDigestUtil.getInstance("MD5");
+		digester.update(content);
+		return Hex.encodeLower(digester.digest());
+	}
+
 	String getHostOverride()
 	{
 		return hostOverride;
@@ -205,19 +233,6 @@ public final class Resource
 	void setHostOverride(final String hostOverride)
 	{
 		this.hostOverride = hostOverride;
-	}
-
-	long getExpiresSeconds()
-	{
-		return expiresOffset/1000;
-	}
-
-	void setExpiresSeconds(final long expiresSeconds)
-	{
-		if(expiresSeconds<0)
-			throw new IllegalArgumentException("expiresSeconds must not be negative, but was " + expiresSeconds);
-
-		this.expiresOffset = expiresSeconds*1000;
 	}
 
 	boolean getLog()
@@ -245,7 +260,12 @@ public final class Resource
 		response.setContentType(contentType);
 		response.setDateHeader(RESPONSE_LAST_MODIFIED, lastModified);
 		final long now = System.currentTimeMillis();
-		response.setDateHeader(RESPONSE_EXPIRES, now+expiresOffset);
+		// RFC 2616:
+		// To mark a response as "never expires," an origin server sends an
+		// Expires date approximately one year from the time the response is
+		// sent. HTTP/1.1 servers SHOULD NOT send Expires dates more than one
+		// year in the future.
+		response.setDateHeader(RESPONSE_EXPIRES, now + 1000l*60*60*24*363); // 363 days
 
 		final long ifModifiedSince = request.getDateHeader(REQUEST_IF_MODIFIED_SINCE);
 
@@ -263,6 +283,19 @@ public final class Resource
 			if(log)
 				log(request, "Delivered");
 		}
+	}
+
+	void doRedirect(
+			final HttpServletRequest request,
+			final HttpServletResponse response,
+			final boolean byName)
+	{
+		response.setStatus(SC_MOVED_PERMANENTLY);
+		response.setHeader("Location", getAbsoluteURL(request));
+
+		(byName ? response301ByNameCount : response301ByFingerprintCount).inc();
+		if(log)
+			log(request, byName ? "Redirect by name" : "Redirect by fingerprint");
 	}
 
 	private static void log(final HttpServletRequest request, final String action)
