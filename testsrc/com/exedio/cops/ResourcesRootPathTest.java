@@ -35,6 +35,19 @@ public class ResourcesRootPathTest extends TestCase
 		create("x");
 	}
 
+	public void testSlash()
+	{
+		try
+		{
+			create("x/y");
+			fail();
+		}
+		catch(final IllegalArgumentException e)
+		{
+			assertEquals("getResourcesRootPath must not return string containing /, but was x/y", e.getMessage());
+		}
+	}
+
 	public void testEmpty()
 	{
 		try
