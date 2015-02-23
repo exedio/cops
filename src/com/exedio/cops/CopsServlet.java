@@ -57,6 +57,8 @@ public abstract class CopsServlet extends HttpServlet
 			final String resourcesRootPath = getResourcesRootPath();
 			if(resourcesRootPath==null)
 				throw new NullPointerException("getResourcesRootPath must not return null");
+			if(resourcesRootPath.isEmpty())
+				throw new NullPointerException("getResourcesRootPath must not return empty string");
 			this.resourcesRootPathSegment = '/' + resourcesRootPath + '/';
 
 			final LinkedHashMap<String, Resource> resources       = new LinkedHashMap<>();
