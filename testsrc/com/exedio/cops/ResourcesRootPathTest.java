@@ -42,7 +42,7 @@ public class ResourcesRootPathTest extends TestCase
 			create("");
 			fail();
 		}
-		catch(final NullPointerException e)
+		catch(final IllegalArgumentException e)
 		{
 			assertEquals("getResourcesRootPath must not return empty string", e.getMessage());
 		}
