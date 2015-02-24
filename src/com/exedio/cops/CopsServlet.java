@@ -69,6 +69,8 @@ public abstract class CopsServlet extends HttpServlet
 			{
 				for(final java.lang.reflect.Field field : clazz.getDeclaredFields())
 				{
+					if(field.isSynthetic())
+						continue;
 					if((field.getModifiers() & (STATIC | FINAL)) != (STATIC | FINAL))
 						continue;
 					if(!Resource.class.isAssignableFrom(field.getType()))
