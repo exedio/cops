@@ -161,11 +161,9 @@ final class Properties_Jspm
 		}
 		%>
 			<table>
-				<caption>Tests</caption>
-				<tr>
-					<th><input type="checkbox" onclick="checkAll(this)" checked></th>
-					<th><i>(un)check all tests</i></th>
-				</tr><%
+				<caption>Tests</caption><%
+
+			writeTestCheckAll(out);
 			
 			int testNumber = -1;
 			final HashSet<Integer> doTestNumbers;
@@ -232,6 +230,7 @@ final class Properties_Jspm
 				%>
 				</tr><%
 			}
+			writeTestCheckAll(out);
 			%>
 			</table>
 			<input type="submit" name="<%=TEST%>" value="Test"><%
@@ -247,6 +246,16 @@ final class Properties_Jspm
 		<div class="footer"><%=footerDate%></div>
 	</body>
 </html><%
+	}
+
+	private static void writeTestCheckAll(
+			final Out out)
+	{
+				%>
+				<tr>
+					<th><input class="testcheck" type="checkbox" onclick="checkAll(this)" checked></th>
+					<th><i>(un)check all tests</i></th>
+				</tr><%
 	}
 }
 %>
