@@ -18,8 +18,8 @@
 
 package com.exedio.cops;
 
-import com.exedio.cope.util.CharsetName;
-import java.io.UnsupportedEncodingException;
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -43,15 +43,7 @@ public class BasicAuthorization
 		final String basicCookie = authorization.substring(BASIC_LENGTH);
 		//System.out.println("basicCookie:"+basicCookie);
 
-		final String basicCookiePlain;
-		try
-		{
-			basicCookiePlain = new String(Base64.decode(basicCookie), CharsetName.UTF8);
-		}
-		catch(final UnsupportedEncodingException e)
-		{
-			throw new RuntimeException(e);
-		}
+		final String basicCookiePlain = new String(Base64.decode(basicCookie), UTF_8);
 		//System.out.println("basicCookiePlain:"+basicCookiePlain);
 
 		final int colon = basicCookiePlain.indexOf(':');

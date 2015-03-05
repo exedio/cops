@@ -18,7 +18,7 @@
 
 package com.exedio.cops;
 
-import static com.exedio.cope.util.CharsetName.UTF8;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.Collections.enumeration;
 
 import java.io.BufferedReader;
@@ -96,7 +96,7 @@ final class CopParameterRequest implements HttpServletRequest
 	{
 		try
 		{
-			return URLDecoder.decode(s, UTF8);
+			return URLDecoder.decode(s, UTF_8.name());
 		}
 		catch(final UnsupportedEncodingException e)
 		{

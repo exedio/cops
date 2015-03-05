@@ -19,6 +19,7 @@
 package com.exedio.cops;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
@@ -27,10 +28,23 @@ public class BodySender
 	public static final void send(
 			final HttpServletResponse response,
 			final StringBuilder body,
+			final Charset charset)
+	throws IOException
+	{
+		send(response, body.toString().getBytes(charset));
+	}
+
+	/**
+	 * @deprecated Use {@link #send(HttpServletResponse,StringBuilder,String)} instead
+	 */
+	@Deprecated
+	public static final void send(
+			final HttpServletResponse response,
+			final StringBuilder body,
 			final String encoding)
 	throws IOException
 	{
-		send(response, body.toString().getBytes(encoding));
+		send(response, body, Charset.forName(encoding));
 	}
 
 	public static final void send(

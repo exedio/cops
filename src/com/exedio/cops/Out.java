@@ -22,10 +22,11 @@
 
 package com.exedio.cops;
 
-import static com.exedio.cope.util.CharsetName.UTF8;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.exedio.cope.util.XMLEncoder;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
@@ -98,6 +99,11 @@ final class Out
 	private static final long deltaToday = 1000l * 60 * 60 * 6; // 6 hours
 
 
+	void write(final Charset cs)
+	{
+		bf.append(cs.name());
+	}
+
 	void write(final Resource resource)
 	{
 		bf.append(absoluteUrl ? resource.getAbsoluteURL(request) : resource.getURL(request));
@@ -115,6 +121,6 @@ final class Out
 			throw new IllegalStateException();
 		this.bf = null; // prevent this instance to be used anymore
 
-		BodySender.send(response, bf, UTF8);
+		BodySender.send(response, bf, UTF_8);
 	}
 }

@@ -18,7 +18,7 @@
 
 package com.exedio.cops;
 
-import static com.exedio.cope.util.CharsetName.UTF8;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -129,7 +129,7 @@ public abstract class Cop
 		url.append('=');
 		try
 		{
-			url.append(URLEncoder.encode(value, UTF8));
+			url.append(URLEncoder.encode(value, UTF_8.name()));
 		}
 		catch(final UnsupportedEncodingException e)
 		{

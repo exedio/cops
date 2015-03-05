@@ -22,7 +22,6 @@ import static java.lang.reflect.Modifier.FINAL;
 import static java.lang.reflect.Modifier.STATIC;
 import static javax.servlet.http.HttpServletResponse.SC_NOT_FOUND;
 
-import com.exedio.cope.util.CharsetName;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -354,14 +353,14 @@ public abstract class CopsServlet extends HttpServlet
 	}
 
 	/**
-	 * @deprecated Use {@link CharsetName#UTF8} instead
+	 * @deprecated Use {@link com.exedio.cope.util.CharsetName#UTF8} instead
 	 */
 	@Deprecated
-	public static final String ENCODING = CharsetName.UTF8;
+	public static final String ENCODING = com.exedio.cope.util.CharsetName.UTF8;
 
 	/**
-	 * @deprecated Use {@link CharsetName#UTF8} instead
+	 * @deprecated Use {@link com.exedio.cope.util.CharsetName#UTF8} instead
 	 */
 	@Deprecated
-	public static final String UTF8 = CharsetName.UTF8;
+	public static final String UTF8 = com.exedio.cope.util.CharsetName.UTF8;
 }

@@ -18,13 +18,14 @@
 
 package com.exedio.cops.example;
 
-import static com.exedio.cope.util.CharsetName.UTF8;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.exedio.cope.util.XMLEncoder;
 import com.exedio.cops.BodySender;
 import com.exedio.cops.Cop;
 import com.exedio.cops.Resource;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -63,6 +64,11 @@ final class Out
 		bf.append(i);
 	}
 
+	void append(final Charset cs)
+	{
+		bf.append(cs.name());
+	}
+
 	void append(final Resource resource)
 	{
 		bf.append(resource.getURL(request));
@@ -90,6 +96,6 @@ final class Out
 			throw new IllegalStateException();
 		this.bf = null; // prevent this instance to be used anymore
 
-		BodySender.send(response, bf, UTF8);
+		BodySender.send(response, bf, UTF_8);
 	}
 }

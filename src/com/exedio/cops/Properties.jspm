@@ -28,7 +28,7 @@ import static com.exedio.cops.PropertiesServlet.FIELD_SELECT;
 import static com.exedio.cops.PropertiesServlet.FIELD_VALUE_PREFIX;
 import static com.exedio.cops.PropertiesServlet.FIELDS_RAW;
 import static com.exedio.cops.PropertiesServlet.TEST_NUMBER;
-import static com.exedio.cope.util.CharsetName.UTF8;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.util.HashSet;
 import java.util.concurrent.Callable;
@@ -54,7 +54,7 @@ final class Properties_Jspm
 %><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<meta http-equiv="content-type" content="text/html; charset=<%=UTF8%>">
+		<meta http-equiv="content-type" content="text/html; charset=<%=UTF_8%>">
 		<title><%=caption%></title>
 		<link rel="shortcut icon" href="<%=PropertiesServlet.shortcutIcon%>" type="image/png">
 		<link rel="STYLESHEET" type="text/css" href="<%=PropertiesServlet.stylesheet%>">

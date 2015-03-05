@@ -18,12 +18,11 @@
 
 package com.exedio.cops;
 
-import static com.exedio.cope.util.CharsetName.UTF8;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -70,20 +69,9 @@ public final class RequestLimiter
 		this.interval = interval;
 		this.denyMessage = denyMessage;
 		if(denyBody!=null)
-		{
-			try
-			{
-				this.denyBody = denyBody.getBytes(UTF8);
-			}
-			catch(final UnsupportedEncodingException e)
-			{
-				throw new RuntimeException(e);
-			}
-		}
+			this.denyBody = denyBody.getBytes(UTF_8);
 		else
-		{
 			this.denyBody = null;
-		}
 	}
 
 	public void init(final ServletConfig config)
@@ -203,7 +191,7 @@ public final class RequestLimiter
 			try
 			{
 				outStream = response.getOutputStream();
-				out = new PrintStream(outStream, false, UTF8);
+				out = new PrintStream(outStream, false, UTF_8.name());
 				RequestLimiter_Jspm.write(out, path, threshold, interval, deniedRequests.get());
 			}
 			finally
