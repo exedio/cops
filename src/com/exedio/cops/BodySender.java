@@ -54,15 +54,9 @@ public class BodySender
 	{
 		response.setContentLength(body.length); // avoid chunked transfer
 
-		final ServletOutputStream stream = response.getOutputStream();
-		try
+		try(final ServletOutputStream stream = response.getOutputStream())
 		{
 			stream.write(body);
-		}
-		finally
-		{
-			if(stream!=null)
-				stream.close();
 		}
 	}
 }
