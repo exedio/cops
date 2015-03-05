@@ -80,14 +80,15 @@ public class ResourceTest extends AbstractWebTest
 		assertWithin(new Date(date+(1000l*60*60*24*362)), new Date(date+(1000l*60*60*24*364)), new Date(conn.getExpiration()));
 		assertEquals(expectNotModified ? -1 : (41 + (2*System.getProperty("line.separator").length())), conn.getContentLength());
 
-		final BufferedReader is = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-		if(!expectNotModified)
+		try(BufferedReader is = new BufferedReader(new InputStreamReader(conn.getInputStream())))
 		{
-			assertEquals("This is the test file", is.readLine());
-			assertEquals("for the ResourceTest", is.readLine());
-			assertEquals(null, is.readLine());
+			if(!expectNotModified)
+			{
+				assertEquals("This is the test file", is.readLine());
+				assertEquals("for the ResourceTest", is.readLine());
+				assertEquals(null, is.readLine());
+			}
 		}
-		is.close();
 
 		return lastModified;
 	}

@@ -191,13 +191,14 @@ public final class Resource
 			{
 				if(in==null)
 					throw new RuntimeException("no resource for "+name);
-				final ByteArrayOutputStream out = new ByteArrayOutputStream();
-				final byte[] buf = new byte[20*1024];
-				for(int len = in.read(buf); len>=0; len = in.read(buf))
-					out.write(buf, 0, len);
-				content = out.toByteArray();
-				pathIfInitialized = rootPath + '/' + makeFingerprint(content) + '/' + name;
-				out.close();
+				try(ByteArrayOutputStream out = new ByteArrayOutputStream())
+				{
+					final byte[] buf = new byte[20*1024];
+					for(int len = in.read(buf); len>=0; len = in.read(buf))
+						out.write(buf, 0, len);
+					content = out.toByteArray();
+					pathIfInitialized = rootPath + '/' + makeFingerprint(content) + '/' + name;
+				}
 			}
 			catch(final IOException e)
 			{
