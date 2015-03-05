@@ -78,14 +78,9 @@ public abstract class PropertiesServlet extends CopsServlet
 				{
 					final String string = request.getParameter(FIELDS_RAW);
 					final java.util.Properties properties = new java.util.Properties();
-					final StringReader stream = new StringReader(string);
-					try
+					try(final StringReader stream = new StringReader(string))
 					{
 						properties.load(stream);
-					}
-					finally
-					{
-						stream.close();
 					}
 					for(final Map.Entry<Object,Object> e : properties.entrySet())
 						sourceMap.put((String)e.getKey(), (String)e.getValue());

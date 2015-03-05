@@ -186,20 +186,11 @@ public final class RequestLimiter
 		}
 		else
 		{
-			ServletOutputStream outStream = null;
-			PrintStream out = null;
-			try
+			try(
+				ServletOutputStream outStream = response.getOutputStream();
+				PrintStream out = new PrintStream(outStream, false, UTF_8.name()))
 			{
-				outStream = response.getOutputStream();
-				out = new PrintStream(outStream, false, UTF_8.name());
 				RequestLimiter_Jspm.write(out, path, threshold, interval, deniedRequests.get());
-			}
-			finally
-			{
-				if(out!=null)
-					out.close();
-				if(outStream!=null)
-					outStream.close();
 			}
 		}
 	}
