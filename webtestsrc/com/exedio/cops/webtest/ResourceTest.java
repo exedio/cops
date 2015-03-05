@@ -48,17 +48,17 @@ public class ResourceTest extends AbstractWebTest
 		assertNotFound(prefix + "resources/X/Xresource-test.txt");
 	}
 
-	private long assertURL(final URL url) throws IOException
+	private static long assertURL(final URL url) throws IOException
 	{
 		return assertURL(url, -1, false);
 	}
 
-	private long assertURL(final URL url, final long ifModifiedSince, final boolean expectNotModified) throws IOException
+	private static long assertURL(final URL url, final long ifModifiedSince, final boolean expectNotModified) throws IOException
 	{
 		return assertURL(url, "text/plain", ifModifiedSince, expectNotModified);
 	}
 
-	private long assertURL(final URL url, final String contentType, final long ifModifiedSince, final boolean expectNotModified) throws IOException
+	private static long assertURL(final URL url, final String contentType, final long ifModifiedSince, final boolean expectNotModified) throws IOException
 	{
 		final Date before = new Date();
 		final HttpURLConnection conn = (HttpURLConnection)url.openConnection();

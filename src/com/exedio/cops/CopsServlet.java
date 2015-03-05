@@ -204,7 +204,7 @@ public abstract class CopsServlet extends HttpServlet
 			}
 
 			final ResourceStatusCop cop = ResourceStatusCop.getCop(request);
-			cop.post(request, resources.values());
+			ResourceStatusCop.post(request, resources.values());
 			response.sendRedirect(cop.getURL(request));
 		}
 
@@ -237,6 +237,7 @@ public abstract class CopsServlet extends HttpServlet
 		return principal!=null ? principal.getName() : null;
 	}
 
+	@SuppressWarnings("static-method")
 	public final void printException(final PrintStream out, final Exception exception)
 	{
 		exception.printStackTrace(out);
@@ -266,6 +267,7 @@ public abstract class CopsServlet extends HttpServlet
 		out.append(sw.getBuffer());
 	}
 
+	@SuppressWarnings("static-method")
 	public final void printException(final StringBuilder out, final Exception exception)
 	{
 		printStackTrace(exception, out);

@@ -80,7 +80,7 @@ final class ResourceStatusCop extends Cop
 	static final String ACTIVATE_LOG = "activateLog";
 	static final String DEACTIVATE_LOG = "deactivateLog";
 
-	void post(final HttpServletRequest request, final Collection<Resource> resources)
+	static void post(final HttpServletRequest request, final Collection<Resource> resources)
 	{
 		if(request.getParameter(OVERRIDE_HOST)!=null)
 		{
