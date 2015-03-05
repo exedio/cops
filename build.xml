@@ -242,7 +242,6 @@
 		<javac srcdir="webtestsrc"
 					destdir="build/webtestclasses"
 					includeAntRuntime="false"
-					source="1.5"
 					deprecation="on"
 					debug="on"
 					optimize="off">
