@@ -280,7 +280,12 @@ public final class Resource
 			final boolean byName)
 	{
 		response.setStatus(SC_MOVED_PERMANENTLY);
-		response.setHeader("Location", getAbsoluteURL(request));
+		// There is no need for absolute url anymore: http://en.wikipedia.org/wiki/HTTP_location
+		response.setHeader(
+				"Location",
+				request.getContextPath() +
+				request.getServletPath() +
+				'/' + getPath());
 
 		(byName ? response301ByNameCount : response301ByFingerprintCount).inc();
 		if(log)
