@@ -35,7 +35,7 @@ public class BodySender
 	}
 
 	/**
-	 * @deprecated Use {@link #send(HttpServletResponse,StringBuilder,String)} instead
+	 * @deprecated Use {@link #send(HttpServletResponse,StringBuilder,Charset)} instead
 	 */
 	@Deprecated
 	public static final void send(
