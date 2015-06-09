@@ -24,7 +24,7 @@ import junit.framework.TestCase;
 public class ResourceTest extends TestCase
 {
 	@SuppressWarnings("unused")
-	public void testURL()
+	public void testNameNull()
 	{
 		try
 		{
@@ -34,6 +34,10 @@ public class ResourceTest extends TestCase
 		{
 			assertEquals("name", e.getMessage());
 		}
+	}
+	@SuppressWarnings("unused")
+	public void testContentTypeNull()
+	{
 		try
 		{
 			new Resource("ResourceTest.bin", null);
@@ -42,7 +46,9 @@ public class ResourceTest extends TestCase
 		{
 			assertEquals("contentType", e.getMessage());
 		}
-
+	}
+	public void testURL()
+	{
 		final Resource r1 = new Resource("ResourceTest.bin", "major/minor");
 		final String fp = "dc20e98c25ae2db4ebf870d21d3dc5e2"; // fingerprint
 		assertEquals("ResourceTest.bin", r1.getName());
