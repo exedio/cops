@@ -20,6 +20,7 @@ package com.exedio.cops;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.Collections.enumeration;
+import static java.util.Objects.requireNonNull;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -47,12 +48,8 @@ final class CopParameterRequest implements HttpServletRequest
 
 	CopParameterRequest(final HttpServletRequest nested, final String value)
 	{
-		if(nested==null)
-			throw new NullPointerException("nested");
-		if(value==null)
-			throw new NullPointerException("value");
-
-		this.nested = nested;
+		this.nested = requireNonNull(nested, "nested");
+		requireNonNull(value, "value");
 
 		final int queryPos = value.indexOf('?');
 		if(queryPos<0)
@@ -119,8 +116,7 @@ final class CopParameterRequest implements HttpServletRequest
 	@Override
 	public String getParameter(final String name)
 	{
-		if(name==null)
-			throw new NullPointerException("name");
+		requireNonNull(name, "name");
 		if(parameters==null)
 			return null;
 
@@ -136,8 +132,7 @@ final class CopParameterRequest implements HttpServletRequest
 	@Override
 	public String[] getParameterValues(final String name)
 	{
-		if(name==null)
-			throw new NullPointerException("name");
+		requireNonNull(name, "name");
 		if(parameters==null)
 			return EMPTY_ARRAY;
 

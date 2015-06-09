@@ -18,6 +18,8 @@
 
 package com.exedio.cops;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -33,8 +35,7 @@ public final class Pager
 
 		public Config(final int... limits)
 		{
-			if(limits==null)
-				throw new NullPointerException("limits");
+			requireNonNull(limits, "limits");
 			if(limits.length==0)
 				throw new IllegalArgumentException("limits must not be empty");
 			int n = 0;

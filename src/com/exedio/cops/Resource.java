@@ -18,6 +18,7 @@
 
 package com.exedio.cops;
 
+import static java.util.Objects.requireNonNull;
 import static javax.servlet.http.HttpServletResponse.SC_MOVED_PERMANENTLY;
 
 import com.exedio.cope.util.Hex;
@@ -59,13 +60,8 @@ public final class Resource
 
 	public Resource(final String name, final String contentType)
 	{
-		if(name==null)
-			throw new NullPointerException("name");
-		if(contentType==null)
-			throw new NullPointerException("contentType");
-
-		this.name = name;
-		this.contentType = contentType;
+		this.name = requireNonNull(name, "name");
+		this.contentType = requireNonNull(contentType, "contentType");
 		this.lastModified = roundLastModified(System.currentTimeMillis());
 	}
 
@@ -142,8 +138,7 @@ public final class Resource
 
 	public String getURL(final HttpServletRequest request)
 	{
-		if(request==null)
-			throw new NullPointerException("request");
+		requireNonNull(request, "request");
 
 		final StringBuilder bf = new StringBuilder();
 
@@ -161,8 +156,7 @@ public final class Resource
 
 	public String getAbsoluteURL(final HttpServletRequest request)
 	{
-		if(request==null)
-			throw new NullPointerException("request");
+		requireNonNull(request, "request");
 
 		final String hostOverride = this.hostOverride;
 		return
@@ -175,8 +169,7 @@ public final class Resource
 
 	public final String getAbsoluteURL(final String token)
 	{
-		if(token==null)
-			throw new NullPointerException("token");
+		requireNonNull(token, "token");
 		return EnvironmentRequest.getURL(token, false, getPath());
 	}
 

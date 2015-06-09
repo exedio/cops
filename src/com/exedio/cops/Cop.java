@@ -19,6 +19,7 @@
 package com.exedio.cops;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.Objects.requireNonNull;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -160,8 +161,7 @@ public abstract class Cop
 	{
 		final String url = this.url!=null ? this.url.toString() : pathInfo;
 
-		if(request==null)
-			throw new NullPointerException("request");
+		requireNonNull(request, "request");
 
 		return
 			request.getScheme() + "://" +
@@ -176,8 +176,7 @@ public abstract class Cop
 	 */
 	public static String getToken(final HttpServletRequest request)
 	{
-		if(request==null)
-			throw new NullPointerException("request");
+		requireNonNull(request, "request");
 
 		return
 			request.getHeader(HOST) +
@@ -192,8 +191,7 @@ public abstract class Cop
 	{
 		final String url = this.url!=null ? this.url.toString() : pathInfo;
 
-		if(token==null)
-			throw new NullPointerException("token");
+		requireNonNull(token, "token");
 		return EnvironmentRequest.getURL(token, needsSecure(), url);
 	}
 
@@ -213,8 +211,7 @@ public abstract class Cop
 	{
 		final String url = this.url!=null ? this.url.toString() : pathInfo;
 
-		if(request==null)
-			throw new NullPointerException("request");
+		requireNonNull(request, "request");
 
 		final String fullURL = request.getContextPath() + request.getServletPath() + '/' + url;
 
@@ -281,8 +278,7 @@ public abstract class Cop
 
 	public final boolean redirectToCanonical(final HttpServletRequest request, final HttpServletResponse response)
 	{
-		if(request==null)
-			throw new NullPointerException();
+		requireNonNull(request, "request");
 		if(!"GET".equals(request.getMethod()))
 			return false;
 
