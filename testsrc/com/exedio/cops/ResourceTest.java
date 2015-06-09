@@ -214,8 +214,7 @@ public class ResourceTest extends TestCase
 			@Override
 			public String getScheme()
 			{
-				if(scheme==null)
-					throw new NullPointerException("scheme");
+				assertNotNull(scheme);
 				return scheme;
 			}
 
@@ -225,8 +224,7 @@ public class ResourceTest extends TestCase
 			{
 				if("Host".equals(name))
 				{
-					if(host==null)
-						throw new NullPointerException("host");
+					assertNotNull(host);
 					return host;
 				}
 				else
