@@ -63,6 +63,10 @@ public final class Resource
 		this.name = requireNonNull(name, "name");
 		this.contentType = requireNonNull(contentType, "contentType");
 		this.lastModified = roundLastModified(System.currentTimeMillis());
+
+		if(name.indexOf('/')>=0)
+			throw new IllegalArgumentException(
+					"name must not contain slash ('/'), but was " + name);
 	}
 
 	public String getName()

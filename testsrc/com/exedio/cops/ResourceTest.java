@@ -37,6 +37,19 @@ public class ResourceTest extends TestCase
 		}
 	}
 	@SuppressWarnings("unused")
+	public void testNameSlash()
+	{
+		try
+		{
+			new Resource("/zack.txt", "major/minor");
+			fail();
+		}
+		catch(final IllegalArgumentException e)
+		{
+			assertEquals("name must not contain slash ('/'), but was /zack.txt", e.getMessage());
+		}
+	}
+	@SuppressWarnings("unused")
 	public void testContentTypeNull()
 	{
 		try
