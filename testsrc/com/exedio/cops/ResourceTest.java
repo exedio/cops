@@ -29,6 +29,7 @@ public class ResourceTest extends TestCase
 		try
 		{
 			new Resource(null, null);
+			fail();
 		}
 		catch(final NullPointerException e)
 		{
@@ -41,6 +42,7 @@ public class ResourceTest extends TestCase
 		try
 		{
 			new Resource("ResourceTest.bin", null);
+			fail();
 		}
 		catch(final NullPointerException e)
 		{
