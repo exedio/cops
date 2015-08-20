@@ -232,7 +232,6 @@ public final class Resource
 	}
 
 	private static final String REQUEST_IF_MODIFIED_SINCE = "If-Modified-Since";
-	private static final String RESPONSE_EXPIRES = "Expires";
 	private static final String RESPONSE_LAST_MODIFIED = "Last-Modified";
 
 	void doGet(
@@ -245,13 +244,12 @@ public final class Resource
 
 		response.setContentType(contentType);
 		response.setDateHeader(RESPONSE_LAST_MODIFIED, lastModified);
-		final long now = System.currentTimeMillis();
 		// RFC 2616:
 		// To mark a response as "never expires," an origin server sends an
 		// Expires date approximately one year from the time the response is
 		// sent. HTTP/1.1 servers SHOULD NOT send Expires dates more than one
 		// year in the future.
-		response.setDateHeader(RESPONSE_EXPIRES, now + 1000l*60*60*24*363); // 363 days
+		response.setHeader("Cache-Control", "max-age=" + 60*60*24*363); // 363 days
 
 		final long ifModifiedSince = request.getDateHeader(REQUEST_IF_MODIFIED_SINCE);
 
