@@ -73,6 +73,7 @@ public class ResourceTest extends TestCase
 		assertEquals(0, r1.getResponse304Count());
 		assertEquals(0, r1.getResponse301ByNameCount());
 		assertEquals(0, r1.getResponse301ByFingerprintCount());
+		assertEquals(0, r1.getResponse404ByQueryCount());
 		assertEquals("ResourceTest.bin", r1.toString());
 		try
 		{

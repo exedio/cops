@@ -148,6 +148,7 @@ final class ResourceStatus_Jspm
 				<th>200l</th>
 				<th title="Redirect by Name">301n</th>
 				<th title="Redirect by Fingerprint">301f</th>
+				<th title="Not Found by Query">404</th>
 				<th><a href="<%=cop.toggleShowImage()%>"><%=
 						cop.showImage?"Image":"i"
 					%></a></th>
@@ -175,6 +176,7 @@ final class ResourceStatus_Jspm
 			long response200LengthTotal = 0;
 			long response301NameCountTotal        = 0;
 			long response301FingerprintCountTotal = 0;
+			long response404QueryCountTotal       = 0;
 			
 			for(final Resource resource : resources)
 			{
@@ -185,6 +187,7 @@ final class ResourceStatus_Jspm
 				final long response200Length = response200Count * contentLength;
 				final long response301NameCount        = resource.getResponse301ByNameCount();
 				final long response301FingerprintCount = resource.getResponse301ByFingerprintCount();
+				final long response404QueryCount       = resource.getResponse404ByQueryCount();
 				final String contentType = resource.getContentType();
 				final boolean showImageThis = cop.showImage && contentType.startsWith("image/");
 			%>
@@ -197,6 +200,7 @@ final class ResourceStatus_Jspm
 				<td><%=nf.format(response200Length)%></td>
 				<td><%=nf.format(response301NameCount       )%></td>
 				<td><%=nf.format(response301FingerprintCount)%></td>
+				<td><%=nf.format(response404QueryCount      )%></td>
 				<td class="text"><% if(showImageThis){%><img src="<%=resource%>"><%} %></td>
 				<td class="text"><a href="<%=resource%>"><%=resource.getName()%></a><% if(resource.getLog()){%> <small>(logged)</small><%} %></td>
 				<%
@@ -222,6 +226,7 @@ final class ResourceStatus_Jspm
 				response200LengthTotal += response200Length;
 				response301NameCountTotal        += response301NameCount;
 				response301FingerprintCountTotal += response301FingerprintCount;
+				response404QueryCountTotal       += response404QueryCount;
 			}
 		%>
 			<tr>
@@ -233,6 +238,7 @@ final class ResourceStatus_Jspm
 				<td><%=nf.format(response200LengthTotal)%></td>
 				<td><%=nf.format(response301NameCountTotal       )%></td>
 				<td><%=nf.format(response301FingerprintCountTotal)%></td>
+				<td><%=nf.format(response404QueryCountTotal      )%></td>
 				<th colspan="0">Total (Not Found <%=nf.format(count404)%>)</th>
 			</tr>
 		</table>

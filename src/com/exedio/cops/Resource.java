@@ -20,6 +20,7 @@ package com.exedio.cops;
 
 import static java.util.Objects.requireNonNull;
 import static javax.servlet.http.HttpServletResponse.SC_MOVED_PERMANENTLY;
+import static javax.servlet.http.HttpServletResponse.SC_NOT_FOUND;
 
 import com.exedio.cope.util.Hex;
 import com.exedio.cope.util.MessageDigestUtil;
@@ -52,6 +53,7 @@ public final class Resource
 	private final VolatileLong response304Count = new VolatileLong();
 	private final VolatileLong response301ByNameCount = new VolatileLong();
 	private final VolatileLong response301ByFingerprintCount = new VolatileLong();
+	private final VolatileLong response404ByQueryCount = new VolatileLong();
 
 	public Resource(final String name)
 	{
@@ -121,6 +123,11 @@ public final class Resource
 	public long getResponse301ByFingerprintCount()
 	{
 		return response301ByFingerprintCount.get();
+	}
+
+	public long getResponse404ByQueryCount()
+	{
+		return response404ByQueryCount.get();
 	}
 
 	@Override
@@ -241,6 +248,17 @@ public final class Resource
 	{
 		if(content==null)
 			throw new RuntimeException("not initialized: "+name);
+
+		// NOTE
+		// This code prevents a Denial of Service attack against the caching mechanism.
+		// Query strings can be used to effectively disable the cache by using many urls
+		// for one resource. Therefore they are forbidden completely.
+		if(request.getQueryString()!=null)
+		{
+			response.setStatus(SC_NOT_FOUND);
+			response404ByQueryCount.inc();
+			return;
+		}
 
 		response.setContentType(contentType);
 		response.setDateHeader(RESPONSE_LAST_MODIFIED, lastModified);

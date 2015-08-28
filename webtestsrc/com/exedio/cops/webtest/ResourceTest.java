@@ -56,7 +56,7 @@ public class ResourceTest extends AbstractWebTest
 		assertMoved   (prefix + "resources/resource-test.txt"  , textRelative);
 		assertMoved   (prefix + "resource-test.txt"            , textRelative);
 		assertNotFound(prefix + "resources/X/Xresource-test.txt");
-		assertEquals(textLastModified, assertURL(new URL(schemeAndHost + textRelative + "?param=value"), textLastModified+5000, true));
+		assertNotFound(textRelative + "?param=value");
 	}
 
 	private static long assertURL(final URL url) throws IOException
