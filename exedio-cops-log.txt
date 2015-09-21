@@ -8,6 +8,8 @@ The items are sorted inversely, i.e. latest items are on top
 
 --------------------------------------------------------------------------
 * Resource rejects requests with query part, responds with 404 Not Found.
+* Resource constructor fails on name containing a slash.
+	This breaks backwards API compatibility.
 * Resource introduces url fingerprinting.
 	BEWARE:
 	* Resource#getName() is not suitable to generate a url anymore. Use
