@@ -333,11 +333,19 @@ public abstract class CopsServlet extends HttpServlet
 				bf.append("header >").append(name).append("<: >").append(((String)ev.nextElement())).append("<\n");
 		}
 
+		final String PARAMETER_PASSWORD = "(.*password)";
 		for(final Enumeration<?> e = request.getParameterNames(); e.hasMoreElements(); )
 		{
 			final String name = (String)e.nextElement();
-			for(final String value : request.getParameterValues(name))
+			for(String value : request.getParameterValues(name))
+			{
+				if(name.matches(PARAMETER_PASSWORD))
+				{
+					// mask password values
+					value = "*****";
+				}
 				bf.append("parameter >").append(name).append("<: >").append(value + "<\n");
+			}
 		}
 
 		return bf.toString();
