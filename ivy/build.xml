@@ -2,6 +2,12 @@
 <project name="ivy" default="copy">
 	<import file="common.xml" />
 	<target name="copy" depends="resolve">
+		<delete dir="../lib">
+			<include name="*" />
+			<exclude name="ant-contrib.jar" />
+			<exclude name="apache-tomcat.tar.gz" />
+			<exclude name="catalina.jar" />
+		</delete>
 		<copy overwrite="true" file="artifacts/exedio-cope-util-jar.jar" tofile="../lib/exedio-cope-util.jar" />
 		<copy overwrite="true" file="artifacts/exedio-cope-util-log.txt" tofile="../lib/exedio-cope-util.jar-CHANGELOG" />
 		<copy overwrite="true" file="artifacts/exedio-cope-util-src.zip" tofile="../lib/exedio-cope-util.jar-src.zip" />
