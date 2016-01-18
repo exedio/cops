@@ -22,6 +22,7 @@
 
 package com.exedio.cops.example;
 
+import com.exedio.cope.util.Sources;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +69,7 @@ public final class Properties extends com.exedio.cope.util.Properties
 
 	private Properties(final File source)
 	{
-		super(getSource(source));
+		super(Sources.load(source));
 	}
 
 	Properties(final Properties.Source source)
