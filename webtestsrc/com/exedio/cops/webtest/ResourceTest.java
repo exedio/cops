@@ -18,6 +18,7 @@
 
 package com.exedio.cops.webtest;
 
+import static java.lang.System.lineSeparator;
 import static java.net.HttpURLConnection.HTTP_MOVED_PERM;
 import static java.net.HttpURLConnection.HTTP_NOT_FOUND;
 
@@ -90,7 +91,7 @@ public class ResourceTest extends AbstractWebTest
 		//System.out.println("Expires: "+new Date(conn.getExpiration()));
 		assertEquals(0, conn.getExpiration());
 		assertEquals("max-age=31363200", conn.getHeaderField("Cache-Control"));
-		assertEquals(expectNotModified ? -1 : (41 + (2*System.getProperty("line.separator").length())), conn.getContentLength());
+		assertEquals(expectNotModified ? -1 : (41 + (2*lineSeparator().length())), conn.getContentLength());
 
 		try(BufferedReader is = new BufferedReader(new InputStreamReader(conn.getInputStream())))
 		{
