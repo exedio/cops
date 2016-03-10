@@ -124,7 +124,7 @@ final class ResourceStatus_Jspm
 		</style>
 	</head>
 	<body>
-		<a href="http://cope.sourceforge.net/" target="_blank"><img src="http://cope.sourceforge.net/exedio.png" alt="Exedio Logo" class="logo"></a>
+		<a href="https://exedio.github.io/" target="_blank"><img src="https://exedio.github.io/exedio198x60.png" alt="Exedio Logo" class="logo"></a>
 		<h1>Cops Servlet &quot;<%=servletName%>&quot;</h1>
 		<div class="<% if(authentication==null){%>not<%} %>authenticated"><%
 			if(authentication!=null)

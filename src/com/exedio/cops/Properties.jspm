@@ -61,7 +61,7 @@ final class Properties_Jspm
 		<script src="<%=PropertiesServlet.script%>" type="text/javascript"></script>
 	</head>
 	<body>
-		<a href="http://cope.sourceforge.net/" target="_blank"><img src="<%=PropertiesServlet.logo%>" alt="Exedio Logo" class="logo"></a>
+		<a href="https://exedio.github.io/" target="_blank"><img src="<%=PropertiesServlet.logo%>" alt="Exedio Logo" class="logo"></a>
 		<h1><%=caption%></h1>
 		<div class="footer"><%=properties.getSource()%></div>
 		<div class="footer">
