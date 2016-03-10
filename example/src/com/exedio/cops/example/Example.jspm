@@ -51,25 +51,25 @@ final class Example_Jspm
 		[<a href="<%=ExampleServlet.test%>">test</a>]
 		<img src="<%=ExampleSuperServlet.logoSmall%>">
 		<br>
-		
+
 		this:
 		<a href="<%=cop%>">url</a> |
 		<a href="<% out.appendAbsolute(cop); %>">absolute</a>
 		<tt style="border: red solid 1px;"><%=cop%></tt>
 		<br>
-		
+
 		number:
 		<a href="<%=cop.set(0)%>">0</a> |
 		<a href="<%=cop.add(10)%>">+10</a> |
 		<a href="<%=cop.add(-10)%>">-10</a>
 		<span style="border: solid 1px;"><%=cop.number%></span>
 		<br>
-		
+
 		bool:
 		<a href="<%=cop.toggle()%>">toggle</a>
 		<span style="border: solid 1px;"><%=cop.bool%></span>
 		<br>
-		
+
 		string:
 		<a href="<%=cop.setString(null)%>">null</a> |
 		<a href="<%=cop.setString("zack")%>">zack</a> |
@@ -89,11 +89,11 @@ final class Example_Jspm
 	}
 		%>
 		<br>
-		
+
 		cop:
 		<a href="<%=cop.setCopNull()%>">null</a> |
 		<a href="<%=cop.setCopSelf()%>">self</a><%
-	
+
 	if(cop.cop!=null)
 	{
 		%>
@@ -102,20 +102,20 @@ final class Example_Jspm
 	}
 		%>
 		<br>
-		
+
 		needsSecure:
 		<a href="<%=cop.toSecure(false)%>">false<small>(any)</small></a>
 		<a href="<%=cop.toSecure(true) %>">true<small>(https)</small></a>
 		<span style="border: solid 1px;"><%=cop.needsSecure()%></span>
 		<br>
-		
+
 		<a href="<%=cop.toRedirectLoop()%>">Redirect Loop</a><%
 		%>
 		<br>
 		<form action="<%=cop%>" method="POST">
 			<input type="submit" name="<%=ExampleServlet.START_SESSION%>" value="Start Session">
 		</form><%
-		
+
 		%>
 		<br>
 		<form action="<%=cop%>" method="POST">
@@ -127,7 +127,7 @@ final class Example_Jspm
 			}
 			%>
 		</form><%
-		
+
 		ExampleCop.writePager(out, cop);
 		%>
 		<ol><%
@@ -153,9 +153,9 @@ final class Example_Jspm
 		%> raw: <u><%=request.getHeader("Accept-Language")%></u>
 	</body>
 </html><%
-		
+
 	}
-	
+
 	static final void writePagerButton(
 			final Out out,
 			final Pageable cop,
@@ -165,7 +165,7 @@ final class Example_Jspm
 				%>
 				<a href="<%=cop.toPage(href)%>"<% if(href.isNeutral()){%> style="background:grey;"<%}%>><%=text%></a><%
 	}
-	
+
 	static final void write(
 			final Out out,
 			final Locale l)

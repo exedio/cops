@@ -40,7 +40,7 @@ import com.exedio.cope.util.Properties;
 final class Properties_Jspm
 {
 	private static final String TEST = "test";
-	
+
 	static final void write(
 			final Out out,
 			final PropertiesCop cop,
@@ -100,7 +100,7 @@ final class Properties_Jspm
 			idNum++;
 			%>
 			<tr<% if(!fieldSpecified){ %> class="unspecified"<% } %>><%
-			
+
 			if(overridable)
 			{
 				%>
@@ -108,7 +108,7 @@ final class Properties_Jspm
 			}
 				%>
 				<th><%=field.getKey()%></th><%
-		
+
 		if(!cop.isShowHidden(field) && field.hasHiddenValue())
 		{
 				%>
@@ -164,7 +164,7 @@ final class Properties_Jspm
 				<caption>Tests</caption><%
 
 			writeTestCheckAll(out);
-			
+
 			int testNumber = -1;
 			final HashSet<Integer> doTestNumbers;
 			if(Cop.isPost(request) && request.getParameter(TEST)!=null)
@@ -181,7 +181,7 @@ final class Properties_Jspm
 			{
 				doTestNumbers = null;
 			}
-			
+
 			for(final Callable<?> test : properties.getTests())
 			{
 				testNumber++;
@@ -189,7 +189,7 @@ final class Properties_Jspm
 				<tr>
 					<th><input class="testcheck" type="checkbox" name="<%=TEST_NUMBER%>" value="<%=testNumber%>" checked="true"></th>
 					<th><%=test.toString()%></th><%
-					
+
 				if(doTestNumbers!=null && doTestNumbers.contains(Integer.valueOf(testNumber)))
 				{
 					%>
@@ -219,7 +219,7 @@ final class Properties_Jspm
 								{
 									%>
 									<li><%=el.getClassName()%>.<%=el.getMethodName()%> (<%=el.getFileName()%>:<%=el.getLineNumber()%>)</li><%
-								} 
+								}
 								%>
 								</ul>
 							<%
@@ -234,7 +234,7 @@ final class Properties_Jspm
 			%>
 			</table>
 			<input type="submit" name="<%=TEST%>" value="Test"><%
-		
+
 		if(overridable)
 		{
 			%>

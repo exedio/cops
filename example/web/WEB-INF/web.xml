@@ -11,7 +11,7 @@
 		<auth-method>BASIC</auth-method>
 		<realm-name>cops example realm</realm-name>
 	</login-config>
-	
+
 	<servlet>
 		<servlet-name>cops</servlet-name>
 		<servlet-class>com.exedio.cops.example.ExampleServlet</servlet-class>

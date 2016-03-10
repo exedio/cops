@@ -4,15 +4,15 @@
 
 	<property file="local.properties" />
 	<property file="project.properties" />
-	
+
 	<import file="macros/findbugs.xml" />
-	
+
 	<taskdef classpath="lib/ant-contrib.jar" resource="net/sf/antcontrib/antcontrib.properties" />
-	
+
 	<taskdef
 				resource="com/exedio/jspm/ant.properties"
 				classpath="lib/exedio-jspm.jar" />
-	
+
 	<target name="runtime.jspm">
 		<jspm method="print">
 			<fileset dir="src">
@@ -28,7 +28,7 @@
 			</fileset>
 		</jspm>
 	</target>
-	
+
 	<target name="compile" depends="runtime.jspm">
 		<mkdir dir="build/classes" />
 		<javac srcdir="src"
@@ -55,7 +55,7 @@
 			</fileset>
 		</copy>
 	</target>
-	
+
 	<target name="catalina.compile">
 		<mkdir dir="build/classes" />
 		<javac srcdir="catalinasrc"
@@ -73,7 +73,7 @@
 			<compilerarg value="ascii" />
 		</javac>
 	</target>
-	
+
 	<target name="test.compile" depends="compile">
 		<mkdir dir="build/testclasses" />
 		<javac srcdir="testsrc"
@@ -98,7 +98,7 @@
 			</fileset>
 		</copy>
 	</target>
-	
+
 	<target name="test.run" depends="test.compile">
 		<mkdir dir="build/testresults" />
 		<junit fork="yes"
@@ -120,9 +120,9 @@
 			<assertions><enable/></assertions>
 		</junit>
 	</target>
-	
+
 	<target name="test" depends="test.run" />
-	
+
 	<target name="jar" depends="compile, catalina.compile">
 		<jar jarfile="build/exedio-cops.jar" basedir="build/classes" filesonly="true" duplicate="fail" strict="fail" level="9">
 			<manifest>
@@ -136,7 +136,7 @@
 			</manifest>
 		</jar>
 	</target>
-	
+
 	<target name="jar.src">
 		<mkdir dir="build" />
 		<zip destfile="build/exedio-cops-src.zip" filesonly="true" whenempty="fail" duplicate="fail" level="9">
@@ -149,13 +149,13 @@
 			</zipfileset>
 		</zip>
 	</target>
-	
+
 	<target name="example.jspm">
 		<jspm method="append">
 			<fileset dir="example/src" includes="**/*.jspm" />
 		</jspm>
 	</target>
-	
+
 	<target name="example.compile" depends="compile, example.jspm">
 		<mkdir dir="build/exampleclasses" />
 		<javac srcdir="example/src"
@@ -181,7 +181,7 @@
 			</fileset>
 		</copy>
 	</target>
-	
+
 	<target name="example.web" depends="compile, catalina.compile, example.compile">
 		<mkdir dir="example/web/files" />
 		<touch file="example/web/files/hallo.txt" />
@@ -199,7 +199,7 @@
 		</copy>
 		<touch file="example/web/WEB-INF/web.xml" />
 	</target>
-		
+
 	<target name="catalina">
 		<property name="catalina.root" value="apache-tomcat-6.0.16" />
 		<untar src="lib/apache-tomcat.tar.gz"
@@ -230,13 +230,13 @@
 			</filterset>
 		</copy>
 	</target>
-	
+
 	<target name="example.tomcat" depends="example.web, catalina">
 		<copy file="example/context.xml" tofile="tomcat/conf/Catalina/localhost/cops.xml" />
 	</target>
-	
+
 	<target name="example" depends="example.tomcat" />
-	
+
 	<target name="webtest.compile">
 		<mkdir dir="build/webtestclasses" />
 		<javac srcdir="webtestsrc"
@@ -253,7 +253,7 @@
 			<compilerarg value="ascii" />
 		</javac>
 	</target>
-	
+
 	<target name="webtest" depends="example.tomcat, webtest.compile">
 		<trycatch>
 			<try>
@@ -307,7 +307,7 @@
 			</finally>
 		</trycatch>
 	</target>
-	
+
 	<target name="clean">
 		<delete dir="build" />
 		<delete dir="tomcat" />
@@ -364,7 +364,7 @@
 			</classpath>
 		</javadoc>
 	</target>
-	
+
 	<target name="findbugs" depends="compile, findbugs.taskdef">
 		<findbugs
 					home="${basedir}/build/findbugs-home"
@@ -384,13 +384,13 @@
 			</auxclasspath>
 		</findbugs>
 	</target>
-	
+
 	<target name="jspm" depends="runtime.jspm, example.jspm" />
 	<target name="src" depends="jspm" description="creates all sources, so the IDE does not complain" />
 	<target name="build" depends="compile, catalina.compile, test, webtest, jar, example, api" />
 	<target name="all" depends="build, jar.src, findbugs" />
 	<target name="tomcat" depends="example.tomcat" />
-	
+
 	<target name="jenkins" depends="all">
 		<copy todir="${basedir}/build/success">
 			<fileset file="${basedir}/build/exedio-cops.jar" />
