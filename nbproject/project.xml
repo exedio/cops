@@ -28,6 +28,12 @@
                     <location>webtestsrc</location>
                     <encoding>UTF-8</encoding>
                 </source-folder>
+                <source-folder>
+                    <label>example/src</label>
+                    <type>java</type>
+                    <location>example/src</location>
+                    <encoding>UTF-8</encoding>
+                </source-folder>
             </folders>
             <ide-actions>
                 <action name="build">
@@ -58,6 +64,10 @@
                         <location>testsrc</location>
                     </source-folder>
                     <source-folder style="packages">
+                        <label>example/src</label>
+                        <location>example/src</location>
+                    </source-folder>
+                    <source-folder style="packages">
                         <label>webtestsrc</label>
                         <location>webtestsrc</location>
                     </source-folder>
@@ -80,7 +90,8 @@
                 <package-root>src</package-root>
                 <package-root>testsrc</package-root>
                 <package-root>webtestsrc</package-root>
-                <classpath mode="compile">lib/ant-contrib.jar:lib/catalina.jar:lib/exedio-jspm.jar:lib/junit.jar:lib/servlet-api.jar</classpath>
+                <package-root>example/src</package-root>
+                <classpath mode="compile">lib/ant-contrib.jar:lib/catalina.jar:lib/exedio-cope-util.jar:lib/exedio-jspm.jar:lib/junit.jar:lib/servlet-api.jar</classpath>
                 <source-level>1.7</source-level>
             </compilation-unit>
         </java-data>
