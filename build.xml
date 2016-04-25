@@ -294,16 +294,16 @@
 				</junit>
 			</try>
 			<finally>
-				<echo message="tomcat: stoping ..." />
+				<echo message="tomcat: stopping ..." />
 				<exec dir="${basedir}/tomcat/bin"
 						executable="${basedir}/tomcat/bin/${catalina.executable}"
 						failonerror="true"
 						output="build/catalina-stop.log">
 					<arg value="stop" />
 				</exec>
-				<echo message="tomcat: waiting to be stoped ..." />
+				<echo message="tomcat: waiting to be stopped ..." />
 				<sleep seconds="10" />
-				<echo message="tomcat: stoped." />
+				<echo message="tomcat: stopped." />
 			</finally>
 		</trycatch>
 	</target>
