@@ -201,7 +201,7 @@
 	</target>
 
 	<target name="catalina">
-		<property name="catalina.root" value="apache-tomcat-6.0.16" />
+		<property name="catalina.root" value="apache-tomcat-7.0.67" />
 		<untar src="lib/apache-tomcat.tar.gz"
 				 compression="gzip"
 				 dest="${basedir}">
