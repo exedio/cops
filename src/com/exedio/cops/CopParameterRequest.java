@@ -28,16 +28,25 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
+import javax.servlet.AsyncContext;
+import javax.servlet.DispatcherType;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.ServletInputStream;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 final class CopParameterRequest implements HttpServletRequest
 {
@@ -143,10 +152,10 @@ final class CopParameterRequest implements HttpServletRequest
 		return list.toArray(new String[list.size()]);
 	}
 
-	private static final Enumeration<?> EMPTY_ENUMERATION = enumeration(Collections.<String>emptyList());
+	private static final Enumeration<String> EMPTY_ENUMERATION = enumeration(Collections.<String>emptyList());
 
 	@Override
-	public Enumeration<?> getParameterNames()
+	public Enumeration<String> getParameterNames()
 	{
 		if(parameters==null)
 			return EMPTY_ENUMERATION;
@@ -155,10 +164,10 @@ final class CopParameterRequest implements HttpServletRequest
 	}
 
 	@Override
-	public Map<?,?> getParameterMap()
+	public Map<String,String[]> getParameterMap()
 	{
 		if(parameters==null)
-			return Collections.EMPTY_MAP;
+			return Collections.emptyMap();
 
 		final LinkedHashMap<String, String[]> result = new LinkedHashMap<>();
 		for(final Map.Entry<String, ArrayList<String>> e : parameters.entrySet())
@@ -199,13 +208,13 @@ final class CopParameterRequest implements HttpServletRequest
 	}
 
 	@Override
-	public Enumeration<?> getHeaderNames()
+	public Enumeration<String> getHeaderNames()
 	{
 		return nested.getHeaderNames();
 	}
 
 	@Override
-	public Enumeration<?> getHeaders(final String arg0)
+	public Enumeration<String> getHeaders(final String arg0)
 	{
 		return nested.getHeaders(arg0);
 	}
@@ -314,7 +323,7 @@ final class CopParameterRequest implements HttpServletRequest
 	}
 
 	@Override
-	public Enumeration<?> getAttributeNames()
+	public Enumeration<String> getAttributeNames()
 	{
 		return nested.getAttributeNames();
 	}
@@ -368,7 +377,7 @@ final class CopParameterRequest implements HttpServletRequest
 	}
 
 	@Override
-	public Enumeration<?> getLocales()
+	public Enumeration<Locale> getLocales()
 	{
 		return nested.getLocales();
 	}
@@ -457,5 +466,77 @@ final class CopParameterRequest implements HttpServletRequest
 			throws UnsupportedEncodingException
 	{
 		nested.setCharacterEncoding(arg0);
+	}
+
+	@Override
+	public boolean authenticate(HttpServletResponse hsr) throws IOException, ServletException
+	{
+		return nested.authenticate(hsr);
+	}
+
+	@Override
+	public void login(String string, String string1) throws ServletException
+	{
+		nested.login(string, string1);
+	}
+
+	@Override
+	public void logout() throws ServletException
+	{
+		nested.logout();
+	}
+
+	@Override
+	public Collection<Part> getParts() throws IOException, ServletException
+	{
+		return nested.getParts();
+	}
+
+	@Override
+	public Part getPart(String string) throws IOException, ServletException
+	{
+		return nested.getPart(string);
+	}
+
+	@Override
+	public ServletContext getServletContext()
+	{
+		return nested.getServletContext();
+	}
+
+	@Override
+	public AsyncContext startAsync() throws IllegalStateException
+	{
+		return nested.startAsync();
+	}
+
+	@Override
+	public AsyncContext startAsync(ServletRequest sr, ServletResponse sr1) throws IllegalStateException
+	{
+		return nested.startAsync(sr, sr1);
+	}
+
+	@Override
+	public boolean isAsyncStarted()
+	{
+		return nested.isAsyncStarted();
+	}
+
+	@Override
+	public boolean isAsyncSupported()
+	{
+		return nested.isAsyncSupported();
+	}
+
+	@Override
+	public AsyncContext getAsyncContext()
+	{
+		return nested.getAsyncContext();
+	}
+
+	@Override
+	public DispatcherType getDispatcherType()
+	{
+		return nested.getDispatcherType();
 	}
 }

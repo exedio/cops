@@ -38,7 +38,7 @@
 				debug="on"
 				optimize="off">
 			<classpath>
-				<pathelement location="lib/servlet-api.jar" />
+				<pathelement location="lib/javax.servlet-api.jar" />
 				<pathelement location="lib/slf4j-api.jar" />
 				<pathelement location="lib/exedio-cope-util.jar" />
 				<pathelement location="lib/findbugs-annotations.jar" />
@@ -65,7 +65,7 @@
 				debug="on"
 				optimize="off">
 			<classpath>
-				<pathelement location="lib/servlet-api.jar" />
+				<pathelement location="lib/javax.servlet-api.jar" />
 				<pathelement location="lib/catalina.jar" />
 			</classpath>
 			<compilerarg value="-Xlint" />
@@ -84,7 +84,7 @@
 				optimize="off">
 			<classpath>
 				<pathelement location="build/classes" />
-				<pathelement location="lib/servlet-api.jar" />
+				<pathelement location="lib/javax.servlet-api.jar" />
 				<pathelement location="lib/junit.jar" />
 				<pathelement location="lib/findbugs-annotations.jar" />
 			</classpath>
@@ -110,7 +110,7 @@
 				<pathelement location="build/classes" />
 				<pathelement location="build/testclasses" />
 				<pathelement location="lib/junit.jar" />
-				<pathelement location="lib/servlet-api.jar" />
+				<pathelement location="lib/javax.servlet-api.jar" />
 				<pathelement location="lib/slf4j-api.jar" />
 				<pathelement location="lib/slf4j-log4j12.jar" />
 				<pathelement location="lib/log4j-bundle.jar" />
@@ -132,7 +132,7 @@
 				<attribute name="Implementation-Title" value="exedio cops"/>
 				<attribute name="Implementation-Version" value="${build.tag}"/>
 				<attribute name="Implementation-Vendor" value="exedio GmbH"/>
-				<attribute name="Class-Path" value="servlet-api.jar" />
+				<attribute name="Class-Path" value="javax.servlet-api.jar" />
 			</manifest>
 		</jar>
 	</target>
@@ -165,7 +165,7 @@
 				optimize="off">
 			<classpath>
 				<pathelement location="build/classes" />
-				<pathelement location="lib/servlet-api.jar" />
+				<pathelement location="lib/javax.servlet-api.jar" />
 				<pathelement location="lib/exedio-cope-util.jar" />
 				<pathelement location="lib/findbugs-annotations.jar" />
 			</classpath>
@@ -357,7 +357,7 @@
 			<link href="${api.link.j2ee}" packagelistLoc="package-list/j2ee" offline="true" />
 			<arg value="${api.doclint}" />
 			<classpath>
-				<pathelement location="lib/servlet-api.jar" />
+				<pathelement location="lib/javax.servlet-api.jar" />
 				<pathelement location="lib/exedio-cope-util.jar" />
 				<pathelement location="lib/slf4j-api.jar" />
 				<pathelement location="lib/findbugs-annotations.jar" />
@@ -379,7 +379,7 @@
 			<class location="${basedir}/build/classes" />
 			<auxclasspath>
 				<pathelement location="${basedir}/lib/exedio-cope-util.jar" />
-				<pathelement location="${basedir}/lib/servlet-api.jar" />
+				<pathelement location="${basedir}/lib/javax.servlet-api.jar" />
 				<pathelement location="${basedir}/lib/slf4j-api.jar" />
 			</auxclasspath>
 		</findbugs>

@@ -19,6 +19,7 @@
 package com.exedio.cops;
 
 import java.io.PrintWriter;
+import java.util.Collection;
 import java.util.Locale;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
@@ -217,6 +218,30 @@ public class DummyResponse implements HttpServletResponse
 
 	@Override
 	public void setLocale(final Locale arg0)
+	{
+		throw new RuntimeException();
+	}
+
+	@Override
+	public int getStatus()
+	{
+		throw new RuntimeException();
+	}
+
+	@Override
+	public String getHeader(String string)
+	{
+		throw new RuntimeException();
+	}
+
+	@Override
+	public Collection<String> getHeaders(String string)
+	{
+		throw new RuntimeException();
+	}
+
+	@Override
+	public Collection<String> getHeaderNames()
 	{
 		throw new RuntimeException();
 	}

@@ -31,7 +31,7 @@ public class DummySession implements HttpSession
 	}
 
 	@Override
-	public Enumeration<?> getAttributeNames()
+	public Enumeration<String> getAttributeNames()
 	{
 		throw new RuntimeException();
 	}

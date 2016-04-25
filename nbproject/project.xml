@@ -91,7 +91,7 @@
                 <package-root>testsrc</package-root>
                 <package-root>webtestsrc</package-root>
                 <package-root>example/src</package-root>
-                <classpath mode="compile">lib/ant-contrib.jar:lib/catalina.jar:lib/exedio-cope-util.jar:lib/exedio-jspm.jar:lib/junit.jar:lib/servlet-api.jar</classpath>
+                <classpath mode="compile">lib/ant-contrib.jar:lib/catalina.jar:lib/exedio-cope-util.jar:lib/exedio-jspm.jar:lib/junit.jar:lib/javax.servlet-api.jar</classpath>
                 <source-level>1.7</source-level>
             </compilation-unit>
         </java-data>
