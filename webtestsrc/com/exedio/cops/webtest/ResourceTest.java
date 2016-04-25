@@ -43,7 +43,7 @@ public class ResourceTest extends AbstractWebTest
 	public void testError() throws Exception
 	{
 		final String prefix = "/cops/";
-		final String textRelative = prefix + "resources/9e4cd71daa5a10b9dde41b944e0f185c/resource-test.txt";
+		final String textRelative = prefix + "resources/" + getFingerprintForResourceTestTxt() + "/resource-test.txt";
 		final URL text = new URL(schemeAndHost + textRelative);
 
 		final long textLastModified = assertURL(text);
@@ -58,6 +58,20 @@ public class ResourceTest extends AbstractWebTest
 		assertMoved   (prefix + "resource-test.txt"            , textRelative);
 		assertNotFound(prefix + "resources/X/Xresource-test.txt");
 		assertNotFound(textRelative + "?param=value");
+	}
+
+	private static String getFingerprintForResourceTestTxt()
+	{
+		// resource-test.txt contains a line separator, so the MD5 fingerprint changes with the OS the git checkout was made with
+		switch ( System.lineSeparator() )
+		{
+			case "\n":
+				return "9e4cd71daa5a10b9dde41b944e0f185c";
+			case "\r\n":
+				return "c153a03d57965ec85e739bc7799d73fb";
+			default:
+				throw new RuntimeException("system line separator not supported - please add to unit test");
+		}
 	}
 
 	private static long assertURL(final URL url) throws IOException
