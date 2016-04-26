@@ -229,13 +229,13 @@ public class DummyResponse implements HttpServletResponse
 	}
 
 	@Override
-	public String getHeader(String string)
+	public String getHeader(final String string)
 	{
 		throw new RuntimeException();
 	}
 
 	@Override
-	public Collection<String> getHeaders(String string)
+	public Collection<String> getHeaders(final String string)
 	{
 		throw new RuntimeException();
 	}

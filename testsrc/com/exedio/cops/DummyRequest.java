@@ -370,13 +370,13 @@ public class DummyRequest implements HttpServletRequest
 	}
 
 	@Override
-	public boolean authenticate(HttpServletResponse hsr) throws IOException, ServletException
+	public boolean authenticate(final HttpServletResponse hsr) throws IOException, ServletException
 	{
 		throw new RuntimeException();
 	}
 
 	@Override
-	public void login(String string, String string1) throws ServletException
+	public void login(final String string, final String string1) throws ServletException
 	{
 		throw new RuntimeException();
 	}
@@ -394,7 +394,7 @@ public class DummyRequest implements HttpServletRequest
 	}
 
 	@Override
-	public Part getPart(String string) throws IOException, ServletException
+	public Part getPart(final String string) throws IOException, ServletException
 	{
 		throw new RuntimeException();
 	}
@@ -412,7 +412,7 @@ public class DummyRequest implements HttpServletRequest
 	}
 
 	@Override
-	public AsyncContext startAsync(ServletRequest sr, ServletResponse sr1) throws IllegalStateException
+	public AsyncContext startAsync(final ServletRequest sr, final ServletResponse sr1) throws IllegalStateException
 	{
 		throw new RuntimeException();
 	}

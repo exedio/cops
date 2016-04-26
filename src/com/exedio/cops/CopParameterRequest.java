@@ -469,13 +469,13 @@ final class CopParameterRequest implements HttpServletRequest
 	}
 
 	@Override
-	public boolean authenticate(HttpServletResponse hsr) throws IOException, ServletException
+	public boolean authenticate(final HttpServletResponse hsr) throws IOException, ServletException
 	{
 		return nested.authenticate(hsr);
 	}
 
 	@Override
-	public void login(String string, String string1) throws ServletException
+	public void login(final String string, final String string1) throws ServletException
 	{
 		nested.login(string, string1);
 	}
@@ -493,7 +493,7 @@ final class CopParameterRequest implements HttpServletRequest
 	}
 
 	@Override
-	public Part getPart(String string) throws IOException, ServletException
+	public Part getPart(final String string) throws IOException, ServletException
 	{
 		return nested.getPart(string);
 	}
@@ -511,7 +511,7 @@ final class CopParameterRequest implements HttpServletRequest
 	}
 
 	@Override
-	public AsyncContext startAsync(ServletRequest sr, ServletResponse sr1) throws IllegalStateException
+	public AsyncContext startAsync(final ServletRequest sr, final ServletResponse sr1) throws IllegalStateException
 	{
 		return nested.startAsync(sr, sr1);
 	}
