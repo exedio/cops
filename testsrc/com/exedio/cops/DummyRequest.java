@@ -30,7 +30,6 @@ import javax.servlet.AsyncContext;
 import javax.servlet.DispatcherType;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.ServletInputStream;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -370,31 +369,31 @@ public class DummyRequest implements HttpServletRequest
 	}
 
 	@Override
-	public boolean authenticate(final HttpServletResponse hsr) throws IOException, ServletException
+	public boolean authenticate(final HttpServletResponse hsr)
 	{
 		throw new RuntimeException();
 	}
 
 	@Override
-	public void login(final String string, final String string1) throws ServletException
+	public void login(final String string, final String string1)
 	{
 		throw new RuntimeException();
 	}
 
 	@Override
-	public void logout() throws ServletException
+	public void logout()
 	{
 		throw new RuntimeException();
 	}
 
 	@Override
-	public Collection<Part> getParts() throws IOException, ServletException
+	public Collection<Part> getParts()
 	{
 		throw new RuntimeException();
 	}
 
 	@Override
-	public Part getPart(final String string) throws IOException, ServletException
+	public Part getPart(final String string)
 	{
 		throw new RuntimeException();
 	}
