@@ -97,7 +97,7 @@ public abstract class CopsServlet extends HttpServlet
 	}
 
 	@Override
-	public void init(ServletConfig config) throws ServletException
+	public void init(final ServletConfig config) throws ServletException
 	{
 		super.init(config);
 		if (!suppressPathCheck())
@@ -107,7 +107,7 @@ public abstract class CopsServlet extends HttpServlet
 			{
 				if (entry.getKey().equals(config.getServletName()))
 				{
-					for (String urlPattern: entry.getValue().getMappings())
+					for (final String urlPattern: entry.getValue().getMappings())
 					{
 						if (!urlPattern.endsWith("/*"))
 						{
