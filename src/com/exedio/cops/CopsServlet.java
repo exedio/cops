@@ -33,9 +33,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Random;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRegistration;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -92,6 +94,38 @@ public abstract class CopsServlet extends HttpServlet
 		{
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public void init(final ServletConfig config) throws ServletException
+	{
+		super.init(config);
+		if (!suppressPathCheck())
+		{
+			final Map<String, ? extends ServletRegistration> registrations=config.getServletContext().getServletRegistrations();
+			for (final Map.Entry<String, ? extends ServletRegistration> entry: registrations.entrySet())
+			{
+				if (entry.getKey().equals(config.getServletName()))
+				{
+					for (final String urlPattern: entry.getValue().getMappings())
+					{
+						if (!urlPattern.endsWith("/*"))
+						{
+							throw new RuntimeException("CopsServlets must be mounted under path patterns ending with \"/*\". "
+								+ "For servlet "+config.getServletName()+", this requirement is not met by pattern "+urlPattern+". "
+								+ "Overwrite 'suppressPathCheck()' to disable this check."
+							);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/** Overwrite this method (and return true) if your CopsServlet is not mounted at ".../*" and you know what you're doing. */
+	protected boolean suppressPathCheck()
+	{
+		return false;
 	}
 
 	/**
