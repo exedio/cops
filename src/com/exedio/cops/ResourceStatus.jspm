@@ -48,6 +48,8 @@ final class ResourceStatus_Jspm
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=<%=UTF_8%>">
 		<title>Cops Servlet &quot;<%=servletName%>&quot; - Resource Status</title>
+		<% /*the href:data below is a 1x1 px PNG */ %>
+		<link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg==" type="image/x-icon">
 		<style>
 			h1
 			{
