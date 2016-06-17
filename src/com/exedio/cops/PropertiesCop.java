@@ -63,7 +63,7 @@ final class PropertiesCop extends Cop
 		final HashSet<String> showHidden =
 				(this.showHidden!=null)
 				? new HashSet<>(this.showHidden)
-				: new HashSet<String>();
+				: new HashSet<>();
 		showHidden.add(field.getKey());
 		return new PropertiesCop(properties, showHidden);
 	}
