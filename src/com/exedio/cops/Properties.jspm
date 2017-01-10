@@ -163,7 +163,7 @@ final class Properties_Jspm
 			<table>
 				<caption>Probes</caption><%
 
-			writeTestCheckAll(out);
+			writeProbeCheckAll(out);
 
 			int testNumber = -1;
 			final HashSet<Integer> doTestNumbers;
@@ -230,7 +230,7 @@ final class Properties_Jspm
 				%>
 				</tr><%
 			}
-			writeTestCheckAll(out);
+			writeProbeCheckAll(out);
 			%>
 			</table>
 			<input type="submit" name="<%=TEST%>" value="Run Probes"><%
@@ -248,7 +248,7 @@ final class Properties_Jspm
 </html><%
 	}
 
-	private static void writeTestCheckAll(
+	private static void writeProbeCheckAll(
 			final Out out)
 	{
 				%>
