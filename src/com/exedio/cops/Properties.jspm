@@ -161,7 +161,7 @@ final class Properties_Jspm
 		}
 		%>
 			<table>
-				<caption>Tests</caption><%
+				<caption>Probes</caption><%
 
 			writeTestCheckAll(out);
 
@@ -233,12 +233,12 @@ final class Properties_Jspm
 			writeTestCheckAll(out);
 			%>
 			</table>
-			<input type="submit" name="<%=TEST%>" value="Test"><%
+			<input type="submit" name="<%=TEST%>" value="Run Probes"><%
 
 		if(overridable)
 		{
 			%>
-			<input type="submit" name="<%=SET %>" value="Set"><%
+			<input type="submit" name="<%=SET %>" value="Set Fields"><%
 		}
 		%>
 		</form>
@@ -254,7 +254,7 @@ final class Properties_Jspm
 				%>
 				<tr>
 					<th><input class="testcheck" type="checkbox" onclick="checkAll(this)" checked></th>
-					<th><i>(un)check all tests</i></th>
+					<th><i>(un)check all probes</i></th>
 				</tr><%
 	}
 }
