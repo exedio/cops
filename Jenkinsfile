@@ -50,6 +50,9 @@ timestamps
 				sh "${antHome}/bin/ant clean jenkins" +
 						' "-Dbuild.revision=${BUILD_NUMBER}"' +
 						' "-Dbuild.tag=git ${BRANCH_NAME} ${GIT_COMMIT} ${GIT_TREE} jenkins ${BUILD_NUMBER} ${BUILD_TIMESTAMP}"' +
+						' -Dtomcat.port.shutdown=' + port(0) +
+						' -Dtomcat.port.http='     + port(1) +
+						' -Dtomcat.port.https='    + port(2) +
 						' -Dfindbugs.output=xml'
 
 				stage 'Publish'
@@ -132,4 +135,9 @@ def abortable(Closure body)
 			return
 		throw e;
 	}
+}
+
+def port(int offset)
+{
+	return 28000 + 10*env.EXECUTOR_NUMBER.toInteger() + offset
 }
