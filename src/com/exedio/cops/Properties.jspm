@@ -187,7 +187,7 @@ final class Properties_Jspm
 				testNumber++;
 				%>
 				<tr>
-					<th><input class="testcheck" type="checkbox" name="<%=TEST_NUMBER%>" value="<%=testNumber%>" checked="true"></th>
+					<th><input class="probecheck" type="checkbox" name="<%=TEST_NUMBER%>" value="<%=testNumber%>" checked="true"></th>
 					<th><%=test.toString()%></th><%
 
 				if(doTestNumbers!=null && doTestNumbers.contains(Integer.valueOf(testNumber)))
@@ -253,7 +253,7 @@ final class Properties_Jspm
 	{
 				%>
 				<tr>
-					<th><input class="testcheck" type="checkbox" onclick="checkAll(this)" checked></th>
+					<th><input class="probecheck" type="checkbox" onclick="checkAll(this)" checked></th>
 					<th><i>(un)check all probes</i></th>
 				</tr><%
 	}
