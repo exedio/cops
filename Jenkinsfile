@@ -68,7 +68,7 @@ timestamps
 						unstableTotalAll: '0',
 						usePreviousBuildAsReference: false,
 						useStableBuildAsReference: false])
-				archive 'build/success/*'
+				archive 'build/catalina-start.log,build/success/*'
 			}
 		}
 		catch(Exception e)
