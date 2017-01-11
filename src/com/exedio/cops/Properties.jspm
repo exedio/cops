@@ -165,7 +165,7 @@ final class Properties_Jspm
 
 			writeProbeCheckAll(out);
 
-			int testNumber = -1;
+			int probeNumber = -1;
 			final HashSet<Integer> doTestNumbers;
 			if(Cop.isPost(request) && request.getParameter(TEST)!=null)
 			{
@@ -184,13 +184,13 @@ final class Properties_Jspm
 
 			for(final Callable<?> test : properties.getTests())
 			{
-				testNumber++;
+				probeNumber++;
 				%>
 				<tr>
-					<th><input class="probecheck" type="checkbox" name="<%=PROBE_NUMBER%>" value="<%=testNumber%>" checked="true"></th>
+					<th><input class="probecheck" type="checkbox" name="<%=PROBE_NUMBER%>" value="<%=probeNumber%>" checked="true"></th>
 					<th><%=test.toString()%></th><%
 
-				if(doTestNumbers!=null && doTestNumbers.contains(Integer.valueOf(testNumber)))
+				if(doTestNumbers!=null && doTestNumbers.contains(Integer.valueOf(probeNumber)))
 				{
 					%>
 					<td><%
