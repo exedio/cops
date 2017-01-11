@@ -144,12 +144,12 @@ public abstract class PropertiesServlet extends CopsServlet
 		final P properties = overridable.newProperties(Sources.cascade(
 				new EditedSource(authentication, hostname, sourceMap), source));
 
-		int testNumber = -1;
+		int probeNumber = -1;
 		for(final Callable<?> test : properties.getTests())
 		{
-			testNumber++;
+			probeNumber++;
 
-			if(doTestNumbers.contains(Integer.valueOf(testNumber)))
+			if(doTestNumbers.contains(Integer.valueOf(probeNumber)))
 			{
 				try
 				{
