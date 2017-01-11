@@ -106,7 +106,19 @@ img.logo
 	height:60px;
 }
 
+img.node
+{
+	width:9px;
+	height:9px;
+}
+
 div.footer
 {
 	font-size:70%;
+}
+
+span.stacktraceMore
+{
+	display:none;
+	font-size:80%;
 }

@@ -44,6 +44,8 @@ final class Out
 	private final SimpleDateFormat dateFormatYear  = new SimpleDateFormat(     "MM/dd'&nbsp;'HH:mm:ss'<small>'.SSS'</small>'");
 	private final SimpleDateFormat dateFormatToday = new SimpleDateFormat(                  "HH:mm:ss'<small>'.SSS'</small>'");
 
+	private int nextId = 0;
+
 	Out(final HttpServletRequest request)
 	{
 		assert request !=null;
@@ -112,6 +114,15 @@ final class Out
 	void write(final Cop cop)
 	{
 		bf.append(cop.getURL(request));
+	}
+
+	/**
+	 * Returns an id unique within the document.
+	 * Useful for html ids needed for javascript manipulating DOM.
+	 */
+	int nextId()
+	{
+		return nextId++;
 	}
 
 	void sendBody(final HttpServletResponse response) throws IOException

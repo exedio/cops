@@ -214,15 +214,9 @@ final class Properties_Jspm
 								%>
 								<%=t.getClass().getName()%>:
 								<%=t.getMessage()%>
-								<ul><%
-								for(final StackTraceElement el : t.getStackTrace())
-								{
-									%>
-									<li><%=el.getClassName()%>.<%=el.getMethodName()%> (<%=el.getFileName()%>:<%=el.getLineNumber()%>)</li><%
-								}
-								%>
-								</ul>
-							<%
+								<br><%
+								StackTrace_Jspm.write(out, t.getStackTrace());%>
+								<br><%
 							}
 						}
 						%></td><%

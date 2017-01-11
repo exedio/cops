@@ -41,3 +41,19 @@ function checkAll(bx)
 		}
 	}
 }
+
+function toggleStacktrace(image,more)
+{
+	var imageSrc = image.src;
+	var moreElement = document.getElementById(more);
+	if(imageSrc.substring(imageSrc.length-8)=="true.png")
+	{
+		image.src = imageSrc.substring(0, imageSrc.length-8) + "false.png";
+		moreElement.style.display = "none";
+	}
+	else
+	{
+		image.src = imageSrc.substring(0, imageSrc.length-9) + "true.png";
+		moreElement.style.display = "inline";
+	}
+}

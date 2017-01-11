@@ -19,12 +19,14 @@
 				<include name="**/*.jspm" />
 				<exclude name="com/exedio/cops/ResourceStatus.jspm" />
 				<exclude name="com/exedio/cops/Properties.jspm" />
+				<exclude name="com/exedio/cops/StackTrace.jspm" />
 			</fileset>
 		</jspm>
 		<jspm>
 			<fileset dir="src">
 				<include name="com/exedio/cops/ResourceStatus.jspm" />
 				<include name="com/exedio/cops/Properties.jspm" />
+				<include name="com/exedio/cops/StackTrace.jspm" />
 			</fileset>
 		</jspm>
 	</target>

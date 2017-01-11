@@ -49,6 +49,8 @@ public abstract class PropertiesServlet extends CopsServlet
 	static final Resource shortcutIcon = new Resource("shortcutIcon.png");
 	static final Resource checkFalse = new Resource("checkfalse.png");
 	static final Resource checkTrue  = new Resource("checktrue.png");
+	static final Resource nodeFalse = new Resource("nodefalse.png");
+	static final Resource nodeTrue  = new Resource("nodetrue.png");
 
 	static final String SET = "set";
 	static final String FIELD_SELECT = "fieldSelect";
