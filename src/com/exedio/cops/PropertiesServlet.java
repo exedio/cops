@@ -54,7 +54,7 @@ public abstract class PropertiesServlet extends CopsServlet
 	static final String FIELD_SELECT = "fieldSelect";
 	static final String FIELD_VALUE_PREFIX = "fieldVal_";
 	static final String FIELDS_RAW = "fieldsRaw";
-	static final String TEST_NUMBER = "testNum";
+	static final String PROBE_NUMBER = "probeNum";
 
 	@Override
 	protected final void doRequest(
@@ -88,7 +88,7 @@ public abstract class PropertiesServlet extends CopsServlet
 				if(!sourceMap.isEmpty())
 				{
 					final HashSet<Integer> doTestNumbers = new HashSet<>();
-					final String[] doTestNumberStrings = request.getParameterValues(TEST_NUMBER);
+					final String[] doTestNumberStrings = request.getParameterValues(PROBE_NUMBER);
 					if(doTestNumberStrings!=null)
 						for(final String doTestNumberString : doTestNumberStrings)
 							doTestNumbers.add(Integer.valueOf(Integer.parseInt(doTestNumberString)));

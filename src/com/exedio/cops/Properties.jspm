@@ -27,7 +27,7 @@ import static com.exedio.cops.PropertiesServlet.SET;
 import static com.exedio.cops.PropertiesServlet.FIELD_SELECT;
 import static com.exedio.cops.PropertiesServlet.FIELD_VALUE_PREFIX;
 import static com.exedio.cops.PropertiesServlet.FIELDS_RAW;
-import static com.exedio.cops.PropertiesServlet.TEST_NUMBER;
+import static com.exedio.cops.PropertiesServlet.PROBE_NUMBER;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.util.HashSet;
@@ -170,7 +170,7 @@ final class Properties_Jspm
 			if(Cop.isPost(request) && request.getParameter(TEST)!=null)
 			{
 				doTestNumbers = new HashSet<>();
-				final String[] doTestNumberStrings = request.getParameterValues(TEST_NUMBER);
+				final String[] doTestNumberStrings = request.getParameterValues(PROBE_NUMBER);
 				if(doTestNumberStrings!=null)
 				{
 					for(final String doTestNumberString : doTestNumberStrings)
@@ -187,7 +187,7 @@ final class Properties_Jspm
 				testNumber++;
 				%>
 				<tr>
-					<th><input class="probecheck" type="checkbox" name="<%=TEST_NUMBER%>" value="<%=testNumber%>" checked="true"></th>
+					<th><input class="probecheck" type="checkbox" name="<%=PROBE_NUMBER%>" value="<%=testNumber%>" checked="true"></th>
 					<th><%=test.toString()%></th><%
 
 				if(doTestNumbers!=null && doTestNumbers.contains(Integer.valueOf(testNumber)))
