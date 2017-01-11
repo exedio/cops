@@ -139,7 +139,7 @@ public abstract class PropertiesServlet extends CopsServlet
 			final String authentication,
 			final String hostname,
 			final HashMap<String, String> sourceMap,
-			final HashSet<Integer> doTestNumbers)
+			final HashSet<Integer> doProbeNumbers)
 	{
 		final P properties = overridable.newProperties(Sources.cascade(
 				new EditedSource(authentication, hostname, sourceMap), source));
@@ -149,7 +149,7 @@ public abstract class PropertiesServlet extends CopsServlet
 		{
 			probeNumber++;
 
-			if(doTestNumbers.contains(Integer.valueOf(probeNumber)))
+			if(doProbeNumbers.contains(Integer.valueOf(probeNumber)))
 			{
 				try
 				{
