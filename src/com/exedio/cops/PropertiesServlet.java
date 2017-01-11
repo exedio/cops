@@ -87,11 +87,11 @@ public abstract class PropertiesServlet extends CopsServlet
 				}
 				if(!sourceMap.isEmpty())
 				{
-					final HashSet<Integer> doTestNumbers = new HashSet<>();
-					final String[] doTestNumberStrings = request.getParameterValues(PROBE_NUMBER);
-					if(doTestNumberStrings!=null)
-						for(final String doTestNumberString : doTestNumberStrings)
-							doTestNumbers.add(Integer.valueOf(Integer.parseInt(doTestNumberString)));
+					final HashSet<Integer> doProbeNumbers = new HashSet<>();
+					final String[] doProbeNumberStrings = request.getParameterValues(PROBE_NUMBER);
+					if(doProbeNumberStrings!=null)
+						for(final String doProbeNumberString : doProbeNumberStrings)
+							doProbeNumbers.add(Integer.valueOf(Integer.parseInt(doProbeNumberString)));
 
 					final Principal principal = request.getUserPrincipal();
 					final String authentication = principal!=null ? principal.getName() : null;
@@ -110,7 +110,7 @@ public abstract class PropertiesServlet extends CopsServlet
 							getProperties().getSourceObject(),
 							authentication, hostname,
 							sourceMap,
-							doTestNumbers);
+							doProbeNumbers);
 				}
 			}
 		}
