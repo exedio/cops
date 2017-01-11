@@ -39,7 +39,7 @@ import com.exedio.cope.util.Properties;
 
 final class Properties_Jspm
 {
-	private static final String TEST = "test";
+	private static final String RUN_PROBES = "runProbes";
 
 	static final void write(
 			final Out out,
@@ -167,7 +167,7 @@ final class Properties_Jspm
 
 			int probeNumber = -1;
 			final HashSet<Integer> doProbeNumbers;
-			if(Cop.isPost(request) && request.getParameter(TEST)!=null)
+			if(Cop.isPost(request) && request.getParameter(RUN_PROBES)!=null)
 			{
 				doProbeNumbers = new HashSet<>();
 				final String[] doProbeNumberStrings = request.getParameterValues(PROBE_NUMBER);
@@ -233,7 +233,7 @@ final class Properties_Jspm
 			writeProbeCheckAll(out);
 			%>
 			</table>
-			<input type="submit" name="<%=TEST%>" value="Run Probes"><%
+			<input type="submit" name="<%=RUN_PROBES%>" value="Run Probes"><%
 
 		if(overridable)
 		{
