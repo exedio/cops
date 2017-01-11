@@ -22,6 +22,8 @@
 
 package com.exedio.cops.example;
 
+import static java.lang.System.nanoTime;
+
 import com.exedio.cope.util.Sources;
 import java.io.File;
 import java.util.ArrayList;
@@ -140,6 +142,25 @@ public final class Properties extends com.exedio.cope.util.Properties
 				public String toString()
 				{
 					return "Broken Nested";
+				}
+			});
+
+
+		result.add(new Callable<Object>(){
+
+				@Override
+				public String call() throws InterruptedException
+				{
+					final long start = nanoTime();
+					Thread.sleep(77);
+					final long end = nanoTime();
+					return "Slept " + (end - start) + "ns";
+				}
+
+				@Override
+				public String toString()
+				{
+					return "Sleep";
 				}
 			});
 

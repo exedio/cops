@@ -55,6 +55,11 @@ table td
 	padding:1px 3px;
 }
 
+table td.number
+{
+	text-align:right;
+}
+
 table td.notavailable
 {
 	text-align:center;

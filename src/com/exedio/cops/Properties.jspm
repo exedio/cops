@@ -28,6 +28,8 @@ import static com.exedio.cops.PropertiesServlet.FIELD_SELECT;
 import static com.exedio.cops.PropertiesServlet.FIELD_VALUE_PREFIX;
 import static com.exedio.cops.PropertiesServlet.FIELDS_RAW;
 import static com.exedio.cops.PropertiesServlet.PROBE_NUMBER;
+import static com.exedio.cops.TimeUtil.toMillies;
+import static java.lang.System.nanoTime;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.util.HashSet;
@@ -193,12 +195,15 @@ final class Properties_Jspm
 				if(doProbeNumbers!=null && doProbeNumbers.contains(Integer.valueOf(probeNumber)))
 				{
 					%>
-					<td><%
+					<td class="number"><%
 						final Object result;
+						final long start = nanoTime();
 						try
 						{
 							result = probe.call();
-							%>OK<%
+							final long end = nanoTime();
+							%><%=toMillies(end, start)%></td>
+							<td>OK<%
 							if(result!=null)
 							{
 								%>: <%=result.toString()%><%
@@ -206,8 +211,9 @@ final class Properties_Jspm
 						}
 						catch(Exception e)
 						{
-							%>
-							<span style="color:red">failed:</span>
+							final long end = nanoTime();
+							%><%=toMillies(end, start)%></td>
+							<td><span style="color:red">failed:</span>
 							<%
 							for(Throwable t = e; t!=null; t = t.getCause())
 							{

@@ -70,6 +70,11 @@ final class Out
 		bf.append(i);
 	}
 
+	void write(final long i)
+	{
+		bf.append(i);
+	}
+
 	void write(final HashSet<String> set)
 	{
 		XMLEncoder.append(bf, set.toString());
