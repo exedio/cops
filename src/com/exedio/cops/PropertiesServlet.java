@@ -145,7 +145,7 @@ public abstract class PropertiesServlet extends CopsServlet
 				new EditedSource(authentication, hostname, sourceMap), source));
 
 		int probeNumber = -1;
-		for(final Callable<?> test : properties.getTests())
+		for(final Callable<?> probe : properties.getTests())
 		{
 			probeNumber++;
 
@@ -153,7 +153,7 @@ public abstract class PropertiesServlet extends CopsServlet
 			{
 				try
 				{
-					test.call();
+					probe.call();
 				}
 				catch(final Exception e)
 				{
