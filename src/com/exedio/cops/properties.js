@@ -35,7 +35,7 @@ function checkAll(bx)
 	var cbs = document.getElementsByTagName('input');
 	for(var i=0; i < cbs.length; i++)
 	{
-		if(cbs[i].type=='checkbox' && cbs[i].className=='testcheck')
+		if(cbs[i].type=='checkbox' && cbs[i].className=='probecheck')
 		{
 			cbs[i].checked = bx.checked;
 		}

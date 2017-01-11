@@ -54,7 +54,7 @@ public abstract class PropertiesServlet extends CopsServlet
 	static final String FIELD_SELECT = "fieldSelect";
 	static final String FIELD_VALUE_PREFIX = "fieldVal_";
 	static final String FIELDS_RAW = "fieldsRaw";
-	static final String TEST_NUMBER = "testNum";
+	static final String PROBE_NUMBER = "probeNum";
 
 	@Override
 	protected final void doRequest(
@@ -87,11 +87,11 @@ public abstract class PropertiesServlet extends CopsServlet
 				}
 				if(!sourceMap.isEmpty())
 				{
-					final HashSet<Integer> doTestNumbers = new HashSet<>();
-					final String[] doTestNumberStrings = request.getParameterValues(TEST_NUMBER);
-					if(doTestNumberStrings!=null)
-						for(final String doTestNumberString : doTestNumberStrings)
-							doTestNumbers.add(Integer.valueOf(Integer.parseInt(doTestNumberString)));
+					final HashSet<Integer> doProbeNumbers = new HashSet<>();
+					final String[] doProbeNumberStrings = request.getParameterValues(PROBE_NUMBER);
+					if(doProbeNumberStrings!=null)
+						for(final String doProbeNumberString : doProbeNumberStrings)
+							doProbeNumbers.add(Integer.valueOf(Integer.parseInt(doProbeNumberString)));
 
 					final Principal principal = request.getUserPrincipal();
 					final String authentication = principal!=null ? principal.getName() : null;
@@ -110,7 +110,7 @@ public abstract class PropertiesServlet extends CopsServlet
 							getProperties().getSourceObject(),
 							authentication, hostname,
 							sourceMap,
-							doTestNumbers);
+							doProbeNumbers);
 				}
 			}
 		}
@@ -139,21 +139,21 @@ public abstract class PropertiesServlet extends CopsServlet
 			final String authentication,
 			final String hostname,
 			final HashMap<String, String> sourceMap,
-			final HashSet<Integer> doTestNumbers)
+			final HashSet<Integer> doProbeNumbers)
 	{
 		final P properties = overridable.newProperties(Sources.cascade(
 				new EditedSource(authentication, hostname, sourceMap), source));
 
-		int testNumber = -1;
-		for(final Callable<?> test : properties.getTests())
+		int probeNumber = -1;
+		for(final Callable<?> probe : properties.getTests())
 		{
-			testNumber++;
+			probeNumber++;
 
-			if(doTestNumbers.contains(Integer.valueOf(testNumber)))
+			if(doProbeNumbers.contains(Integer.valueOf(probeNumber)))
 			{
 				try
 				{
-					test.call();
+					probe.call();
 				}
 				catch(final Exception e)
 				{

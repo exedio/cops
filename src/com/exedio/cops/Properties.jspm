@@ -27,7 +27,7 @@ import static com.exedio.cops.PropertiesServlet.SET;
 import static com.exedio.cops.PropertiesServlet.FIELD_SELECT;
 import static com.exedio.cops.PropertiesServlet.FIELD_VALUE_PREFIX;
 import static com.exedio.cops.PropertiesServlet.FIELDS_RAW;
-import static com.exedio.cops.PropertiesServlet.TEST_NUMBER;
+import static com.exedio.cops.PropertiesServlet.PROBE_NUMBER;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.util.HashSet;
@@ -39,7 +39,7 @@ import com.exedio.cope.util.Properties;
 
 final class Properties_Jspm
 {
-	private static final String TEST = "test";
+	private static final String RUN_PROBES = "runProbes";
 
 	static final void write(
 			final Out out,
@@ -161,43 +161,43 @@ final class Properties_Jspm
 		}
 		%>
 			<table>
-				<caption>Tests</caption><%
+				<caption>Probes</caption><%
 
-			writeTestCheckAll(out);
+			writeProbeCheckAll(out);
 
-			int testNumber = -1;
-			final HashSet<Integer> doTestNumbers;
-			if(Cop.isPost(request) && request.getParameter(TEST)!=null)
+			int probeNumber = -1;
+			final HashSet<Integer> doProbeNumbers;
+			if(Cop.isPost(request) && request.getParameter(RUN_PROBES)!=null)
 			{
-				doTestNumbers = new HashSet<>();
-				final String[] doTestNumberStrings = request.getParameterValues(TEST_NUMBER);
-				if(doTestNumberStrings!=null)
+				doProbeNumbers = new HashSet<>();
+				final String[] doProbeNumberStrings = request.getParameterValues(PROBE_NUMBER);
+				if(doProbeNumberStrings!=null)
 				{
-					for(final String doTestNumberString : doTestNumberStrings)
-						doTestNumbers.add(Integer.valueOf(Integer.parseInt(doTestNumberString)));
+					for(final String doProbeNumberString : doProbeNumberStrings)
+						doProbeNumbers.add(Integer.valueOf(Integer.parseInt(doProbeNumberString)));
 				}
 			}
 			else
 			{
-				doTestNumbers = null;
+				doProbeNumbers = null;
 			}
 
-			for(final Callable<?> test : properties.getTests())
+			for(final Callable<?> probe : properties.getTests())
 			{
-				testNumber++;
+				probeNumber++;
 				%>
 				<tr>
-					<th><input class="testcheck" type="checkbox" name="<%=TEST_NUMBER%>" value="<%=testNumber%>" checked="true"></th>
-					<th><%=test.toString()%></th><%
+					<th><input class="probecheck" type="checkbox" name="<%=PROBE_NUMBER%>" value="<%=probeNumber%>" checked="true"></th>
+					<th><%=probe.toString()%></th><%
 
-				if(doTestNumbers!=null && doTestNumbers.contains(Integer.valueOf(testNumber)))
+				if(doProbeNumbers!=null && doProbeNumbers.contains(Integer.valueOf(probeNumber)))
 				{
 					%>
 					<td><%
 						final Object result;
 						try
 						{
-							result = test.call();
+							result = probe.call();
 							%>OK<%
 							if(result!=null)
 							{
@@ -230,15 +230,15 @@ final class Properties_Jspm
 				%>
 				</tr><%
 			}
-			writeTestCheckAll(out);
+			writeProbeCheckAll(out);
 			%>
 			</table>
-			<input type="submit" name="<%=TEST%>" value="Test"><%
+			<input type="submit" name="<%=RUN_PROBES%>" value="Run Probes"><%
 
 		if(overridable)
 		{
 			%>
-			<input type="submit" name="<%=SET %>" value="Set"><%
+			<input type="submit" name="<%=SET%>" value="Run Probes and Set Fields"><%
 		}
 		%>
 		</form>
@@ -248,13 +248,13 @@ final class Properties_Jspm
 </html><%
 	}
 
-	private static void writeTestCheckAll(
+	private static void writeProbeCheckAll(
 			final Out out)
 	{
 				%>
 				<tr>
-					<th><input class="testcheck" type="checkbox" onclick="checkAll(this)" checked></th>
-					<th><i>(un)check all tests</i></th>
+					<th><input class="probecheck" type="checkbox" onclick="checkAll(this)" checked></th>
+					<th><i>(un)check all probes</i></th>
 				</tr><%
 	}
 }
