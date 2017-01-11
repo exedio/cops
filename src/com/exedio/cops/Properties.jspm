@@ -238,7 +238,7 @@ final class Properties_Jspm
 		if(overridable)
 		{
 			%>
-			<input type="submit" name="<%=SET %>" value="Set Fields"><%
+			<input type="submit" name="<%=SET%>" value="Run Probes and Set Fields"><%
 		}
 		%>
 		</form>
