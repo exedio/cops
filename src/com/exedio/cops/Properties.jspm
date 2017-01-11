@@ -182,13 +182,13 @@ final class Properties_Jspm
 				doProbeNumbers = null;
 			}
 
-			for(final Callable<?> test : properties.getTests())
+			for(final Callable<?> probe : properties.getTests())
 			{
 				probeNumber++;
 				%>
 				<tr>
 					<th><input class="probecheck" type="checkbox" name="<%=PROBE_NUMBER%>" value="<%=probeNumber%>" checked="true"></th>
-					<th><%=test.toString()%></th><%
+					<th><%=probe.toString()%></th><%
 
 				if(doProbeNumbers!=null && doProbeNumbers.contains(Integer.valueOf(probeNumber)))
 				{
@@ -197,7 +197,7 @@ final class Properties_Jspm
 						final Object result;
 						try
 						{
-							result = test.call();
+							result = probe.call();
 							%>OK<%
 							if(result!=null)
 							{
