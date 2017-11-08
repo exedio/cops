@@ -55,6 +55,7 @@ final class ResourceStatus_Jspm
 			{
 				font-family:sans-serif;
 				font-size:180%;
+				font-variant:small-caps;
 			}
 
 			div.authenticated
