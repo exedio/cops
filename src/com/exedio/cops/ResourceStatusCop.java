@@ -130,7 +130,7 @@ final class ResourceStatusCop extends Cop
 		if(s==null)
 			return null;
 		s = s.trim();
-		if(s.length()==0)
+		if(s.isEmpty())
 			return null;
 		return s;
 	}
