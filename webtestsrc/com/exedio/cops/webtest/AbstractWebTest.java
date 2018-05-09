@@ -28,7 +28,7 @@ public class AbstractWebTest extends TestCase
 
 	private static final String DATE_FORMAT_FULL = "dd.MM.yyyy HH:mm:ss.SSS";
 
-	public final static void assertWithinHttpDate(final Date expectedBefore, final Date expectedAfter, final Date actual)
+	public static final void assertWithinHttpDate(final Date expectedBefore, final Date expectedAfter, final Date actual)
 	{
 		final long resolution = 1000;
 		final long leftTolerance = 995;
