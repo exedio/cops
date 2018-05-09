@@ -20,6 +20,7 @@ package com.exedio.cops;
 
 import static java.lang.reflect.Modifier.FINAL;
 import static java.lang.reflect.Modifier.STATIC;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static javax.servlet.http.HttpServletResponse.SC_NOT_FOUND;
 
 import java.io.IOException;
@@ -164,7 +165,7 @@ public abstract class CopsServlet extends HttpServlet
 					return;
 				}
 
-				response.setContentType("text/html; charset="+UTF8);
+				response.setContentType("text/html; charset="+UTF_8.name());
 				final DecimalFormatSymbols nfs = new DecimalFormatSymbols();
 				nfs.setDecimalSeparator(',');
 				nfs.setGroupingSeparator('\'');
@@ -248,8 +249,8 @@ public abstract class CopsServlet extends HttpServlet
 	private void doRequestPrivate(final HttpServletRequest request, final HttpServletResponse response)
 		throws ServletException, IOException
 	{
-		request.setCharacterEncoding(UTF8);
-		response.setContentType("text/html; charset="+UTF8);
+		request.setCharacterEncoding(UTF_8.name());
+		response.setContentType("text/html; charset="+UTF_8.name());
 
 		response.addHeader("Cache-Control", "no-cache");
 		response.addHeader("Cache-Control", "no-store");
