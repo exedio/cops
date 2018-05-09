@@ -23,7 +23,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class BasicAuthorization
+public final class BasicAuthorization
 {
 	private BasicAuthorization()
 	{
