@@ -283,7 +283,7 @@ public abstract class Cop
 		if(!"GET".equals(request.getMethod()))
 			return false;
 
-		final String expected = '/' + (this.url!=null ? this.url.toString() : pathInfo);
+		final String expected = '/' + (url!=null ? url.toString() : pathInfo);
 		final String actualPathInfo = request.getPathInfo();
 		final String actualQueryString = request.getQueryString();
 		final String actual = actualQueryString!=null ? (actualPathInfo + '?' + actualQueryString) : actualPathInfo;
