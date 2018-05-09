@@ -91,5 +91,11 @@ final class ColoredTableServlet_Jspm
 </html><%
 
 	}
+
+
+	private ColoredTableServlet_Jspm()
+	{
+		// prevent instantiation
+	}
 }
 %>

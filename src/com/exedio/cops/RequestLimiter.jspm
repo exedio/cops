@@ -57,5 +57,11 @@ final class RequestLimiter_Jspm
 	</body>
 </html><%
 	}
+
+
+	private RequestLimiter_Jspm()
+	{
+		// prevent instantiation
+	}
 }
 %>

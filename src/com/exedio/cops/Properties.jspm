@@ -257,5 +257,11 @@ final class Properties_Jspm
 					<th><i>(un)check all probes</i></th>
 				</tr><%
 	}
+
+
+	private Properties_Jspm()
+	{
+		// prevent instantiation
+	}
 }
 %>

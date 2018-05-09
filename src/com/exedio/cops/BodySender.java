@@ -59,4 +59,10 @@ public final class BodySender
 			stream.write(body);
 		}
 	}
+
+
+	private BodySender()
+	{
+		// prevent instantiation
+	}
 }

@@ -177,5 +177,11 @@ final class Example_Jspm
 				l.getCountry()%></u>[<u><%=l.getISO3Country()%></u>], <u><%=
 				l.getVariant()%></u>), <%
 	}
+
+
+	private Example_Jspm()
+	{
+		// prevent instantiation
+	}
 }
 %>
