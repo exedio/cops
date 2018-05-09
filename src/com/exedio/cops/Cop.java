@@ -251,7 +251,8 @@ public abstract class Cop
 				if(i>0)
 					bf.append(s.substring(0, i));
 				boolean skipped = false;
-				for(; i<l; i++)
+				for(; i<l; //noinspection AssignmentToForLoopParameter
+					 i++)
 				{
 					final char c2 = s.charAt(i);
 					if(('0'<=c2&&c2<='9')||('a'<=c2&&c2<='z')||('A'<=c2&&c2<='Z'))

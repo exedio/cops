@@ -376,6 +376,7 @@ public abstract class CopsServlet extends HttpServlet
 				if(name.matches(PARAMETER_PASSWORD))
 				{
 					// mask password values
+					//noinspection AssignmentToForLoopParameter
 					value = "*****";
 				}
 				bf.append("parameter >").append(name).append("<: >").append(value + "<\n");
