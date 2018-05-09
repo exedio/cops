@@ -49,7 +49,7 @@ final class ResourceStatusCop extends Cop
 		addParameter(ABSOLUTE_URL, absoluteUrl);
 	}
 
-	static final ResourceStatusCop getCop(final HttpServletRequest request)
+	static ResourceStatusCop getCop(final HttpServletRequest request)
 	{
 		return new ResourceStatusCop(
 				getBooleanParameter(request, SHOW_IMAGE),

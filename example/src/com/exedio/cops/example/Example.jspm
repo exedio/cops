@@ -33,7 +33,7 @@ import com.exedio.cops.Pager;
 final class Example_Jspm
 {
 	@SuppressWarnings("StaticMethodOnlyUsedInOneClass") // ok for jspm
-	static final void write(
+	static void write(
 			final Out out,
 			final ExampleCop cop,
 			final HttpServletRequest request,
@@ -158,7 +158,7 @@ final class Example_Jspm
 	}
 
 	@SuppressWarnings("StaticMethodOnlyUsedInOneClass") // ok for jspm
-	static final void writePagerButton(
+	static void writePagerButton(
 			final Out out,
 			final Pageable cop,
 			final Pager href,
@@ -168,7 +168,7 @@ final class Example_Jspm
 				<a href="<%=cop.toPage(href)%>"<% if(href.isNeutral()){%> style="background:grey;"<%}%>><%=text%></a><%
 	}
 
-	static final void write(
+	static void write(
 			final Out out,
 			final Locale l)
 	{

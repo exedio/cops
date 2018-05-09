@@ -62,7 +62,7 @@ public class CopTest extends TestCase
 				dummy = 1.0;
 		}
 
-		private static final String pathInfo(final String[] dirs, final String name)
+		private static String pathInfo(final String[] dirs, final String name)
 		{
 			if(dirs==null)
 				return name;

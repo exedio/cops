@@ -22,7 +22,7 @@ package com.exedio.cops;
 final class StackTrace_Jspm
 {
 	@SuppressWarnings("StaticMethodOnlyUsedInOneClass") // ok for jspm
-	static final void write(
+	static void write(
 			final Out out,
 			final StackTraceElement[] stackTrace)
 	{

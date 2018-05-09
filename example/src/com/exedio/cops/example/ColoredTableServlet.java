@@ -31,7 +31,7 @@ public final class ColoredTableServlet extends HttpServlet
 	private static final long serialVersionUID = 1l;
 
 	@Override
-	protected final void doGet(
+	protected void doGet(
 			final HttpServletRequest request,
 			final HttpServletResponse response)
 		throws IOException

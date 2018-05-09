@@ -106,7 +106,7 @@ public final class RequestLimiter
 	private final VolatileLong deniedRequests = new VolatileLong();
 
 	@SuppressWarnings("deprecation")
-	private static final void setStatus503WithBody(final HttpServletResponse response, final String denyMessage)
+	private static void setStatus503WithBody(final HttpServletResponse response, final String denyMessage)
 	{
 		response.setStatus(HttpServletResponse.SC_SERVICE_UNAVAILABLE, denyMessage);
 	}

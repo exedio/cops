@@ -34,7 +34,7 @@ import java.util.Collection;
 final class ResourceStatus_Jspm
 {
 	@SuppressWarnings("StaticMethodOnlyUsedInOneClass") // ok for jspm
-	public static final void write(
+	public static void write(
 				final Out out,
 				final ResourceStatusCop cop,
 				final String servletName,

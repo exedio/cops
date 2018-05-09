@@ -29,7 +29,7 @@ public final class XMLEncoder
 		// forbid instantiation
 	}
 
-	public static final String encode(final String st)
+	public static String encode(final String st)
 	{
 		return com.exedio.cope.util.XMLEncoder.encode(st);
 	}

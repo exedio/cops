@@ -26,7 +26,7 @@ import java.io.PrintStream;
 final class RequestLimiter_Jspm
 {
 	@SuppressWarnings("StaticMethodOnlyUsedInOneClass") // ok for jspm
-	static final void write(
+	static void write(
 			final PrintStream out,
 			final String path,
 			final int threshold,

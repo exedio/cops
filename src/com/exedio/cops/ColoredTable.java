@@ -27,12 +27,12 @@ public final class ColoredTable
 		// prevent instantiation
 	}
 
-	public static final void writeHeader(final PrintStream out, final String[] names, final String[] shortNames)
+	public static void writeHeader(final PrintStream out, final String[] names, final String[] shortNames)
 	{
 		ColoredTable_Jspm.writeHeader(out, names, shortNames);
 	}
 
-	public static final void writeData(final PrintStream out, final String[] data)
+	public static void writeData(final PrintStream out, final String[] data)
 	{
 		ColoredTable_Jspm.writeData(out, data);
 	}

@@ -43,7 +43,7 @@ final class Properties_Jspm
 {
 	private static final String RUN_PROBES = "runProbes";
 
-	static final void write(
+	static void write(
 			final Out out,
 			final PropertiesCop cop,
 			final HttpServletRequest request,

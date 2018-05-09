@@ -169,7 +169,7 @@ public final class Properties extends com.exedio.cope.util.Properties
 
 	private static Properties instance = null;
 
-	public static final Properties instance(final File source)
+	public static Properties instance(final File source)
 	{
 		if(instance!=null)
 			return instance;
@@ -178,7 +178,7 @@ public final class Properties extends com.exedio.cope.util.Properties
 		return instance;
 	}
 
-	static final void setInstance(final Properties instance)
+	static void setInstance(final Properties instance)
 	{
 		Properties.instance = instance;
 	}

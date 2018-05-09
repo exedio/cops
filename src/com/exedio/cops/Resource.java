@@ -178,7 +178,7 @@ public final class Resource
 			'/' + getPath();
 	}
 
-	public final String getAbsoluteURL(final String token)
+	public String getAbsoluteURL(final String token)
 	{
 		requireNonNull(token, "token");
 		return EnvironmentRequest.getURL(token, false, getPath());

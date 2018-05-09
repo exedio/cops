@@ -33,7 +33,7 @@ public final class BasicAuthorization
 	private static final String BASIC = "Basic ";
 	private static final int BASIC_LENGTH = BASIC.length();
 
-	public static final String[] getUserAndPassword(final HttpServletRequest request)
+	public static String[] getUserAndPassword(final HttpServletRequest request)
 	{
 		final String authorization = request.getHeader("Authorization");
 		//System.out.println("authorization:"+authorization);
@@ -57,7 +57,7 @@ public final class BasicAuthorization
 		return new String[]{userid, password};
 	}
 
-	public static final void reject(final HttpServletResponse response, final String realm)
+	public static void reject(final HttpServletResponse response, final String realm)
 	{
 		response.addHeader("WWW-Authenticate", "Basic realm=\"" + realm + '"');
 		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
