@@ -63,7 +63,7 @@ public class ResourceTest extends AbstractWebTest
 	private static String getFingerprintForResourceTestTxt()
 	{
 		// resource-test.txt contains a line separator, so the MD5 fingerprint changes with the OS the git checkout was made with
-		switch ( System.lineSeparator() )
+		switch ( lineSeparator() )
 		{
 			case "\n":
 				return "9e4cd71daa5a10b9dde41b944e0f185c";

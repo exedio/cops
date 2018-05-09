@@ -20,7 +20,6 @@ package com.exedio.cops;
 
 import static java.util.Arrays.asList;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.LinkedHashMap;
@@ -120,7 +119,7 @@ public class CopParameterRequestTest extends TestCase
 	static final void assertParameters(final CopParameterRequest request)
 	{
 		assertEquals(null, request.getParameter("xxx"));
-		assertEquals(Collections.EMPTY_LIST, Arrays.asList(request.getParameterValues("xxx")));
+		assertEquals(Collections.EMPTY_LIST, asList(request.getParameterValues("xxx")));
 
 		try
 		{
@@ -174,7 +173,7 @@ public class CopParameterRequestTest extends TestCase
 		final Map<?,?> parameters = request.getParameterMap();
 		final LinkedHashMap<String, List<String>> result = new LinkedHashMap<>();
 		for(final Map.Entry<?,?> e : parameters.entrySet())
-			result.put((String)e.getKey(), Arrays.asList((String[])e.getValue()));
+			result.put((String)e.getKey(), asList((String[])e.getValue()));
 		return Collections.unmodifiableMap(result);
 	}
 }
