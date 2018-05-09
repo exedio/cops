@@ -44,7 +44,7 @@ public abstract class Cop
 		this.pathInfo = pathInfo;
 	}
 
-	private static final char[] FORBIDDEN_IN_PATH_INFO = new char[] {'?', '&', ';'};
+	private static final char[] FORBIDDEN_IN_PATH_INFO = {'?', '&', ';'};
 
 	public final void addParameter(final String key, final boolean value)
 	{

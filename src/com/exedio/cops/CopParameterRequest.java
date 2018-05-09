@@ -136,7 +136,7 @@ final class CopParameterRequest implements HttpServletRequest
 		return list.get(0);
 	}
 
-	private static final String[] EMPTY_ARRAY = new String[]{};
+	private static final String[] EMPTY_ARRAY = {};
 
 	@Override
 	public String[] getParameterValues(final String name)
