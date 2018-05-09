@@ -21,6 +21,7 @@ package com.exedio.cops;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+@SuppressWarnings("UtilityClassWithoutPrivateConstructor") // default constructor called by reflection
 public final class PackageTest
 {
 	public static Test suite()
