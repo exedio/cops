@@ -209,7 +209,7 @@ final class Properties_Jspm
 								%>: <%=result.toString()%><%
 							}
 						}
-						catch(Exception e)
+						catch(final Exception e)
 						{
 							final long end = nanoTime();
 							%><%=toMillies(end, start)%></td>

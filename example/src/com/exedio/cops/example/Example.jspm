@@ -132,7 +132,7 @@ final class Example_Jspm
 		ExampleCop.writePager(out, cop);
 		%>
 		<ol><%
-		for(String s : searchResult)
+		for(final String s : searchResult)
 		{
 		%>
 			<li><%=s%></li><%
