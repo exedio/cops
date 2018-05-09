@@ -200,7 +200,7 @@ public abstract class PropertiesServlet extends CopsServlet
 			if(hostname!=null)
 				bf.append(" on ").append(hostname);
 			bf.append(' ');
-			bf.append(content.toString());
+			bf.append(content);
 			bf.append(')');
 			return bf.toString();
 		}
