@@ -224,12 +224,12 @@ public class ResourceTest extends TestCase
 		assertEquals(CopTest.TOKEN, Cop.getToken(request(null, "host.invalid")));
 	}
 
-	private static final HttpServletRequest request()
+	private static HttpServletRequest request()
 	{
 		return request(null, null);
 	}
 
-	private static final HttpServletRequest request(final String scheme, final String host)
+	private static HttpServletRequest request(final String scheme, final String host)
 	{
 		return new DummyRequest(){
 

@@ -142,13 +142,13 @@ public class CopParameterRequestTest extends TestCase
 		}
 	}
 
-	private static final void assertEqualsParameterMap(
+	private static void assertEqualsParameterMap(
 			final CopParameterRequest request)
 	{
 		assertEquals(Collections.emptyMap(), convertParameterMap(request));
 	}
 
-	private static final void assertEqualsParameterMap(
+	private static void assertEqualsParameterMap(
 			final String key1,
 			final List<String> value1,
 			final CopParameterRequest request)
@@ -156,7 +156,7 @@ public class CopParameterRequestTest extends TestCase
 		assertEquals(Collections.singletonMap(key1, value1), convertParameterMap(request));
 	}
 
-	private static final void assertEqualsParameterMap(
+	private static void assertEqualsParameterMap(
 			final String key1,
 			final List<String> value1,
 			final String key2,
@@ -169,7 +169,7 @@ public class CopParameterRequestTest extends TestCase
 		assertEquals(expected, convertParameterMap(request));
 	}
 
-	private static final Map<String, List<String>> convertParameterMap(final CopParameterRequest request)
+	private static Map<String, List<String>> convertParameterMap(final CopParameterRequest request)
 	{
 		final Map<?,?> parameters = request.getParameterMap();
 		final LinkedHashMap<String, List<String>> result = new LinkedHashMap<>();

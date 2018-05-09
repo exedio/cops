@@ -201,19 +201,19 @@ public class PagerTest extends TestCase
 		}
 	}
 
-	private static final Pager p(final int limit)
+	private static Pager p(final int limit)
 	{
 		assertEquals(10, limit);
 		return new Pager.Config(10, 20, 50, 100, 200, 500).newPager();
 	}
 
-	private static final Pager i(final Pager pager, final int page, final int total)
+	private static Pager i(final Pager pager, final int page, final int total)
 	{
 		pager.init(page, total);
 		return pager;
 	}
 
-	private static final void assertIt(
+	private static void assertIt(
 			final Pager pager,
 			final int offset, final int limit,
 			final int from, final int to,

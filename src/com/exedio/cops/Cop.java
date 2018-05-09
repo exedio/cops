@@ -150,7 +150,7 @@ public abstract class Cop
 		return false;
 	}
 
-	private final boolean doesNotNeedSecureRedirect(final HttpServletRequest request)
+	private boolean doesNotNeedSecureRedirect(final HttpServletRequest request)
 	{
 		return !needsSecure() || request.isSecure();
 	}
@@ -205,7 +205,7 @@ public abstract class Cop
 		return getURL(request, true);
 	}
 
-	private final String getURL(
+	private String getURL(
 			final HttpServletRequest request,
 			final boolean needsSecure)
 	{

@@ -245,7 +245,7 @@ public abstract class CopsServlet extends HttpServlet
 		doRequestPrivate(request, response);
 	}
 
-	private final void doRequestPrivate(final HttpServletRequest request, final HttpServletResponse response)
+	private void doRequestPrivate(final HttpServletRequest request, final HttpServletResponse response)
 		throws ServletException, IOException
 	{
 		request.setCharacterEncoding(UTF8);
@@ -292,7 +292,7 @@ public abstract class CopsServlet extends HttpServlet
 		out.flush();
 	}
 
-	private static final void printStackTrace(final Throwable exception, final StringBuilder out)
+	private static void printStackTrace(final Throwable exception, final StringBuilder out)
 	{
 		final StringWriter sw = new StringWriter();
 		final PrintWriter pw = new PrintWriter(sw);

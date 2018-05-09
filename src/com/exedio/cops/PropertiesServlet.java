@@ -226,7 +226,7 @@ public abstract class PropertiesServlet extends CopsServlet
 	}
 
 	// TODO replace by method in class Properties
-	private static final HashSet<String> orphaned(final Properties properties)
+	private static HashSet<String> orphaned(final Properties properties)
 	{
 		final Collection<String> sourceKeySet = properties.getSourceObject().keySet();
 		if(sourceKeySet==null)

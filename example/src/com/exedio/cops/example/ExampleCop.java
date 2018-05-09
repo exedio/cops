@@ -50,7 +50,7 @@ public class ExampleCop extends Cop implements Pageable
 	final Pager pager;
 	private final int dirLevel;
 
-	private static final String dirLevel(final String pathInfo, final int dirLevel, final String string)
+	private static String dirLevel(final String pathInfo, final int dirLevel, final String string)
 	{
 		if(dirLevel<=0||string==null)
 			return pathInfo;
