@@ -21,7 +21,7 @@ package com.exedio.cops;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-public class PackageTest
+public final class PackageTest
 {
 	public static Test suite()
 	{

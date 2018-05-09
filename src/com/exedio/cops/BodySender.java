@@ -23,9 +23,9 @@ import java.nio.charset.Charset;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
-public class BodySender
+public final class BodySender
 {
-	public static final void send(
+	public static void send(
 			final HttpServletResponse response,
 			final StringBuilder body,
 			final Charset charset)
@@ -38,7 +38,7 @@ public class BodySender
 	 * @deprecated Use {@link #send(HttpServletResponse,StringBuilder,Charset)} instead
 	 */
 	@Deprecated
-	public static final void send(
+	public static void send(
 			final HttpServletResponse response,
 			final StringBuilder body,
 			final String encoding)
@@ -47,7 +47,7 @@ public class BodySender
 		send(response, body, Charset.forName(encoding));
 	}
 
-	public static final void send(
+	public static void send(
 			final HttpServletResponse response,
 			final byte[] body)
 	throws IOException
