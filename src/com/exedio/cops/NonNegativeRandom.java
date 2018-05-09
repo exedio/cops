@@ -22,6 +22,7 @@ import java.util.Random;
 
 final class NonNegativeRandom
 {
+	@SuppressWarnings("StaticMethodOnlyUsedInOneClass")
 	public static long nextLong(final Random random)
 	{
 		final long raw = random.nextLong();

@@ -32,6 +32,7 @@ import com.exedio.cops.Pager;
 
 final class Example_Jspm
 {
+	@SuppressWarnings("StaticMethodOnlyUsedInOneClass") // ok for jspm
 	static final void write(
 			final Out out,
 			final ExampleCop cop,
@@ -156,6 +157,7 @@ final class Example_Jspm
 
 	}
 
+	@SuppressWarnings("StaticMethodOnlyUsedInOneClass") // ok for jspm
 	static final void writePagerButton(
 			final Out out,
 			final Pageable cop,

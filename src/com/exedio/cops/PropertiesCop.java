@@ -47,6 +47,7 @@ final class PropertiesCop extends Cop
 					addParameter(SHOW_HIDDEN, field.getKey());
 	}
 
+	@SuppressWarnings("StaticMethodOnlyUsedInOneClass")
 	static PropertiesCop getCop(final Properties properties, final HttpServletRequest request)
 	{
 		final String[] showHiddenKeys = request.getParameterValues(SHOW_HIDDEN);

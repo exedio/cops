@@ -171,6 +171,7 @@ public class ExampleCop extends Cop implements Pageable
 		return new ExampleCop(number, bool, string, cop, needsSecure, redirectLoop, pager, dirLevel);
 	}
 
+	@SuppressWarnings("StaticMethodOnlyUsedInOneClass") // ok for jspm
 	static void writePager(final Out out, final Pageable cop)
 	{
 		final Pager pager = cop.getPager();
