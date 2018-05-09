@@ -54,6 +54,7 @@ package com.exedio.cops;
  * @author rob@iharder.net
  * @version 2.1
  */
+@SuppressWarnings("MissortedModifiers") // do not change foreign code
 final class Base64
 {
 
