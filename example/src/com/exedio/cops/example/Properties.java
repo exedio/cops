@@ -82,7 +82,7 @@ public final class Properties extends com.exedio.cope.util.Properties
 	@Override
 	public List<? extends Callable<?>> getTests()
 	{
-		final ArrayList<Callable<?>> result = new ArrayList<Callable<?>>();
+		final ArrayList<Callable<?>> result = new ArrayList<>();
 
 		result.add(new Callable<Object>(){
 
