@@ -308,7 +308,7 @@ public final class Resource
 	private static void log(final HttpServletRequest request, final String action)
 	{
 		final StringBuilder bf = new StringBuilder();
-		bf.append("-----------------" + action + "\n");
+		bf.append("-----------------").append(action).append("\n");
 		bf.append(CopsServlet.report(request));
 		bf.append("-----------------\n");
 		System.out.print(bf);

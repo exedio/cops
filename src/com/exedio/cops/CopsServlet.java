@@ -381,7 +381,7 @@ public abstract class CopsServlet extends HttpServlet
 					//noinspection AssignmentToForLoopParameter
 					value = "*****";
 				}
-				bf.append("parameter >").append(name).append("<: >").append(value + "<\n");
+				bf.append("parameter >").append(name).append("<: >").append(value).append("<\n");
 			}
 		}
 
