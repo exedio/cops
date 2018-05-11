@@ -262,6 +262,7 @@ public abstract class CopsServlet extends HttpServlet
 		doRequest(request, response);
 	}
 
+	@SuppressWarnings("RedundantThrows") // ServletException may be needed by subclasses
 	protected abstract void doRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException;
 
