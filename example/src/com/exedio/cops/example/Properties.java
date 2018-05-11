@@ -80,6 +80,7 @@ public final class Properties extends com.exedio.cope.util.Properties
 	}
 
 	@Override
+	@SuppressWarnings("AnonymousInnerClassMayBeStatic")
 	public List<? extends Callable<?>> getTests()
 	{
 		final ArrayList<Callable<?>> result = new ArrayList<>();
