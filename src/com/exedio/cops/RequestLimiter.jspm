@@ -23,6 +23,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.PrintStream;
 
+@SuppressWarnings("HardcodedLineSeparator") // ok for jspm
 final class RequestLimiter_Jspm
 {
 	@SuppressWarnings("StaticMethodOnlyUsedInOneClass") // ok for jspm

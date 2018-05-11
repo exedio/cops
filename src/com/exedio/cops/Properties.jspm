@@ -39,6 +39,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.exedio.cope.util.Properties;
 
+@SuppressWarnings("HardcodedLineSeparator") // ok for jspm
 final class Properties_Jspm
 {
 	private static final String RUN_PROBES = "runProbes";
