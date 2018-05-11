@@ -305,6 +305,7 @@ public final class Resource
 			log(request, byName ? "Redirect by name" : "Redirect by fingerprint");
 	}
 
+	@SuppressWarnings("HardcodedLineSeparator")
 	private static void log(final HttpServletRequest request, final String action)
 	{
 		final StringBuilder bf = new StringBuilder();

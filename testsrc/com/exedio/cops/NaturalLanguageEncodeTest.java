@@ -23,6 +23,7 @@ import junit.framework.TestCase;
 
 public class NaturalLanguageEncodeTest extends TestCase
 {
+	@SuppressWarnings("HardcodedLineSeparator")
 	public void testIt()
 	{
 		assertEquals(null, e(null));

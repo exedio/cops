@@ -345,6 +345,7 @@ public abstract class CopsServlet extends HttpServlet
 		return id;
 	}
 
+	@SuppressWarnings("HardcodedLineSeparator")
 	public static final String report(final HttpServletRequest request)
 	{
 		final StringBuilder bf = new StringBuilder();

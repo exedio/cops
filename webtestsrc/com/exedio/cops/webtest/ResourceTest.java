@@ -61,6 +61,7 @@ public class ResourceTest extends AbstractWebTest
 		assertNotFound(textRelative + "?param=value");
 	}
 
+	@SuppressWarnings("HardcodedLineSeparator")
 	private static String getFingerprintForResourceTestTxt()
 	{
 		// resource-test.txt contains a line separator, so the MD5 fingerprint changes with the OS the git checkout was made with
