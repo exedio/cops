@@ -250,7 +250,7 @@ public abstract class Cop
 			{
 				final StringBuilder bf = new StringBuilder(l);
 				if(i>0)
-					bf.append(s.substring(0, i));
+					bf.append(s, 0, i);
 				boolean skipped = false;
 				for(; i<l; //noinspection AssignmentToForLoopParameter
 					 i++)
