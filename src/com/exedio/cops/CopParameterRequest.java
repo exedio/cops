@@ -143,7 +143,7 @@ final class CopParameterRequest implements HttpServletRequest
 		if(list==null)
 			return EMPTY_ARRAY;
 
-		return list.toArray(new String[list.size()]);
+		return list.toArray(EMPTY_ARRAY);
 	}
 
 	private static final Enumeration<String> EMPTY_ENUMERATION = enumeration(Collections.<String>emptyList());
@@ -165,7 +165,7 @@ final class CopParameterRequest implements HttpServletRequest
 
 		final LinkedHashMap<String, String[]> result = new LinkedHashMap<>();
 		for(final Map.Entry<String, ArrayList<String>> e : parameters.entrySet())
-			result.put(e.getKey(), e.getValue().toArray(new String[e.getValue().size()]));
+			result.put(e.getKey(), e.getValue().toArray(EMPTY_ARRAY));
 		return Collections.unmodifiableMap(result);
 	}
 
