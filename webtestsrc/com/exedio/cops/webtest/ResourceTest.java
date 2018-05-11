@@ -21,6 +21,7 @@ package com.exedio.cops.webtest;
 import static java.lang.System.lineSeparator;
 import static java.net.HttpURLConnection.HTTP_MOVED_PERM;
 import static java.net.HttpURLConnection.HTTP_NOT_FOUND;
+import static java.nio.charset.StandardCharsets.US_ASCII;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -107,7 +108,7 @@ public class ResourceTest extends AbstractWebTest
 		assertEquals("max-age=31363200", conn.getHeaderField("Cache-Control"));
 		assertEquals(expectNotModified ? -1 : (41 + (2*lineSeparator().length())), conn.getContentLength());
 
-		try(BufferedReader is = new BufferedReader(new InputStreamReader(conn.getInputStream())))
+		try(BufferedReader is = new BufferedReader(new InputStreamReader(conn.getInputStream(), US_ASCII)))
 		{
 			if(!expectNotModified)
 			{
