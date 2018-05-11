@@ -97,7 +97,7 @@ public abstract class PropertiesServlet extends CopsServlet
 					final String[] doProbeNumberStrings = request.getParameterValues(PROBE_NUMBER);
 					if(doProbeNumberStrings!=null)
 						for(final String doProbeNumberString : doProbeNumberStrings)
-							doProbeNumbers.add(Integer.valueOf(Integer.parseInt(doProbeNumberString)));
+							doProbeNumbers.add(Integer.parseInt(doProbeNumberString));
 
 					final Principal principal = request.getUserPrincipal();
 					final String authentication = principal!=null ? principal.getName() : null;
@@ -155,7 +155,7 @@ public abstract class PropertiesServlet extends CopsServlet
 		{
 			probeNumber++;
 
-			if(doProbeNumbers.contains(Integer.valueOf(probeNumber)))
+			if(doProbeNumbers.contains(probeNumber))
 			{
 				try
 				{
