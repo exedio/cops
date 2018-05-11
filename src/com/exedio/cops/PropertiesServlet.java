@@ -48,8 +48,10 @@ public abstract class PropertiesServlet extends CopsServlet
 	static final Resource logo = new Resource("logo.png");
 	static final Resource shortcutIcon = new Resource("shortcutIcon.png");
 	static final Resource checkFalse = new Resource("checkfalse.png");
+	@SuppressWarnings("unused") // used by properties.js
 	static final Resource checkTrue  = new Resource("checktrue.png");
 	static final Resource nodeFalse = new Resource("nodefalse.png");
+	@SuppressWarnings("unused") // used by properties.js
 	static final Resource nodeTrue  = new Resource("nodetrue.png");
 
 	static final String SET = "set";

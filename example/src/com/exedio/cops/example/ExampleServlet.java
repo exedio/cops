@@ -32,6 +32,7 @@ public final class ExampleServlet extends ExampleSuperServlet
 	private static final long serialVersionUID = 1l;
 
 	static final Resource logo = new Resource("logo.png");
+	@SuppressWarnings("unused")
 	static final Resource someClass = new Resource("ExampleServlet.class", "application/octet-steam");
 
 	// For ResourceTest.
