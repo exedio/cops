@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@SuppressWarnings("AbstractClassWithoutAbstractMethods")
 public abstract class Cop
 {
 	private static final Logger logger = LoggerFactory.getLogger(Cop.class);
