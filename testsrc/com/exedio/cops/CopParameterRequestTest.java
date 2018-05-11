@@ -19,6 +19,7 @@
 package com.exedio.cops;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
 
 import java.util.Collections;
 import java.util.Enumeration;
@@ -119,7 +120,7 @@ public class CopParameterRequestTest extends TestCase
 	static final void assertParameters(final CopParameterRequest request)
 	{
 		assertEquals(null, request.getParameter("xxx"));
-		assertEquals(Collections.EMPTY_LIST, asList(request.getParameterValues("xxx")));
+		assertEquals(emptyList(), asList(request.getParameterValues("xxx")));
 
 		try
 		{

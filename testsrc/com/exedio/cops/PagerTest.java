@@ -19,7 +19,7 @@
 package com.exedio.cops;
 
 import static java.util.Arrays.asList;
-import static java.util.Collections.EMPTY_LIST;
+import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableList;
 
 import java.util.Collections;
@@ -127,17 +127,17 @@ public class PagerTest extends TestCase
 		}
 		{
 			final Pager inconsistent = first.next();
-			assertEquals(EMPTY_LIST, inconsistent.init(unmodifiableList(asList("one", "two", "three"))));
+			assertEquals(emptyList(), inconsistent.init(unmodifiableList(asList("one", "two", "three"))));
 			assertIt(inconsistent, 3, 3, 4, 3, 3, 2, 1, false, false, false, true);
 		}
 		{
 			final Pager inconsistent = first.next();
-			assertEquals(EMPTY_LIST, inconsistent.init(unmodifiableList(asList("one", "two"))));
+			assertEquals(emptyList(), inconsistent.init(unmodifiableList(asList("one", "two"))));
 			assertIt(inconsistent, 3, 3, 4, 3, 2, 2, 1, false, false, false, true);
 		}
 		{
 			final Pager inconsistent = first.next();
-			assertEquals(EMPTY_LIST, inconsistent.init(Collections.<String>emptyList()));
+			assertEquals(emptyList(), inconsistent.init(Collections.<String>emptyList()));
 			assertIt(inconsistent, 3, 3, 4, 3, 0, 2, 1, false, false, false, true);
 		}
 	}
