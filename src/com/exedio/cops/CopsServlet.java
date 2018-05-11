@@ -139,8 +139,6 @@ public abstract class CopsServlet extends HttpServlet
 		return "resources";
 	}
 
-	static final String INLINE = "inline";
-
 	@Override
 	protected final void doGet(
 			final HttpServletRequest request,
