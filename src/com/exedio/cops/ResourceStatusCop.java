@@ -18,6 +18,8 @@
 
 package com.exedio.cops;
 
+import static java.util.Arrays.asList;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -115,9 +117,7 @@ final class ResourceStatusCop extends Cop
 		if(selectList==null)
 			return Collections.<Resource>emptyList();
 
-		final HashSet<String> selects = new HashSet<>();
-		for(final String select : selectList)
-			selects.add(select);
+		final HashSet<String> selects = new HashSet<>(asList(selectList));
 		final ArrayList<Resource> result = new ArrayList<>();
 		for(final Resource resource : resources)
 			if(selects.contains(resource.getName()))
