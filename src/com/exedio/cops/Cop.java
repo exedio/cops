@@ -35,7 +35,7 @@ public abstract class Cop
 	private final String pathInfo;
 	private StringBuilder url = null;
 
-	public Cop(final String pathInfo)
+	protected Cop(final String pathInfo)
 	{
 		for(final char c : FORBIDDEN_IN_PATH_INFO)
 			if(pathInfo.indexOf(c)>=0)
