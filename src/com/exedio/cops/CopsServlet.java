@@ -56,6 +56,7 @@ public abstract class CopsServlet extends HttpServlet
 	{
 		try
 		{
+			@SuppressWarnings("OverridableMethodCallDuringObjectConstruction")
 			final String resourcesRootPath = getResourcesRootPath();
 			if(resourcesRootPath==null)
 				throw new NullPointerException    ("getResourcesRootPath must not return null");
