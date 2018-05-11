@@ -74,9 +74,9 @@ public class ResourcesRootPathTest extends TestCase
 		}
 	}
 
-	private static Servlet create(final String path)
+	private static void create(final String path)
 	{
-		return new Servlet(){
+		new Servlet(){
 			@Override protected String getResourcesRootPath()
 			{
 				return path;
