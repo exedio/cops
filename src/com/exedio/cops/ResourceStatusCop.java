@@ -115,7 +115,7 @@ final class ResourceStatusCop extends Cop
 
 		final String[] selectList = request.getParameterValues(SELECT);
 		if(selectList==null)
-			return Collections.<Resource>emptyList();
+			return Collections.emptyList();
 
 		final HashSet<String> selects = new HashSet<>(asList(selectList));
 		final ArrayList<Resource> result = new ArrayList<>();

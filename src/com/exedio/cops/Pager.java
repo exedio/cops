@@ -150,7 +150,7 @@ public final class Pager
 		final List<E> page =
 				(toIndex>offset)
 				? all.subList(offset, toIndex)
-				: Collections.<E>emptyList();
+				: Collections.emptyList();
 		init(page.size(), allSize);
 		return page;
 	}

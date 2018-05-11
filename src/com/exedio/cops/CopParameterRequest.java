@@ -146,7 +146,7 @@ final class CopParameterRequest implements HttpServletRequest
 		return list.toArray(EMPTY_ARRAY);
 	}
 
-	private static final Enumeration<String> EMPTY_ENUMERATION = enumeration(Collections.<String>emptyList());
+	private static final Enumeration<String> EMPTY_ENUMERATION = enumeration(Collections.emptyList());
 
 	@Override
 	public Enumeration<String> getParameterNames()
