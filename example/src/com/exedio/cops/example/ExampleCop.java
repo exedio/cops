@@ -87,6 +87,7 @@ public class ExampleCop extends Cop implements Pageable
 		addParameter(COP, cop);
 		addParameter(NEEDS_SECURE, needsSecure);
 		addParameter(REDIRECT_LOOP, redirectLoop==REDIRECT_LOOP_DEFAULT?REDIRECT_LOOP_DEFAULT:redirectLoop+1, REDIRECT_LOOP_DEFAULT); // make redirect loop in redirectToCanonical
+		//noinspection ThisEscapedInObjectConstruction
 		pager.addParameters(this);
 		addParameter(DIR_LEVEL, dirLevel, 0);
 	}
