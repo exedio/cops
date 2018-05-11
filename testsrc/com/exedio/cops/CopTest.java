@@ -143,6 +143,7 @@ public class CopTest extends TestCase
 		}
 		try
 		{
+			//noinspection RedundantCast
 			new TestCop().getSecureURL((HttpServletRequest)null);
 			fail();
 		}
