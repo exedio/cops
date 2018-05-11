@@ -23,6 +23,7 @@
 package com.exedio.cops;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.Locale.UK;
 
 import com.exedio.cope.util.XMLEncoder;
 import java.io.IOException;
@@ -40,9 +41,9 @@ final class Out
 	boolean absoluteUrl = false;
 
 	private final long now = System.currentTimeMillis();
-	private final SimpleDateFormat dateFormatFull  = new SimpleDateFormat("yyyy/MM/dd'&nbsp;'HH:mm:ss'<small>'.SSS'</small>'");
-	private final SimpleDateFormat dateFormatYear  = new SimpleDateFormat(     "MM/dd'&nbsp;'HH:mm:ss'<small>'.SSS'</small>'");
-	private final SimpleDateFormat dateFormatToday = new SimpleDateFormat(                  "HH:mm:ss'<small>'.SSS'</small>'");
+	private final SimpleDateFormat dateFormatFull  = new SimpleDateFormat("yyyy/MM/dd'&nbsp;'HH:mm:ss'<small>'.SSS'</small>'", UK);
+	private final SimpleDateFormat dateFormatYear  = new SimpleDateFormat(     "MM/dd'&nbsp;'HH:mm:ss'<small>'.SSS'</small>'", UK);
+	private final SimpleDateFormat dateFormatToday = new SimpleDateFormat(                  "HH:mm:ss'<small>'.SSS'</small>'", UK);
 
 	private int nextId = 0;
 

@@ -18,6 +18,8 @@
 
 package com.exedio.cops.webtest;
 
+import static java.util.Locale.GERMANY;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import junit.framework.TestCase;
@@ -35,7 +37,7 @@ public class AbstractWebTest extends TestCase
 		final Date expectedBeforeFloor = new Date(((expectedBefore.getTime()-leftTolerance) / resolution) * resolution);
 		final Date expectedAfterCeil   = new Date(((expectedAfter.getTime() / resolution) * resolution) + resolution);
 
-		final SimpleDateFormat df = new SimpleDateFormat(DATE_FORMAT_FULL);
+		final SimpleDateFormat df = new SimpleDateFormat(DATE_FORMAT_FULL, GERMANY);
 		final String message =
 			"expected date within " + df.format(expectedBeforeFloor) + " (" + df.format(expectedBefore) + ")" +
 			" and " + df.format(expectedAfterCeil) + " (" + df.format(expectedAfter) + ")" +

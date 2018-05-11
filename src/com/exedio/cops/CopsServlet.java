@@ -21,6 +21,7 @@ package com.exedio.cops;
 import static java.lang.reflect.Modifier.FINAL;
 import static java.lang.reflect.Modifier.STATIC;
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.Locale.UK;
 import static javax.servlet.http.HttpServletResponse.SC_NOT_FOUND;
 
 import java.io.IOException;
@@ -336,7 +337,7 @@ public abstract class CopsServlet extends HttpServlet
 		}
 		final String id = String.valueOf(Math.abs(idLong));
 		System.out.println("--------"+id+"-----");
-		System.out.println("Date: " + new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS Z (z)").format(new Date()));
+		System.out.println("Date: " + new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS Z (z)", UK).format(new Date()));
 		if(request!=null)
 			System.out.print(report(request));
 		printException(System.out, exception);

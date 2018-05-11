@@ -22,6 +22,8 @@
 
 package com.exedio.cops;
 
+import static java.util.Locale.UK;
+
 import com.exedio.cope.util.Properties;
 import com.exedio.cope.util.Sources;
 import java.io.IOException;
@@ -127,7 +129,7 @@ public abstract class PropertiesServlet extends CopsServlet
 				PropertiesCop.getCop(properties, request),
 				request,
 				getDisplayCaption(),
-				new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS Z (z)").format(new Date()),
+				new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS Z (z)", UK).format(new Date()),
 				orphaned(properties),
 				this instanceof Overridable<?>,
 				properties);
@@ -196,7 +198,7 @@ public abstract class PropertiesServlet extends CopsServlet
 		{
 			final StringBuilder bf = new StringBuilder();
 			bf.append("(Edited ");
-			bf.append(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS").format(new Date(timestamp)));
+			bf.append(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS", UK).format(new Date(timestamp)));
 			if(authentication!=null)
 				bf.append(" by ").append(authentication);
 			if(hostname!=null)

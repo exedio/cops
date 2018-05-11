@@ -18,6 +18,8 @@
 
 package com.exedio.cops;
 
+import static java.util.Locale.GERMANY;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import junit.framework.TestCase;
@@ -67,7 +69,7 @@ public class ResourceLastModifiedTest extends TestCase
 
 	public static final void assertWithin(final Date expectedBefore, final Date expectedAfter, final Date actual)
 	{
-		final SimpleDateFormat df = new SimpleDateFormat(DATE_FORMAT_FULL);
+		final SimpleDateFormat df = new SimpleDateFormat(DATE_FORMAT_FULL, GERMANY);
 		final String message =
 			"expected date within " + df.format(expectedBefore) +
 			" and " + df.format(expectedAfter) +
