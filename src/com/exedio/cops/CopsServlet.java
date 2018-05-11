@@ -273,7 +273,7 @@ public abstract class CopsServlet extends HttpServlet
 		return principal!=null ? principal.getName() : null;
 	}
 
-	@SuppressWarnings("static-method")
+	@SuppressWarnings({"static-method", "MethodMayBeStatic"})
 	public final void printException(final PrintStream out, final Exception exception)
 	{
 		exception.printStackTrace(out);
@@ -303,7 +303,7 @@ public abstract class CopsServlet extends HttpServlet
 		out.append(sw.getBuffer());
 	}
 
-	@SuppressWarnings("static-method")
+	@SuppressWarnings({"static-method", "MethodMayBeStatic"})
 	public final void printException(final StringBuilder out, final Exception exception)
 	{
 		printStackTrace(exception, out);
