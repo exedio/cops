@@ -82,13 +82,7 @@ final class CopParameterRequest implements HttpServletRequest
 				final String key = value.substring(startPos + 1, equalPos);
 				final int endPos = value.indexOf('&', equalPos + 1);
 				final String newValue = (endPos<0) ? value.substring(equalPos + 1) : value.substring(equalPos + 1, endPos);
-				ArrayList<String> list = parameters.get(key);
-				if(list==null)
-				{
-					list = new ArrayList<>();
-					parameters.put(key, list);
-				}
-				list.add(decode(newValue));
+				parameters.computeIfAbsent(key, k -> new ArrayList<>()).add(decode(newValue));
 
 				if(endPos<0)
 					break;
