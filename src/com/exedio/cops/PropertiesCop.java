@@ -35,7 +35,7 @@ final class PropertiesCop extends Cop
 	private final Properties properties;
 	private final HashSet<String> showHidden;
 
-	PropertiesCop(final Properties properties, final HashSet<String> showHidden)
+	private PropertiesCop(final Properties properties, final HashSet<String> showHidden)
 	{
 		super("");
 		this.properties = properties;

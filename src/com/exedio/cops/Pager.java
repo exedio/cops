@@ -49,7 +49,7 @@ public final class Pager
 				n = limit;
 			}
 
-			this.limits = limits;
+			this.limits = limits.clone();
 			this.limitDefault = limits[0];
 			this.limitCeiling = limits[limits.length-1];
 		}
