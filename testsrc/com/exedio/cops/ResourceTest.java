@@ -77,6 +77,7 @@ public class ResourceTest extends TestCase
 		assertEquals("ResourceTest.bin", r1.toString());
 		try
 		{
+			//noinspection ResultOfMethodCallIgnored
 			r1.getPath();
 			fail();
 		}
