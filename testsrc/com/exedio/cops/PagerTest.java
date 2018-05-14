@@ -147,7 +147,7 @@ public class PagerTest extends TestCase
 	{
 		try
 		{
-			new Pager.Config(null);
+			new Pager.Config((int[])null);
 			fail();
 		}
 		catch(final NullPointerException e)
