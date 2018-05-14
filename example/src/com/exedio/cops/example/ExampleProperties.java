@@ -24,6 +24,7 @@ package com.exedio.cops.example;
 
 import static java.lang.System.nanoTime;
 
+import com.exedio.cope.util.Properties;
 import com.exedio.cope.util.Sources;
 import java.io.File;
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 @SuppressWarnings("unused")
-public final class Properties extends com.exedio.cope.util.Properties
+public final class ExampleProperties extends Properties
 {
 	private final String mailFrom    = value("mail.from",    "copedemo@mailgrab.exedio.com");
 	private final String mailBcc     = value("mail.bcc",     "copedemo@mailgrab.exedio.com");
@@ -69,12 +70,12 @@ public final class Properties extends com.exedio.cope.util.Properties
 	private final int     setToDefaultInt     = value("setToDefault.int"    , 1234, 5);
 	private final boolean setToDefaultBoolean = value("setToDefault.boolean", true);
 
-	private Properties(final File source)
+	private ExampleProperties(final File source)
 	{
 		super(Sources.load(source));
 	}
 
-	Properties(final Properties.Source source)
+	ExampleProperties(final Source source)
 	{
 		super(source);
 	}
@@ -168,19 +169,19 @@ public final class Properties extends com.exedio.cope.util.Properties
 		return result;
 	}
 
-	private static Properties instance = null;
+	private static ExampleProperties instance = null;
 
-	public static Properties instance(final File source)
+	public static ExampleProperties instance(final File source)
 	{
 		if(instance!=null)
 			return instance;
 
-		instance = new Properties(source);
+		instance = new ExampleProperties(source);
 		return instance;
 	}
 
-	static void setInstance(final Properties instance)
+	static void setInstance(final ExampleProperties instance)
 	{
-		Properties.instance = instance;
+		ExampleProperties.instance = instance;
 	}
 }

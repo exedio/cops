@@ -22,11 +22,12 @@
 
 package com.exedio.cops.example;
 
+import com.exedio.cope.util.Properties;
 import com.exedio.cops.PropertiesServlet.Overridable;
 import java.io.File;
 
 public final class PropertiesServlet extends com.exedio.cops.PropertiesServlet
-implements Overridable<Properties>
+implements Overridable<ExampleProperties>
 {
 	private static final long serialVersionUID = 1l;
 
@@ -45,9 +46,9 @@ implements Overridable<Properties>
 	}
 
 	@Override
-	protected Properties getProperties()
+	protected ExampleProperties getProperties()
 	{
-		return Properties.instance(source);
+		return ExampleProperties.instance(source);
 	}
 
 	@Override
@@ -57,14 +58,14 @@ implements Overridable<Properties>
 	}
 
 	@Override
-	public Properties newProperties(final Properties.Source overrideSource)
+	public ExampleProperties newProperties(final Properties.Source overrideSource)
 	{
-		return new Properties(overrideSource);
+		return new ExampleProperties(overrideSource);
 	}
 
 	@Override
-	public void override(final Properties properties)
+	public void override(final ExampleProperties properties)
 	{
-		Properties.setInstance(properties);
+		ExampleProperties.setInstance(properties);
 	}
 }
