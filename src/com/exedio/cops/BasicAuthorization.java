@@ -20,6 +20,7 @@ package com.exedio.cops;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import java.util.Base64;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -43,7 +44,7 @@ public final class BasicAuthorization
 		final String basicCookie = authorization.substring(BASIC_LENGTH);
 		//System.out.println("basicCookie:"+basicCookie);
 
-		final String basicCookiePlain = new String(Base64.decode(basicCookie), UTF_8);
+		final String basicCookiePlain = new String(Base64.getDecoder().decode(basicCookie), UTF_8);
 		//System.out.println("basicCookiePlain:"+basicCookiePlain);
 
 		final int colon = basicCookiePlain.indexOf(':');
