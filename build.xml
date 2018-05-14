@@ -5,7 +5,11 @@
 	<property file="local.properties" />
 	<property file="project.properties" />
 
-	<import file="macros/findbugs.xml" />
+	<import>
+		<fileset dir="macros">
+			<include name="*.xml" />
+		</fileset>
+	</import>
 
 	<taskdef classpath="lib/ant-contrib.jar" resource="net/sf/antcontrib/antcontrib.properties" />
 
@@ -137,6 +141,7 @@
 				<attribute name="Class-Path" value="javax.servlet-api.jar" />
 			</manifest>
 		</jar>
+		<plot file="build/exedio-cops.jar" />
 	</target>
 
 	<target name="jar.src">
@@ -150,6 +155,7 @@
 				<include name="**/*.java" />
 			</zipfileset>
 		</zip>
+		<plot file="build/exedio-cops-src.zip" />
 	</target>
 
 	<target name="example.jspm">

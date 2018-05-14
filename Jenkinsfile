@@ -68,6 +68,20 @@ timestamps
 						usePreviousBuildAsReference: false,
 						useStableBuildAsReference: false])
 				archive 'build/catalina-start.log,build/success/*'
+				step([$class: 'PlotBuilder',
+						csvFileName: 'plots.csv',
+						exclZero: false,
+						keepRecords: false,
+						group: 'Sizes',
+						title: 'exedio-cops.jar',
+						numBuilds: '1000',
+						style: 'line',
+						useDescr: false,
+						propertiesSeries: [
+							[ file: 'build/exedio-cops.jar-plot.properties',     label: 'exedio-cops.jar' ],
+							[ file: 'build/exedio-cops-src.zip-plot.properties', label: 'exedio-cops-src.zip' ],
+						],
+				])
 			}
 		}
 		catch(Exception e)
