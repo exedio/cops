@@ -28,6 +28,7 @@ public final class PackageTest
 	{
 		final TestSuite suite = new TestSuite();
 		suite.addTestSuite(NaturalLanguageEncodeTest.class);
+		suite.addTestSuite(BasicAuthorizationTest.class);
 		suite.addTestSuite(CopTest.class);
 		suite.addTestSuite(CopParameterRequestTest.class);
 		suite.addTestSuite(ResourceLastModifiedTest.class);
