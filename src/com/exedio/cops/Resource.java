@@ -188,6 +188,7 @@ public final class Resource
 	{
 		synchronized(contentLock)
 		{
+			//noinspection VariableNotUsedInsideIf
 			if(content!=null)
 				return;
 
