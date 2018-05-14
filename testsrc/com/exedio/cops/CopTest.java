@@ -55,11 +55,9 @@ public class CopTest extends TestCase
 			addParameter("param1", param1, 0);
 		}
 
-		TestCop(double dummy, final String name)
+		TestCop(@SuppressWarnings("unused") final double dummy, final String name)
 		{
 			super(name);
-			if(dummy==0.0)
-				dummy = 1.0;
 		}
 
 		private static String pathInfo(final String[] dirs, final String name)
