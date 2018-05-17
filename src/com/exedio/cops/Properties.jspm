@@ -32,6 +32,7 @@ import static com.exedio.cops.TimeUtil.toMillies;
 import static java.lang.System.nanoTime;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.Callable;
@@ -55,7 +56,9 @@ final class Properties_Jspm
 			final String footerDate,
 			final Set<String> orphaned,
 			final boolean overridable,
-			final Properties properties)
+			final Properties properties,
+			final Properties reloaded,
+			final RuntimeException reloadFailure)
 	{
 %><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -100,9 +103,11 @@ final class Properties_Jspm
 		<form method="post">
 		<table><%
 		int idNum = 0;
+		final ArrayList<Field> reloadedFields = new ArrayList<>();
 		for(final Field field : properties.getFields())
 		{
 			final boolean fieldSpecified = field.isSpecified();
+			final Object reloadedNewValue = PropertiesCop.reloadedNewValue(field, reloaded, reloadedFields);
 			idNum++;
 			%>
 			<tr<% if(!fieldSpecified){ %> class="unspecified"<% } %>><%
@@ -118,12 +123,20 @@ final class Properties_Jspm
 		if(cop.isHidden(field))
 		{
 				%>
-				<td class="notavailable" colspan="2">hidden (<a href="<%=cop.addShowHidden(field)%>">show</a>)</td><%
+				<td class="notavailable<%
+					//noinspection VariableNotUsedInsideIf
+					if(reloadedNewValue!=null){%> tobereloaded<%}
+					%>" colspan="2">hidden (<a href="<%=
+					cop.addShowHidden(field)%>">show</a>)</td><%
 		}
 		else
 		{
 				%>
-				<td><%=field.getValue().toString()%><%
+				<td<%
+					//noinspection VariableNotUsedInsideIf
+					if(reloadedNewValue!=null){%> class="tobereloaded"<%} %>><%=
+					field.getValue().toString()%><%
+
 					if(fieldSpecified)
 					{
 						final Object fieldDefault = field.getDefaultValue();
@@ -145,6 +158,11 @@ final class Properties_Jspm
 						}
 						%></small><%
 					}
+					if(reloadedNewValue!=null)
+					{
+						%><hr class="reload"><%=
+						reloadedNewValue.toString()%> <span class="tobereloaded">to be reloaded</span><%
+					}
 					if(overridable)
 					{
 						%><br><input id="fid<%=idNum%>" class="propertyValue" name="<%=FIELD_VALUE_PREFIX%><%=field.getKey()%>"><%
@@ -164,6 +182,51 @@ final class Properties_Jspm
 # Here you can enter any key-value pairs in the syntax of java.util.Properties#load
 #
 </textarea><%
+		}
+
+		if(!reloadedFields.isEmpty())
+		{
+			%>
+			<table>
+				<caption>To be Reloaded</caption><%
+
+			for(final Field field : reloadedFields)
+			{
+				final String key = field.getKey();
+				%>
+				<tr>
+					<th><%=key%></th><%
+
+				if(cop.isHidden(field))
+				{
+					%>
+					<td class="notavailable">hidden (<a href="<%=
+						cop.addShowHidden(field)%>">show</a>)</td><%
+				}
+				else
+				{
+					%>
+					<td><%=
+						properties.getField(key).getValue().toString()
+						%><hr class="reload"><%=
+						field.getValue().toString()
+					%></td><%
+				}
+				%>
+				</tr><%
+			}
+			%>
+			</table><%
+		}
+		if(reloadFailure!=null)
+		{
+			%>
+			<table>
+				<caption>Changes in Source are Invalid</caption>
+				<tr>
+					<td><% StackTrace_Jspm.write(out, reloadFailure); %></td>
+				</tr>
+			</table><%
 		}
 		%>
 			<table>
@@ -234,7 +297,7 @@ final class Properties_Jspm
 		if(overridable)
 		{
 			%>
-			<input type="submit" name="<%=SET%>" value="Run Probes and Set Fields"><%
+			<input type="submit" name="<%=SET%>" value="Run Probes, Reload, and Set Fields"><%
 		}
 		%>
 		</form>

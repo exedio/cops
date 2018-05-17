@@ -24,6 +24,7 @@ package com.exedio.cops;
 
 import com.exedio.cope.util.Properties;
 import com.exedio.cope.util.Properties.Field;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import javax.servlet.http.HttpServletRequest;
@@ -84,5 +85,26 @@ final class PropertiesCop extends Cop
 	boolean hasShowHidden()
 	{
 		return showHidden!=null && !showHidden.isEmpty();
+	}
+
+	@SuppressWarnings("StaticMethodOnlyUsedInOneClass") // ok for jspm
+	static Object reloadedNewValue(
+			final Field field,
+			final Properties reloaded,
+			final ArrayList<Field> reloadedFields)
+	{
+		if(reloaded==null)
+			return null;
+
+		final Field reloadedField = reloaded.getField(field.getKey());
+		if(reloadedField==null)
+			return null;
+
+		final Object reloadedValue = reloadedField.getValue();
+		if(field.getValue().equals(reloadedValue))
+			return null;
+
+		reloadedFields.add(reloadedField);
+		return reloadedValue;
 	}
 }

@@ -128,3 +128,28 @@ span.stacktraceMore
 	display:none;
 	font-size:80%;
 }
+
+table td.tobereloaded
+{
+	border-color:#a00;
+}
+
+span.tobereloaded
+{
+	font-weight:bold;
+	color:#a00;
+	font-size:small;
+}
+
+hr.reload
+{
+	margin:0;
+	border-width:0px;
+	height:1px;
+	background-color:black;
+}
+
+table td.tobereloaded hr.reload
+{
+	background-color:#a00;
+}

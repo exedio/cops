@@ -91,7 +91,6 @@ public abstract class PropertiesServlet extends CopsServlet
 					for(final Map.Entry<Object,Object> e : properties.entrySet())
 						sourceMap.put((String)e.getKey(), (String)e.getValue());
 				}
-				if(!sourceMap.isEmpty())
 				{
 					final HashSet<Integer> doProbeNumbers = new HashSet<>();
 					final String[] doProbeNumberStrings = request.getParameterValues(PROBE_NUMBER);
@@ -113,7 +112,7 @@ public abstract class PropertiesServlet extends CopsServlet
 
 					override(
 							(Overridable<?>)this,
-							getProperties().getSourceObject(),
+							getProperties().getSourceObject().reload(),
 							authentication, hostname,
 							sourceMap,
 							doProbeNumbers);
@@ -122,6 +121,20 @@ public abstract class PropertiesServlet extends CopsServlet
 		}
 
 		final Properties properties = getProperties();
+
+		Properties reloaded = null;
+		RuntimeException reloadFailure = null;
+		if(this instanceof Overridable<?>)
+		{
+			try
+			{
+				reloaded = ((Overridable<?>)this).newProperties(properties.getSourceObject().reload());
+			}
+			catch(final RuntimeException e)
+			{
+				reloadFailure = e;
+			}
+		}
 
 		final Out out = new Out(request);
 		Properties_Jspm.write(
@@ -132,7 +145,9 @@ public abstract class PropertiesServlet extends CopsServlet
 				new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS Z (z)", UK).format(new Date()),
 				properties.getOrphanedKeys(),
 				this instanceof Overridable<?>,
-				properties);
+				properties,
+				reloaded,
+				reloadFailure);
 		out.sendBody(response);
 	}
 
@@ -147,8 +162,13 @@ public abstract class PropertiesServlet extends CopsServlet
 			final HashMap<String, String> sourceMap,
 			final HashSet<Integer> doProbeNumbers)
 	{
-		final P properties = overridable.newProperties(Sources.cascade(
-				new EditedSource(authentication, hostname, sourceMap), source));
+		final P properties = overridable.newProperties(
+				sourceMap.isEmpty()
+				? source
+				: Sources.cascade(
+						new EditedSource(authentication, hostname, sourceMap),
+						source)
+		);
 
 		int probeNumber = -1;
 		for(final Callable<?> probe : properties.getProbes())
