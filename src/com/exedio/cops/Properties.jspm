@@ -187,7 +187,7 @@ final class Properties_Jspm
 				doProbeNumbers = null;
 			}
 
-			for(final Callable<?> probe : properties.getTests())
+			for(final Callable<?> probe : properties.getProbes())
 			{
 				probeNumber++;
 				%>
