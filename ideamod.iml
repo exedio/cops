@@ -23,6 +23,7 @@
       <sourceFolder url="file://$MODULE_DIR$/catalinasrc" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.settings" />
       <excludeFolder url="file://$MODULE_DIR$/api" />
+      <excludeFolder url="file://$MODULE_DIR$/build" />
       <excludeFolder url="file://$MODULE_DIR$/ivy/artifacts" />
       <excludeFolder url="file://$MODULE_DIR$/nbproject" />
       <excludeFolder url="file://$MODULE_DIR$/tomcat" />
