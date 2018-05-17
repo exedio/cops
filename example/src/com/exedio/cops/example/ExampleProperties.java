@@ -27,9 +27,6 @@ import static java.lang.System.nanoTime;
 import com.exedio.cope.util.Properties;
 import com.exedio.cope.util.Sources;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Callable;
 
 @SuppressWarnings("unused")
 public final class ExampleProperties extends Properties
@@ -80,93 +77,37 @@ public final class ExampleProperties extends Properties
 		super(source);
 	}
 
-	@Override
-	@SuppressWarnings("AnonymousInnerClassMayBeStatic")
-	public List<? extends Callable<?>> getTests()
+	@Probe private void probeOkVoid()
 	{
-		final ArrayList<Callable<?>> result = new ArrayList<>();
-
-		result.add(new Callable<Object>(){
-
-				@Override
-				public Object call()
-				{
-					return null;
-				}
-
-				@Override
-				public String toString()
-				{
-					return "Ok";
-				}
-			});
-
-		result.add(new Callable<Object>(){
-
-			@Override
-			public Object call()
-			{
-				return "Result";
-			}
-
-			@Override
-			public String toString()
-			{
-				return "Ok Result";
-			}
-		});
-
-
-		result.add(new Callable<Object>(){
-
-				@Override
-				public Object call()
-				{
-					throw new NullPointerException("zack");
-				}
-
-				@Override
-				public String toString()
-				{
-					return "Broken";
-				}
-			});
-
-		result.add(new Callable<Object>(){
-
-				@Override
-				public Object call()
-				{
-					throw new RuntimeException(new NullPointerException("zack"));
-				}
-
-				@Override
-				public String toString()
-				{
-					return "Broken Nested";
-				}
-			});
-
-
-		result.add(new Callable<Object>(){
-
-				@Override
-				public String call() throws InterruptedException
-				{
-					final long start = nanoTime();
-					Thread.sleep(77);
-					final long end = nanoTime();
-					return "Slept " + (end - start) + "ns";
-				}
-
-				@Override
-				public String toString()
-				{
-					return "Sleep";
-				}
-			});
-
-		return result;
+		// empty
+	}
+	@SuppressWarnings("MethodMayBeStatic") // OK: @Probe
+	@Probe private Object probeOkNull()
+	{
+		return null;
+	}
+	@SuppressWarnings("MethodMayBeStatic") // OK: @Probe
+	@Probe private String probeOkResult()
+	{
+		return "Result";
+	}
+	@SuppressWarnings("MethodMayBeStatic") // OK: @Probe
+	@Probe private void probeBroken()
+	{
+		throw new NullPointerException("zack");
+	}
+	@SuppressWarnings("MethodMayBeStatic") // OK: @Probe
+	@Probe private void probeBrokenNested()
+	{
+		throw new RuntimeException(new NullPointerException("zack"));
+	}
+	@SuppressWarnings("MethodMayBeStatic") // OK: @Probe
+	@Probe private String probeSleep() throws InterruptedException
+	{
+		final long start = nanoTime();
+		Thread.sleep(77);
+		final long end = nanoTime();
+		return "Slept " + (end - start) + "ns";
 	}
 
 	private static ExampleProperties instance = null;
