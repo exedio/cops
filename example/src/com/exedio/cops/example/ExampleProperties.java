@@ -69,7 +69,7 @@ public final class ExampleProperties extends Properties
 
 	private ExampleProperties(final File source)
 	{
-		super(Sources.load(source));
+		super(Sources.reloadable(() -> Sources.load(source)));
 	}
 
 	ExampleProperties(final Source source)
