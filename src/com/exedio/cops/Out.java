@@ -30,7 +30,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashSet;
+import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -76,7 +76,7 @@ final class Out
 		bf.append(i);
 	}
 
-	void write(final HashSet<String> set)
+	void write(final Set<String> set)
 	{
 		XMLEncoder.append(bf, set.toString());
 	}

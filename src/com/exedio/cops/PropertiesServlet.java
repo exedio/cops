@@ -130,7 +130,7 @@ public abstract class PropertiesServlet extends CopsServlet
 				request,
 				getDisplayCaption(),
 				new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS Z (z)", UK).format(new Date()),
-				orphaned(properties),
+				properties.getOrphanedKeys(),
 				this instanceof Overridable<?>,
 				properties);
 		out.sendBody(response);
@@ -227,18 +227,5 @@ public abstract class PropertiesServlet extends CopsServlet
 	{
 		P newProperties(Properties.Source overrideSource);
 		void override(P properties);
-	}
-
-	// TODO replace by method in class Properties
-	private static HashSet<String> orphaned(final Properties properties)
-	{
-		final Collection<String> sourceKeySet = properties.getSourceObject().keySet();
-		if(sourceKeySet==null)
-			return null;
-
-		final HashSet<String> result = new HashSet<>(sourceKeySet);
-		for(final Properties.Field field : properties.getFields())
-			result.remove(field.getKey());
-		return result;
 	}
 }
