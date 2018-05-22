@@ -38,6 +38,7 @@ import java.util.concurrent.Callable;
 import javax.servlet.http.HttpServletRequest;
 
 import com.exedio.cope.util.Properties;
+import com.exedio.cope.util.Properties.Field;
 
 @SuppressWarnings("HardcodedLineSeparator") // ok for jspm
 final class Properties_Jspm
@@ -98,7 +99,7 @@ final class Properties_Jspm
 		<form method="post">
 		<table><%
 		int idNum = 0;
-		for(final Properties.Field field : properties.getFields())
+		for(final Field field : properties.getFields())
 		{
 			final boolean fieldSpecified = field.isSpecified();
 			idNum++;
