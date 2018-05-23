@@ -25,6 +25,21 @@ final class StackTrace_Jspm
 	@SuppressWarnings("StaticMethodOnlyUsedInOneClass") // ok for jspm
 	static void write(
 			final Out out,
+			final Exception exception)
+	{
+							for(Throwable t = exception; t!=null; t = t.getCause())
+							{
+								%>
+								<%=t.getClass().getName()%>:
+								<%=t.getMessage()%>
+								<br><%
+								write(out, t.getStackTrace());%>
+								<br><%
+							}
+	}
+
+	private static void write(
+			final Out out,
 			final StackTraceElement[] stackTrace)
 	{
 				if(stackTrace!=null && stackTrace.length>0)

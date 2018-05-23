@@ -218,15 +218,7 @@ final class Properties_Jspm
 							%><%=toMillies(end, start)%></td>
 							<td><span style="color:red">failed:</span>
 							<%
-							for(Throwable t = e; t!=null; t = t.getCause())
-							{
-								%>
-								<%=t.getClass().getName()%>:
-								<%=t.getMessage()%>
-								<br><%
-								StackTrace_Jspm.write(out, t.getStackTrace());%>
-								<br><%
-							}
+							StackTrace_Jspm.write(out, e);
 						}
 						%></td><%
 				}
