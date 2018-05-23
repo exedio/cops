@@ -91,32 +91,30 @@ public abstract class PropertiesServlet extends CopsServlet
 					for(final Map.Entry<Object,Object> e : properties.entrySet())
 						sourceMap.put((String)e.getKey(), (String)e.getValue());
 				}
+				final HashSet<Integer> doProbeNumbers = new HashSet<>();
+				final String[] doProbeNumberStrings = request.getParameterValues(PROBE_NUMBER);
+				if(doProbeNumberStrings!=null)
+					for(final String doProbeNumberString : doProbeNumberStrings)
+						doProbeNumbers.add(Integer.parseInt(doProbeNumberString));
+
+				final Principal principal = request.getUserPrincipal();
+				final String authentication = principal!=null ? principal.getName() : null;
+				String hostname = null;
+				try
 				{
-					final HashSet<Integer> doProbeNumbers = new HashSet<>();
-					final String[] doProbeNumberStrings = request.getParameterValues(PROBE_NUMBER);
-					if(doProbeNumberStrings!=null)
-						for(final String doProbeNumberString : doProbeNumberStrings)
-							doProbeNumbers.add(Integer.parseInt(doProbeNumberString));
-
-					final Principal principal = request.getUserPrincipal();
-					final String authentication = principal!=null ? principal.getName() : null;
-					String hostname = null;
-					try
-					{
-						hostname = InetAddress.getLocalHost().getHostName();
-					}
-					catch(final UnknownHostException ignored)
-					{
-						// leave hostname==null
-					}
-
-					override(
-							(Overridable<?>)this,
-							getProperties().getSourceObject().reload(),
-							authentication, hostname,
-							sourceMap,
-							doProbeNumbers);
+					hostname = InetAddress.getLocalHost().getHostName();
 				}
+				catch(final UnknownHostException ignored)
+				{
+					// leave hostname==null
+				}
+
+				override(
+						(Overridable<?>)this,
+						getProperties().getSourceObject().reload(),
+						authentication, hostname,
+						sourceMap,
+						doProbeNumbers);
 			}
 		}
 
