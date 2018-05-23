@@ -114,7 +114,7 @@ final class Properties_Jspm
 				%>
 				<th><%=field.getKey()%></th><%
 
-		if(!cop.isShowHidden(field) && field.hasHiddenValue())
+		if(cop.isHidden(field))
 		{
 				%>
 				<td class="notavailable" colspan="2">hidden (<a href="<%=cop.addShowHidden(field)%>">show</a>)</td><%

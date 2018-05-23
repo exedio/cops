@@ -74,9 +74,11 @@ final class PropertiesCop extends Cop
 		return new PropertiesCop(properties, null);
 	}
 
-	boolean isShowHidden(final Field field)
+	boolean isHidden(final Field field)
 	{
-		return showHidden!=null && showHidden.contains(field.getKey());
+		return
+				field.hasHiddenValue() &&
+				(showHidden==null || !showHidden.contains(field.getKey()));
 	}
 
 	boolean hasShowHidden()
