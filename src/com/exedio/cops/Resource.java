@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.security.MessageDigest;
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicLong;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -49,11 +50,11 @@ public final class Resource
 
 	private volatile boolean log = false;
 
-	private final VolatileLong response200Count = new VolatileLong();
-	private final VolatileLong response304Count = new VolatileLong();
-	private final VolatileLong response301ByNameCount = new VolatileLong();
-	private final VolatileLong response301ByFingerprintCount = new VolatileLong();
-	private final VolatileLong response404ByQueryCount = new VolatileLong();
+	private final AtomicLong response200Count = new AtomicLong();
+	private final AtomicLong response304Count = new AtomicLong();
+	private final AtomicLong response301ByNameCount = new AtomicLong();
+	private final AtomicLong response301ByFingerprintCount = new AtomicLong();
+	private final AtomicLong response404ByQueryCount = new AtomicLong();
 
 	public Resource(final String name)
 	{
@@ -257,7 +258,7 @@ public final class Resource
 		if(request.getQueryString()!=null)
 		{
 			response.setStatus(SC_NOT_FOUND);
-			response404ByQueryCount.inc();
+			response404ByQueryCount.incrementAndGet();
 			return;
 		}
 
@@ -275,14 +276,14 @@ public final class Resource
 		if(ifModifiedSince>=0 && ifModifiedSince>=lastModified)
 		{
 			response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
-			response304Count.inc();
+			response304Count.incrementAndGet();
 			if(log)
 				log(request, "Not Modified");
 		}
 		else
 		{
 			BodySender.send(response, content);
-			response200Count.inc();
+			response200Count.incrementAndGet();
 			if(log)
 				log(request, "Delivered");
 		}
@@ -301,7 +302,7 @@ public final class Resource
 				request.getServletPath() +
 				'/' + getPath());
 
-		(byName ? response301ByNameCount : response301ByFingerprintCount).inc();
+		(byName ? response301ByNameCount : response301ByFingerprintCount).incrementAndGet();
 		if(log)
 			log(request, byName ? "Redirect by name" : "Redirect by fingerprint");
 	}

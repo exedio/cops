@@ -37,6 +37,7 @@ import java.util.Enumeration;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicLong;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
@@ -51,7 +52,7 @@ public abstract class CopsServlet extends HttpServlet
 	private final LinkedHashMap<String, Resource> resources;
 	private final LinkedHashMap<String, Resource> resourcesByName;
 	private final String resourcesRootPathSegment;
-	private final VolatileLong resources404Count = new VolatileLong();
+	private final AtomicLong resources404Count = new AtomicLong();
 
 	protected CopsServlet()
 	{
@@ -208,7 +209,7 @@ public abstract class CopsServlet extends HttpServlet
 					}
 				}
 				response.setStatus(SC_NOT_FOUND);
-				resources404Count.inc();
+				resources404Count.incrementAndGet();
 				return;
 			}
 			{
