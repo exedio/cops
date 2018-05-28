@@ -23,6 +23,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.concurrent.atomic.AtomicLong;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -103,7 +104,7 @@ public final class RequestLimiter
 	private volatile long lastInterval = Long.MIN_VALUE;
 	@SuppressFBWarnings("VO_VOLATILE_INCREMENT") // TODO use AtomicInteger
 	private volatile int requestsInInterval = 1;
-	private final VolatileLong deniedRequests = new VolatileLong();
+	private final AtomicLong deniedRequests = new AtomicLong();
 
 	@SuppressWarnings("deprecation")
 	private static void setStatus503WithBody(final HttpServletResponse response, final String denyMessage)
@@ -143,7 +144,7 @@ public final class RequestLimiter
 					{
 						response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE, denyMessage);
 					}
-					deniedRequests.inc();
+					deniedRequests.incrementAndGet();
 					//System.out.println("copsRequestLimiter denied " + deniedRequests);
 					return true;
 				}
