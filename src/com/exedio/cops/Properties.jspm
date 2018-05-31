@@ -103,8 +103,8 @@ final class Properties_Jspm
 		<form method="post">
 		<table><%
 		int idNum = 0;
-		final ArrayList<Field> reloadedFields = new ArrayList<>();
-		for(final Field field : properties.getFields())
+		final ArrayList<Field<?>> reloadedFields = new ArrayList<>();
+		for(final Field<?> field : properties.getFields())
 		{
 			final boolean fieldSpecified = field.isSpecified();
 			final Object reloadedNewValue = PropertiesCop.reloadedNewValue(field, reloaded, reloadedFields);
@@ -190,7 +190,7 @@ final class Properties_Jspm
 			<table>
 				<caption>To be Reloaded</caption><%
 
-			for(final Field field : reloadedFields)
+			for(final Field<?> field : reloadedFields)
 			{
 				final String key = field.getKey();
 				%>

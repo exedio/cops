@@ -43,7 +43,7 @@ final class PropertiesCop extends Cop
 		this.showHidden = showHidden;
 
 		if(showHidden!=null)
-			for(final Field field : properties.getFields())
+			for(final Field<?> field : properties.getFields())
 				if(showHidden.contains(field.getKey()))
 					addParameter(SHOW_HIDDEN, field.getKey());
 	}
@@ -60,7 +60,7 @@ final class PropertiesCop extends Cop
 				properties, showHidden);
 	}
 
-	PropertiesCop addShowHidden(final Field field)
+	PropertiesCop addShowHidden(final Field<?> field)
 	{
 		final HashSet<String> showHidden =
 				(this.showHidden!=null)
@@ -75,7 +75,7 @@ final class PropertiesCop extends Cop
 		return new PropertiesCop(properties, null);
 	}
 
-	boolean isHidden(final Field field)
+	boolean isHidden(final Field<?> field)
 	{
 		return
 				field.hasHiddenValue() &&
@@ -89,14 +89,14 @@ final class PropertiesCop extends Cop
 
 	@SuppressWarnings("StaticMethodOnlyUsedInOneClass") // ok for jspm
 	static Object reloadedNewValue(
-			final Field field,
+			final Field<?> field,
 			final Properties reloaded,
-			final ArrayList<Field> reloadedFields)
+			final ArrayList<Field<?>> reloadedFields)
 	{
 		if(reloaded==null)
 			return null;
 
-		final Field reloadedField = reloaded.getField(field.getKey());
+		final Field<?> reloadedField = reloaded.getField(field.getKey());
 		if(reloadedField==null)
 			return null;
 
