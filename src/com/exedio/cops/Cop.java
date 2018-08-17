@@ -291,7 +291,7 @@ public abstract class Cop
 		if(expected.equals(actual) && doesNotNeedSecureRedirect(request))
 			return false;
 
-		// There is no need for absolute url anymore: http://en.wikipedia.org/wiki/HTTP_location
+		// There is no need for absolute url anymore: https://en.wikipedia.org/wiki/HTTP_location
 		final String location = response.encodeRedirectURL(getURL(request));
 		logger.info("redirectToCanonical from --{}-- to --{}--", actual, location);
 

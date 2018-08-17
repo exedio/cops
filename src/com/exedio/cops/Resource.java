@@ -295,7 +295,7 @@ public final class Resource
 			final boolean byName)
 	{
 		response.setStatus(SC_MOVED_PERMANENTLY);
-		// There is no need for absolute url anymore: http://en.wikipedia.org/wiki/HTTP_location
+		// There is no need for absolute url anymore: https://en.wikipedia.org/wiki/HTTP_location
 		response.setHeader(
 				"Location",
 				request.getContextPath() +
