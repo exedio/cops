@@ -95,7 +95,7 @@ public class ResourceTest extends AbstractWebTest
 			conn.setIfModifiedSince(ifModifiedSince);
 		conn.connect();
 		assertEquals(expectNotModified ? HttpURLConnection.HTTP_NOT_MODIFIED : HttpURLConnection.HTTP_OK, conn.getResponseCode());
-		assertEquals(expectNotModified ? "Not Modified" : "OK", conn.getResponseMessage());
+		assertEquals(null, conn.getResponseMessage()); // is null since tomcat 8.5
 		final long date = conn.getDate();
 		final Date after = new Date();
 		//System.out.println("Date: "+new Date(date));
@@ -127,7 +127,7 @@ public class ResourceTest extends AbstractWebTest
 		HttpURLConnection.setFollowRedirects(false);
 		conn.connect();
 		assertEquals(HTTP_MOVED_PERM, conn.getResponseCode());
-		assertEquals("Moved Permanently", conn.getResponseMessage());
+		assertEquals(null, conn.getResponseMessage()); // is null since tomcat 8.5
 		assertEquals(target, conn.getHeaderField("Location"));
 		assertEquals(null, conn.getContentType());
 		assertEquals(0, conn.getContentLength());
@@ -139,6 +139,6 @@ public class ResourceTest extends AbstractWebTest
 		HttpURLConnection.setFollowRedirects(false);
 		conn.connect();
 		assertEquals(HTTP_NOT_FOUND, conn.getResponseCode());
-		assertEquals("Not Found", conn.getResponseMessage());
+		assertEquals(null, conn.getResponseMessage()); // is null since tomcat 8.5
 	}
 }
