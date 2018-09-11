@@ -25,6 +25,7 @@ package com.exedio.cops.example;
 import static java.lang.System.nanoTime;
 
 import com.exedio.cope.util.Properties;
+import com.exedio.cope.util.ServiceFactory;
 import com.exedio.cope.util.Sources;
 import java.io.File;
 
@@ -66,6 +67,12 @@ public final class ExampleProperties extends Properties
 	private final String  setToDefaultString  = value("setToDefault.string" , "value of setToDefault.string");
 	private final int     setToDefaultInt     = value("setToDefault.int"    , 1234, 5);
 	private final boolean setToDefaultBoolean = value("setToDefault.boolean", true);
+
+	private final ServiceFactory<ExampleService, ExampleServiceParameter> service =
+			valueService("service",
+					ExampleServiceImplementationDefault.class.getName(),
+					ExampleService.class,
+					ExampleServiceParameter.class);
 
 	private ExampleProperties(final File source)
 	{
