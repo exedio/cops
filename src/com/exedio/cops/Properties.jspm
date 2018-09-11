@@ -135,7 +135,7 @@ final class Properties_Jspm
 				<td<%
 					//noinspection VariableNotUsedInsideIf
 					if(reloadedNewValue!=null){%> class="tobereloaded"<%} %>><%=
-					field.getValue().toString()%><%
+					field.getValueString()%><%
 
 					if(fieldSpecified)
 					{
@@ -149,7 +149,7 @@ final class Properties_Jspm
 							}
 							else
 							{
-								%>(<%=fieldDefault.toString()%>)<%
+								%>(<%=field.getString(fieldDefault)%>)<%
 							}
 						}
 						else
@@ -161,7 +161,7 @@ final class Properties_Jspm
 					if(reloadedNewValue!=null)
 					{
 						%><hr class="reload"><%=
-						reloadedNewValue.toString()%> <span class="tobereloaded">to be reloaded</span><%
+						field.getString(reloadedNewValue)%> <span class="tobereloaded">to be reloaded</span><%
 					}
 					if(overridable)
 					{
@@ -207,9 +207,9 @@ final class Properties_Jspm
 				{
 					%>
 					<td><%=
-						properties.getField(key).getValue().toString()
+						properties.getField(key).getValueString()
 						%><hr class="reload"><%=
-						field.getValue().toString()
+						field.getValueString()
 					%></td><%
 				}
 				%>
