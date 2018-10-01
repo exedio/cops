@@ -74,6 +74,12 @@ public final class ExampleProperties extends Properties
 					ExampleService.class,
 					ExampleServiceParameter.class);
 
+	private final ServiceFactory<ExampleService, ExampleServiceParameter> serviceDefaultFailure =
+			valueService("serviceDefaultFailure",
+					"does not exist",
+					ExampleService.class,
+					ExampleServiceParameter.class);
+
 	private ExampleProperties(final File source)
 	{
 		super(Sources.reloadable(() -> Sources.load(source)));

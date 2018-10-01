@@ -154,7 +154,15 @@ final class Properties_Jspm
 						}
 						else
 						{
-							%><i>(no default)</i><%
+							final String failure = field.getDefaultValueFailure();
+							if(failure==null)
+							{
+								%><i>(no default)</i><%
+							}
+							else
+							{
+								%><i>(illegal default: <%=failure%>)</i><%
+							}
 						}
 						%></small><%
 					}
