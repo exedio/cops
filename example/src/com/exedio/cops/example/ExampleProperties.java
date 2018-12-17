@@ -122,6 +122,16 @@ public final class ExampleProperties extends Properties
 		final long end = nanoTime();
 		return "Slept " + (end - start) + "ns";
 	}
+	@SuppressWarnings("MethodMayBeStatic") // OK: @Probe
+	@Probe private Object probeAborted() throws ProbeAbortedException
+	{
+		throw newProbeAbortedException("abort message");
+	}
+	@SuppressWarnings("MethodMayBeStatic") // OK: @Probe
+	@Probe private Object probeAbortedNull() throws ProbeAbortedException
+	{
+		throw newProbeAbortedException(null);
+	}
 
 	private static ExampleProperties instance = null;
 

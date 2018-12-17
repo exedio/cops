@@ -7,6 +7,10 @@ omit bug fixes.
 The items are sorted inversely, i.e. latest items are on top
 
 --------------------------------------------------------------------------
+* Properties#newProbeAbortedException added.
+* Properties#valueService with Class defaultValue added.
+* PropertiesInstance added.
+* class Check added.
 * Properties.Field#getString etc. added.
 	Check, whether results of methods of Properties.Field mentioned below
 	are applied to Object#toString() and replace as shown:

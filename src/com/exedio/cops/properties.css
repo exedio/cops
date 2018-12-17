@@ -158,3 +158,8 @@ table td.failed
 {
 	background-color:#fee;
 }
+
+table td.aborted
+{
+	background-color:#ffe;
+}

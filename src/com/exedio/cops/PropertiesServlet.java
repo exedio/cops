@@ -25,6 +25,7 @@ package com.exedio.cops;
 import static java.util.Locale.UK;
 
 import com.exedio.cope.util.Properties;
+import com.exedio.cope.util.Properties.ProbeAbortedException;
 import com.exedio.cope.util.Sources;
 import java.io.IOException;
 import java.io.StringReader;
@@ -178,6 +179,9 @@ public abstract class PropertiesServlet extends CopsServlet
 				try
 				{
 					probe.call();
+				}
+				catch(final ProbeAbortedException ignored)
+				{
 				}
 				catch(final Exception e)
 				{

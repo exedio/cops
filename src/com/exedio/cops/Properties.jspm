@@ -41,6 +41,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.exedio.cope.util.Properties;
 import com.exedio.cope.util.Properties.Field;
+import com.exedio.cope.util.Properties.ProbeAbortedException;
 
 @SuppressWarnings("HardcodedLineSeparator") // ok for jspm
 final class Properties_Jspm
@@ -282,6 +283,17 @@ final class Properties_Jspm
 							if(result!=null)
 							{
 								%>: <%=result.toString()%><%
+							}
+						}
+						catch(final ProbeAbortedException e)
+						{
+							final long end = nanoTime();
+							final String message = e.getMessage();
+							%><%=toMillies(end, start)%></td>
+							<td class="aborted">aborted<%
+							if(message!=null)
+							{
+								%>: <%=message%><%
 							}
 						}
 						catch(final Exception e)
