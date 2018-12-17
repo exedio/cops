@@ -25,6 +25,7 @@ package com.exedio.cops.example;
 import static java.lang.System.nanoTime;
 
 import com.exedio.cope.util.Properties;
+import com.exedio.cope.util.PropertiesInstance;
 import com.exedio.cope.util.ServiceFactory;
 import com.exedio.cope.util.Sources;
 import java.io.File;
@@ -133,19 +134,6 @@ public final class ExampleProperties extends Properties
 		throw newProbeAbortedException(null);
 	}
 
-	private static ExampleProperties instance = null;
-
-	public static ExampleProperties instance(final File source)
-	{
-		if(instance!=null)
-			return instance;
-
-		instance = new ExampleProperties(source);
-		return instance;
-	}
-
-	static void setInstance(final ExampleProperties instance)
-	{
-		ExampleProperties.instance = instance;
-	}
+	static final PropertiesInstance<ExampleProperties> instance =
+			PropertiesInstance.create(ExampleProperties::new);
 }

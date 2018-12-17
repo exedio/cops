@@ -3,4 +3,8 @@
 			debug="0"
 			privileged="true"
 			cookies="false">
+	<Parameter
+			name="cops.com.exedio.cope.servletutil.ServletSource.propertiesFile"
+			value="../../example/web/WEB-INF/normal.properties"
+	/>
 </Context>

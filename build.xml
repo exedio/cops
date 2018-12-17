@@ -175,6 +175,7 @@
 				<pathelement location="build/classes" />
 				<pathelement location="lib/javax.servlet-api.jar" />
 				<pathelement location="lib/exedio-cope-util.jar" />
+				<pathelement location="lib/exedio-cope-servletutil.jar" />
 				<pathelement location="lib/findbugs-annotations.jar" />
 			</classpath>
 			<compilerarg value="-Xlint" />
@@ -196,6 +197,7 @@
 		<copy todir="example/web/WEB-INF/lib">
 			<fileset dir="lib">
 				<include name="exedio-cope-util.jar" />
+				<include name="exedio-cope-servletutil.jar" />
 				<include name="slf4j-api.jar" />
 				<include name="slf4j-log4j12.jar" />
 				<include name="log4j-bundle.jar" />

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2009  exedio GmbH (www.exedio.com)
+ * Copyright (C) 2004-2015  exedio GmbH (www.exedio.com)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -20,24 +20,35 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package com.exedio.cops.example;
+package com.exedio.cops;
 
+import com.exedio.cope.util.Properties;
+import com.exedio.cope.util.Properties.Source;
 import com.exedio.cope.util.PropertiesInstance;
-import com.exedio.cops.PropertiesInstanceServlet;
+import com.exedio.cops.PropertiesServlet.Overridable;
 
-public final class PropertiesServlet extends PropertiesInstanceServlet<ExampleProperties>
+public abstract class PropertiesInstanceServlet<P extends Properties>
+	extends PropertiesServlet implements Overridable<P>
 {
 	private static final long serialVersionUID = 1l;
 
+	protected abstract PropertiesInstance<P> get();
+
 	@Override
-	protected PropertiesInstance<ExampleProperties> get()
+	protected final Properties getProperties()
 	{
-		return ExampleProperties.instance;
+		return get().get();
 	}
 
 	@Override
-	protected String getDisplayCaption()
+	public final void override(final P properties)
 	{
-		return "Display Caption";
+		get().set(properties);
+	}
+
+	@Override
+	public final P newProperties(final Source source)
+	{
+		return get().create(source);
 	}
 }

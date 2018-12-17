@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2009  exedio GmbH (www.exedio.com)
+ * Copyright (C) 2004-2015  exedio GmbH (www.exedio.com)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -22,22 +22,27 @@
 
 package com.exedio.cops.example;
 
-import com.exedio.cope.util.PropertiesInstance;
-import com.exedio.cops.PropertiesInstanceServlet;
+import static com.exedio.cops.example.ExampleProperties.instance;
 
-public final class PropertiesServlet extends PropertiesInstanceServlet<ExampleProperties>
+import com.exedio.cope.servletutil.ServletSource;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+
+/**
+ * This listener should be the only listener with the whole web.xml.
+ * If you need more, refactor / extend this class.
+ */
+public final class WebappListener implements ServletContextListener
 {
-	private static final long serialVersionUID = 1l;
-
 	@Override
-	protected PropertiesInstance<ExampleProperties> get()
+	public void contextInitialized(final ServletContextEvent sce)
 	{
-		return ExampleProperties.instance;
+		instance.set(ServletSource.create(sce.getServletContext()));
 	}
 
 	@Override
-	protected String getDisplayCaption()
+	public void contextDestroyed(final ServletContextEvent sce)
 	{
-		return "Display Caption";
+		instance.remove();
 	}
 }

@@ -12,6 +12,12 @@
 		<realm-name>cops example realm</realm-name>
 	</login-config>
 
+	<!--
+		This listener should be the only listener with the whole web.xml.
+		If you need more, refactor / extend class WebappListener.
+	-->
+	<listener><listener-class>com.exedio.cops.example.WebappListener</listener-class></listener>
+
 	<servlet>
 		<servlet-name>cops</servlet-name>
 		<servlet-class>com.exedio.cops.example.ExampleServlet</servlet-class>
@@ -54,10 +60,6 @@
 	<servlet>
 		<servlet-name>properties</servlet-name>
 		<servlet-class>com.exedio.cops.example.PropertiesServlet</servlet-class>
-		<init-param>
-			<param-name>source</param-name>
-			<param-value>normal.properties</param-value>
-		</init-param>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>properties</servlet-name>
