@@ -71,7 +71,7 @@ public final class ExampleProperties extends Properties
 
 	private final ServiceFactory<ExampleService, ExampleServiceParameter> service =
 			valueService("service",
-					ExampleServiceImplementationDefault.class.getName(),
+					ExampleServiceImplementationDefault.class,
 					ExampleService.class,
 					ExampleServiceParameter.class);
 
