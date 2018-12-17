@@ -153,3 +153,8 @@ table td.tobereloaded hr.reload
 {
 	background-color:#a00;
 }
+
+table td.failed
+{
+	background-color:#fee;
+}

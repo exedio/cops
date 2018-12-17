@@ -288,7 +288,7 @@ final class Properties_Jspm
 						{
 							final long end = nanoTime();
 							%><%=toMillies(end, start)%></td>
-							<td><span style="color:red">failed:</span>
+							<td class="failed">failed:
 							<%
 							StackTrace_Jspm.write(out, e);
 						}
