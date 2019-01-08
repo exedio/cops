@@ -62,6 +62,7 @@ public abstract class PropertiesServlet extends CopsServlet
 	static final String FIELD_VALUE_PREFIX = "fieldVal_";
 	static final String FIELDS_RAW = "fieldsRaw";
 	static final String PROBE_NUMBER = "probeNum";
+	static final String DRY_RUN = "dryRun";
 
 	@Override
 	protected final void doRequest(
@@ -115,7 +116,8 @@ public abstract class PropertiesServlet extends CopsServlet
 						getProperties().getSourceObject().reload(),
 						authentication, hostname,
 						sourceMap,
-						doProbeNumbers);
+						doProbeNumbers,
+						request.getParameter(DRY_RUN)!=null);
 			}
 		}
 
@@ -159,7 +161,8 @@ public abstract class PropertiesServlet extends CopsServlet
 			final String authentication,
 			final String hostname,
 			final HashMap<String, String> sourceMap,
-			final HashSet<Integer> doProbeNumbers)
+			final HashSet<Integer> doProbeNumbers,
+			final boolean dryRun)
 	{
 		final P properties = overridable.newProperties(
 				sourceMap.isEmpty()
@@ -189,7 +192,8 @@ public abstract class PropertiesServlet extends CopsServlet
 				}
 			}
 		}
-		overridable.override(properties);
+		if(!dryRun)
+			overridable.override(properties);
 	}
 
 	private static final class EditedSource implements Properties.Source

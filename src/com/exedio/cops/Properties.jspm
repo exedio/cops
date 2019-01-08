@@ -24,6 +24,7 @@
 package com.exedio.cops;
 
 import static com.exedio.cops.PropertiesServlet.SET;
+import static com.exedio.cops.PropertiesServlet.DRY_RUN;
 import static com.exedio.cops.PropertiesServlet.FIELD_SELECT;
 import static com.exedio.cops.PropertiesServlet.FIELD_VALUE_PREFIX;
 import static com.exedio.cops.PropertiesServlet.FIELDS_RAW;
@@ -317,7 +318,8 @@ final class Properties_Jspm
 		if(overridable)
 		{
 			%>
-			<input type="submit" name="<%=SET%>" value="Run Probes, Reload, and Set Fields"><%
+			<input type="submit" name="<%=SET%>" value="Run Probes, Reload, and Set Fields">
+			<input type="checkbox" name="<%=DRY_RUN%>">dry run<%
 		}
 		%>
 		</form>
