@@ -74,6 +74,7 @@ final class ResourceStatusCop extends Cop
 		return new ResourceStatusCop(showImage, showUrl, !absoluteUrl);
 	}
 
+	static final String EXEDIO_LOGO = "https://exedio.github.io/exedio198x60.png";
 	static final String SELECT = "select";
 	static final String SELECT_ALL = "selectAll";
 	static final String INBOX = "inbox";

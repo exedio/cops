@@ -20,6 +20,7 @@
 package com.exedio.cops;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static com.exedio.cops.ResourceStatusCop.EXEDIO_LOGO;
 import static com.exedio.cops.ResourceStatusCop.SELECT;
 import static com.exedio.cops.ResourceStatusCop.SELECT_ALL;
 import static com.exedio.cops.ResourceStatusCop.INBOX;
@@ -129,7 +130,7 @@ final class ResourceStatus_Jspm
 		</style>
 	</head>
 	<body>
-		<a href="https://exedio.github.io/" target="_blank"><img src="https://exedio.github.io/exedio198x60.png" alt="Exedio Logo" class="logo"></a>
+		<a href="https://exedio.github.io/" target="_blank"><img src="<%= EXEDIO_LOGO %>" alt="Exedio Logo" class="logo"></a>
 		<h1>Cops Servlet &quot;<%=servletName%>&quot;</h1>
 		<div class="<% if(authentication==null){%>not<%} %>authenticated"><%
 			if(authentication!=null)

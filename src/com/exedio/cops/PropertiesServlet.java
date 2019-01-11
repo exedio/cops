@@ -72,6 +72,30 @@ public abstract class PropertiesServlet extends CopsServlet
 	{
 		//System.out.println("request ---" + request.getMethod() + "---" + request.getContextPath() + "---" + request.getServletPath() + "---" + request.getPathInfo() + "---" + request.getQueryString() + "---");
 
+		// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
+		response.setHeader("Content-Security-Policy",
+				"default-src 'none'; " +
+				"style-src 'self'; " +
+				"script-src 'self' 'unsafe-inline'; " + // TODO get rid of unsafe-inline
+				"img-src 'self'; " +
+				"frame-ancestors 'none'; " +
+				"block-all-mixed-content; " +
+				"base-uri 'none'");
+
+		// Do not leak information to external servers, not even the (typically private) hostname.
+		// We need the referer within the servlet, because typically there is a StrictRefererValidationFilter.
+		// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
+		response.setHeader("Referrer-Policy", "same-origin");
+
+		// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options
+		response.setHeader("X-Content-Type-Options", "nosniff");
+
+		// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
+		response.setHeader("X-Frame-Options", "deny");
+
+		// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection
+		response.setHeader("X-XSS-Protection", "1; mode=block");
+
 		if(Cop.isPost(request) && request.getParameter(SET)!=null)
 		{
 			if(this instanceof Overridable<?>)
