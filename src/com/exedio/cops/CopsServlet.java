@@ -253,10 +253,7 @@ public abstract class CopsServlet extends HttpServlet
 		request.setCharacterEncoding(UTF_8.name());
 		response.setContentType("text/html; charset="+UTF_8.name());
 
-		response.addHeader("Cache-Control", "no-cache");
-		response.addHeader("Cache-Control", "no-store");
-		response.addHeader("Cache-Control", "max-age=0");
-		response.addHeader("Cache-Control", "must-revalidate");
+		response.addHeader("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate");
 		response.setHeader("Pragma", "no-cache");
 		response.setDateHeader("Expires", System.currentTimeMillis());
 
