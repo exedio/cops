@@ -115,7 +115,7 @@ public final class RequestLimiter
 	/**
 	 * @return whether this call has handled the request.
 	 *         Do the following at the beginning of processing the request:
-	 *         <tt>if(requestLimiter.doRequest(request, response)) return;</tt>
+	 *         {@code if(requestLimiter.doRequest(request, response)) return;}
 	 */
 	public boolean doRequest(
 			final HttpServletRequest request,

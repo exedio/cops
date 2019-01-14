@@ -112,7 +112,7 @@ public abstract class Cop
 	}
 
 	/**
-	 * Does nothing, if <tt>value==null</tt>.
+	 * Does nothing, if {@code value==null}.
 	 */
 	public final void addParameter(final String key, final String value)
 	{

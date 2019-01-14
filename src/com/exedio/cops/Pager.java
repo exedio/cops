@@ -141,7 +141,7 @@ public final class Pager
 	}
 
 	/**
-	 * @return a subList of <tt>all</tt> corresponding the the current page of the pager.
+	 * @return a subList of {@code all} corresponding the the current page of the pager.
 	 */
 	public <E> List<E> init(final List<E> all)
 	{
