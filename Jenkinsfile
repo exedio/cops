@@ -45,6 +45,7 @@ timestamps
 				sh "${antHome}/bin/ant clean jenkins" +
 						' "-Dbuild.revision=${BUILD_NUMBER}"' +
 						' "-Dbuild.tag=git ${BRANCH_NAME} ${GIT_COMMIT} ${GIT_TREE} jenkins ${BUILD_NUMBER} ${BUILD_TIMESTAMP}"' +
+						' -Dbuild.status=' + (isRelease?'release':'integration') +
 						' -Dtomcat.port.shutdown=' + port(0) +
 						' -Dtomcat.port.http='     + port(1) +
 						' -Dtomcat.port.https='    + port(2) +
