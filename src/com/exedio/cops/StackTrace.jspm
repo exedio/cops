@@ -19,7 +19,6 @@
 
 package com.exedio.cops;
 
-@SuppressWarnings("HardcodedLineSeparator") // ok for jspm
 final class StackTrace_Jspm
 {
 	@SuppressWarnings("StaticMethodOnlyUsedInOneClass") // ok for jspm

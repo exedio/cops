@@ -32,7 +32,6 @@ import static com.exedio.cops.ResourceStatusCop.DEACTIVATE_LOG;
 import java.text.DecimalFormat;
 import java.util.Collection;
 
-@SuppressWarnings("HardcodedLineSeparator") // ok for jspm
 final class ResourceStatus_Jspm
 {
 	@SuppressWarnings("StaticMethodOnlyUsedInOneClass") // ok for jspm

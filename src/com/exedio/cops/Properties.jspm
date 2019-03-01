@@ -44,7 +44,6 @@ import com.exedio.cope.util.Properties;
 import com.exedio.cope.util.Properties.Field;
 import com.exedio.cope.util.Properties.ProbeAbortedException;
 
-@SuppressWarnings("HardcodedLineSeparator") // ok for jspm
 final class Properties_Jspm
 {
 	private static final String RUN_PROBES = "runProbes";

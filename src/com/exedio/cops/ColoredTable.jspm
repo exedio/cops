@@ -22,7 +22,6 @@ package com.exedio.cops;
 import java.io.PrintStream;
 import java.util.Arrays;
 
-@SuppressWarnings("HardcodedLineSeparator") // ok for jspm
 final class ColoredTable_Jspm
 {
 	private ColoredTable_Jspm()

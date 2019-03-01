@@ -30,7 +30,6 @@ import javax.servlet.http.HttpServletRequest;
 import com.exedio.cops.Pageable;
 import com.exedio.cops.Pager;
 
-@SuppressWarnings("HardcodedLineSeparator") // ok for jspm
 final class Example_Jspm
 {
 	@SuppressWarnings("StaticMethodOnlyUsedInOneClass") // ok for jspm
