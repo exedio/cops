@@ -62,8 +62,8 @@ public final class ExampleProperties extends Properties
 	private final String stringDefaultSet = value("string.default.set", "default of string.default.set");
 
 	private final String hidden1 = valueHidden("hidden.1", "default of hidden.1");
-	private final String hidden2 = valueHidden("hidden.2", (String)null);
-	private final String hidden3 = valueHidden("hidden.3", (String)null);
+	private final String hidden2 = valueHidden("hidden.2", null);
+	private final String hidden3 = valueHidden("hidden.3", null);
 
 	private final String  setToDefaultString  = value("setToDefault.string" , "value of setToDefault.string");
 	private final int     setToDefaultInt     = value("setToDefault.int"    , 1234, 5);
@@ -123,12 +123,10 @@ public final class ExampleProperties extends Properties
 		final long end = nanoTime();
 		return "Slept " + (end - start) + "ns";
 	}
-	@SuppressWarnings("MethodMayBeStatic") // OK: @Probe
 	@Probe private Object probeAborted() throws ProbeAbortedException
 	{
 		throw newProbeAbortedException("abort message");
 	}
-	@SuppressWarnings("MethodMayBeStatic") // OK: @Probe
 	@Probe private Object probeAbortedNull() throws ProbeAbortedException
 	{
 		throw newProbeAbortedException(null);

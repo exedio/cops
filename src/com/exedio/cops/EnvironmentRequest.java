@@ -25,6 +25,9 @@ final class EnvironmentRequest
 		// prevent instantiation
 	}
 
+	@SuppressWarnings({
+			"DuplicateExpressions",  // OK: just formal duplicate (pos is different)
+			"RedundantSuppression"}) // OK: bug in idea
 	static String getURL(final String environment, final boolean needsSecure, final String url)
 	{
 		String e = environment;

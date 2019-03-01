@@ -41,9 +41,11 @@ public final class Resource
 	/**
 	 * rounded to full seconds
 	 */
+	@SuppressWarnings("VolatileLongOrDoubleField")
 	private volatile long lastModified;
 
 	private final Object contentLock = new Object();
+	@SuppressWarnings("FieldAccessedSynchronizedAndUnsynchronized") // TODO
 	private byte[] content;
 
 	private volatile String hostOverride = null;
@@ -138,6 +140,7 @@ public final class Resource
 	}
 
 
+	@SuppressWarnings("FieldAccessedSynchronizedAndUnsynchronized") // TODO
 	private String pathIfInitialized;
 
 	public String getPath()

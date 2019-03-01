@@ -56,7 +56,7 @@ public class ExampleCop extends Cop implements Pageable
 			return pathInfo;
 		final StringBuilder bf = new StringBuilder();
 		for(int i = 0; i<dirLevel; i++)
-			bf.append(Cop.encodeNaturalLanguageSegment(string)).append(String.valueOf(i)).append('/');
+			bf.append(Cop.encodeNaturalLanguageSegment(string)).append(i).append('/');
 		bf.append(pathInfo);
 		return bf.toString();
 	}

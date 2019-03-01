@@ -174,7 +174,6 @@ public class CopParameterRequestTest extends TestCase
 		final Map<?,?> parameters = request.getParameterMap();
 		final LinkedHashMap<String, List<String>> result = new LinkedHashMap<>();
 		for(final Map.Entry<?,?> e : parameters.entrySet())
-			//noinspection OverlyStrongTypeCast bug in idea
 			result.put((String)e.getKey(), asList((String[])e.getValue()));
 		return Collections.unmodifiableMap(result);
 	}

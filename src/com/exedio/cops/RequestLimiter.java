@@ -101,6 +101,7 @@ public final class RequestLimiter
 		return i;
 	}
 
+	@SuppressWarnings("VolatileLongOrDoubleField")
 	private volatile long lastInterval = Long.MIN_VALUE;
 	@SuppressFBWarnings("VO_VOLATILE_INCREMENT") // TODO use AtomicInteger
 	private volatile int requestsInInterval = 1;
@@ -150,6 +151,7 @@ public final class RequestLimiter
 				}
 				else
 				{
+					//noinspection NonAtomicOperationOnVolatileField TODO
 					requestsInInterval++;
 					//System.out.println("copsRequestLimiter passed " + requestsInInterval);
 					return false;

@@ -128,9 +128,9 @@ public final class Pager
 	public void init(final int page, final int total)
 	{
 		if(page<0)
-			throw new IllegalArgumentException("page must be positive, but was " + String.valueOf(page));
+			throw new IllegalArgumentException("page must be positive, but was " + page);
 		if(total<0)
-			throw new IllegalArgumentException("total must be positive, but was " + String.valueOf(total));
+			throw new IllegalArgumentException("total must be positive, but was " + total);
 		if(pageIfInitialized>=0)
 			throw new IllegalStateException("must not call init more than once");
 		if(totalIfInitialized>=0)

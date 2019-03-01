@@ -70,6 +70,7 @@ public class BasicAuthorizationTest extends TestCase
 		@Override
 		public String getHeader(final String name)
 		{
+			//noinspection SwitchStatementWithTooFewBranches OK: prepares more branches
 			switch(name)
 			{
 				case "Authorization": return authorization;
