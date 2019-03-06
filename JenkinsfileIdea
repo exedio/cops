@@ -2,6 +2,7 @@
 timestamps
 {
 	def idea = 'idea-2018.3.5'
+	def confighome = '.IdeaIC2018.3'
 
 	//noinspection GroovyAssignabilityCheck
 	lock('idea') { node('OpenJdk18Debian9 && ' + idea)
@@ -26,6 +27,10 @@ timestamps
 				])
 
 				sh "${antHome}/bin/ant src"
+
+				sh "${antHome}/bin/ant -f conf/idea" +
+						' -Dconfig.home=' + env.HOME + '/' + confighome +
+						' -Djava.home=' + env.JAVA_HOME
 
 				sh "/" + idea + "/bin/inspect.sh . 'Project Default' idea-inspection-output"
 				archiveArtifacts 'idea-inspection-output/**'
