@@ -25,13 +25,14 @@ timestamps
 				sh "java -version"
 				sh "${antHome}/bin/ant -version"
 
-				def isRelease = env.BRANCH_NAME.toString().equals("master");
+				def isRelease = env.BRANCH_NAME.toString().equals("master")
 
-				properties([[$class: 'jenkins.model.BuildDiscarderProperty',
-						strategy: [
-								$class               : 'LogRotator',
-								numToKeepStr         : isRelease ? '1000' : '15',
-								artifactNumToKeepStr : isRelease ? '1000' :  '2' ]]])
+				properties([
+						buildDiscarder(logRotator(
+								numToKeepStr         : isRelease ? '1000' : '30',
+								artifactNumToKeepStr : isRelease ? '1000' :  '2'
+						))
+				])
 
 				sh 'echo' +
 						' GIT_COMMIT -${GIT_COMMIT}-' +
