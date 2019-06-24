@@ -47,7 +47,7 @@
 		<dependency org="com.exedio" name="copeutil" rev="970" conf="runtime->runtime; build->runtime,sources,changelog" />
 		<dependency org="com.exedio" name="copeservletutil" rev="107" conf="build->runtime,sources,changelog" />
 		<dependency org="com.exedio" name="jspm"     rev="202" conf="build->runtime,changelog" />
-		<dependency org="org.apache.tomcat" name="tomcat" rev="8.5.14" conf="build->default">
+		<dependency org="org.apache.tomcat" name="tomcat" rev="9.0.31" conf="build->default">
 			<artifact name="tomcat" type="tar.gz" />
 		</dependency>
 	</dependencies>
