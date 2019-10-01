@@ -337,9 +337,6 @@
 
 	<target name="api">
 
-		<property name="api.link.jdk"  value="https://java.sun.com/j2se/1.5.0/docs/api" />
-		<property name="api.link.j2ee" value="https://java.sun.com/j2ee/1.4/docs/api" />
-
 		<delete dir="api" />
 		<mkdir  dir="api" />
 
@@ -359,8 +356,6 @@
 			<footer>exedio cops</footer>
 			<bottom><![CDATA[<small>Copyright &copy; 2004-2008 <a href="https://www.exedio.com/" target="_top">exedio</a> Gesellschaft f&uuml;r Softwareentwicklung mbH. All rights reserved.</small><br><font size="-3">${build.tag}</font>]]></bottom>
 			<package name="com.*" />
-			<link href="${api.link.jdk}"  packagelistLoc="package-list/jdk"  offline="true" />
-			<link href="${api.link.j2ee}" packagelistLoc="package-list/j2ee" offline="true" />
 			<arg value="-Xdoclint:all,-missing" />
 			<classpath>
 				<pathelement location="lib/javax.servlet-api.jar" />
