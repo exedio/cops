@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2015  exedio GmbH (www.exedio.com)
+ * Copyright (C) 2004-2009  exedio GmbH (www.exedio.com)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -18,23 +18,24 @@
 
 package com.exedio.cops;
 
-// copied from cope
-final class TimeUtil
+import io.micrometer.core.instrument.Metrics;
+import io.micrometer.core.instrument.Timer;
+import java.util.EnumMap;
+
+enum ProbeResult
 {
-	/**
-	 *	Never returns a negative value.
-	 */
+	success, failure, abort;
+
 	@SuppressWarnings("StaticMethodOnlyUsedInOneClass")
-	static long toMillies(final long nanos)
+	static EnumMap<ProbeResult, Timer> timers(final String name, final String caption)
 	{
-		if(nanos<500000)
-			return 0l;
-
-		return (nanos+500000) / 1000000l;
-	}
-
-	private TimeUtil()
-	{
-		// prevent instantiation
+		final EnumMap<ProbeResult, Timer> result = new EnumMap<>(ProbeResult.class);
+		for(final ProbeResult pr : values())
+			result.put(pr, Metrics.timer(
+					PropertiesServlet.class.getName() + ".probe",
+					"caption", caption,
+					"name", name,
+					"result", pr.name()));
+		return result;
 	}
 }

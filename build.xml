@@ -47,6 +47,7 @@
 			<classpath>
 				<pathelement location="lib/javax.servlet-api.jar" />
 				<pathelement location="lib/slf4j-api.jar" />
+				<pathelement location="lib/micrometer-core.jar" />
 				<pathelement location="lib/exedio-cope-util.jar" />
 				<pathelement location="lib/findbugs-annotations.jar" />
 			</classpath>
@@ -175,6 +176,9 @@
 			<classpath>
 				<pathelement location="build/classes" />
 				<pathelement location="lib/javax.servlet-api.jar" />
+				<pathelement location="lib/micrometer-core.jar" />
+				<pathelement location="lib/micrometer-registry-prometheus.jar" />
+				<pathelement location="lib/simpleclient-bundle.jar" />
 				<pathelement location="lib/exedio-cope-util.jar" />
 				<pathelement location="lib/exedio-cope-servletutil.jar" />
 				<pathelement location="lib/findbugs-annotations.jar" />
@@ -201,6 +205,12 @@
 				<include name="exedio-cope-servletutil.jar" />
 				<include name="slf4j-api.jar" />
 				<include name="slf4j-log4j12.jar" />
+				<include name="micrometer-core.jar" />
+				<include name="LatencyUtils.jar" />
+				<include name="micrometer-registry-prometheus.jar" />
+				<include name="simpleclient-bundle.jar" />
+				<include name="simpleclient_common-bundle.jar" />
+				<include name="simpleclient_servlet-bundle.jar" />
 				<include name="log4j-bundle.jar" />
 			</fileset>
 		</copy>

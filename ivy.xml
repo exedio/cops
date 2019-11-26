@@ -29,6 +29,11 @@
 			<conf name="build" mapped="sources" />
 		</dependency>
 		<dependency org="org.slf4j" name="slf4j-log4j12" rev="1.6.4" conf="build->default" />
+		<dependency org="io.micrometer" name="micrometer-core" rev="1.3.0" conf="runtime->default; build->sources">
+			<exclude org="org.hdrhistogram" module="HdrHistogram" />
+		</dependency>
+		<dependency org="io.micrometer" name="micrometer-registry-prometheus" rev="1.3.0" conf="build->default" />
+		<dependency org="io.prometheus" name="simpleclient_servlet" rev="0.7.0" conf="build->default" />
 		<dependency org="junit" name="junit" rev="4.4" conf="build->default" />
 		<dependency org="findbugs-x" name="findbugs" rev="3.0.0" conf="build->default" />
 		<dependency org="com.exedio" name="copeutil" rev="856" conf="runtime->runtime; build->runtime,sources,changelog" />

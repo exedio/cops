@@ -25,6 +25,11 @@ package com.exedio.cops.example;
 import static com.exedio.cops.example.ExampleProperties.instance;
 
 import com.exedio.cope.servletutil.ServletSource;
+import io.micrometer.core.instrument.Clock;
+import io.micrometer.core.instrument.Metrics;
+import io.micrometer.prometheus.PrometheusConfig;
+import io.micrometer.prometheus.PrometheusMeterRegistry;
+import io.prometheus.client.CollectorRegistry;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
@@ -38,6 +43,10 @@ public final class WebappListener implements ServletContextListener
 	public void contextInitialized(final ServletContextEvent sce)
 	{
 		instance.set(ServletSource.create(sce.getServletContext()));
+		Metrics.globalRegistry.add(new PrometheusMeterRegistry(
+				PrometheusConfig.DEFAULT,
+				CollectorRegistry.defaultRegistry,
+				Clock.SYSTEM));
 	}
 
 	@Override

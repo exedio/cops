@@ -30,10 +30,11 @@ import static com.exedio.cops.PropertiesServlet.FIELD_VALUE_PREFIX;
 import static com.exedio.cops.PropertiesServlet.FIELDS_RAW;
 import static com.exedio.cops.PropertiesServlet.PROBE_NUMBER;
 import static com.exedio.cops.TimeUtil.toMillies;
-import static java.lang.System.nanoTime;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import io.micrometer.core.instrument.Timer;
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.Callable;
@@ -263,22 +264,24 @@ final class Properties_Jspm
 			for(final Callable<?> probe : properties.getProbes())
 			{
 				probeNumber++;
+				final String probeName = probe.toString();
+				final EnumMap<ProbeResult, Timer> timers = ProbeResult.timers(probeName, caption);
 				%>
 				<tr>
 					<th><input class="probecheck" type="checkbox" name="<%=PROBE_NUMBER%>" value="<%=probeNumber%>" checked="true"></th>
-					<th><%=probe.toString()%></th><%
+					<th><%=probeName%></th><%
 
 				if(doProbeNumbers!=null && doProbeNumbers.contains(probeNumber))
 				{
 					%>
 					<td class="number"><%
 						final Object result;
-						final long start = nanoTime();
+						final Timer.Sample start = Timer.start();
 						try
 						{
 							result = probe.call();
-							final long end = nanoTime();
-							%><%=toMillies(end, start)%></td>
+							final long elapsed = start.stop(timers.get(ProbeResult.success));
+							%><%=toMillies(elapsed)%></td>
 							<td>OK<%
 							if(result!=null)
 							{
@@ -287,9 +290,9 @@ final class Properties_Jspm
 						}
 						catch(final ProbeAbortedException e)
 						{
-							final long end = nanoTime();
+							final long elapsed = start.stop(timers.get(ProbeResult.abort));
 							final String message = e.getMessage();
-							%><%=toMillies(end, start)%></td>
+							%><%=toMillies(elapsed)%></td>
 							<td class="aborted">aborted<%
 							if(message!=null)
 							{
@@ -298,8 +301,8 @@ final class Properties_Jspm
 						}
 						catch(final Exception e)
 						{
-							final long end = nanoTime();
-							%><%=toMillies(end, start)%></td>
+							final long elapsed = start.stop(timers.get(ProbeResult.failure));
+							%><%=toMillies(elapsed)%></td>
 							<td class="failed">failed:
 							<%
 							StackTrace_Jspm.write(out, e);

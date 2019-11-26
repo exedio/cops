@@ -70,6 +70,15 @@
 		<auth-constraint><role-name>manager</role-name></auth-constraint>
 	</security-constraint-->
 
+	<servlet>
+		<servlet-name>prometheus</servlet-name>
+		<servlet-class>io.prometheus.client.exporter.MetricsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>prometheus</servlet-name>
+		<url-pattern>/prometheus/*</url-pattern>
+	</servlet-mapping>
+
 	<!-- don't know, why this is needed here,
 		  requestLimiter.html protects itself -->
 	<security-role><role-name>manager</role-name></security-role>
