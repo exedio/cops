@@ -1,11 +1,12 @@
 
 timestamps
 {
+	def jdk = 'openjdk-8-deb9'
 	def idea = 'idea-2018.3.5'
 	def confighome = '.IdeaIC2018.3'
 
 	//noinspection GroovyAssignabilityCheck
-	lock('idea') { node('OpenJdk18Debian9 && ' + idea)
+	lock('idea') { node(jdk + ' && ' + idea)
 	{
 		try
 		{
@@ -16,7 +17,7 @@ timestamps
 
 				checkout scm
 
-				env.JAVA_HOME = "${tool 'openjdk 1.8 debian9'}"
+				env.JAVA_HOME = tool jdk
 				env.PATH = "${env.JAVA_HOME}/bin:${env.PATH}"
 				def antHome = tool 'Ant version 1.9.3'
 
