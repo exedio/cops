@@ -36,6 +36,7 @@ import io.micrometer.core.instrument.Timer;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
 
@@ -44,6 +45,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.exedio.cope.util.Properties;
 import com.exedio.cope.util.Properties.Field;
 import com.exedio.cope.util.Properties.ProbeAbortedException;
+import com.exedio.cops.PropertiesServlet.EditedSource;
 
 final class Properties_Jspm
 {
@@ -57,6 +59,7 @@ final class Properties_Jspm
 			final String footerDate,
 			final Set<String> orphaned,
 			final boolean overridable,
+			final ArrayList<EditedSource> edited,
 			final Properties properties,
 			final Properties reloaded,
 			final RuntimeException reloadFailure)
@@ -94,6 +97,43 @@ final class Properties_Jspm
 		%>
 		</div>
 		<%
+		if(!edited.isEmpty())
+		{
+		%>
+		<table>
+			<caption>Transient Changes</caption>
+			<tr>
+				<th>When</th>
+				<th>By</th>
+				<th>Key</th>
+				<th>Value</th>
+			</tr><%
+
+		for(final EditedSource e : edited)
+		{
+			boolean first = true;
+			final int rowspan = e.content().size();
+			for(final Map.Entry<String,String> en : e.content().entrySet())
+			{
+			%>
+			<tr><%
+				if(first)
+				{
+				%>
+				<td rowspan="<%=rowspan%>"><%= e.timestamp() %></td>
+				<td rowspan="<%=rowspan%>"><% if(e.authentication!=null){%><%=e.authentication%><%} %></td><%
+					first = false;
+				}
+				%>
+				<td><%=en.getKey()%></td>
+				<td><%=en.getValue()%></td>
+			</tr><%
+			}
+		}
+		%>
+		</table><%
+		}
+
 		if(cop.hasShowHidden())
 		{
 		%>

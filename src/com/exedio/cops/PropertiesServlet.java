@@ -31,7 +31,9 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -151,6 +153,11 @@ public abstract class PropertiesServlet extends CopsServlet
 			}
 		}
 
+		final ArrayList<EditedSource> edited = new ArrayList<>();
+		for(final Properties.Source s : Sources.decascade(properties.getSourceObject()))
+			if(s instanceof EditedSource)
+				edited.add((EditedSource)s);
+
 		final Out out = new Out(request);
 		Properties_Jspm.write(
 				out,
@@ -160,6 +167,7 @@ public abstract class PropertiesServlet extends CopsServlet
 				new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS Z (z)", UK).format(new Date()),
 				properties.getOrphanedKeys(),
 				this instanceof Overridable<?>,
+				edited,
 				properties,
 				reloaded,
 				reloadFailure);
@@ -209,9 +217,9 @@ public abstract class PropertiesServlet extends CopsServlet
 			overridable.override(properties);
 	}
 
-	private static final class EditedSource implements Properties.Source
+	static final class EditedSource implements Properties.Source
 	{
-		private final String authentication;
+		final String authentication;
 		private final HashMap<String, String> content;
 		private final long timestamp = System.currentTimeMillis();
 
@@ -220,7 +228,18 @@ public abstract class PropertiesServlet extends CopsServlet
 				final HashMap<String, String> content)
 		{
 			this.authentication = authentication;
+			//noinspection AssignmentOrReturnOfFieldWithMutableType OK: no reference is held anywhere else
 			this.content = content;
+		}
+
+		String timestamp()
+		{
+			return new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS", UK).format(new Date(timestamp));
+		}
+
+		Map<String,String> content()
+		{
+			return Collections.unmodifiableMap(content);
 		}
 
 		@Override
@@ -233,8 +252,8 @@ public abstract class PropertiesServlet extends CopsServlet
 		public String getDescription()
 		{
 			final StringBuilder bf = new StringBuilder();
-			bf.append("(Edited ");
-			bf.append(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS", UK).format(new Date(timestamp)));
+			bf.append("(Transiently changed ");
+			bf.append(timestamp());
 			if(authentication!=null)
 				bf.append(" by ").append(authentication);
 			bf.append(' ');
