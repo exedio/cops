@@ -35,18 +35,21 @@ public abstract class PropertiesInstanceServlet<P extends Properties>
 	protected abstract PropertiesInstance<P> get();
 
 	@Override
+	@SuppressWarnings({"deprecation","RedundantSuppression"}) // OK: PropertiesServlet
 	protected final Properties getProperties()
 	{
 		return get().get();
 	}
 
 	@Override
+	@SuppressWarnings({"deprecation","RedundantSuppression"}) // OK: PropertiesServlet
 	public final void override(final P properties)
 	{
 		get().set(properties);
 	}
 
 	@Override
+	@SuppressWarnings({"deprecation","RedundantSuppression"}) // OK: PropertiesServlet
 	public final P newProperties(final Source source)
 	{
 		return get().create(source);

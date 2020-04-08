@@ -135,6 +135,7 @@ public abstract class PropertiesServlet extends CopsServlet
 					// leave hostname==null
 				}
 
+				//noinspection deprecation OK: PropertiesServlet
 				override(
 						(Overridable<?>)this,
 						getProperties().getSourceObject().reload(),
@@ -145,6 +146,7 @@ public abstract class PropertiesServlet extends CopsServlet
 			}
 		}
 
+		//noinspection deprecation OK: PropertiesServlet
 		final Properties properties = getProperties();
 
 		Properties reloaded = null;
@@ -153,6 +155,7 @@ public abstract class PropertiesServlet extends CopsServlet
 		{
 			try
 			{
+				//noinspection deprecation OK: PropertiesServlet
 				reloaded = ((Overridable<?>)this).newProperties(properties.getSourceObject().reload());
 			}
 			catch(final RuntimeException e)
@@ -188,6 +191,7 @@ public abstract class PropertiesServlet extends CopsServlet
 			final HashSet<Integer> doProbeNumbers,
 			final boolean dryRun)
 	{
+		//noinspection deprecation OK: PropertiesServlet
 		final P properties = overridable.newProperties(
 				sourceMap.isEmpty()
 				? source
@@ -217,6 +221,7 @@ public abstract class PropertiesServlet extends CopsServlet
 			}
 		}
 		if(!dryRun)
+			//noinspection deprecation OK: PropertiesServlet
 			overridable.override(properties);
 	}
 
@@ -266,6 +271,10 @@ public abstract class PropertiesServlet extends CopsServlet
 		}
 	}
 
+	/**
+	 * @deprecated Override {@link PropertiesInstanceServlet} instead.
+	 */
+	@Deprecated
 	protected abstract Properties getProperties();
 
 	protected String getDisplayCaption()
@@ -275,7 +284,16 @@ public abstract class PropertiesServlet extends CopsServlet
 
 	public interface Overridable<P extends Properties>
 	{
+		/**
+		 * @deprecated Override {@link PropertiesInstanceServlet} instead.
+		 */
+		@Deprecated
 		P newProperties(Properties.Source overrideSource);
+
+		/**
+		 * @deprecated Override {@link PropertiesInstanceServlet} instead.
+		 */
+		@Deprecated
 		void override(P properties);
 	}
 }
