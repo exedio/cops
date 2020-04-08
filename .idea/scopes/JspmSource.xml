@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="JspmSource" pattern="file[ideamod]:*/*.jspm" />
+</component>
