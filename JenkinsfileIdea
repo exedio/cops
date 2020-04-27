@@ -32,6 +32,8 @@ timestamps
 
 				sh "${antHome}/bin/ant src"
 
+				sh "rm -rf " + env.HOME  + "/.Idea*"
+				sh "rm -rf " + env.HOME  + "/.config/JetBrains"
 				sh "${antHome}/bin/ant -f conf/idea" +
 						' -Dconfig.home=' + env.HOME + '/' + confighome +
 						' -Djava.home=' + env.JAVA_HOME
