@@ -313,11 +313,10 @@ public final class Resource
 	@SuppressWarnings("HardcodedLineSeparator")
 	private static void log(final HttpServletRequest request, final String action)
 	{
-		final StringBuilder bf = new StringBuilder();
-		bf.append("-----------------").append(action).append("\n");
-		bf.append(CopsServlet.report(request));
-		bf.append("-----------------\n");
-		System.out.print(bf);
+		System.out.print(
+				"-----------------" + action + "\n" +
+				CopsServlet.report(request) +
+				"-----------------\n");
 	}
 
 	private static String getContentTypeFromName(final String name)

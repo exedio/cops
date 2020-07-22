@@ -42,6 +42,7 @@ import java.util.concurrent.Callable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@SuppressWarnings("StaticMethodOnlyUsedInOneClass") // ok for jspm
 public abstract class PropertiesServlet extends CopsServlet
 {
 	private static final long serialVersionUID = 1l;
@@ -135,7 +136,6 @@ public abstract class PropertiesServlet extends CopsServlet
 					// leave hostname==null
 				}
 
-				//noinspection deprecation OK: PropertiesServlet
 				override(
 						(Overridable<?>)this,
 						getProperties().getSourceObject().reload(),
@@ -146,7 +146,6 @@ public abstract class PropertiesServlet extends CopsServlet
 			}
 		}
 
-		//noinspection deprecation OK: PropertiesServlet
 		final Properties properties = getProperties();
 
 		Properties reloaded = null;
@@ -155,7 +154,6 @@ public abstract class PropertiesServlet extends CopsServlet
 		{
 			try
 			{
-				//noinspection deprecation OK: PropertiesServlet
 				reloaded = ((Overridable<?>)this).newProperties(properties.getSourceObject().reload());
 			}
 			catch(final RuntimeException e)
@@ -191,7 +189,6 @@ public abstract class PropertiesServlet extends CopsServlet
 			final HashSet<Integer> doProbeNumbers,
 			final boolean dryRun)
 	{
-		//noinspection deprecation OK: PropertiesServlet
 		final P properties = overridable.newProperties(
 				sourceMap.isEmpty()
 				? source
@@ -221,7 +218,6 @@ public abstract class PropertiesServlet extends CopsServlet
 			}
 		}
 		if(!dryRun)
-			//noinspection deprecation OK: PropertiesServlet
 			overridable.override(properties);
 	}
 

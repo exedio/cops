@@ -27,6 +27,7 @@ import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@SuppressWarnings("StaticMethodOnlyUsedInOneClass") // ok for jspm
 public final class ExampleServlet extends ExampleSuperServlet
 {
 	private static final long serialVersionUID = 1l;

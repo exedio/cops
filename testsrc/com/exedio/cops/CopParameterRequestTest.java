@@ -145,6 +145,7 @@ public class CopParameterRequestTest extends TestCase
 	private static void assertEqualsParameterMap(
 			final CopParameterRequest request)
 	{
+		//noinspection AssertEqualsBetweenInconvertibleTypes OK: bug in idea
 		assertEquals(Collections.emptyMap(), convertParameterMap(request));
 	}
 
