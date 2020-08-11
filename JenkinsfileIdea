@@ -1,11 +1,11 @@
 
 timestamps
 {
-	def jdk = 'openjdk-8-deb9'
-	def idea = 'idea-2020.1'
+	def jdk = 'openjdk-8'
+	def idea = '2020.1'
 
 	//noinspection GroovyAssignabilityCheck
-	lock('idea') { node(jdk + ' && ' + idea)
+	node('docker')
 	{
 		try
 		{
@@ -16,10 +16,6 @@ timestamps
 
 				checkout scm
 
-				env.JAVA_HOME = tool jdk
-				env.PATH = "${env.JAVA_HOME}/bin:${env.PATH}"
-				def antHome = tool 'Ant version 1.9.3'
-
 				def isRelease = env.BRANCH_NAME.toString().equals("master")
 
 				properties([
@@ -29,13 +25,19 @@ timestamps
 						))
 				])
 
-				sh "${antHome}/bin/ant src"
-
-				sh "rm -rf " + env.HOME  + "/.Idea*"
-				sh "rm -rf " + env.HOME  + "/.cache/JetBrains"
-				sh "rm -rf " + env.HOME  + "/.config/JetBrains"
-
-				sh "/" + idea + "/bin/inspect.sh " + env.WORKSPACE + " 'Project Default' idea-inspection-output"
+				def dockerName = env.JOB_NAME.replace("/", "-") + "-" + env.BUILD_NUMBER;
+				docker.
+					build(
+						'exedio-jenkins:' + dockerName + '-' + new Date().format("yyyyMMdd"),
+						'--build-arg JDK=' + jdk + ' ' +
+						'--build-arg IDEA=' + idea + ' ' +
+						'conf/idea').
+					inside(
+						"--name '" + dockerName + "'")
+					{
+						sh "ant -noinput src"
+						sh "/opt/idea/bin/inspect.sh " + env.WORKSPACE + " 'Project Default' idea-inspection-output"
+					}
 				archiveArtifacts 'idea-inspection-output/**'
 				sh "rm idea-inspection-output/SpellCheckingInspection.xml"
 				recordIssues(
@@ -65,7 +67,7 @@ timestamps
 			echo("Delete working dir after " + currentBuild.result)
 			deleteDir()
 		}
-	}}
+	}
 }
 
 def abortable(Closure body)
