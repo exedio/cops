@@ -2,6 +2,14 @@
 timestamps
 {
 	def jdk = 'openjdk-8-deb9'
+	def isRelease = env.BRANCH_NAME.toString().equals("master")
+
+	properties([
+			buildDiscarder(logRotator(
+					numToKeepStr         : isRelease ? '1000' : '30',
+					artifactNumToKeepStr : isRelease ? '1000' :  '2'
+			))
+	])
 
 	//noinspection GroovyAssignabilityCheck
 	node(jdk)
@@ -13,66 +21,35 @@ timestamps
 				echo("Delete working dir before build")
 				deleteDir()
 
-				checkout scm
-				sh 'git rev-parse HEAD > GIT_COMMIT'
-				env.GIT_COMMIT = readFile('GIT_COMMIT').trim()
-				sh "git cat-file -p HEAD | grep '^tree ' | sed -e 's/^tree //' > GIT_TREE"
-				env.GIT_TREE = readFile('GIT_TREE').trim()
+				def buildTag = makeBuildTag(checkout(scm))
 
-				env.BUILD_TIMESTAMP = new Date().format("yyyy-MM-dd_HH-mm-ss");
-				env.JAVA_HOME = tool jdk
+				env.JAVA_HOME = tool type: 'jdk', name: jdk
 				env.PATH = "${env.JAVA_HOME}/bin:${env.PATH}"
 				def antHome = tool 'Ant version 1.9.3'
 
 				sh "java -version"
 				sh "${antHome}/bin/ant -version"
 
-				def isRelease = env.BRANCH_NAME.toString().equals("master")
-
-				properties([
-						buildDiscarder(logRotator(
-								numToKeepStr         : isRelease ? '1000' : '30',
-								artifactNumToKeepStr : isRelease ? '1000' :  '2'
-						))
-				])
-
-				sh 'echo' +
-						' GIT_COMMIT -${GIT_COMMIT}-' +
-						' GIT_TREE -${GIT_TREE}-' +
-						' BUILD_TIMESTAMP -${BUILD_TIMESTAMP}-' +
-						' BRANCH_NAME -${BRANCH_NAME}-' +
-						' BUILD_NUMBER -${BUILD_NUMBER}-' +
-						' BUILD_ID -${BUILD_ID}-' +
-						' isRelease=' + isRelease
-
-				sh "${antHome}/bin/ant clean jenkins" +
+				sh "${antHome}/bin/ant -noinput clean jenkins" +
 						' "-Dbuild.revision=${BUILD_NUMBER}"' +
-						' "-Dbuild.tag=git ${BRANCH_NAME} ${GIT_COMMIT} ${GIT_TREE} jenkins ${BUILD_NUMBER} ${BUILD_TIMESTAMP}"' +
+						' "-Dbuild.tag=' + buildTag + '"' +
 						' -Dbuild.status=' + (isRelease?'release':'integration') +
 						' -Dtomcat.port.shutdown=' + port(0) +
 						' -Dtomcat.port.http='     + port(1) +
 						' -Dtomcat.port.https='    + port(2) +
 						' -Dfindbugs.output=xml'
 
-				step([$class: 'WarningsPublisher',
-						canComputeNew: true,
-						canResolveRelativePaths: true,
-						consoleParsers: [[parserName: 'Java Compiler (javac)']],
-						defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', messagesPattern: '', unHealthy: '',
-						unstableTotalAll: '0',
-						usePreviousBuildAsReference: false,
-						useStableBuildAsReference: false])
-				step([$class: 'FindBugsPublisher',
-						canComputeNew: true,
-						defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '',
-						isRankActivated: false,
-						pattern: 'build/findbugs.xml',
-						unHealthy: '',
-						unstableTotalAll: '0',
-						usePreviousBuildAsReference: false,
-						useStableBuildAsReference: false])
-				archive 'build/catalina-start.log,build/success/*'
-				step([$class: 'PlotBuilder',
+				recordIssues(
+						enabledForFailure: true,
+						ignoreFailedBuilds: false,
+						qualityGates: [[threshold: 1, type: 'TOTAL', unstable: true]],
+						tools: [
+							java(),
+							spotBugs(pattern: 'build/findbugs.xml', useRankAsPriority: true),
+						],
+				)
+				archiveArtifacts 'build/catalina-start.log,build/success/*'
+				plot(
 						csvFileName: 'plots.csv',
 						exclZero: false,
 						keepRecords: false,
@@ -85,37 +62,30 @@ timestamps
 							[ file: 'build/exedio-cops.jar-plot.properties',     label: 'exedio-cops.jar' ],
 							[ file: 'build/exedio-cops-src.zip-plot.properties', label: 'exedio-cops-src.zip' ],
 						],
-				])
+				)
 			}
 		}
 		catch(Exception e)
 		{
 			//todo handle script returned exit code 143
-			throw e;
+			throw e
 		}
 		finally
 		{
 			// because junit failure aborts ant
-			step([$class: 'JUnitResultArchiver',
+			junit(
 					allowEmptyResults: false,
-					testResults: 'build/testresults/*.xml'])
-
-			def to = emailextrecipients([
-					[$class: 'CulpritsRecipientProvider'],
-					[$class: 'RequesterRecipientProvider']
-			])
+					testResults: 'build/testresults/*.xml',
+			)
+			def to = emailextrecipients([culprits(), requestor()])
 			//TODO details
 			step([$class: 'Mailer',
 					recipients: to,
 					attachLog: true,
 					notifyEveryUnstableBuild: true])
 
-			if('SUCCESS'.equals(currentBuild.result) ||
-				'UNSTABLE'.equals(currentBuild.result))
-			{
-				echo("Delete working dir after " + currentBuild.result)
-				deleteDir()
-			}
+			echo("Delete working dir after build")
+			deleteDir()
 		}
 	}
 }
@@ -124,14 +94,24 @@ def abortable(Closure body)
 {
 	try
 	{
-		body.call();
+		body.call()
 	}
 	catch(hudson.AbortException e)
 	{
 		if(e.getMessage().contains("exit code 143"))
 			return
-		throw e;
+		throw e
 	}
+}
+
+def makeBuildTag(scmResult)
+{
+	return 'build ' +
+			env.BRANCH_NAME + ' ' +
+			env.BUILD_NUMBER + ' ' +
+			new Date().format("yyyy-MM-dd") + ' ' +
+			scmResult.GIT_COMMIT + ' ' +
+			sh (script: "git cat-file -p " + scmResult.GIT_COMMIT + " | grep '^tree ' | sed -e 's/^tree //'", returnStdout: true).trim()
 }
 
 def port(int offset)
