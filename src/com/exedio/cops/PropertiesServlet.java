@@ -29,8 +29,6 @@ import com.exedio.cope.util.Properties.ProbeAbortedException;
 import com.exedio.cope.util.Sources;
 import java.io.IOException;
 import java.io.StringReader;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -126,20 +124,11 @@ public abstract class PropertiesServlet extends CopsServlet
 
 				final Principal principal = request.getUserPrincipal();
 				final String authentication = principal!=null ? principal.getName() : null;
-				String hostname = null;
-				try
-				{
-					hostname = InetAddress.getLocalHost().getHostName();
-				}
-				catch(final UnknownHostException ignored)
-				{
-					// leave hostname==null
-				}
 
 				override(
 						(Overridable<?>)this,
 						getProperties().getSourceObject().reload(),
-						authentication, hostname,
+						authentication,
 						sourceMap,
 						doProbeNumbers,
 						request.getParameter(DRY_RUN)!=null);
@@ -184,7 +173,6 @@ public abstract class PropertiesServlet extends CopsServlet
 			final Overridable<P> overridable,
 			final Properties.Source source,
 			final String authentication,
-			final String hostname,
 			final HashMap<String, String> sourceMap,
 			final HashSet<Integer> doProbeNumbers,
 			final boolean dryRun)
@@ -193,7 +181,7 @@ public abstract class PropertiesServlet extends CopsServlet
 				sourceMap.isEmpty()
 				? source
 				: Sources.cascade(
-						new EditedSource(authentication, hostname, sourceMap),
+						new EditedSource(authentication, sourceMap),
 						source)
 		);
 
@@ -224,17 +212,14 @@ public abstract class PropertiesServlet extends CopsServlet
 	private static final class EditedSource implements Properties.Source
 	{
 		private final String authentication;
-		private final String hostname;
 		private final HashMap<String, String> content;
 		private final long timestamp = System.currentTimeMillis();
 
 		EditedSource(
 				final String authentication,
-				final String hostname,
 				final HashMap<String, String> content)
 		{
 			this.authentication = authentication;
-			this.hostname = hostname;
 			this.content = content;
 		}
 
@@ -252,8 +237,6 @@ public abstract class PropertiesServlet extends CopsServlet
 			bf.append(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS", UK).format(new Date(timestamp)));
 			if(authentication!=null)
 				bf.append(" by ").append(authentication);
-			if(hostname!=null)
-				bf.append(" on ").append(hostname);
 			bf.append(' ');
 			bf.append(content);
 			bf.append(')');
