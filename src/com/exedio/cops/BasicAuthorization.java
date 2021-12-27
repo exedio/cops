@@ -37,15 +37,12 @@ public final class BasicAuthorization
 	public static String[] getUserAndPassword(final HttpServletRequest request)
 	{
 		final String authorization = request.getHeader("Authorization");
-		//System.out.println("authorization:"+authorization);
 		if(authorization==null||!authorization.startsWith(BASIC))
 			return null;
 
 		final String basicCookie = authorization.substring(BASIC_LENGTH);
-		//System.out.println("basicCookie:"+basicCookie);
 
 		final String basicCookiePlain = new String(Base64.getDecoder().decode(basicCookie), UTF_8);
-		//System.out.println("basicCookiePlain:"+basicCookiePlain);
 
 		final int colon = basicCookiePlain.indexOf(':');
 		if(colon<=0 || colon+1>=basicCookiePlain.length())
@@ -53,8 +50,6 @@ public final class BasicAuthorization
 
 		final String userid = basicCookiePlain.substring(0, colon);
 		final String password = basicCookiePlain.substring(colon+1);
-		//System.out.println("userid:"+userid);
-		//System.out.println("password:"+password);
 		return new String[]{userid, password};
 	}
 
