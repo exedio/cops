@@ -19,7 +19,6 @@
 package com.exedio.cops;
 
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.catalina.servlets.DefaultServlet;
 
 public final class FileServlet extends DefaultServlet
