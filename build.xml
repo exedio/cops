@@ -213,6 +213,7 @@
 				<include name="simpleclient-bundle.jar" />
 				<include name="simpleclient_common-bundle.jar" />
 				<include name="simpleclient_servlet-bundle.jar" />
+				<include name="simpleclient_servlet_common-bundle.jar" />
 				<include name="log4j-bundle.jar" />
 			</fileset>
 		</copy>
