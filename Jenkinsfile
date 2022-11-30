@@ -1,7 +1,7 @@
 #!'groovy'
 
 def projectName = env.JOB_NAME.substring(0, env.JOB_NAME.indexOf("/")) // depends on name and location of multibranch pipeline in jenkins
-def jdk = 'openjdk-8'
+def jdk = 'openjdk-11'
 def idea = '2021.2'
 def ideaSHA256 = '7c27799861fb1ba0d43a3565a1ec2be789e1871191be709f0e79f1e17d3571fe'
 def isRelease = env.BRANCH_NAME=="master"

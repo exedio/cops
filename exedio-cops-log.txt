@@ -7,6 +7,7 @@ omit bug fixes.
 The items are sorted inversely, i.e. latest items are on top
 
 --------------------------------------------------------------------------
+* JDK 11 required.
 * Class-Path removed from jar manifest:
 	- exedio-cops.jar drops "Class-Path: javax.servlet-api.jar"
 * HTTP header security:
