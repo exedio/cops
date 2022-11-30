@@ -48,8 +48,7 @@ try
 						' -Dbuild.status=' + (isRelease?'release':'integration') +
 						' -Dtomcat.port.shutdown=' + port(0) +
 						' -Dtomcat.port.http='     + port(1) +
-						' -Dtomcat.port.https='    + port(2) +
-						' -Dfindbugs.output=xml'
+						' -Dtomcat.port.https='    + port(2)
 			}
 
 			recordIssues(
@@ -59,7 +58,6 @@ try
 					qualityGates: [[threshold: 1, type: 'TOTAL', unstable: true]],
 					tools: [
 						java(),
-						spotBugs(pattern: 'build/findbugs.xml', useRankAsPriority: true),
 					],
 					skipPublishingChecks: true,
 			)

@@ -5,7 +5,6 @@
     <libelement value="jar://$MODULE_DIR$/lib/junit.jar!/" />
     <libelement value="jar://$MODULE_DIR$/lib/exedio-cope-util.jar!/" />
     <libelement value="jar://$MODULE_DIR$/lib/slf4j-api.jar!/" />
-    <libelement value="jar://$MODULE_DIR$/lib/findbugs-annotations.jar!/" />
     <src_description expected_position="0">
       <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
       <src_folder value="file://$MODULE_DIR$/webtestsrc" expected_position="1" />

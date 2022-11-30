@@ -44,7 +44,6 @@
 			<exclude org="io.prometheus" module="simpleclient_tracer_otel_agent" />
 		</dependency>
 		<dependency org="junit" name="junit" rev="4.4" conf="build->default" />
-		<dependency org="findbugs-x" name="findbugs" rev="3.0.0" conf="build->default" />
 		<dependency org="com.exedio" name="copeutil" rev="970" conf="runtime->runtime; build->runtime,sources,changelog" />
 		<dependency org="com.exedio" name="copeservletutil" rev="107" conf="build->runtime,sources,changelog" />
 		<dependency org="com.exedio" name="jspm"     rev="202" conf="build->runtime,changelog" />
