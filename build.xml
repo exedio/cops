@@ -51,7 +51,6 @@
 				<pathelement location="lib/slf4j-api.jar" />
 				<pathelement location="lib/micrometer-core.jar" />
 				<pathelement location="lib/exedio-cope-util.jar" />
-				<pathelement location="lib/findbugs-annotations.jar" />
 			</classpath>
 			<compilerarg value="-Xlint" />
 			<compilerarg value="-encoding" />
@@ -96,7 +95,6 @@
 				<pathelement location="build/classes" />
 				<pathelement location="lib/javax.servlet-api.jar" />
 				<pathelement location="lib/junit.jar" />
-				<pathelement location="lib/findbugs-annotations.jar" />
 			</classpath>
 			<compilerarg value="-Xlint" />
 			<compilerarg value="-encoding" />
@@ -182,7 +180,6 @@
 				<pathelement location="lib/simpleclient-bundle.jar" />
 				<pathelement location="lib/exedio-cope-util.jar" />
 				<pathelement location="lib/exedio-cope-servletutil.jar" />
-				<pathelement location="lib/findbugs-annotations.jar" />
 			</classpath>
 			<compilerarg value="-Xlint" />
 			<compilerarg value="-encoding" />
@@ -374,35 +371,14 @@
 				<pathelement location="lib/exedio-cope-util.jar" />
 				<pathelement location="lib/slf4j-api.jar" />
 				<pathelement location="lib/micrometer-core.jar" />
-				<pathelement location="lib/findbugs-annotations.jar" />
 			</classpath>
 		</javadoc>
-	</target>
-
-	<target name="findbugs" depends="compile, findbugs.taskdef">
-		<findbugs
-					home="${basedir}/build/findbugs-home"
-					jvmargs="-Xmx250M"
-					failOnError="true"
-					warningsProperty="findbugs.warnings"
-					output="${findbugs.output}"
-					outputFile="${basedir}/build/findbugs.${findbugs.output}"
-					excludeFilter="findbugs-exclude.xml"
-					effort="max"
-					reportlevel="low">
-			<class location="${basedir}/build/classes" />
-			<auxclasspath>
-				<pathelement location="${basedir}/lib/exedio-cope-util.jar" />
-				<pathelement location="${basedir}/lib/javax.servlet-api.jar" />
-				<pathelement location="${basedir}/lib/slf4j-api.jar" />
-			</auxclasspath>
-		</findbugs>
 	</target>
 
 	<target name="jspm" depends="runtime.jspm, example.jspm" />
 	<target name="src" depends="jspm" description="creates all sources, so the IDE does not complain" />
 	<target name="build" depends="compile, catalina.compile, test, webtest, jar, example, api" />
-	<target name="all" depends="build, jar.src, findbugs" />
+	<target name="all" depends="build, jar.src" />
 	<target name="tomcat" depends="example.tomcat" />
 
 	<target name="jenkins" depends="all">

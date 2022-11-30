@@ -20,7 +20,6 @@ package com.exedio.cops;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.concurrent.atomic.AtomicLong;
@@ -103,7 +102,7 @@ public final class RequestLimiter
 
 	@SuppressWarnings("VolatileLongOrDoubleField")
 	private volatile long lastInterval = Long.MIN_VALUE;
-	@SuppressFBWarnings("VO_VOLATILE_INCREMENT") // TODO use AtomicInteger
+	// TODO use AtomicInteger
 	private volatile int requestsInInterval = 1;
 	private final AtomicLong deniedRequests = new AtomicLong();
 
