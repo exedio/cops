@@ -70,7 +70,7 @@ table td.notavailable
 	font-size:7pt;
 }
 
-table tr.unspecified
+table.hide-unspecified tr.unspecified
 {
 	display:none;
 }
@@ -162,4 +162,16 @@ table td.failed
 table td.aborted
 {
 	background-color:#ffe;
+}
+
+tr.hidden-by-filter
+{
+	display:none;
+}
+
+input.filter
+{
+	width:6em;
+	border:none;
+	background-color:#eee;
 }

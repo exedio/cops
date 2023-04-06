@@ -9,24 +9,12 @@ function toggleUnspecified(image)
 	if(imageSrc.substring(imageSrc.length-8)=="true.png")
 	{
 		image.src = imageSrc.substring(0, imageSrc.length-8) + "false.png";
-		var rows = document.body.getElementsByTagName("tr");
-		for(i=0; i<rows.length; i++)
-		{
-			var row = rows[i];
-			if(row.className=="unspecified")
-				row.style.display = "none";
-		}
+		document.getElementById("properties-table").classList.add("hide-unspecified");
 	}
 	else
 	{
 		image.src = imageSrc.substring(0, imageSrc.length-9) + "true.png";
-		var rows = document.body.getElementsByTagName("tr");
-		for(i=0; i<rows.length; i++)
-		{
-			var row = rows[i];
-			if(row.className=="unspecified")
-				row.style.display = "table-row";
-		}
+		document.getElementById("properties-table").classList.remove("hide-unspecified");
 	}
 }
 
@@ -55,5 +43,19 @@ function toggleStacktrace(image,more)
 	{
 		image.src = imageSrc.substring(0, imageSrc.length-9) + "true.png";
 		moreElement.style.display = "inline";
+	}
+}
+
+function filterRows(text)
+{
+	var rows = document.body.querySelectorAll("tr.property");
+	for(i=0; i<rows.length; i++)
+	{
+		var row = rows[i];
+		var tdKey = row.getElementsByClassName("key");
+		if (tdKey.item(0).textContent.includes(text))
+			row.classList.remove("hidden-by-filter");
+		else
+			row.classList.add("hidden-by-filter");
 	}
 }
