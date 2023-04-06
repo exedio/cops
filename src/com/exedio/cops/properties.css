@@ -70,7 +70,7 @@ table td.notavailable
 	font-size:7pt;
 }
 
-table tr.unspecified
+table.hide-unspecified tr.unspecified
 {
 	display:none;
 }
