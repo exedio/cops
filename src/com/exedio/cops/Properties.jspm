@@ -167,7 +167,7 @@ final class Properties_Jspm
 			if(overridable)
 			{
 				%>
-				<th><input type="checkbox" name="<%=FIELD_SELECT%>" value="<%=field.getKey()%>" onClick="onCheckbox(this,'fid<%=idNum%>')"></th><%
+				<th><input type="checkbox" name="<%=FIELD_SELECT%>" value="<%=field.getKey()%>" onClick="onCheckbox(this,'fid<%=idNum%>')" <%=cop.isHidden(field)?" disabled":""%>></th><%
 			}
 				%>
 				<th class="key"><%=field.getKey()%></th><%
