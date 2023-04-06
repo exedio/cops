@@ -45,3 +45,17 @@ function toggleStacktrace(image,more)
 		moreElement.style.display = "inline";
 	}
 }
+
+function filterRows(text)
+{
+	var rows = document.body.querySelectorAll("tr.property");
+	for(i=0; i<rows.length; i++)
+	{
+		var row = rows[i];
+		var tdKey = row.getElementsByClassName("key");
+		if (tdKey.item(0).textContent.includes(text))
+			row.classList.remove("hidden-by-filter");
+		else
+			row.classList.add("hidden-by-filter");
+	}
+}

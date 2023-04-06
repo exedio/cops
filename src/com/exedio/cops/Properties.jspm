@@ -145,13 +145,24 @@ final class Properties_Jspm
 		<table id="properties-table" class="hide-unspecified"><%
 		int idNum = 0;
 		final ArrayList<Field<?>> reloadedFields = new ArrayList<>();
+			%>
+			<tr><%
+				if(overridable)
+				{
+					%>
+				<th></th><%
+				}
+				%>
+				<th><input class="filter" type="text" onkeyup="filterRows(this.value);" placeholder="Filter"></input></th>
+				<th></th>
+			</tr><%
 		for(final Field<?> field : properties.getFields())
 		{
 			final boolean fieldSpecified = field.isSpecified();
 			final Object reloadedNewValue = PropertiesCop.reloadedNewValue(field, reloaded, reloadedFields);
 			idNum++;
 			%>
-			<tr<% if(!fieldSpecified){ %> class="unspecified"<% } %>><%
+			<tr class="property<%=fieldSpecified?"":" unspecified"%>"><%
 
 			if(overridable)
 			{
@@ -159,7 +170,7 @@ final class Properties_Jspm
 				<th><input type="checkbox" name="<%=FIELD_SELECT%>" value="<%=field.getKey()%>" onClick="onCheckbox(this,'fid<%=idNum%>')"></th><%
 			}
 				%>
-				<th><%=field.getKey()%></th><%
+				<th class="key"><%=field.getKey()%></th><%
 
 		if(cop.isHidden(field))
 		{

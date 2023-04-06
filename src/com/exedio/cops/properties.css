@@ -163,3 +163,15 @@ table td.aborted
 {
 	background-color:#ffe;
 }
+
+tr.hidden-by-filter
+{
+	display:none;
+}
+
+input.filter
+{
+	width:6em;
+	border:none;
+	background-color:#eee;
+}
