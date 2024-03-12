@@ -274,6 +274,9 @@ public final class Resource
 		// year in the future.
 		response.setHeader("Cache-Control", "max-age=" + 60*60*24*363); // 363 days
 
+		// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options
+		response.addHeader("X-Content-Type-Options", "nosniff");
+
 		final long ifModifiedSince = request.getDateHeader(REQUEST_IF_MODIFIED_SINCE);
 
 		if(ifModifiedSince>=0 && ifModifiedSince>=lastModified)
