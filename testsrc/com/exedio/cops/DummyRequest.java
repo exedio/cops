@@ -34,10 +34,13 @@ import javax.servlet.ServletInputStream;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpUpgradeHandler;
 import javax.servlet.http.Part;
+import javax.servlet.http.PushBuilder;
 
 public class DummyRequest implements HttpServletRequest
 {
@@ -90,6 +93,12 @@ public class DummyRequest implements HttpServletRequest
 	}
 
 	@Override
+	public HttpServletMapping getHttpServletMapping()
+	{
+		throw new RuntimeException();
+	}
+
+	@Override
 	public String getMethod()
 	{
 		throw new RuntimeException();
@@ -103,6 +112,12 @@ public class DummyRequest implements HttpServletRequest
 
 	@Override
 	public String getPathTranslated()
+	{
+		throw new RuntimeException();
+	}
+
+	@Override
+	public PushBuilder newPushBuilder()
 	{
 		throw new RuntimeException();
 	}
@@ -145,6 +160,12 @@ public class DummyRequest implements HttpServletRequest
 
 	@Override
 	public HttpSession getSession()
+	{
+		throw new RuntimeException();
+	}
+
+	@Override
+	public String changeSessionId()
 	{
 		throw new RuntimeException();
 	}
@@ -212,6 +233,12 @@ public class DummyRequest implements HttpServletRequest
 
 	@Override
 	public int getContentLength()
+	{
+		throw new RuntimeException();
+	}
+
+	@Override
+	public long getContentLengthLong()
 	{
 		throw new RuntimeException();
 	}
@@ -394,6 +421,24 @@ public class DummyRequest implements HttpServletRequest
 
 	@Override
 	public Part getPart(final String string)
+	{
+		throw new RuntimeException();
+	}
+
+	@Override
+	public <T extends HttpUpgradeHandler> T upgrade(final Class<T> handlerClass)
+	{
+		throw new RuntimeException();
+	}
+
+	@Override
+	public Map<String, String> getTrailerFields()
+	{
+		throw new RuntimeException();
+	}
+
+	@Override
+	public boolean isTrailerFieldsReady()
 	{
 		throw new RuntimeException();
 	}
