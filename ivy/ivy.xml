@@ -23,7 +23,7 @@
 		<artifact name="exedio-cops" conf="changelog" type="log" ext="txt" />
 	</publications>
 	<dependencies>
-		<dependency org="javax.servlet" name="javax.servlet-api" rev="3.0.1" conf="runtime->default; build->sources" />
+		<dependency org="javax.servlet" name="javax.servlet-api" rev="4.0.1" conf="runtime->default; build->sources" />
 		<dependency org="org.slf4j" name="slf4j-api" rev="1.6.4">
 			<conf name="runtime" mapped="default" />
 			<conf name="build" mapped="sources" />

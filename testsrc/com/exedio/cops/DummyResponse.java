@@ -21,6 +21,8 @@ package com.exedio.cops;
 import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.Locale;
+import java.util.Map;
+import java.util.function.Supplier;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -211,6 +213,12 @@ public class DummyResponse implements HttpServletResponse
 	}
 
 	@Override
+	public void setContentLengthLong(final long len)
+	{
+		throw new RuntimeException();
+	}
+
+	@Override
 	public void setContentType(final String arg0)
 	{
 		throw new RuntimeException();
@@ -242,6 +250,18 @@ public class DummyResponse implements HttpServletResponse
 
 	@Override
 	public Collection<String> getHeaderNames()
+	{
+		throw new RuntimeException();
+	}
+
+	@Override
+	public void setTrailerFields(final Supplier<Map<String, String>> supplier)
+	{
+		throw new RuntimeException();
+	}
+
+	@Override
+	public Supplier<Map<String, String>> getTrailerFields()
 	{
 		throw new RuntimeException();
 	}
