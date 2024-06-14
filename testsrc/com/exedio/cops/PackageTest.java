@@ -36,7 +36,6 @@ public final class PackageTest
 		suite.addTestSuite(ResourcesRootPathTest.class);
 		suite.addTestSuite(EncodeTest.class);
 		suite.addTestSuite(PagerTest.class);
-		suite.addTestSuite(RequestLimiterTest.class);
 		return suite;
 	}
 }

@@ -19,11 +19,9 @@
 package com.exedio.cops.example;
 
 import com.exedio.cops.Cop;
-import com.exedio.cops.RequestLimiter;
 import com.exedio.cops.Resource;
 import java.io.IOException;
 import java.util.ArrayList;
-import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -43,19 +41,11 @@ public final class ExampleServlet extends ExampleSuperServlet
 	static final String REPORT_EXCEPTION = "reportexception";
 
 	private final ArrayList<String> searchSet = new ArrayList<>();
-	@SuppressWarnings("NonSerializableFieldInSerializableClass") // ok in servlet
-	private final RequestLimiter requestLimiter = new RequestLimiter(200, 1000, "Sorry, please try again later.", "<html><body>Request Limiter limited request.</body></html>");
 
 	public ExampleServlet()
 	{
 		for(int i = 1; i<=84; i++)
 			searchSet.add("paged " + i);
-	}
-
-	@Override
-	public void init(final ServletConfig config)
-	{
-		requestLimiter.init(config);
 	}
 
 	@Override
@@ -65,9 +55,6 @@ public final class ExampleServlet extends ExampleSuperServlet
 		throws IOException
 	{
 		//System.out.println("request ---" + request.getMethod() + "---" + request.getContextPath() + "---" + request.getServletPath() + "---" + request.getPathInfo() + "---" + request.getQueryString() + "---");
-
-		if(requestLimiter.doRequest(request, response))
-			return;
 
 		final ExampleCop cop = ExampleCop.getCop(request);
 		if(cop.redirectToCanonical(request, response))
