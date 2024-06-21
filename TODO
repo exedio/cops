@@ -7,8 +7,6 @@ TODO for cops
 	- on IE as well, with just .x and .y for images
 	- with reliable value, independent of button description
 * general solution against url guessing
-* RequestLimiter
-	- error mail
 * resource status
 	- total on top
 	- ratio for 304/200
@@ -16,4 +14,3 @@ TODO for cops
 	- Resource
 	- ResourceStatus
 	- Ignore 404
-	- RequestLimiter status
