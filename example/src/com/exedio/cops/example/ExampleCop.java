@@ -23,7 +23,7 @@ import static com.exedio.cops.example.Example_Jspm.writePagerButton;
 import com.exedio.cops.Cop;
 import com.exedio.cops.Pageable;
 import com.exedio.cops.Pager;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 public class ExampleCop extends Cop implements Pageable
 {

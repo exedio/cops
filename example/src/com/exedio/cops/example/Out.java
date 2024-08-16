@@ -26,8 +26,8 @@ import com.exedio.cops.Cop;
 import com.exedio.cops.Resource;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 final class Out
 {

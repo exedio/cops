@@ -19,8 +19,8 @@
 package com.exedio.cops;
 
 import static java.util.Objects.requireNonNull;
-import static javax.servlet.http.HttpServletResponse.SC_MOVED_PERMANENTLY;
-import static javax.servlet.http.HttpServletResponse.SC_NOT_FOUND;
+import static jakarta.servlet.http.HttpServletResponse.SC_MOVED_PERMANENTLY;
+import static jakarta.servlet.http.HttpServletResponse.SC_NOT_FOUND;
 
 import com.exedio.cope.util.Hex;
 import com.exedio.cope.util.MessageDigestUtil;
@@ -30,8 +30,8 @@ import java.io.InputStream;
 import java.security.MessageDigest;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicLong;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public final class Resource
 {

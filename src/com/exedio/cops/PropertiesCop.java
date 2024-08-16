@@ -27,8 +27,8 @@ import com.exedio.cope.util.Properties.Field;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 final class PropertiesCop extends Cop
 {

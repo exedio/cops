@@ -21,7 +21,7 @@ package com.exedio.cops;
 import static com.exedio.cops.BasicAuthorization.getUserAndPassword;
 import static java.util.Arrays.asList;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import junit.framework.TestCase;
 
 public class BasicAuthorizationTest extends TestCase
