@@ -23,7 +23,7 @@
 		<artifact name="exedio-cops" conf="changelog" type="log" ext="txt" />
 	</publications>
 	<dependencies>
-		<dependency org="javax.servlet" name="javax.servlet-api" rev="4.0.1" conf="runtime->default; build->sources" />
+		<dependency org="jakarta.servlet" name="jakarta.servlet-api" rev="6.0.0" conf="runtime->default; build->sources" />
 		<dependency org="org.slf4j" name="slf4j-api" rev="1.6.4">
 			<conf name="runtime" mapped="default" />
 			<conf name="build" mapped="sources" />
@@ -31,6 +31,7 @@
 		<dependency org="ant-contrib" name="ant-contrib" rev="1.0b3" conf="build->default">
 			<exclude org="ant" module="ant" />
 		</dependency>
+		<dependency org="org.apache.tomcat" name="jakartaee-migration" rev="1.0.9" conf="build->default" />
 		<dependency org="org.slf4j" name="slf4j-log4j12" rev="1.6.4" conf="build->default" />
 		<dependency org="io.micrometer" name="micrometer-core" rev="1.8.5" conf="runtime->default; build->sources">
 			<exclude org="org.hdrhistogram" module="HdrHistogram" />
@@ -47,8 +48,10 @@
 		<dependency org="com.exedio" name="copeutil" rev="970" conf="runtime->runtime; build->runtime,sources,changelog" />
 		<dependency org="com.exedio" name="copeservletutil" rev="107" conf="build->runtime,sources,changelog" />
 		<dependency org="com.exedio" name="jspm"     rev="202" conf="build->runtime,changelog" />
-		<dependency org="org.apache.tomcat" name="tomcat" rev="9.0.43" conf="build->default">
+		<dependency org="org.apache.tomcat" name="tomcat" rev="10.1.24" conf="build->default">
 			<artifact name="tomcat" type="tar.gz" />
 		</dependency>
+
+		<exclude org="javax.servlet" module="javax.servlet-api" /><!-- old javax.servlet package instead of new jakarta.servlet -->
 	</dependencies>
 </ivy-module>

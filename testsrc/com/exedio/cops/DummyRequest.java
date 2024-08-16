@@ -18,6 +18,7 @@
 
 package com.exedio.cops;
 
+import jakarta.servlet.ServletConnection;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -195,13 +196,6 @@ public class DummyRequest implements HttpServletRequest
 	}
 
 	@Override
-	@Deprecated
-	public boolean isRequestedSessionIdFromUrl()
-	{
-		throw new RuntimeException();
-	}
-
-	@Override
 	public boolean isRequestedSessionIdValid()
 	{
 		throw new RuntimeException();
@@ -319,13 +313,6 @@ public class DummyRequest implements HttpServletRequest
 	public BufferedReader getReader() throws IOException
 	{
 		throw new IOException();
-	}
-
-	@Override
-	@Deprecated
-	public String getRealPath(final String arg0)
-	{
-		throw new RuntimeException();
 	}
 
 	@Override
@@ -481,6 +468,24 @@ public class DummyRequest implements HttpServletRequest
 
 	@Override
 	public DispatcherType getDispatcherType()
+	{
+		throw new RuntimeException();
+	}
+
+	@Override
+	public String getRequestId()
+	{
+		throw new RuntimeException();
+	}
+
+	@Override
+	public String getProtocolRequestId()
+	{
+		throw new RuntimeException();
+	}
+
+	@Override
+	public ServletConnection getServletConnection()
 	{
 		throw new RuntimeException();
 	}

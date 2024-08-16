@@ -66,30 +66,6 @@ public class DummySession implements HttpSession
 		throw new RuntimeException();
 	}
 
-	/**
-	 * @deprecated otherwise javac prints a warning
-	 */
-	@Override
-	@Deprecated
-	public javax.servlet.http.HttpSessionContext getSessionContext()
-	{
-		throw new RuntimeException();
-	}
-
-	@Override
-	@Deprecated
-	public Object getValue(final String s)
-	{
-		throw new RuntimeException();
-	}
-
-	@Override
-	@Deprecated
-	public String[] getValueNames()
-	{
-		throw new RuntimeException();
-	}
-
 	@Override
 	public void invalidate()
 	{
@@ -103,21 +79,7 @@ public class DummySession implements HttpSession
 	}
 
 	@Override
-	@Deprecated
-	public void putValue(final String s, final Object obj)
-	{
-		throw new RuntimeException();
-	}
-
-	@Override
 	public void removeAttribute(final String s)
-	{
-		throw new RuntimeException();
-	}
-
-	@Override
-	@Deprecated
-	public void removeValue(final String s)
 	{
 		throw new RuntimeException();
 	}

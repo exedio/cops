@@ -72,20 +72,6 @@ public class DummyResponse implements HttpServletResponse
 	}
 
 	@Override
-	@Deprecated
-	public String encodeRedirectUrl(final String arg0)
-	{
-		throw new RuntimeException();
-	}
-
-	@Override
-	@Deprecated
-	public String encodeUrl(final String arg0)
-	{
-		throw new RuntimeException();
-	}
-
-	@Override
 	public void sendError(final int arg0)
 	{
 		throw new RuntimeException();
@@ -123,13 +109,6 @@ public class DummyResponse implements HttpServletResponse
 
 	@Override
 	public void setStatus(final int arg0)
-	{
-		throw new RuntimeException();
-	}
-
-	@Override
-	@Deprecated
-	public void setStatus(final int arg0, final String arg1)
 	{
 		throw new RuntimeException();
 	}

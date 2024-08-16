@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
 <project name="ivy" default="copy">
 	<import file="common.xml" />
-	<target name="copy" depends="resolve">
+	<target name="copy" depends="resolve, taskdef.jakartaee-migrate">
+
+		<jakartaee-migrate file="exedio-cope-servletutil-jar.jar" />
+		<jakartaee-migrate file="exedio-cope-servletutil-src.zip" />
 
 		<delete dir="../lib">
 			<include name="*" />
@@ -18,4 +21,24 @@
 		</copy>
 
 	</target>
+
+	<target name="taskdef.jakartaee-migrate">
+		<taskdef name="javax2jakarta" classname="org.apache.tomcat.jakartaee.MigrationTask" onerror="failall">
+			<classpath>
+				<fileset dir="../lib" />
+			</classpath>
+		</taskdef>
+	</target>
+
+	<macrodef name="jakartaee-migrate">
+		<attribute name="file" />
+		<attribute name="otherconfs" default="" />
+		<sequential>
+			<javax2jakarta
+					src="artifacts/lib/@{file}"
+					dest="artifacts/lib/@{file}"
+					profile="servlet" />
+		</sequential>
+	</macrodef>
+
 </project>

@@ -4,7 +4,7 @@
 	<classpathentry kind="src" path="webtestsrc"/>
 	<classpathentry kind="src" path="example/src"/>
 	<classpathentry kind="src" path="testsrc"/>
-	<classpathentry kind="lib" path="lib/javax.servlet-api.jar" sourcepath="lib/javax.servlet-api-source.jar"/>
+	<classpathentry kind="lib" path="lib/jakarta.servlet-api.jar" sourcepath="lib/jakarta.servlet-api-source.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/junit.jar"/>
 	<classpathentry kind="lib" path="lib/exedio-cope-util.jar" sourcepath="lib/exedio-cope-util-src.zip"/>
