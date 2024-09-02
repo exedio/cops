@@ -28,6 +28,7 @@ import com.exedio.cope.util.Properties;
 import com.exedio.cope.util.Properties.ProbeAbortedException;
 import com.exedio.cope.util.Sources;
 import java.io.IOException;
+import java.io.Serial;
 import java.io.StringReader;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
@@ -45,6 +46,7 @@ import javax.servlet.http.HttpServletResponse;
 @SuppressWarnings("StaticMethodOnlyUsedInOneClass") // ok for jspm
 public abstract class PropertiesServlet extends CopsServlet
 {
+	@Serial
 	private static final long serialVersionUID = 1l;
 
 	static final Resource stylesheet = new Resource("properties.css");

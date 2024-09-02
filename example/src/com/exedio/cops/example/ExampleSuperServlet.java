@@ -20,9 +20,11 @@ package com.exedio.cops.example;
 
 import com.exedio.cops.CopsServlet;
 import com.exedio.cops.Resource;
+import java.io.Serial;
 
 public abstract class ExampleSuperServlet extends CopsServlet
 {
+	@Serial
 	private static final long serialVersionUID = 1l;
 
 	static final Resource logoSmall = new Resource("logoSmall.png");

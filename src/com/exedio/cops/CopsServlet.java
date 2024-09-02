@@ -27,6 +27,7 @@ import static javax.servlet.http.HttpServletResponse.SC_NOT_FOUND;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.io.Serial;
 import java.io.StringWriter;
 import java.security.Principal;
 import java.text.DecimalFormat;
@@ -47,6 +48,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public abstract class CopsServlet extends HttpServlet
 {
+	@Serial
 	private static final long serialVersionUID = 1l;
 
 	private final LinkedHashMap<String, Resource> resources;

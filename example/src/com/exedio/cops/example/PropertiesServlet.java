@@ -24,9 +24,11 @@ package com.exedio.cops.example;
 
 import com.exedio.cope.util.PropertiesInstance;
 import com.exedio.cops.PropertiesInstanceServlet;
+import java.io.Serial;
 
 public final class PropertiesServlet extends PropertiesInstanceServlet<ExampleProperties>
 {
+	@Serial
 	private static final long serialVersionUID = 1l;
 
 	@Override

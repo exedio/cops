@@ -18,11 +18,13 @@
 
 package com.exedio.cops;
 
+import java.io.Serial;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.catalina.servlets.DefaultServlet;
 
 public final class FileServlet extends DefaultServlet
 {
+	@Serial
 	private static final long serialVersionUID = 1l;
 	
 	@Override

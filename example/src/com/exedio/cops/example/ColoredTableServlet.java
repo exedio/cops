@@ -22,12 +22,14 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.IOException;
 import java.io.PrintStream;
+import java.io.Serial;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public final class ColoredTableServlet extends HttpServlet
 {
+	@Serial
 	private static final long serialVersionUID = 1l;
 
 	@Override
