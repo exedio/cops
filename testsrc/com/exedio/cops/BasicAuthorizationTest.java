@@ -75,11 +75,11 @@ public class BasicAuthorizationTest extends TestCase
 		public String getHeader(final String name)
 		{
 			//noinspection SwitchStatementWithTooFewBranches OK: prepares more branches
-			switch(name)
+			return switch(name)
 			{
-				case "Authorization": return authorization;
-				default: return super.getHeader(name);
-			}
+				case "Authorization" -> authorization;
+				default -> super.getHeader(name);
+			};
 		}
 	}
 }
