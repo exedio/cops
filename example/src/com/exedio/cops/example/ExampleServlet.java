@@ -21,6 +21,7 @@ package com.exedio.cops.example;
 import com.exedio.cops.Cop;
 import com.exedio.cops.Resource;
 import java.io.IOException;
+import java.io.Serial;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 @SuppressWarnings("StaticMethodOnlyUsedInOneClass") // ok for jspm
 public final class ExampleServlet extends ExampleSuperServlet
 {
+	@Serial
 	private static final long serialVersionUID = 1l;
 
 	static final Resource logo = new Resource("logo.png");

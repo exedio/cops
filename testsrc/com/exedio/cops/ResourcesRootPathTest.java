@@ -18,6 +18,7 @@
 
 package com.exedio.cops;
 
+import java.io.Serial;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import junit.framework.TestCase;
@@ -81,12 +82,14 @@ public class ResourcesRootPathTest extends TestCase
 			{
 				return path;
 			}
+			@Serial
 			private static final long serialVersionUID = 1l;
 		};
 	}
 
 	static class Servlet extends CopsServlet
 	{
+		@Serial
 		private static final long serialVersionUID = 1l;
 
 		@SuppressWarnings("unused")

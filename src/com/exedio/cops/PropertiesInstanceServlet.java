@@ -26,10 +26,12 @@ import com.exedio.cope.util.Properties;
 import com.exedio.cope.util.Properties.Source;
 import com.exedio.cope.util.PropertiesInstance;
 import com.exedio.cops.PropertiesServlet.Overridable;
+import java.io.Serial;
 
 public abstract class PropertiesInstanceServlet<P extends Properties>
 	extends PropertiesServlet implements Overridable<P>
 {
+	@Serial
 	private static final long serialVersionUID = 1l;
 
 	protected abstract PropertiesInstance<P> get();
