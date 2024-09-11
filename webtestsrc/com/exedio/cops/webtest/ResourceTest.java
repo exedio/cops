@@ -65,15 +65,15 @@ public class ResourceTest extends AbstractWebTest
 	private static String getFingerprintForResourceTestTxt()
 	{
 		// resource-test.txt contains a line separator, so the MD5 fingerprint changes with the OS the git checkout was made with
-		switch ( lineSeparator() )
+		return switch ( lineSeparator() )
 		{
-			case "\n":
-				return "9e4cd71daa5a10b9dde41b944e0f185c";
-			case "\r\n":
-				return "c153a03d57965ec85e739bc7799d73fb";
-			default:
+			case "\n" ->
+				"9e4cd71daa5a10b9dde41b944e0f185c";
+			case "\r\n" ->
+				"c153a03d57965ec85e739bc7799d73fb";
+			default ->
 				throw new RuntimeException("system line separator not supported - please add to unit test");
-		}
+		};
 	}
 
 	private static long assertURL(final URL url) throws IOException
