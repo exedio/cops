@@ -46,9 +46,9 @@ try
 						' "-Dbuild.revision=${BUILD_NUMBER}"' +
 						' "-Dbuild.tag=' + buildTag + '"' +
 						' -Dbuild.status=' + (isRelease?'release':'integration') +
-						' -Dtomcat.port.shutdown=' + port(0) +
-						' -Dtomcat.port.http='     + port(1) +
-						' -Dtomcat.port.https='    + port(2)
+						' -Dtomcat.port.shutdown=18005' +
+						' -Dtomcat.port.http=18080' +
+						' -Dtomcat.port.https=18443'
 			}
 
 			recordIssues(
@@ -240,9 +240,4 @@ def shSilent(script)
 	{
 		currentBuild.result = 'FAILURE'
 	}
-}
-
-def port(int offset)
-{
-	return 28000 + 10*env.EXECUTOR_NUMBER.toInteger() + offset
 }
