@@ -45,19 +45,6 @@
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>files</servlet-name>
-		<servlet-class>com.exedio.cops.FileServlet</servlet-class>
-		<init-param>
-			<param-name>listings</param-name>
-			<param-value>true</param-value>
-		</init-param>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>files</servlet-name>
-		<url-pattern>/files/*</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
 		<servlet-name>properties</servlet-name>
 		<servlet-class>com.exedio.cops.example.PropertiesServlet</servlet-class>
 	</servlet>

@@ -3,14 +3,6 @@
 	<import file="common.xml" />
 	<target name="copy" depends="resolve">
 
-		<property name="catalina.root" value="apache-tomcat-9.0.31" />
-		<untar src="artifacts/lib/tomcat-tar.gz.tar.gz" dest="artifacts" compression="gzip">
-			<patternset>
-				<include name="${catalina.root}/lib/catalina.jar" />
-			</patternset>
-		</untar>
-		<move file="artifacts/${catalina.root}/lib/catalina.jar" todir="artifacts/lib" />
-
 		<delete dir="../lib">
 			<include name="*" />
 		</delete>
