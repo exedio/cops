@@ -19,7 +19,6 @@
       <sourceFolder url="file://$MODULE_DIR$/example/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/testsrc" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/webtestsrc" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/catalinasrc" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.settings" />
       <excludeFolder url="file://$MODULE_DIR$/api" />
       <excludeFolder url="file://$MODULE_DIR$/build" />

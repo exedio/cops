@@ -65,24 +65,6 @@
 		</copy>
 	</target>
 
-	<target name="catalina.compile">
-		<mkdir dir="build/classes" />
-		<javac srcdir="catalinasrc"
-				destdir="build/classes"
-				includeAntRuntime="false"
-				deprecation="on"
-				debug="on"
-				optimize="off">
-			<classpath>
-				<pathelement location="lib/javax.servlet-api.jar" />
-				<pathelement location="lib/catalina.jar" />
-			</classpath>
-			<compilerarg value="-Xlint" />
-			<compilerarg value="-encoding" />
-			<compilerarg value="ascii" />
-		</javac>
-	</target>
-
 	<target name="test.compile" depends="compile">
 		<mkdir dir="build/testclasses" />
 		<javac srcdir="testsrc"
@@ -131,7 +113,7 @@
 
 	<target name="test" depends="test.run" />
 
-	<target name="jar" depends="compile, catalina.compile">
+	<target name="jar" depends="compile">
 		<jar jarfile="build/exedio-cops.jar" basedir="build/classes" filesonly="true" duplicate="fail" strict="fail" level="9">
 			<manifest>
 				<attribute name="Specification-Title" value="exedio cops"/>
@@ -151,9 +133,6 @@
 			<zipfileset dir="${basedir}/src">
 				<include name="**/*.java" />
 				<exclude name="**/*_Jspm.java" />
-			</zipfileset>
-			<zipfileset dir="${basedir}/catalinasrc">
-				<include name="**/*.java" />
 			</zipfileset>
 		</zip>
 		<plot file="build/exedio-cops-src.zip" />
@@ -194,9 +173,7 @@
 		</copy>
 	</target>
 
-	<target name="example.web" depends="compile, catalina.compile, example.compile">
-		<mkdir dir="example/web/files" />
-		<touch file="example/web/files/hallo.txt" />
+	<target name="example.web" depends="compile, example.compile">
 		<copy todir="example/web/WEB-INF/lib">
 			<fileset dir="lib">
 				<include name="exedio-cope-util.jar" />
@@ -331,7 +308,7 @@
 	<target name="clean">
 		<delete dir="build" />
 		<delete dir="tomcat" />
-		<delete dir="example/web/files" />
+		<delete dir="example/web/files" /><!-- no longer created -->
 		<delete dir="example/web/WEB-INF/lib" />
 		<delete dir="example/web/WEB-INF/classes" />
 		<delete>
@@ -377,7 +354,7 @@
 
 	<target name="jspm" depends="runtime.jspm, example.jspm" />
 	<target name="src" depends="jspm" description="creates all sources, so the IDE does not complain" />
-	<target name="build" depends="compile, catalina.compile, test, webtest, jar, example, api" />
+	<target name="build" depends="compile, test, webtest, jar, example, api" />
 	<target name="all" depends="build, jar.src" />
 	<target name="tomcat" depends="example.tomcat" />
 
