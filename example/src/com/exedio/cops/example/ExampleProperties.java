@@ -69,6 +69,8 @@ public final class ExampleProperties extends Properties
 	private final int     setToDefaultInt     = value("setToDefault.int"    , 1234, 5);
 	private final boolean setToDefaultBoolean = value("setToDefault.boolean", true);
 
+	private final String toBeEscaped = value("toBeEscaped", "<h1>to be escaped</h1>");
+
 	private final ServiceFactory<ExampleService, ExampleServiceParameter> service =
 			valueService("service",
 					ExampleServiceImplementationDefault.class,
@@ -106,6 +108,11 @@ public final class ExampleProperties extends Properties
 		return "Result";
 	}
 	@SuppressWarnings("MethodMayBeStatic") // OK: @Probe
+	@Probe private String probeOkResultToBeEscaped()
+	{
+		return "<h1>to be escaped</h1>";
+	}
+	@SuppressWarnings("MethodMayBeStatic") // OK: @Probe
 	@Probe private void probeBroken()
 	{
 		throw new NullPointerException("zack");
@@ -114,6 +121,11 @@ public final class ExampleProperties extends Properties
 	@Probe private void probeBrokenNested()
 	{
 		throw new RuntimeException(new NullPointerException("zack"));
+	}
+	@SuppressWarnings("MethodMayBeStatic") // OK: @Probe
+	@Probe private void probeBrokenToBeEscaped()
+	{
+		throw new NullPointerException("<h1>to be escaped</h1>");
 	}
 	@SuppressWarnings("MethodMayBeStatic") // OK: @Probe
 	@Probe private String probeSleep() throws InterruptedException
