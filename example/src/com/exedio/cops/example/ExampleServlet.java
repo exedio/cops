@@ -79,6 +79,6 @@ public final class ExampleServlet extends ExampleSuperServlet
 
 		final Out out = new Out(request, response);
 		Example_Jspm.write(out, cop, request, cop.pager.init(searchSet), reportedException);
-		out.writeBody();
+		out.sendBody();
 	}
 }

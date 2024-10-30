@@ -184,23 +184,23 @@ public class ExampleCop extends Cop implements Pageable
 			writePagerButton(out, cop, pager.last(),     "&gt;&gt;");
 			for(final Pager newLimit : pager.newLimits())
 				writePagerButton(out, cop, newLimit, String.valueOf(newLimit.getLimit()));
-			out.append(" item ");
-			out.append(pager.getFrom());
-			out.append('-');
-			out.append(pager.getTo());
-			out.append(" of ");
-			out.append(pager.getTotal());
-			out.append("<br> page ");
-			out.append(pager.getPage());
-			out.append(" of ");
-			out.append(pager.getTotalPages());
-			out.append(" pages ");
+			out.write(" item ");
+			out.write(pager.getFrom());
+			out.write('-');
+			out.write(pager.getTo());
+			out.write(" of ");
+			out.write(pager.getTotal());
+			out.writeStatic("<br> page ");
+			out.write(pager.getPage());
+			out.write(" of ");
+			out.write(pager.getTotalPages());
+			out.write(" pages ");
 			if(pager.hasBeforeNewPages())
-				out.append("... ");
+				out.write("... ");
 			for(final Pager newPage : pager.newPages())
 				writePagerButton(out, cop, newPage, String.valueOf(newPage.getPage()));
 			if(pager.hasAfterNewPages())
-				out.append(" ...");
+				out.write(" ...");
 		}
 	}
 

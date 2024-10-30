@@ -44,52 +44,60 @@ final class Out
 		this.response = response;
 	}
 
-	void append(final char c)
+	void write(final char c)
 	{
-		bf.append(c);
+		XMLEncoder.append(bf, c);
 	}
 
-	void append(final String s)
+	void writeStatic(final String s)
 	{
 		bf.append(s);
 	}
 
-	void append(final boolean b)
+	void write(final String s)
+	{
+		if(s==null)
+			bf.append("null");
+		else
+			XMLEncoder.append(bf, s);
+	}
+
+	void write(final boolean b)
 	{
 		bf.append(b);
 	}
 
-	void append(final int i)
+	void write(final int i)
 	{
 		bf.append(i);
 	}
 
-	void append(final Charset cs)
+	void write(final Charset cs)
 	{
 		bf.append(cs.name());
 	}
 
-	void append(final Resource resource)
+	void write(final Resource resource)
 	{
 		bf.append(resource.getURL(request));
 	}
 
-	void appendAbsolute(final Resource resource)
+	void writeAbsolute(final Resource resource)
 	{
 		bf.append(resource.getAbsoluteURL(request));
 	}
 
-	void append(final Cop cop)
+	void write(final Cop cop)
 	{
 		bf.append(XMLEncoder.encode(response.encodeURL(cop.getURL(request))));
 	}
 
-	void appendAbsolute(final Cop cop)
+	void writeAbsolute(final Cop cop)
 	{
 		bf.append(XMLEncoder.encode(response.encodeURL(cop.getAbsoluteURL(request))));
 	}
 
-	void writeBody() throws IOException
+	void sendBody() throws IOException
 	{
 		final StringBuilder bf = this.bf;
 		if(bf==null)
