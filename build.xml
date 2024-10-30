@@ -129,7 +129,7 @@
 	</target>
 
 	<target name="example.jspm">
-		<jspm method="append">
+		<jspm>
 			<fileset dir="example/src" includes="**/*.jspm" />
 		</jspm>
 	</target>

@@ -48,14 +48,14 @@ final class Example_Jspm
 	</head>
 	<body>
 		<img src="<%=ExampleServlet.logo%>">
-		<img src="<% out.appendAbsolute(ExampleServlet.logo); %>"><% out.appendAbsolute(ExampleServlet.logo); %>
+		<img src="<% out.writeAbsolute(ExampleServlet.logo); %>"><% out.writeAbsolute(ExampleServlet.logo); %>
 		[<a href="<%=ExampleServlet.test%>">test</a>]
 		<img src="<%=ExampleSuperServlet.logoSmall%>">
 		<br>
 
 		this:
 		<a href="<%=cop%>">url</a> |
-		<a href="<% out.appendAbsolute(cop); %>">absolute</a>
+		<a href="<% out.writeAbsolute(cop); %>">absolute</a>
 		<tt style="border: red solid 1px;"><%=cop%></tt>
 		<br>
 
@@ -145,6 +145,8 @@ final class Example_Jspm
 		<a href="<%=cop.toDirLevel(2)%>">2</a> |
 		<a href="<%=cop.toDirLevel(3)%>">3</a> |
 		<a href="<%=cop.toDirLevel(4)%>">4</a>
+		<br>
+		<%= "<h1>to be escaped</h1>" %>
 		<br>
 		Locale: <% write(out, request.getLocale()); %>all: <%
 		for(final Enumeration<?> e = request.getLocales(); e.hasMoreElements(); )
