@@ -376,7 +376,11 @@ final class Properties_Jspm
 		%>
 		</form>
 		<hr>
-		<div class="footer"><%=footerDate%></div>
+		<div class="footer">
+			<%=footerDate%>
+			<br>
+			<a href="copsResourceStatus.html" target="_blank">Resource Status</a>
+		</div>
 	</body>
 </html><%
 	}
