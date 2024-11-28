@@ -10,13 +10,13 @@ The items are sorted inversely, i.e. latest items are on top
 * Page footer links to Resource Status (copsResourceStatus.html).
 	You may want to drop links within the Admin Area of your project.
 * com.exedio.cops.ColoredTable dropped.
-	This breaks backwards API compatibility, causes compiler error.
+	This breaks backwards API compatibility - check for usages in your project!
 * com.exedio.cops.FileServlet dropped.
-	This breaks backwards API compatibility.
-	In particular check your web.xml.
+	This breaks backwards API compatibility - check for usages in your project,
+	in particular in your web.xml!
 * JDK 17 required.
 * RequestLimiter dropped.
-	This breaks backwards API compatibility, causes compiler error.
+	This breaks backwards API compatibility - check for usages in your project!
 * servlet-api 4.0.1 required.
 * HTTP header security:
 	X-Content-Type-Options: nosniff set in response of Resource.
