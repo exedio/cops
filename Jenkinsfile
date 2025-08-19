@@ -1,6 +1,8 @@
 #!'groovy'
+import groovy.transform.Field
 
-def projectName = env.JOB_NAME.substring(0, env.JOB_NAME.indexOf("/")) // depends on name and location of multibranch pipeline in jenkins
+@Field
+String projectNamePattern = "^exedio/([a-z]*)/.*" // depends on location of multibranch pipeline in jenkins
 def jdk = 'openjdk-17'
 def idea = '2021.2'
 def ideaSHA256 = '7c27799861fb1ba0d43a3565a1ec2be789e1871191be709f0e79f1e17d3571fe'
@@ -142,7 +144,7 @@ try
 
 	parallelBranches["Ivy"] =
 	{
-		def cache = 'jenkins-build-survivor-' + projectName + "-Ivy"
+		def cache = 'jenkins-build-survivor-' + projectName() + "-Ivy"
 		//noinspection GroovyAssignabilityCheck
 		lockNodeCheckoutAndDelete(cache)
 		{
@@ -188,6 +190,22 @@ finally
 				notifyEveryUnstableBuild: true])
 	}
 	updateGitlabCommitStatus state: currentBuild.resultIsBetterOrEqualTo("SUCCESS") ? "success" : "failed" // https://docs.gitlab.com/ee/api/commits.html#post-the-build-status-to-a-commit
+}
+
+// ------------------- LIBRARY ----------------------------
+// The code below is meant to be equal across all projects.
+
+String projectName()
+{
+	String jobName = env.JOB_NAME
+	java.util.regex.Matcher m = java.util.regex.Pattern.compile(projectNamePattern).
+			matcher(jobName)
+	if(!m.matches())
+		error "illegal jobName >" + jobName + "<, must match " + projectNamePattern
+
+	String result = m.group(1)
+	echo("project name >" + result + "< computed from >" + jobName + "<")
+	return result
 }
 
 def lockNodeCheckoutAndDelete(resource, Closure body)
