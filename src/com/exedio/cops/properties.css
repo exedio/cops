@@ -85,6 +85,11 @@ table tr.unspecified td
 	background:#FFE;
 }
 
+form.inline
+{
+	display: inline;
+}
+
 input.propertyValue
 {
 	display:none;

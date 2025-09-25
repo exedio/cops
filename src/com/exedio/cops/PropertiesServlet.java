@@ -60,6 +60,9 @@ public abstract class PropertiesServlet extends CopsServlet
 	@SuppressWarnings("unused") // used by properties.js
 	static final Resource nodeTrue  = new Resource("nodetrue.png");
 
+	static final String HIDDEN_SHOW_CLEAR = "hidden.clear";
+	static final String HIDDEN_SHOW_ADD = "hidden.add";
+	static final String HIDDEN_SHOW_ADD_FIELD = "hidden.add.field";
 	static final String SET = "set";
 	static final String FIELD_SELECT = "fieldSelect";
 	static final String FIELD_VALUE_PREFIX = "fieldVal_";
@@ -99,6 +102,24 @@ public abstract class PropertiesServlet extends CopsServlet
 		// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection
 		response.setHeader("X-XSS-Protection", "1; mode=block");
 
+		if(Cop.isPost(request))
+		{
+			if(request.getParameter(HIDDEN_SHOW_CLEAR)!=null)
+				PropertiesCop.clearShowHidden(request);
+
+			if(request.getParameter(HIDDEN_SHOW_ADD)!=null)
+			{
+				final String field = request.getParameter(HIDDEN_SHOW_ADD_FIELD);
+				for(final Properties.Field<?> f : getProperties().getFields())
+				{
+					if(field.equals(f.getKey()))
+					{
+						PropertiesCop.addShowHidden(f, request);
+						break;
+					}
+				}
+			}
+		}
 		if(Cop.isPost(request) && request.getParameter(SET)!=null)
 		{
 			if(this instanceof Overridable<?>)
@@ -163,7 +184,7 @@ public abstract class PropertiesServlet extends CopsServlet
 		final Out out = new Out(request);
 		Properties_Jspm.write(
 				out,
-				PropertiesCop.getCop(properties, request),
+				PropertiesCop.getCop(request),
 				request,
 				getDisplayCaption(),
 				new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS Z (z)", UK).format(new Date()),

@@ -2,7 +2,7 @@
 <Context docBase="../../example/web"
 			debug="0"
 			privileged="true"
-			cookies="false">
+			cookies="true" useHttpOnly="true">
 	<Parameter
 			name="cops.com.exedio.cope.servletutil.ServletSource.propertiesFile"
 			value="../../example/web/WEB-INF/normal.properties"

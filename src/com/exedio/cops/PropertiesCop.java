@@ -25,67 +25,77 @@ package com.exedio.cops;
 import com.exedio.cope.util.Properties;
 import com.exedio.cope.util.Properties.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 final class PropertiesCop extends Cop
 {
-	static final String SHOW_HIDDEN = "sh";
+	private final HttpServletRequest request;
 
-	private final Properties properties;
-	private final HashSet<String> showHidden;
-
-	private PropertiesCop(final Properties properties, final HashSet<String> showHidden)
+	private PropertiesCop(final HttpServletRequest request)
 	{
 		super("");
-		this.properties = properties;
-		this.showHidden = showHidden;
-
-		if(showHidden!=null)
-			for(final Field<?> field : properties.getFields())
-				if(showHidden.contains(field.getKey()))
-					addParameter(SHOW_HIDDEN, field.getKey());
+		this.request = request;
 	}
 
 	@SuppressWarnings("StaticMethodOnlyUsedInOneClass")
-	static PropertiesCop getCop(final Properties properties, final HttpServletRequest request)
+	static PropertiesCop getCop(final HttpServletRequest request)
 	{
-		final String[] showHiddenKeys = request.getParameterValues(SHOW_HIDDEN);
-		final HashSet<String> showHidden =
-				(showHiddenKeys!=null)
-				? new HashSet<>(Arrays.asList(showHiddenKeys))
-				: null;
 		return new PropertiesCop(
-				properties, showHidden);
+				request);
 	}
 
-	PropertiesCop addShowHidden(final Field<?> field)
+	static void addShowHidden(final Field<?> field, final HttpServletRequest request)
 	{
-		final HashSet<String> showHidden =
-				(this.showHidden!=null)
-				? new HashSet<>(this.showHidden)
-				: new HashSet<>();
-		showHidden.add(field.getKey());
-		return new PropertiesCop(properties, showHidden);
+		final HttpSession session = request.getSession(true);
+		final Object valueObject = session.getAttribute(SHOW_HIDDEN_SESSION);
+		if(valueObject instanceof final Set<?> valueWildcard) // implies !=null
+		{
+			@SuppressWarnings("unchecked")
+			final Set<String> value = (Set<String>)valueWildcard;
+			value.add(field.getKey());
+		}
+		else
+		{
+			final HashSet<String> value = new HashSet<>();
+			value.add(field.getKey());
+			session.setAttribute(SHOW_HIDDEN_SESSION, value);
+		}
 	}
 
-	PropertiesCop clearShowHidden()
+	static void clearShowHidden(final HttpServletRequest request)
 	{
-		return new PropertiesCop(properties, null);
+		final HttpSession session = request.getSession(false);
+		if(session!=null)
+			session.removeAttribute(SHOW_HIDDEN_SESSION);
 	}
 
 	boolean isHidden(final Field<?> field)
 	{
-		return
-				field.hasHiddenValue() &&
-				(showHidden==null || !showHidden.contains(field.getKey()));
+		if(!field.hasHiddenValue())
+			return false;
+
+		final HttpSession session = request.getSession(false);
+		if(session==null)
+			return true;
+		final Object valueObject = session.getAttribute(SHOW_HIDDEN_SESSION);
+		return !(
+				valueObject instanceof final Set<?> value && // implies !=null
+				value.contains(field.getKey())
+		);
 	}
 
 	boolean hasShowHidden()
 	{
-		return showHidden!=null && !showHidden.isEmpty();
+		final HttpSession session = request.getSession(false);
+		return
+				session!=null &&
+				session.getAttribute(SHOW_HIDDEN_SESSION)!=null;
 	}
+
+	private static final String SHOW_HIDDEN_SESSION = PropertiesServlet.class.getName() + "#showHidden";
 
 	@SuppressWarnings("StaticMethodOnlyUsedInOneClass") // ok for jspm
 	static Object reloadedNewValue(
