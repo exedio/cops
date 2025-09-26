@@ -178,8 +178,8 @@ final class Properties_Jspm
 				<td class="notavailable<%
 					//noinspection VariableNotUsedInsideIf
 					if(reloadedNewValue!=null){%> tobereloaded<%}
-					%>" colspan="2">hidden (<a href="<%=
-					cop.addShowHidden(field)%>">show</a>)</td><%
+					%>" colspan="2"><% writeHiddenField(out, cop, field);
+					%></td><%
 		}
 		else
 		{
@@ -260,8 +260,8 @@ final class Properties_Jspm
 				if(cop.isHidden(field))
 				{
 					%>
-					<td class="notavailable">hidden (<a href="<%=
-						cop.addShowHidden(field)%>">show</a>)</td><%
+					<td class="notavailable"><% writeHiddenField(out, cop, field);
+						%></td><%
 				}
 				else
 				{
@@ -383,6 +383,15 @@ final class Properties_Jspm
 		</div>
 	</body>
 </html><%
+	}
+
+	private static void writeHiddenField(
+			final Out out,
+			final PropertiesCop cop,
+			final Field<?> field)
+	{
+		%>hidden
+		(<a href="<%=cop.addShowHidden(field)%>">show</a>)<%
 	}
 
 	private static void writeProbeCheckAll(
