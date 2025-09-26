@@ -141,7 +141,7 @@ final class Properties_Jspm
 		}
 		%>
 		<div><img class="check" onClick="toggleUnspecified(this)" src="<%=PropertiesServlet.checkFalse%>"> show unspecified</div>
-		<form method="post">
+		<form method="POST">
 		<table id="properties-table" class="hide-unspecified"><%
 		int idNum = 0;
 		final ArrayList<Field<?>> reloadedFields = new ArrayList<>();

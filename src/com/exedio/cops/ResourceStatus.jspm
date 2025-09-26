@@ -141,7 +141,7 @@ final class ResourceStatus_Jspm
 				%>not authenticated<%
 			}
 		%></div>
-	<form action="<%=cop%>" method="post">
+	<form action="<%=cop%>" method="POST">
 		<table>
 			<caption>Resource Status <small>(<a href="<%=cop.toggleShowUrl()%>">url</a>,<a href="<%=cop.toggleAbsoluteUrl()%>">absolute</a>)</small></caption>
 			<tr>
