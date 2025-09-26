@@ -28,6 +28,9 @@ import static com.exedio.cops.PropertiesServlet.DRY_RUN;
 import static com.exedio.cops.PropertiesServlet.FIELD_SELECT;
 import static com.exedio.cops.PropertiesServlet.FIELD_VALUE_PREFIX;
 import static com.exedio.cops.PropertiesServlet.FIELDS_RAW;
+import static com.exedio.cops.PropertiesServlet.HIDDEN_SHOW_ADD;
+import static com.exedio.cops.PropertiesServlet.HIDDEN_SHOW_ADD_FIELD;
+import static com.exedio.cops.PropertiesServlet.HIDDEN_SHOW_CLEAR;
 import static com.exedio.cops.PropertiesServlet.PROBE_NUMBER;
 import static com.exedio.cops.TimeUtil.toMillies;
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -137,7 +140,9 @@ final class Properties_Jspm
 		if(cop.hasShowHidden())
 		{
 		%>
-		<div class="footer"><a href="<%=cop.clearShowHidden()%>">hide hidden fields</a></div><%
+		<form action="<%=cop%>" method="POST">
+			<input type="submit" name="<%=HIDDEN_SHOW_CLEAR%>" value="hide hidden fields">
+		</form><%
 		}
 		%>
 		<div><img class="check" onClick="toggleUnspecified(this)" src="<%=PropertiesServlet.checkFalse%>"> show unspecified</div>
@@ -391,7 +396,10 @@ final class Properties_Jspm
 			final Field<?> field)
 	{
 		%>hidden
-		(<a href="<%=cop.addShowHidden(field)%>">show</a>)<%
+		<form action="<%=cop%>" method="POST" class="inline">
+			<input type="hidden" name="<%=HIDDEN_SHOW_ADD_FIELD%>" value="<%=field.getKey()%>">
+			<input type="submit" name="<%=HIDDEN_SHOW_ADD%>" value="show">
+		</form><%
 	}
 
 	private static void writeProbeCheckAll(
