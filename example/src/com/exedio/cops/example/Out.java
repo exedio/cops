@@ -89,12 +89,12 @@ final class Out
 
 	void write(final Cop cop)
 	{
-		bf.append(XMLEncoder.encode(response.encodeURL(cop.getURL(request))));
+		bf.append(XMLEncoder.encode(cop.getURL(request)));
 	}
 
 	void writeAbsolute(final Cop cop)
 	{
-		bf.append(XMLEncoder.encode(response.encodeURL(cop.getAbsoluteURL(request))));
+		bf.append(XMLEncoder.encode(cop.getAbsoluteURL(request)));
 	}
 
 	void sendBody() throws IOException

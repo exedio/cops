@@ -68,7 +68,7 @@ public final class ExampleServlet extends ExampleSuperServlet
 			if(request.getParameter(START_SESSION)!=null)
 			{
 				request.getSession();
-				response.sendRedirect(response.encodeRedirectURL(cop.getURL(request)));
+				response.sendRedirect(cop.getURL(request));
 				return;
 			}
 			else if(request.getParameter(REPORT_EXCEPTION)!=null)
