@@ -292,7 +292,7 @@ public abstract class Cop
 			return false;
 
 		// There is no need for absolute url anymore: https://en.wikipedia.org/wiki/HTTP_location
-		final String location = response.encodeRedirectURL(getURL(request));
+		final String location = getURL(request);
 		logger.info("redirectToCanonical from --{}-- to --{}--", actual, location);
 
 		response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
