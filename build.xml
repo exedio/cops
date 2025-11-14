@@ -37,7 +37,7 @@
 				debug="on"
 				optimize="off">
 			<classpath>
-				<pathelement location="lib/javax.servlet-api.jar" />
+				<pathelement location="lib/jakarta.servlet-api.jar" />
 				<pathelement location="lib/slf4j-api.jar" />
 				<pathelement location="lib/micrometer-core.jar" />
 				<pathelement location="lib/exedio-cope-util.jar" />
@@ -65,7 +65,7 @@
 				optimize="off">
 			<classpath>
 				<pathelement location="build/classes" />
-				<pathelement location="lib/javax.servlet-api.jar" />
+				<pathelement location="lib/jakarta.servlet-api.jar" />
 				<pathelement location="lib/junit.jar" />
 			</classpath>
 			<compilerarg value="-Xlint" />
@@ -90,7 +90,7 @@
 				<pathelement location="build/classes" />
 				<pathelement location="build/testclasses" />
 				<pathelement location="lib/junit.jar" />
-				<pathelement location="lib/javax.servlet-api.jar" />
+				<pathelement location="lib/jakarta.servlet-api.jar" />
 				<pathelement location="lib/slf4j-api.jar" />
 				<pathelement location="lib/slf4j-log4j12.jar" />
 				<pathelement location="lib/log4j-bundle.jar" />
@@ -143,7 +143,7 @@
 				optimize="off">
 			<classpath>
 				<pathelement location="build/classes" />
-				<pathelement location="lib/javax.servlet-api.jar" />
+				<pathelement location="lib/jakarta.servlet-api.jar" />
 				<pathelement location="lib/micrometer-core.jar" />
 				<pathelement location="lib/micrometer-registry-prometheus.jar" />
 				<pathelement location="lib/simpleclient-bundle.jar" />
@@ -188,7 +188,7 @@
 	</target>
 
 	<target name="catalina">
-		<property name="catalina.root" value="apache-tomcat-9.0.43" />
+		<property name="catalina.root" value="apache-tomcat-10.1.24" />
 		<untar src="lib/tomcat.tar.gz"
 				 compression="gzip"
 				 dest="${basedir}">
@@ -334,7 +334,7 @@
 			<package name="com.*" />
 			<arg value="-Xdoclint:all,-missing" />
 			<classpath>
-				<pathelement location="lib/javax.servlet-api.jar" />
+				<pathelement location="lib/jakarta.servlet-api.jar" />
 				<pathelement location="lib/exedio-cope-util.jar" />
 				<pathelement location="lib/slf4j-api.jar" />
 				<pathelement location="lib/micrometer-core.jar" />

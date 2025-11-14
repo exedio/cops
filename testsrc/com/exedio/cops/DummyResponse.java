@@ -23,9 +23,9 @@ import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
 import java.util.function.Supplier;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class DummyResponse implements HttpServletResponse
 {
@@ -72,20 +72,6 @@ public class DummyResponse implements HttpServletResponse
 	}
 
 	@Override
-	@Deprecated
-	public String encodeRedirectUrl(final String arg0)
-	{
-		throw new RuntimeException();
-	}
-
-	@Override
-	@Deprecated
-	public String encodeUrl(final String arg0)
-	{
-		throw new RuntimeException();
-	}
-
-	@Override
 	public void sendError(final int arg0)
 	{
 		throw new RuntimeException();
@@ -123,13 +109,6 @@ public class DummyResponse implements HttpServletResponse
 
 	@Override
 	public void setStatus(final int arg0)
-	{
-		throw new RuntimeException();
-	}
-
-	@Override
-	@Deprecated
-	public void setStatus(final int arg0, final String arg1)
 	{
 		throw new RuntimeException();
 	}

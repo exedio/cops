@@ -18,7 +18,7 @@
 
 package com.exedio.cops;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import junit.framework.TestCase;
 
 public class CopTest extends TestCase

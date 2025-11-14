@@ -20,8 +20,8 @@ package com.exedio.cops;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletResponse;
 
 public final class BodySender
 {
