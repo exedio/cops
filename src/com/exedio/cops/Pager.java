@@ -20,10 +20,10 @@ package com.exedio.cops;
 
 import static java.util.Objects.requireNonNull;
 
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jakarta.servlet.http.HttpServletRequest;
 
 public final class Pager
 {

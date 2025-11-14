@@ -20,9 +20,9 @@ package com.exedio.cops;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-import java.util.Base64;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.Base64;
 
 public final class BasicAuthorization
 {

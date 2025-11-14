@@ -21,12 +21,12 @@ package com.exedio.cops;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import jakarta.servlet.http.HttpServletRequest;
 import junit.framework.TestCase;
 
 public class CopParameterRequestTest extends TestCase

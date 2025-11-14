@@ -18,9 +18,9 @@
 
 package com.exedio.cops;
 
-import java.util.Enumeration;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpSession;
+import java.util.Enumeration;
 
 public class DummySession implements HttpSession
 {

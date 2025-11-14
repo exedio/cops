@@ -27,6 +27,8 @@ import static java.util.Locale.UK;
 import com.exedio.cope.util.Properties;
 import com.exedio.cope.util.Properties.ProbeAbortedException;
 import com.exedio.cope.util.Sources;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Serial;
 import java.io.StringReader;
@@ -40,8 +42,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.concurrent.Callable;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
 @SuppressWarnings("StaticMethodOnlyUsedInOneClass") // ok for jspm
 public abstract class PropertiesServlet extends CopsServlet

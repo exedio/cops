@@ -18,9 +18,9 @@
 
 package com.exedio.cops;
 
-import java.io.Serial;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.Serial;
 import junit.framework.TestCase;
 
 public class ResourcesRootPathTest extends TestCase
