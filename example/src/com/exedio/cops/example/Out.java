@@ -24,10 +24,10 @@ import com.exedio.cope.util.XMLEncoder;
 import com.exedio.cops.BodySender;
 import com.exedio.cops.Cop;
 import com.exedio.cops.Resource;
-import java.io.IOException;
-import java.nio.charset.Charset;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.nio.charset.Charset;
 
 final class Out
 {

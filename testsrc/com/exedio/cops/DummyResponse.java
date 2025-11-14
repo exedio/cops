@@ -18,14 +18,14 @@
 
 package com.exedio.cops;
 
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
 import java.util.function.Supplier;
-import jakarta.servlet.ServletOutputStream;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletResponse;
 
 public class DummyResponse implements HttpServletResponse
 {

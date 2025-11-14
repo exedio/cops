@@ -20,11 +20,11 @@ package com.exedio.cops.example;
 
 import com.exedio.cops.Cop;
 import com.exedio.cops.Resource;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Serial;
 import java.util.ArrayList;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
 @SuppressWarnings("StaticMethodOnlyUsedInOneClass") // ok for jspm
 public final class ExampleServlet extends ExampleSuperServlet

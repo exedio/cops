@@ -24,11 +24,11 @@ package com.exedio.cops;
 
 import com.exedio.cope.util.Properties;
 import com.exedio.cope.util.Properties.Field;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 
 final class PropertiesCop extends Cop
 {

@@ -18,12 +18,18 @@
 
 package com.exedio.cops;
 
+import static jakarta.servlet.http.HttpServletResponse.SC_NOT_FOUND;
 import static java.lang.reflect.Modifier.FINAL;
 import static java.lang.reflect.Modifier.STATIC;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.Locale.UK;
-import static jakarta.servlet.http.HttpServletResponse.SC_NOT_FOUND;
 
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRegistration;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -39,12 +45,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
-import jakarta.servlet.ServletConfig;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletRegistration;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
 public abstract class CopsServlet extends HttpServlet
 {

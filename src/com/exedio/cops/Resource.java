@@ -18,20 +18,20 @@
 
 package com.exedio.cops;
 
-import static java.util.Objects.requireNonNull;
 import static jakarta.servlet.http.HttpServletResponse.SC_MOVED_PERMANENTLY;
 import static jakarta.servlet.http.HttpServletResponse.SC_NOT_FOUND;
+import static java.util.Objects.requireNonNull;
 
 import com.exedio.cope.util.Hex;
 import com.exedio.cope.util.MessageDigestUtil;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.MessageDigest;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicLong;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
 public final class Resource
 {
