@@ -145,15 +145,15 @@ public abstract class Cop
 	 * Return false to use any of these,
 	 * which uses the previously used protocol.
 	 * This default implementation returns false.
+	 * @deprecated
+	 * No longer supported.
+	 * This method is no longer called by the framework.
+	 * The framework behaves, as if this method was not overridden by any subclass.
 	 */
+	@Deprecated
 	protected boolean needsSecure()
 	{
 		return false;
-	}
-
-	private boolean doesNotNeedSecureRedirect(final HttpServletRequest request)
-	{
-		return !needsSecure() || request.isSecure();
 	}
 
 	private static final String HOST = "Host";
@@ -174,7 +174,7 @@ public abstract class Cop
 
 	public final String getURL(final HttpServletRequest request)
 	{
-		return getURL(request, needsSecure());
+		return getURLInternal(request);
 	}
 
 	/**
@@ -188,27 +188,15 @@ public abstract class Cop
 		return getURL(request);
 	}
 
-	private String getURL(
-			final HttpServletRequest request,
-			final boolean needsSecure)
+	private String getURLInternal(
+			final HttpServletRequest request
+			)
 	{
 		final String url = this.url!=null ? this.url.toString() : pathInfo;
 
 		requireNonNull(request, "request");
 
-		final String fullURL = request.getContextPath() + request.getServletPath() + '/' + url;
-
-		if(!needsSecure || request.isSecure())
-			return fullURL;
-
-		String host = request.getHeader(HOST);
-		if(host.endsWith(":8080"))
-			host = host.substring(0, host.length()-4) + "8443";
-
-		return
-			"https://" +
-			host +
-			fullURL;
+		return request.getContextPath() + request.getServletPath() + '/' + url;
 	}
 
 	@Override
@@ -270,7 +258,7 @@ public abstract class Cop
 		final String actualPathInfo = request.getPathInfo();
 		final String actualQueryString = request.getQueryString();
 		final String actual = actualQueryString!=null ? (actualPathInfo + '?' + actualQueryString) : actualPathInfo;
-		if(expected.equals(actual) && doesNotNeedSecureRedirect(request))
+		if(expected.equals(actual))
 			return false;
 
 		// There is no need for absolute url anymore: https://en.wikipedia.org/wiki/HTTP_location
