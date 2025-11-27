@@ -144,7 +144,7 @@ public abstract class Cop
 	 * Return true to use https.
 	 * Return false to use any of these,
 	 * which uses the previously used protocol.
-	 * This default implementation returns null.
+	 * This default implementation returns false.
 	 */
 	protected boolean needsSecure()
 	{
