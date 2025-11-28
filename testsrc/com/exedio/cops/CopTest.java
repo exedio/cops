@@ -132,8 +132,7 @@ public class CopTest extends TestCase
 		}
 		try
 		{
-			//noinspection RedundantCast
-			new TestCop().getAbsoluteURL((HttpServletRequest)null);
+			new TestCop().getAbsoluteURL(null);
 			fail();
 		}
 		catch(final NullPointerException e)
@@ -142,8 +141,7 @@ public class CopTest extends TestCase
 		}
 		try
 		{
-			//noinspection RedundantCast
-			new TestCop().getSecureURL((HttpServletRequest)null);
+			new TestCop().getSecureURL(null);
 			fail();
 		}
 		catch(final NullPointerException e)

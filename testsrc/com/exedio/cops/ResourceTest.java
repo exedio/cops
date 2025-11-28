@@ -96,8 +96,7 @@ public class ResourceTest extends TestCase
 		}
 		try
 		{
-			//noinspection RedundantCast
-			r1.getAbsoluteURL((HttpServletRequest)null);
+			r1.getAbsoluteURL(null);
 			fail();
 		}
 		catch(final NullPointerException e)
@@ -142,8 +141,7 @@ public class ResourceTest extends TestCase
 		}
 		try
 		{
-			//noinspection RedundantCast
-			r1.getAbsoluteURL((HttpServletRequest)null);
+			r1.getAbsoluteURL(null);
 			fail();
 		}
 		catch(final NullPointerException e)
@@ -171,8 +169,7 @@ public class ResourceTest extends TestCase
 		}
 		try
 		{
-			//noinspection RedundantCast
-			r1.getAbsoluteURL((HttpServletRequest)null);
+			r1.getAbsoluteURL(null);
 			fail();
 		}
 		catch(final NullPointerException e)
