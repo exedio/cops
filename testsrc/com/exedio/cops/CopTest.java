@@ -268,13 +268,6 @@ public class CopTest extends TestCase
 	{
 		final HttpServletRequest request = new SecureRequest();
 		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop().getURL(request));
-		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop().getURL(request));
-		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop().getURL(request));
-		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop().getURL(request));
-		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop().getURL(request));
-		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop().getURL(request));
-		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop().getURL(request));
-		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop().getURL(request));
 	}
 
 	static final class SecureCop extends Cop
