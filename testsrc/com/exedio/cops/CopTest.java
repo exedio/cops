@@ -266,18 +266,18 @@ public class CopTest extends TestCase
 
 	public void testSecure()
 	{
-		HttpServletRequest request = new SecureRequest(false);
+		HttpServletRequest request = new SecureRequest();
 		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop().getURL(request));
 		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop().getURL(request));
-		request = new SecureRequest(true);
+		request = new SecureRequest();
 		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop().getURL(request));
 		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop().getURL(request));
 
 		// port adjustments
-		request = new SecureRequest(false, 8080);
+		request = new SecureRequest(8080);
 		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop().getURL(request));
 		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop().getURL(request));
-		request = new SecureRequest(true,  8443);
+		request = new SecureRequest(8443);
 		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop().getURL(request));
 		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop().getURL(request));
 	}
@@ -293,24 +293,16 @@ public class CopTest extends TestCase
 
 	static final class SecureRequest extends DummyRequest
 	{
-		final boolean secure;
 		final int port;
 
-		SecureRequest(final boolean secure)
+		SecureRequest()
 		{
-			this(secure, -1);
+			this(-1);
 		}
 
-		SecureRequest(final boolean secure, final int port)
+		SecureRequest(final int port)
 		{
-			this.secure = secure;
 			this.port = port;
-		}
-
-		@Override
-		public boolean isSecure()
-		{
-			return secure;
 		}
 
 		@Override
