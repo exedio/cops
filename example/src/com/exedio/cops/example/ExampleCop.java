@@ -205,6 +205,7 @@ public class ExampleCop extends Cop implements Pageable
 	}
 
 	@Override
+	@SuppressWarnings("deprecation") // TODO
 	protected boolean needsSecure()
 	{
 		return needsSecure;
