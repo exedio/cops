@@ -267,37 +267,27 @@ public class CopTest extends TestCase
 	public void testSecure()
 	{
 		HttpServletRequest request = new SecureRequest(false);
-		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop(false).getURL(request));
-		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop(true).getURL(request));
+		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop().getURL(request));
+		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop().getURL(request));
 		request = new SecureRequest(true);
-		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop(false).getURL(request));
-		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop(true).getURL(request));
+		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop().getURL(request));
+		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop().getURL(request));
 
 		// port adjustments
 		request = new SecureRequest(false, 8080);
-		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop(false).getURL(request));
-		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop(true).getURL(request));
+		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop().getURL(request));
+		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop().getURL(request));
 		request = new SecureRequest(true,  8443);
-		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop(false).getURL(request));
-		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop(true).getURL(request));
+		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop().getURL(request));
+		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop().getURL(request));
 	}
 
 	static final class SecureCop extends Cop
 	{
-		final boolean needsSecure;
-
-		SecureCop(final boolean needsSecure)
+		SecureCop()
 		{
 			super("test.html");
-			this.needsSecure = needsSecure;
 			addParameter("param1", "value1");
-		}
-
-		@Override
-		@SuppressWarnings({"deprecation","unused"}) // TODO
-		public boolean needsSecure()
-		{
-			return needsSecure;
 		}
 	}
 
