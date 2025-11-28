@@ -172,11 +172,6 @@ public abstract class Cop
 			'/' + url;
 	}
 
-	public final String getURL(final HttpServletRequest request)
-	{
-		return getURLInternal(request);
-	}
-
 	/**
 	 * @deprecated
 	 * This method is no longer supported.
@@ -188,9 +183,7 @@ public abstract class Cop
 		return getURL(request);
 	}
 
-	private String getURLInternal(
-			final HttpServletRequest request
-			)
+	public final String getURL(final HttpServletRequest request)
 	{
 		final String url = this.url!=null ? this.url.toString() : pathInfo;
 
