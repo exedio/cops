@@ -139,15 +139,6 @@ public class CopTest extends TestCase
 		{
 			assertEquals("request", e.getMessage());
 		}
-		try
-		{
-			new TestCop().getSecureURL(null);
-			fail();
-		}
-		catch(final NullPointerException e)
-		{
-			assertEquals("request", e.getMessage());
-		}
 
 		final HttpServletRequest request = new AbsReq();
 		{
@@ -278,23 +269,17 @@ public class CopTest extends TestCase
 		HttpServletRequest request = new SecureRequest(false);
 		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop(false).getURL(request));
 		assertEquals("https://host.invalid/contextPath/servletPath/test.html?param1=value1", new SecureCop(true).getURL(request));
-		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop(false).getSecureURL(request));
-		assertEquals("https://host.invalid/contextPath/servletPath/test.html?param1=value1", new SecureCop(true).getSecureURL(request));
 		request = new SecureRequest(true);
 		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop(false).getURL(request));
 		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop(true).getURL(request));
-		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop(false).getSecureURL(request));
-		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop(true).getSecureURL(request));
 
 		// port adjustments
 		request = new SecureRequest(false, 8080);
 		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop(false).getURL(request));
 		assertEquals("https://host.invalid:8443/contextPath/servletPath/test.html?param1=value1", new SecureCop(true).getURL(request));
-		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop(false).getSecureURL(request));
 		request = new SecureRequest(true,  8443);
 		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop(false).getURL(request));
 		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop(true).getURL(request));
-		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop(false).getSecureURL(request));
 	}
 
 	static final class SecureCop extends Cop
