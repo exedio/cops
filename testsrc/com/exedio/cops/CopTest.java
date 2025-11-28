@@ -132,6 +132,7 @@ public class CopTest extends TestCase
 		}
 		try
 		{
+			//noinspection RedundantCast
 			new TestCop().getAbsoluteURL((HttpServletRequest)null);
 			fail();
 		}
@@ -149,55 +150,29 @@ public class CopTest extends TestCase
 		{
 			assertEquals("request", e.getMessage());
 		}
-		try
-		{
-			new TestCop().getAbsoluteURL((String)null);
-			fail();
-		}
-		catch(final NullPointerException e)
-		{
-			assertEquals("token", e.getMessage());
-		}
-		try
-		{
-			Cop.getToken(null);
-			fail();
-		}
-		catch(final NullPointerException e)
-		{
-			assertEquals("request", e.getMessage());
-		}
 
 		final HttpServletRequest request = new AbsReq();
 		{
 			final TestCop cop = new TestCop();
 			assertEquals("/contextPath/servletPath/test.html", cop.getURL(request));
 			assertEquals("scheme://host.invalid/contextPath/servletPath/test.html", cop.getAbsoluteURL(request));
-			assertEquals("http://host.invalid/contextPath/servletPath/test.html", cop.getAbsoluteURL(TOKEN));
-			assertEquals("http://host.invalid/test.html", cop.getAbsoluteURL(ROOT_TOKEN));
 			assertEquals("test.html", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop("ding");
 			assertEquals("/contextPath/servletPath/test.html?param1=ding", cop.getURL(request));
 			assertEquals("scheme://host.invalid/contextPath/servletPath/test.html?param1=ding", cop.getAbsoluteURL(request));
-			assertEquals("http://host.invalid/contextPath/servletPath/test.html?param1=ding", cop.getAbsoluteURL(TOKEN));
-			assertEquals("http://host.invalid/test.html?param1=ding", cop.getAbsoluteURL(ROOT_TOKEN));
 			assertEquals("test.html?param1=ding", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop("ding", "dong");
 			assertEquals("/contextPath/servletPath/test.html?param1=ding&param2=dong", cop.getURL(request));
 			assertEquals("scheme://host.invalid/contextPath/servletPath/test.html?param1=ding&param2=dong", cop.getAbsoluteURL(request));
-			assertEquals("http://host.invalid/contextPath/servletPath/test.html?param1=ding&param2=dong", cop.getAbsoluteURL(TOKEN));
-			assertEquals("http://host.invalid/test.html?param1=ding&param2=dong", cop.getAbsoluteURL(ROOT_TOKEN));
 			assertEquals("test.html?param1=ding&param2=dong", cop.toString());
 		}
 		{
 			final TestCop cop = new TestCop(0.0, "shop/hallo.html");
 			assertEquals("/contextPath/servletPath/shop/hallo.html", cop.getURL(request));
-			assertEquals("http://host.invalid/contextPath/servletPath/shop/hallo.html", cop.getAbsoluteURL(TOKEN));
-			assertEquals("http://host.invalid/shop/hallo.html", cop.getAbsoluteURL(ROOT_TOKEN));
 			assertEquals("shop/hallo.html", cop.toString());
 		}
 		{
@@ -268,16 +243,7 @@ public class CopTest extends TestCase
 			final TestCop cop = new TestCop(-1);
 			assertEquals("/contextPath/servletPath/test.html?param1=-1", cop.getURL(request));
 		}
-
-		assertEquals(TOKEN, Cop.getToken(request));
 	}
-
-	static final String TOKEN = "host.invalid/contextPath/servletPath";
-	static final String ROOT_TOKEN = "host.invalid";
-	static final String TOKEN_8080 = "host.invalid:8080/contextPath/servletPath";
-	static final String TOKEN_8443 = "host.invalid:8443/contextPath/servletPath";
-	static final String ROOT_TOKEN_8080 = "host.invalid:8080";
-	static final String ROOT_TOKEN_8443 = "host.invalid:8443";
 
 	static final class AbsReq extends DummyRequest
 	{
@@ -311,22 +277,6 @@ public class CopTest extends TestCase
 
 	public void testSecure()
 	{
-		assertEquals("http://host.invalid/contextPath/servletPath/test.html?param1=value1",  new SecureCop(false).getAbsoluteURL(TOKEN));
-		assertEquals("https://host.invalid/contextPath/servletPath/test.html?param1=value1", new SecureCop(true ).getAbsoluteURL(TOKEN));
-		assertEquals("http://host.invalid/test.html?param1=value1",  new SecureCop(false).getAbsoluteURL(ROOT_TOKEN));
-		assertEquals("https://host.invalid/test.html?param1=value1", new SecureCop(true ).getAbsoluteURL(ROOT_TOKEN));
-
-		// port adjustments
-		assertEquals("http://host.invalid:8080/contextPath/servletPath/test.html?param1=value1",  new SecureCop(false).getAbsoluteURL(TOKEN_8080));
-		assertEquals("https://host.invalid:8443/contextPath/servletPath/test.html?param1=value1", new SecureCop(true ).getAbsoluteURL(TOKEN_8080));
-		assertEquals("http://host.invalid:8080/contextPath/servletPath/test.html?param1=value1",  new SecureCop(false).getAbsoluteURL(TOKEN_8443));
-		assertEquals("https://host.invalid:8443/contextPath/servletPath/test.html?param1=value1", new SecureCop(true ).getAbsoluteURL(TOKEN_8443));
-		assertEquals("http://host.invalid:8080/test.html?param1=value1",  new SecureCop(false).getAbsoluteURL(ROOT_TOKEN_8080));
-		assertEquals("https://host.invalid:8443/test.html?param1=value1", new SecureCop(true ).getAbsoluteURL(ROOT_TOKEN_8080));
-		assertEquals("http://host.invalid:8080/test.html?param1=value1",  new SecureCop(false).getAbsoluteURL(ROOT_TOKEN_8443));
-		assertEquals("https://host.invalid:8443/test.html?param1=value1", new SecureCop(true ).getAbsoluteURL(ROOT_TOKEN_8443));
-
-
 		HttpServletRequest request = new SecureRequest(false);
 		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop(false).getURL(request));
 		assertEquals("https://host.invalid/contextPath/servletPath/test.html?param1=value1", new SecureCop(true).getURL(request));

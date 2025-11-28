@@ -182,12 +182,6 @@ public final class Resource
 			'/' + getPath();
 	}
 
-	public String getAbsoluteURL(final String token)
-	{
-		requireNonNull(token, "token");
-		return EnvironmentRequest.getURL(token, false, getPath());
-	}
-
 	void init(final Class<?> resourceLoader, final String rootPath)
 	{
 		synchronized(contentLock)

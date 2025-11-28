@@ -172,30 +172,6 @@ public abstract class Cop
 			'/' + url;
 	}
 
-	/**
-	 * @see #getAbsoluteURL(String)
-	 */
-	public static String getToken(final HttpServletRequest request)
-	{
-		requireNonNull(request, "request");
-
-		return
-			request.getHeader(HOST) +
-			request.getContextPath() +
-			request.getServletPath();
-	}
-
-	/**
-	 * @see #getToken(HttpServletRequest)
-	 */
-	public final String getAbsoluteURL(final String token)
-	{
-		final String url = this.url!=null ? this.url.toString() : pathInfo;
-
-		requireNonNull(token, "token");
-		return EnvironmentRequest.getURL(token, needsSecure(), url);
-	}
-
 	public final String getURL(final HttpServletRequest request)
 	{
 		return getURL(request, needsSecure());
