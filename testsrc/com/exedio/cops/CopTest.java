@@ -274,10 +274,10 @@ public class CopTest extends TestCase
 		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop().getURL(request));
 
 		// port adjustments
-		request = new SecureRequest(8080);
+		request = new SecureRequest();
 		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop().getURL(request));
 		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop().getURL(request));
-		request = new SecureRequest(8443);
+		request = new SecureRequest();
 		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop().getURL(request));
 		assertEquals("/contextPath/servletPath/test.html?param1=value1", new SecureCop().getURL(request));
 	}
@@ -293,27 +293,6 @@ public class CopTest extends TestCase
 
 	static final class SecureRequest extends DummyRequest
 	{
-		final int port;
-
-		SecureRequest()
-		{
-			this(-1);
-		}
-
-		SecureRequest(final int port)
-		{
-			this.port = port;
-		}
-
-		@Override
-		public String getHeader(final String name)
-		{
-			if("Host".equals(name))
-				return "host.invalid" + (port>=0 ? (":"+port) : "");
-			else
-				throw new RuntimeException();
-		}
-
 		@Override
 		public String getContextPath()
 		{
