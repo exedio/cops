@@ -177,9 +177,14 @@ public abstract class Cop
 		return getURL(request, needsSecure());
 	}
 
+	/**
+	 * To be deprecated.
+	 * This method is no longer supported.
+	 * Use {@link #getURL(HttpServletRequest)} instead.
+	 */
 	public final String getSecureURL(final HttpServletRequest request)
 	{
-		return getURL(request, true);
+		return getURL(request);
 	}
 
 	private String getURL(
