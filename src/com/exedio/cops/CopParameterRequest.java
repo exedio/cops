@@ -126,7 +126,7 @@ final class CopParameterRequest extends HttpServletRequestWrapper
 		if(list==null)
 			return EMPTY_ARRAY;
 
-		return list.toArray(EMPTY_ARRAY);
+		return list.toArray(String[]::new);
 	}
 
 	private static final Enumeration<String> EMPTY_ENUMERATION = enumeration(Collections.emptyList());
@@ -148,7 +148,7 @@ final class CopParameterRequest extends HttpServletRequestWrapper
 
 		final LinkedHashMap<String, String[]> result = new LinkedHashMap<>();
 		for(final Map.Entry<String, ArrayList<String>> e : parameters.entrySet())
-			result.put(e.getKey(), e.getValue().toArray(EMPTY_ARRAY));
+			result.put(e.getKey(), e.getValue().toArray(String[]::new));
 		return Collections.unmodifiableMap(result);
 	}
 }
