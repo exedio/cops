@@ -181,6 +181,13 @@ public abstract class PropertiesServlet extends CopsServlet
 			if(s instanceof EditedSource)
 				edited.add((EditedSource)s);
 
+		// https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/net/doc-files/net-properties.html#Proxies
+		final var proxies = new Proxy[] {
+				new Proxy("http",  "http.proxyHost",  "http.proxyPort",   80, "http.nonProxyHosts", "localhost|127.*|[::1]"),
+				new Proxy("https", "https.proxyHost", "https.proxyPort", 443, "http.nonProxyHosts", "localhost|127.*|[::1]"),
+				new Proxy("ftp",   "ftp.proxyHost",   "ftp.proxyPort",    80, "ftp.nonProxyHosts",  "localhost|127.*|[::1]"),
+		};
+
 		final Out out = new Out(request);
 		Properties_Jspm.write(
 				out,
@@ -192,9 +199,26 @@ public abstract class PropertiesServlet extends CopsServlet
 				this instanceof Overridable<?>,
 				edited,
 				properties,
+				proxies,
 				reloaded,
 				reloadFailure);
 		out.sendBody(response);
+	}
+
+	record Proxy (String kind, String host, String port, String exclude)
+	{
+		Proxy(
+				final String kind,
+				final String hostKey,
+				final String portKey, final int portDefault,
+				final String exclude, final String excludeDefault)
+		{
+			this(
+					kind,
+					System.getProperty(hostKey),
+					System.getProperty(portKey, String.valueOf(portDefault)),
+					System.getProperty(exclude, excludeDefault));
+		}
 	}
 
 	/**

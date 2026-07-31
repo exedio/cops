@@ -64,6 +64,7 @@ final class Properties_Jspm
 			final boolean overridable,
 			final ArrayList<EditedSource> edited,
 			final Properties properties,
+			final PropertiesServlet.Proxy[] proxies,
 			final Properties reloaded,
 			final RuntimeException reloadFailure)
 	{
@@ -238,6 +239,28 @@ final class Properties_Jspm
 			</tr><%
 		}
 		%>
+		</table>
+		<table>
+			<caption>Proxies <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/net/doc-files/net-properties.html#Proxies" target="_blank">docs</a></caption><%
+			%>
+			<tr><th>Kind</th><th>Address</th><th>Excludes</th></tr><%
+
+			for(final var proxy : proxies)
+			{
+				%>
+				<tr><th><%=proxy.kind()%></th><%
+
+				if(proxy.host()!=null)
+				{
+					%><td><%=proxy.host()%>:<%=proxy.port()%></td><td><%=proxy.exclude()%></td><%
+				}
+				else
+				{
+					%><td colspan="2">NONE</td><%
+				}
+				%></tr><%
+			}
+			%>
 		</table><%
 
 		if(overridable)
